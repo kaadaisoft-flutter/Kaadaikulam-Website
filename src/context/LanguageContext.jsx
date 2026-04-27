@@ -3,7 +3,7 @@ import { createContext, useState, useContext } from "react";
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState("ta"); // Default to Tamil as per initial project state
+  const [language, setLanguage] = useState("en"); // Default to English
 
   const toggleLanguage = (lang) => {
     setLanguage(lang);

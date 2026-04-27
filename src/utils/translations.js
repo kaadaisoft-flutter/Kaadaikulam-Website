@@ -17,20 +17,20 @@ export const translations = {
       established: "Established for generations",
       items: [
         {
-          title: "Kongu Vellalar Poondurai Kaadai Kottam",
+          title: "Kongu Vellalar Poondurai Kaadai Koottam",
           text: "The sacred ancestral foundation of the Poondurai Kaadai lineage, dedicated to preserving our divine traditions and spiritual heritage for eternity."
         },
         {
           title: "Sri Arulmigu Angalamman Temple",
-          text: "A sacred shrine rooted in the ancient Kaadai Kottam lineage and traditionally administered by the revered Kongu Vellalar Poondurai Kaadai Kottam."
+          text: "A sacred shrine rooted in the ancient Kaadai Koottam lineage and traditionally administered by the revered Kongu Vellalar Poondurai Kaadai Koottam."
         },
         {
           title: "Sri Pushpavaneswara Swamy Temple",
-          text: "Dedicated to Lord Shiva, this ancient temple stands as a symbol of heritage and divine grace under the administration of Poondurai Kaadai Kottam."
+          text: "Dedicated to Lord Shiva, this ancient temple stands as a symbol of heritage and divine grace under the administration of Poondurai Kaadai Koottam."
         },
         {
           title: "Sri Karikaliamman Temple",
-          text: "The ancestral deity of the Kaadai Kottam lineage, representing generations of devotion and spiritual legacy in Kongu Nadu."
+          text: "The ancestral deity of the Kaadai Koottam lineage, representing generations of devotion and spiritual legacy in Kongu Nadu."
         },
         {
           title: "Sri Damodara Perumal Temple",
@@ -40,7 +40,7 @@ export const translations = {
     },
     temples: {
       heading: "Our Sacred Temples",
-      sub: "Four temples, each with unique significance, form the spiritual center of the Kongu Vellalar Poondurai Kaadai Kottam.",
+      sub: "Four temples, each with unique significance, form the spiritual center of the Kongu Vellalar Poondurai Kaadai Koottam.",
       viewAll: "View All Temples",
       learnMore: "Learn More",
       items: [
@@ -308,20 +308,20 @@ export const translations = {
       established: "தலைமுறை தலைமுறையாக நிலைநாட்டப்பட்டது",
       items: [
         {
-          title: "கொங்கு வெள்ளாளர் பூந்துறை காடை கோட்டம்",
+          title: "கொங்கு வெள்ளாளர் பூந்துறை காடை கூட்டம்",
           text: "பூந்துறை காடை வம்சத்தின் புனிதமான மூதாதையர் தளம், நமது தெய்வீக மரபுகளையும் ஆன்மீக பாரம்பரியத்தையும் என்றென்றும் பாதுகாப்பதற்காக அர்ப்பணிக்கப்பட்டது."
         },
         {
           title: "ஸ்ரீ அருள்மிகு அங்காளம்மன் கோவில்",
-          text: "பண்டைய காடை கோட்ட வம்சத்தில் வேரூன்றி, மரியாதைக்குரிய கொங்கு வெள்ளாளர் பூந்துறை காடை கோட்டத்தால் பாரம்பரியமாக நிர்வகிக்கப்படும் ஒரு புனித தலம்."
+          text: "பண்டைய காடை கூட்ட வம்சத்தில் வேரூன்றி, மரியாதைக்குரிய கொங்கு வெள்ளாளர் பூந்துறை காடை கூட்டத்தால் பாரம்பரியமாக நிர்வகிக்கப்படும் ஒரு புனித தலம்."
         },
         {
           title: "ஸ்ரீ புஷ்பவனேசுவர சுவாமி திருக்கோயில்",
-          text: "சிவபெருமானுக்கு அர்ப்பணிக்கப்பட்ட இந்த புராதனமான கோவில், பூந்துறை காடை கோட்டத்தின் நிர்வாகத்தின் கீழ் பாரம்பரியம் மற்றும் தெய்வீக அருளின் அடையாளமாகத் திகழ்கிறது."
+          text: "சிவபெருமானுக்கு அர்ப்பணிக்கப்பட்ட இந்த புராதனமான கோவில், பூந்துறை காடை கூட்டத்தின் நிர்வாகத்தின் கீழ் பாரம்பரியம் மற்றும் தெய்வீக அருளின் அடையாளமாகத் திகழ்கிறது."
         },
         {
           title: "ஸ்ரீ கரியகாளி அம்மன் ஆலயம்",
-          text: "காடை கோட்ட வம்சத்தின் குலதெய்வம், கொங்கு நாட்டில் தலைமுறைகளாக பக்தி மற்றும் ஆன்மீக பாரம்பரியத்தை பிரதிபலிக்கிறது."
+          text: "காடை கூட்ட வம்சத்தின் குலதெய்வம், கொங்கு நாட்டில் தலைமுறைகளாக பக்தி மற்றும் ஆன்மீக பாரம்பரியத்தை பிரதிபலிக்கிறது."
         },
         {
           title: "ஸ்ரீ தாமோதர பெருமாள் திருக்கோயில்",
@@ -331,7 +331,7 @@ export const translations = {
     },
     temples: {
       heading: "எங்கள் புனித கோவில்கள்",
-      sub: "நான்கு கோவில்கள், ஒவ்வொன்றும் தனித்துவமான முக்கியத்துவத்துடன், கொங்கு வெள்ளாளர் பூந்துறை காடை கோட்டத்தின் ஆன்மீக மையத்தை உருவாக்குகின்றன",
+      sub: "நான்கு கோவில்கள், ஒவ்வொன்றும் தனித்துவமான முக்கியத்துவத்துடன், கொங்கு வெள்ளாளர் பூந்துறை காடை கூட்டத்தின் ஆன்மீக மையத்தை உருவாக்குகின்றன",
       viewAll: "அனைத்து கோவில்களையும் பார்க்க",
       learnMore: "மேலும் அறிய",
       items: [

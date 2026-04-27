@@ -71,11 +71,11 @@ const Temples = ({ showButton = true }) => {
           >
             {language === 'en' ? (
               <>
-                Four temples, each with unique significance, form the spiritual core of <span className="text-[#5d1712] font-medium">Kongu Vellalar Poondurai Kaadai Kottam</span>
+                Four temples, each with unique significance, form the spiritual core of <span className="text-[#5d1712] font-medium">Kongu Vellalar Poondurai Kaadai Koottam</span>
               </>
             ) : (
               <>
-                நான்கு கோவில்கள், ஒவ்வொன்றும் தனித்துவமான முக்கியத்துவத்துடன், <span className="text-[#5d1712] font-medium">கொங்கு வெள்ளாளர் பூந்துறை காடை கோட்டத்தின்</span> ஆன்மீக மையத்தை உருவாக்குகின்றன
+                நான்கு கோவில்கள், ஒவ்வொன்றும் தனித்துவமான முக்கியத்துவத்துடன், <span className="text-[#5d1712] font-medium">கொங்கு வெள்ளாளர் பூந்துறை காடை கூட்டத்தின்</span> ஆன்மீக மையத்தை உருவாக்குகின்றன
               </>
             )}
           </motion.p>
