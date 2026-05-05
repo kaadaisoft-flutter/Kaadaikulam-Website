@@ -67,15 +67,17 @@ const Header = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 * navLinks.length, duration: 0.5 }}
         >
-          <Link
-            to="#"
+          <a
+            href="https://member.kaadaikulam.org/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-1 hover:text-white transition-colors duration-300 text-stone-700 font-bold"
           >
             {t.login}
             <svg className="w-3.5 h-3.5 mix-blend-multiply" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
-          </Link>
+          </a>
         </motion.div>
       </nav>
 
