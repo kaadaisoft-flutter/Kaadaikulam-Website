@@ -7,6 +7,7 @@ import {
     doc, 
     query, 
     orderBy, 
+    where,
     onSnapshot,
     serverTimestamp 
 } from "firebase/firestore";
@@ -98,4 +99,42 @@ export const deleteBlog = async (id) => {
         console.error("Error deleting blog: ", error);
         throw error;
     }
+};
+
+/**
+ * Add a comment to a blog post
+ */
+export const addComment = async (blogId, data) => {
+    try {
+        const docRef = await addDoc(collection(db, "comments"), {
+            blogId,
+            ...data,
+            createdAt: serverTimestamp(),
+            status: "approved" // Auto-approve for now
+        });
+        return { id: docRef.id, ...data };
+    } catch (error) {
+        console.error("Error adding comment: ", error);
+        throw error;
+    }
+};
+
+/**
+ * Subscribe to comments for a blog post
+ */
+export const subscribeComments = (blogId, callback) => {
+    const q = query(
+        collection(db, "comments"), 
+        where("blogId", "==", blogId),
+        orderBy("createdAt", "desc")
+    );
+    return onSnapshot(q, (snapshot) => {
+        const comments = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        callback(comments);
+    }, (error) => {
+        console.error("Error subscribing to comments: ", error);
+    });
 };

@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { collection, query, where, getDocs, limit } from 'firebase/firestore';
+import { collection, query, where, getDocs, limit, orderBy } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { Calendar, User, ArrowLeft, ArrowRight, Clock, Share2, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { addComment, subscribeComments } from '../services/blogService';
 
 const BlogDetail = () => {
     const { slug } = useParams();
     const [blog, setBlog] = useState(null);
+    const [recentBlogs, setRecentBlogs] = useState([]);
+    const [comments, setComments] = useState([]);
+    const [commentForm, setCommentForm] = useState({ name: '', text: '' });
+    const [submitting, setSubmitting] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -22,7 +27,27 @@ const BlogDetail = () => {
                 const querySnapshot = await getDocs(q);
                 
                 if (!querySnapshot.empty) {
-                    setBlog({ id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() });
+                    const blogData = { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() };
+                    setBlog(blogData);
+
+                    // Fetch recent blogs (excluding current)
+                    const recentQ = query(
+                        collection(db, 'blogs'),
+                        orderBy('createdAt', 'desc'),
+                        limit(4)
+                    );
+                    const recentSnapshot = await getDocs(recentQ);
+                    setRecentBlogs(recentSnapshot.docs
+                        .map(doc => ({ id: doc.id, ...doc.data() }))
+                        .filter(b => b.id !== blogData.id)
+                        .slice(0, 3)
+                    );
+
+                    // Subscribe to comments
+                    const unsubComments = subscribeComments(blogData.id, (data) => {
+                        setComments(data);
+                    });
+                    return () => unsubComments();
                 }
             } catch (error) {
                 console.error("Error fetching blog:", error);
@@ -35,6 +60,25 @@ const BlogDetail = () => {
         fetchBlog();
         window.scrollTo(0, 0);
     }, [slug]);
+
+    const handleCommentSubmit = async (e) => {
+        e.preventDefault();
+        if (!commentForm.name || !commentForm.text) return;
+        
+        setSubmitting(true);
+        try {
+            await addComment(blog.id, {
+                userName: commentForm.name,
+                content: commentForm.text
+            });
+            setCommentForm({ name: '', text: '' });
+            toast.success("Comment posted successfully!");
+        } catch (err) {
+            toast.error("Failed to post comment");
+        } finally {
+            setSubmitting(false);
+        }
+    };
 
     const formatDate = (timestamp) => {
         if (!timestamp) return '';
@@ -72,8 +116,8 @@ const BlogDetail = () => {
 
     return (
         <article className="min-h-screen bg-[#FDFBF7] pb-32">
-            {/* Hero Section with Featured Image */}
-            <header className="relative h-[70vh] md:h-[85vh] w-full overflow-hidden">
+            {/* Hero Section */}
+            <header className="relative h-[70vh] md:h-[80vh] w-full overflow-hidden">
                 <img 
                     src={blog.image} 
                     alt={blog.title}
@@ -89,127 +133,203 @@ const BlogDetail = () => {
                 </div>
             </header>
 
-            {/* Content Section */}
-            <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
-                {/* Title and Metadata moved here */}
-                <div className="mb-16">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex flex-wrap items-center gap-6 mb-8"
-                    >
-                        <span className="px-5 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em]">
-                            {blog.category}
-                        </span>
-                        <div className="flex items-center gap-2 text-stone-400 text-[10px] font-bold uppercase tracking-widest">
-                            <Calendar size={14} className="text-primary/40" />
-                            {formatDate(blog.publishDate || blog.createdAt)}
-                        </div>
-                        <div className="flex items-center gap-2 text-stone-400 text-[10px] font-bold uppercase tracking-widest">
-                            <User size={14} className="text-primary/40" />
-                            {blog.author || 'Admin'}
-                        </div>
-                    </motion.div>
+            <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-20">
+                {/* Main Content Area */}
+                <div className="lg:col-span-8 py-16 md:py-24">
+                    <div className="mb-16">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="flex flex-wrap items-center gap-6 mb-8"
+                        >
+                            <span className="px-5 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em]">
+                                {blog.category}
+                            </span>
+                            <div className="flex items-center gap-2 text-stone-400 text-[10px] font-bold uppercase tracking-widest">
+                                <Calendar size={14} className="text-primary/40" />
+                                {formatDate(blog.publishDate || blog.createdAt)}
+                            </div>
+                            <div className="flex items-center gap-2 text-stone-400 text-[10px] font-bold uppercase tracking-widest">
+                                <User size={14} className="text-primary/40" />
+                                {blog.author || 'Admin'}
+                            </div>
+                        </motion.div>
 
-                    <motion.h1 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-7xl font-serif font-bold text-stone-900 leading-[1.1] mb-12"
-                    >
-                        {blog.title}
-                    </motion.h1>
+                        <motion.h1 
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-5xl md:text-7xl font-serif font-bold text-stone-900 leading-[1.1] mb-12"
+                        >
+                            {blog.title}
+                        </motion.h1>
 
-                    <div className="h-[1px] w-full bg-stone-100"></div>
-                </div>
-
-                {/* Intro / Short Description */}
-                {blog.shortDescription && (
-                    <div className="relative mb-20">
-                        <div className="absolute -left-8 top-0 bottom-0 w-1 bg-primary/20 rounded-full"></div>
-                        <p className="text-2xl md:text-3xl text-stone-700 font-serif italic leading-relaxed">
-                            {blog.shortDescription}
-                        </p>
+                        <div className="h-[1px] w-full bg-stone-100"></div>
                     </div>
-                )}
 
-                {/* Main Content Rendered from HTML */}
-                <div 
-                    className="prose prose-stone prose-2xl max-w-none 
-                        prose-headings:font-serif prose-headings:font-bold prose-headings:text-stone-900 
-                        prose-p:text-stone-600 prose-p:leading-[1.8] prose-p:text-xl
-                        prose-img:rounded-[2.5rem] prose-img:shadow-2xl
-                        prose-a:text-primary prose-a:font-bold prose-a:no-underline hover:prose-a:underline
-                        prose-blockquote:border-primary prose-blockquote:bg-stone-50/50 prose-blockquote:p-12 prose-blockquote:rounded-[2rem] prose-blockquote:not-italic prose-blockquote:font-serif prose-blockquote:text-2xl
-                        prose-strong:text-stone-900"
-                    dangerouslySetInnerHTML={{ __html: blog.content }}
-                />
+                    {blog.shortDescription && (
+                        <div className="relative mb-20">
+                            <div className="absolute -left-8 top-0 bottom-0 w-1 bg-primary/20 rounded-full"></div>
+                            <p className="text-2xl md:text-3xl text-stone-700 font-serif italic leading-relaxed">
+                                {blog.shortDescription}
+                            </p>
+                        </div>
+                    )}
 
-                {/* Footer Section */}
-                <footer className="mt-32 pt-16 border-t border-stone-100">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-10">
+                    <div 
+                        className="prose prose-stone prose-2xl max-w-none 
+                            prose-headings:font-serif prose-headings:font-bold prose-headings:text-stone-900 
+                            prose-p:text-stone-600 prose-p:leading-[1.8] prose-p:text-xl
+                            prose-img:rounded-[2.5rem] prose-img:shadow-2xl
+                            prose-a:text-primary prose-a:font-bold prose-a:no-underline hover:prose-a:underline
+                            prose-blockquote:border-primary prose-blockquote:bg-stone-50/50 prose-blockquote:p-12 prose-blockquote:rounded-[2rem] prose-blockquote:not-italic prose-blockquote:font-serif prose-blockquote:text-2xl"
+                        dangerouslySetInnerHTML={{ __html: blog.content }}
+                    />
+
+                    {/* Tags & Sharing */}
+                    <div className="mt-24 pt-12 border-t border-stone-100 flex flex-wrap items-center justify-between gap-8">
                         <div className="flex items-center gap-4">
                             <Tag size={20} className="text-primary/40" />
-                            <div className="flex flex-wrap gap-3">
+                            <div className="flex flex-wrap gap-2">
                                 {blog.tags?.split(',').map((tag, idx) => (
-                                    <span key={idx} className="text-[10px] font-black text-stone-400 bg-stone-100/50 px-4 py-2 rounded-xl uppercase tracking-widest">
+                                    <span key={idx} className="text-[10px] font-black text-stone-400 bg-stone-100 px-4 py-2 rounded-xl tracking-widest uppercase">
                                         #{tag.trim()}
                                     </span>
                                 ))}
                             </div>
                         </div>
-                        
-                        <div className="flex items-center gap-4">
+                        <button 
+                            onClick={() => {
+                                navigator.clipboard.writeText(window.location.href);
+                                toast.success("Link copied!");
+                            }}
+                            className="flex items-center gap-3 px-8 py-4 bg-stone-900 text-white rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-primary transition-all duration-500 shadow-xl"
+                        >
+                            <Share2 size={18} />
+                            Share Story
+                        </button>
+                    </div>
+
+                    {/* Comments Section */}
+                    <section className="mt-32">
+                        <div className="flex items-center gap-4 mb-12">
+                            <h3 className="text-4xl font-serif font-bold text-stone-900">Community Thoughts</h3>
+                            <div className="flex-1 h-[1px] bg-stone-100"></div>
+                            <span className="text-primary font-serif font-bold text-2xl">({comments.length})</span>
+                        </div>
+
+                        {/* Comment Form */}
+                        <form onSubmit={handleCommentSubmit} className="bg-white rounded-[2.5rem] p-10 md:p-12 border border-stone-100 shadow-sm mb-16">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                                <div className="space-y-3">
+                                    <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest ml-1">Your Name</label>
+                                    <input 
+                                        type="text"
+                                        required
+                                        value={commentForm.name}
+                                        onChange={(e) => setCommentForm({ ...commentForm, name: e.target.value })}
+                                        placeholder="Full Name"
+                                        className="w-full bg-stone-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium"
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-3 mb-8">
+                                <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest ml-1">Your Message</label>
+                                <textarea 
+                                    required
+                                    rows="4"
+                                    value={commentForm.text}
+                                    onChange={(e) => setCommentForm({ ...commentForm, text: e.target.value })}
+                                    placeholder="What are your thoughts?"
+                                    className="w-full bg-stone-50 border-none rounded-[2rem] px-6 py-6 focus:ring-2 focus:ring-primary/20 transition-all font-medium resize-none"
+                                ></textarea>
+                            </div>
                             <button 
-                                onClick={() => {
-                                    navigator.clipboard.writeText(window.location.href);
-                                    toast.success("Link copied to clipboard!");
-                                }}
-                                className="flex items-center gap-3 px-8 py-4 bg-stone-900 text-white rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-primary transition-all duration-500 shadow-xl"
+                                type="submit"
+                                disabled={submitting}
+                                className="w-full md:w-auto px-12 py-5 bg-stone-900 text-white rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-primary disabled:opacity-50 transition-all duration-500 shadow-xl"
                             >
-                                <Share2 size={18} />
-                                Share Story
+                                {submitting ? 'Posting...' : 'Post Thought'}
                             </button>
+                        </form>
+
+                        {/* Comments List */}
+                        <div className="space-y-8">
+                            {comments.map((comment) => (
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    key={comment.id} 
+                                    className="bg-white/50 p-8 md:p-10 rounded-[2.5rem] border border-stone-100/50"
+                                >
+                                    <div className="flex items-center justify-between mb-4">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                                                {comment.userName.charAt(0)}
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-stone-900">{comment.userName}</h4>
+                                                <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">{formatDate(comment.createdAt)}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className="text-stone-600 leading-relaxed text-lg italic pl-16">
+                                        "{comment.content}"
+                                    </p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </section>
+                </div>
+
+                {/* Sidebar - Recent Blogs */}
+                <aside className="lg:col-span-4 py-16 lg:py-24 space-y-16 lg:sticky lg:top-0 lg:h-fit">
+                    <div>
+                        <div className="flex items-center gap-4 mb-10">
+                            <h3 className="text-2xl font-serif font-bold text-stone-900 shrink-0">Recent Stories</h3>
+                            <div className="flex-1 h-[1px] bg-stone-100"></div>
+                        </div>
+                        <div className="space-y-10">
+                            {recentBlogs.map((recent) => (
+                                <Link to={`/blog/${recent.slug}`} key={recent.id} className="group flex gap-6 items-start">
+                                    <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-lg group-hover:scale-105 transition-transform duration-500">
+                                        <img src={recent.image} alt={recent.title} className="w-full h-full object-cover" />
+                                    </div>
+                                    <div>
+                                        <span className="text-[9px] font-black text-primary uppercase tracking-widest mb-1 block">
+                                            {recent.category}
+                                        </span>
+                                        <h4 className="font-serif font-bold text-stone-900 group-hover:text-primary transition-colors leading-tight line-clamp-2">
+                                            {recent.title}
+                                        </h4>
+                                        <p className="text-[10px] text-stone-400 font-bold mt-2 uppercase tracking-widest">
+                                            {formatDate(recent.publishDate || recent.createdAt)}
+                                        </p>
+                                    </div>
+                                </Link>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Author Box */}
-                    <div className="mt-24 bg-white rounded-[3rem] p-10 md:p-16 flex flex-col md:flex-row items-center gap-12 border border-stone-100 shadow-sm">
-                        <div className="w-28 h-28 rounded-[2rem] bg-stone-50 border border-stone-100 flex items-center justify-center text-primary font-serif font-bold text-5xl shadow-inner shrink-0">
-                            {blog.author?.charAt(0) || 'A'}
-                        </div>
-                        <div className="flex-1 text-center md:text-left">
-                            <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-3 block">About the Author</span>
-                            <h4 className="text-3xl font-serif font-bold text-stone-900 mb-4">{blog.author || 'Admin'}</h4>
-                            <p className="text-stone-500 text-lg leading-relaxed max-w-xl">
-                                Dedicated to preserving and sharing the rich cultural and spiritual heritage of Poondurai Kaadai. 
-                                Our mission is to keep the community connected through timeless stories and updates.
-                            </p>
-                        </div>
+                    {/* Newsletter / Call to Action */}
+                    <div className="bg-stone-900 rounded-[3rem] p-10 text-center relative overflow-hidden shadow-2xl">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[80px] rounded-full"></div>
+                        <h4 className="text-2xl font-serif font-bold text-white mb-4 relative z-10">Join Our Journey</h4>
+                        <p className="text-stone-400 text-sm mb-8 leading-relaxed relative z-10">Stay updated with our latest spiritual stories and festival announcements.</p>
+                        <Link to="/contact" className="inline-block w-full py-4 bg-primary text-white rounded-2xl font-bold text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-xl relative z-10">
+                            Contact Us
+                        </Link>
                     </div>
-                </footer>
+                </aside>
             </div>
 
-            {/* More Posts Navigation */}
-            <div className="max-w-7xl mx-auto px-6 pt-12 text-center">
-                <Link 
-                    to="/blog"
-                    className="inline-flex items-center gap-4 text-primary font-black text-xs uppercase tracking-[0.3em] group hover:gap-8 transition-all duration-500"
-                >
-                    <div className="h-[1px] w-12 bg-primary/20"></div>
-                    Explore More Stories
-                    <ArrowRight className="w-5 h-5" />
-                </Link>
-            </div>
-
-            {/* Custom Styles for dangerouslySetInnerHTML content */}
             <style>{`
                 .prose h1, .prose h2, .prose h3 { margin-top: 4rem; margin-bottom: 2rem; color: #1c1917; }
                 .prose p { margin-bottom: 2rem; }
-                .prose img { width: 100%; height: auto; margin: 4rem 0; }
+                .prose img { width: 100%; height: auto; margin: 4rem 0; border-radius: 2.5rem; }
                 .prose ul, .prose ol { margin-bottom: 2rem; padding-left: 2rem; }
                 .prose li { margin-bottom: 1rem; }
-                .prose blockquote p { font-size: 1.75rem; line-height: 1.5; color: #44403c; }
+                .prose blockquote p { font-size: 1.75rem; line-height: 1.5; color: #44403c; border-left: 4px solid #800000; padding-left: 2rem; }
             `}</style>
         </article>
     );
