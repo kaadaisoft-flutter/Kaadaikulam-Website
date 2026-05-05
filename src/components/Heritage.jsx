@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import img1 from "../assets/images/angalaaman-DFWBKo-A.webp";
@@ -68,15 +69,19 @@ const Heritage = () => {
               </p>
             </div>
 
-            <motion.button
+            <motion.div
               whileHover={{ x: 5 }}
-              className="mt-8 text-[#5d1712] font-semibold flex items-center gap-2 group transition-colors hover:text-[#c49a3c]"
             >
-              <span className="border-b border-current pb-1 uppercase tracking-widest text-xs">
-                {t.link}
-              </span>
-              <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
-            </motion.button>
+              <Link
+                to="/temples"
+                className="mt-8 text-[#5d1712] font-semibold flex items-center gap-2 group transition-colors hover:text-[#c49a3c]"
+              >
+                <span className="border-b border-current pb-1 uppercase tracking-widest text-xs">
+                  {t.link}
+                </span>
+                <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </motion.div>
           </motion.div>
 
           {/* Right Column: Slideshow */}
