@@ -1,0 +1,59 @@
+---
+description: React multi-view patterns - ensure modals/previews in all return paths
+globs: **/*.jsx
+alwaysApply: false
+---
+
+# Multi-View Components: Shared UI Checklist
+
+When a page has **multiple return paths** (e.g. early return for form vs list view), shared UI elements must exist in **every path** where they're used.
+
+## The Bug Pattern
+
+```jsx
+// ❌ BAD - MediaPreview only in list view; form view has no modal to show
+if (isAddPage || isEditPage) {
+  return (
+    <div>
+      <form>
+        <ImageUploadField onPreviewClick={openPreview} />  {/* click sets state, but... */}
+      </form>
+      {/* MediaPreview MISSING - nothing renders! */}
+    </div>
+  );
+}
+return (
+  <div>
+    <DataTable />
+    <MediaPreview ... />  {/* Only here */}
+  </div>
+);
+```
+
+## Fix
+
+```jsx
+// ✅ GOOD - MediaPreview in BOTH paths
+if (isAddPage || isEditPage) {
+  return (
+    <div>
+      <form>...</form>
+      <MediaPreview isOpen={...} onClose={...} media={...} />
+    </div>
+  );
+}
+return (
+  <div>
+    <DataTable />
+    <MediaPreview ... />
+  </div>
+);
+```
+
+## Senior Dev Checklist
+
+Before marking a feature complete:
+
+1. **Trace the full flow** – If a click/handler opens a modal/preview, verify the modal component is rendered in that view
+2. **Audit all return paths** – Any `if (condition) return (...)` must include shared overlays used in that branch
+3. **Shared UI elements** – Modals, MediaPreview, ConfirmDialog, Toast containers, etc. must be present wherever their open/trigger logic runs

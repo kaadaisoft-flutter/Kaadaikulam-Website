@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #800000;
+  --color-primary-light: #A52A2A;
+  --color-primary-dark: #4A0000;
+  --color-secondary: #D4AF37;
+  /* Gold */
+  --color-secondary-light: #FFDF00;
+  --color-secondary-dark: #B8860B;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Cinzel', serif;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif text-primary;
+  }
+
+  /* Global: interactive elements get cursor-pointer */
+  button, 
+  select,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .cursor-pointer {
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+  }
+
+  button:hover {
+    opacity: 0.92;
+  }
+}
+
+/* Custom scrollbar for a polished look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B8860B;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

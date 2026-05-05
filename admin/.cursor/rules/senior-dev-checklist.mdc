@@ -1,0 +1,13 @@
+---
+description: Senior dev checklist - verify before completing features
+alwaysApply: true
+---
+
+# Senior Dev Checklist
+
+Before completing any feature or fix:
+
+1. **Trace the full user flow** – Click handlers, form submits, navigation: where does state go? Is the target component actually rendered in that view?
+2. **Multi-return components** – If a component has `if (X) return <A/>` and `return <B/>`, shared modals/previews/dialogs must exist in BOTH branches where they're triggered
+3. **No orphaned triggers** – A button/click that calls `setOpen(true)` is useless if the modal with `isOpen={open}` isn't in the DOM
+4. **Verify, don't assume** – If adding `onPreviewClick` or similar, confirm the preview/modal is rendered in the same view
