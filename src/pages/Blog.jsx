@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { subscribeBlogs } from '../services/blogService';
 import { Calendar, User, ArrowRight, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -124,7 +125,9 @@ const Blog = () => {
                                         </div>
 
                                         <h2 className="text-2xl font-serif font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-4 leading-tight">
-                                            {blog.title}
+                                            <Link to={`/blog/${blog.slug}`}>
+                                                {blog.title}
+                                            </Link>
                                         </h2>
 
                                         <p className="text-gray-500 line-clamp-3 mb-6 text-sm leading-relaxed">
@@ -132,10 +135,13 @@ const Blog = () => {
                                         </p>
 
                                         <div className="mt-auto pt-6 border-t border-gray-50">
-                                            <button className="flex items-center gap-2 text-primary font-bold text-sm group/btn">
+                                            <Link 
+                                                to={`/blog/${blog.slug}`}
+                                                className="flex items-center gap-2 text-primary font-bold text-sm group/btn"
+                                            >
                                                 Read More 
                                                 <ArrowRight size={16} className="transform group-hover/btn:translate-x-1 transition-transform" />
-                                            </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </motion.article>
