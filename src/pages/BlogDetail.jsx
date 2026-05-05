@@ -79,39 +79,6 @@ const BlogDetail = () => {
                     alt={blog.title}
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent"></div>
-                
-                <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16 lg:p-24">
-                    <div className="max-w-5xl mx-auto">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="flex flex-wrap items-center gap-6 mb-8"
-                        >
-                            <span className="px-6 py-2 rounded-full bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl">
-                                {blog.category}
-                            </span>
-                            <div className="flex items-center gap-2 text-white/70 text-xs font-bold uppercase tracking-widest">
-                                <Calendar size={16} className="text-primary" />
-                                {formatDate(blog.publishDate || blog.createdAt)}
-                            </div>
-                            <div className="flex items-center gap-2 text-white/70 text-xs font-bold uppercase tracking-widest">
-                                <User size={16} className="text-primary" />
-                                {blog.author || 'Admin'}
-                            </div>
-                        </motion.div>
-
-                        <motion.h1 
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-[1.1] tracking-tight"
-                        >
-                            {blog.title}
-                        </motion.h1>
-                    </div>
-                </div>
-
                 <div className="absolute top-10 left-10">
                     <Link 
                         to="/blog" 
@@ -123,7 +90,39 @@ const BlogDetail = () => {
             </header>
 
             {/* Content Section */}
-            <div className="max-w-4xl mx-auto px-6 py-20 md:py-32">
+            <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+                {/* Title and Metadata moved here */}
+                <div className="mb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex flex-wrap items-center gap-6 mb-8"
+                    >
+                        <span className="px-5 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em]">
+                            {blog.category}
+                        </span>
+                        <div className="flex items-center gap-2 text-stone-400 text-[10px] font-bold uppercase tracking-widest">
+                            <Calendar size={14} className="text-primary/40" />
+                            {formatDate(blog.publishDate || blog.createdAt)}
+                        </div>
+                        <div className="flex items-center gap-2 text-stone-400 text-[10px] font-bold uppercase tracking-widest">
+                            <User size={14} className="text-primary/40" />
+                            {blog.author || 'Admin'}
+                        </div>
+                    </motion.div>
+
+                    <motion.h1 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="text-5xl md:text-7xl font-serif font-bold text-stone-900 leading-[1.1] mb-12"
+                    >
+                        {blog.title}
+                    </motion.h1>
+
+                    <div className="h-[1px] w-full bg-stone-100"></div>
+                </div>
+
                 {/* Intro / Short Description */}
                 {blog.shortDescription && (
                     <div className="relative mb-20">
