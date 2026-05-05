@@ -106,14 +106,12 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
     const [toolbarState, setToolbarState] = useState({ visible: false, position: null });
     const fileInputRef = useRef(null);
 
-    // Initial content load
+    // Initial content load - only if editor is empty to avoid cursor jumps
     useEffect(() => {
-        if (editorRef.current && value && editorRef.current.innerHTML !== value) {
-            if (editorRef.current.innerHTML === '' || editorRef.current.innerHTML === '<p><br></p>') {
-                editorRef.current.innerHTML = value;
-            }
+        if (editorRef.current && value && (editorRef.current.innerHTML === '' || editorRef.current.innerHTML === '<p><br></p>')) {
+            editorRef.current.innerHTML = value;
         }
-    }, []);
+    }, [value]);
 
     // Selection detection logic for floating toolbar
     useEffect(() => {
