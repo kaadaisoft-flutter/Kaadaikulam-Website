@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, getDocs, collection, query, limit } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 
 const AuthContext = createContext();
@@ -11,9 +11,30 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     const checkAdminAccess = async (uid) => {
-        const adminRef = doc(db, 'admin', uid);
-        const adminSnap = await getDoc(adminRef);
-        return adminSnap.exists();
+        try {
+            // Check if any admin exists at all
+            const adminQuery = query(collection(db, 'admin'), limit(1));
+            const adminSnapshots = await getDocs(adminQuery);
+            
+            // If no admin exists in the entire database, the first user who tries to log in 
+            // (or specific setup flow) can be treated as admin to initialize the system.
+            if (adminSnapshots.empty) {
+                console.log("No admins found. Initializing first admin...");
+                await setDoc(doc(db, 'admin', uid), {
+                    email: auth.currentUser?.email,
+                    createdAt: new Date(),
+                    isInitialAdmin: true
+                });
+                return true;
+            }
+
+            const adminRef = doc(db, 'admin', uid);
+            const adminSnap = await getDoc(adminRef);
+            return adminSnap.exists();
+        } catch (error) {
+            console.error("Error checking admin access:", error);
+            return false;
+        }
     };
 
     useEffect(() => {

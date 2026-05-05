@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import DataTable from '../components/DataTable';
 import ConfirmDialog from '../components/ConfirmDialog';
 import SlashEditor from '../components/SlashEditor';
-import { 
-    Plus, Edit2, Trash2, ArrowLeft, Send, Archive, 
-    FileText, CheckCircle, Search, Filter, Calendar, 
+import {
+    Plus, Edit2, Trash2, ArrowLeft, Send, Archive,
+    FileText, CheckCircle, Search, Filter, Calendar,
     Eye, MoreVertical, LayoutGrid, List as ListIcon,
     AlertCircle, Sparkles, Clock, BarChart3, Tag
 } from 'lucide-react';
@@ -137,16 +137,18 @@ const Blog = () => {
         let score = 0;
         const kw = focusKeywordValue.toLowerCase();
         const t = titleValue?.toLowerCase() || '';
+        const mt = watch('metaTitle')?.toLowerCase() || '';
         const d = metaDescriptionValue?.toLowerCase() || '';
         const c = contentValue?.toLowerCase() || '';
 
-        if (t.includes(kw)) score += 30;
+        if (t.includes(kw)) score += 20;
+        if (mt.includes(kw)) score += 20;
         if (d.includes(kw)) score += 20;
         if (c.includes(kw)) score += 20;
-        if (wordCount > 300) score += 15;
-        if (d.length >= 120 && d.length <= 160) score += 15;
+        if (wordCount > 300) score += 10;
+        if (d.length >= 120 && d.length <= 160) score += 10;
         return score;
-    }, [focusKeywordValue, titleValue, metaDescriptionValue, contentValue, wordCount]);
+    }, [focusKeywordValue, titleValue, watch('metaTitle'), metaDescriptionValue, contentValue, wordCount]);
 
     const onSubmit = async (data) => {
         if (!filePreview && !isEditPage) {
@@ -267,13 +269,13 @@ const Blog = () => {
             label: 'Actions',
             render: (item) => (
                 <div className="flex gap-2">
-                    <button 
+                    <button
                         onClick={() => navigate(`/admin/blog/edit/${item.id}`)}
                         className="p-2 rounded-xl text-blue-600 hover:bg-blue-50 border border-transparent hover:border-blue-100 transition-all"
                     >
                         <Edit2 size={16} />
                     </button>
-                    <button 
+                    <button
                         onClick={() => setConfirmDelete({ isOpen: true, id: item.id })}
                         className="p-2 rounded-xl text-red-500 hover:bg-red-50 border border-transparent hover:border-red-100 transition-all"
                     >
@@ -286,7 +288,7 @@ const Blog = () => {
 
     if (isAddPage || isEditPage) {
         return (
-            <motion.div 
+            <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="max-w-[1400px] mx-auto pb-20"
@@ -294,7 +296,7 @@ const Blog = () => {
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center gap-4">
-                        <button 
+                        <button
                             onClick={() => navigate('/admin/blog')}
                             className="p-2.5 rounded-2xl bg-white border border-gray-200 text-gray-500 hover:bg-gray-50 transition-all shadow-sm"
                         >
@@ -306,13 +308,13 @@ const Blog = () => {
                         </div>
                     </div>
                     <div className="flex items-center gap-3">
-                        <button 
+                        <button
                             onClick={() => navigate('/admin/blog')}
                             className="px-6 py-2.5 text-sm font-bold text-gray-500 bg-white border border-gray-200 rounded-2xl hover:bg-gray-50 transition-all"
                         >
                             Discard
                         </button>
-                        <button 
+                        <button
                             onClick={handleSubmit(onSubmit)}
                             disabled={isSaving}
                             className="px-8 py-2.5 text-sm font-bold text-white bg-primary rounded-2xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2"
@@ -328,7 +330,7 @@ const Blog = () => {
                     <div className="space-y-8">
                         {/* Title Section */}
                         <div className="bg-white rounded-[2rem] p-10 border border-gray-200/60 shadow-sm">
-                            <input 
+                            <input
                                 {...register('title', { required: true })}
                                 type="text"
                                 placeholder="Article Title..."
@@ -356,7 +358,7 @@ const Blog = () => {
                                 name="content"
                                 control={control}
                                 render={({ field }) => (
-                                    <SlashEditor 
+                                    <SlashEditor
                                         value={field.value}
                                         onChange={field.onChange}
                                         onImageUpload={async (file) => {
@@ -374,17 +376,25 @@ const Blog = () => {
                         {/* Publishing Card */}
                         <div className="bg-white rounded-[2rem] p-8 border border-gray-200/60 shadow-sm space-y-6">
                             <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest border-b border-gray-100 pb-4">Publishing</h3>
-                            
+
                             <div className="space-y-4">
                                 <div>
                                     <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">Featured Image</label>
-                                    <ImageUploadField 
+                                    <ImageUploadField
                                         value={filePreview}
                                         onChange={setFilePreview}
                                         onFileChange={setSelectedFile}
-                                        aspectRatio={16/9}
+                                        aspectRatio={16 / 9}
                                         className="rounded-2xl border-dashed border-2 border-gray-100 hover:border-primary/20 transition-all bg-gray-50/50"
                                     />
+                                    <div className="mt-3">
+                                        <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1 block">Image Alt Text (SEO)</label>
+                                        <input
+                                            {...register('imageAlt')}
+                                            className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2 text-xs focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                                            placeholder="Describe the featured image..."
+                                        />
+                                    </div>
                                 </div>
 
                                 <div>
@@ -393,7 +403,7 @@ const Blog = () => {
                                         name="category"
                                         control={control}
                                         render={({ field }) => (
-                                            <Select 
+                                            <Select
                                                 {...field}
                                                 options={BLOG_CATEGORIES}
                                                 className="text-sm"
@@ -417,7 +427,7 @@ const Blog = () => {
                                         name="status"
                                         control={control}
                                         render={({ field }) => (
-                                            <Select 
+                                            <Select
                                                 {...field}
                                                 options={BLOG_STATUS_OPTIONS}
                                                 className="text-sm"
@@ -448,8 +458,16 @@ const Blog = () => {
 
                             <div className="space-y-4">
                                 <div>
+                                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">Meta Title</label>
+                                    <input
+                                        {...register('metaTitle')}
+                                        className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                                        placeholder="SEO Title (defaults to post title)"
+                                    />
+                                </div>
+                                <div>
                                     <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">Focus Keyword</label>
-                                    <input 
+                                    <input
                                         {...register('focusKeyword')}
                                         className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                                         placeholder="e.g. Navaratri 2024"
@@ -457,7 +475,7 @@ const Blog = () => {
                                 </div>
                                 <div>
                                     <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">Meta Description</label>
-                                    <textarea 
+                                    <textarea
                                         {...register('metaDescription')}
                                         className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none"
                                         rows={3}
@@ -482,7 +500,7 @@ const Blog = () => {
                     <h1 className="text-3xl font-bold text-gray-900">Blog Management</h1>
                     <p className="text-gray-500 font-medium text-sm mt-1">Manage your stories, drafts, and scheduled posts.</p>
                 </div>
-                <button 
+                <button
                     onClick={() => navigate('/admin/blog/add')}
                     className="flex items-center justify-center gap-2 bg-primary text-white px-8 py-3.5 rounded-2xl font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"
                 >
@@ -509,7 +527,7 @@ const Blog = () => {
                 ))}
             </div>
 
-            <DataTable 
+            <DataTable
                 data={items}
                 columns={columns}
                 searchPlaceholder="Search blogs..."
@@ -520,7 +538,7 @@ const Blog = () => {
                 ]}
             />
 
-            <ConfirmDialog 
+            <ConfirmDialog
                 isOpen={confirmDelete.isOpen}
                 onClose={() => setConfirmDelete({ isOpen: false, id: null })}
                 onConfirm={confirmDeleteAction}

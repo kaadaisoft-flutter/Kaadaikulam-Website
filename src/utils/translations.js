@@ -300,6 +300,53 @@ export const translations = {
           meaning: "The Lord who is the ocean of compassion and the ornament of wisdom and renunciation. We chant the names of the ancient Narayana, Madhava, and Krishna to attain spiritual liberation and eternal peace."
         }
       ]
+    },
+    kulaguruDetail: {
+      hero: {
+        label: "Poondurai Kaadai",
+        heading: "Clan Gurus of Poondurai Nadu",
+        text: "The noble lifestyle of the Poondurai region and the traditional veneration of the Kulagurus and Pasur Madam constitute a divine historical treasure, guiding generations towards spiritual and material prosperity."
+      },
+      definition: {
+        title: "Definition of a Kulaguru",
+        text1: "A Guru is the one who guides us to the divine, next only to mother and father. While parents might sometimes forget, it is the Kulaguru who reminds us of our clan deity and how to worship them, guiding us on the right path.",
+        quote: "Guru Brahma Guru Vishnu Guru Devo Maheshwara, Guru Sakshat Parabrahma Tasmai Shri Gurave Namah",
+        text2: "According to this chant, the Guru protecting the clan is hailed as the divine trinity and the supreme Brahman. In the Poondurai region, this Kulaguru tradition was established as early as the time of Saint Thirumoolar."
+      },
+      history: {
+        title: "Poondurai Nadu and Pasur Madam",
+        divisions: [
+          { name: "Melkarai Poondurai Nadu", regions: "Regions extending from Poondurai village, Vellodu, Nasiyanur, Ezhumathur, Modakurichi to Kolanalli." },
+          { name: "Keezhkarai Poondurai Nadu", regions: "Rasipuram and Salem district regions." }
+        ],
+        desc: "Although the sons of this soil lived in various factions like the Kaadai, Payiran, Sathandhai, and Sellan clans, all were united under the bond of Pasur Madam. The 'Kongu Mandala Sathakam' highlights how the Kaadai clan worshipped the pontiffs of Pasur Madam with deep devotion."
+      },
+      administration: {
+        title: "Divisions and Administration",
+        madams: [
+          {
+            name: "Pasur Periya Madam",
+            desc: "Belongs to the followers of Melkarai Poondurai Nadu. The current pontiff is Sri Sri Sivasubramaniya Dikshitar (Ashok Dikshitar).",
+            img: "img1"
+          },
+          {
+            name: "Pasur Chinna Madam (Nattuppuram)",
+            desc: "Dedicated to the Poondurai Kaadai clan and other disciples. The current pontiff is Sri Sri Chandrasekara Dikshitar (Kannan Dikshitar).",
+            img: "img2"
+          }
+        ],
+        tradition: "They belong to the Pasupatha Saiva tradition following the Bodhayana sutra. Their lineage is known as 'Sathiyojatha Silandhi Mudi Tharitha Gnana Manikka Sivacharya Guruswamigal'."
+      },
+      wonders: {
+        title: "Historical Wonders and Sacred Sites",
+        items: [
+          { title: "The Splendor of Pasur", text: "The madam is located at a beautiful riverbed curve where Mother Kaveri river seems to look back at the path she traveled." },
+          { title: "Mystery of the Sand Lingam", text: "In the Nattatreeswarar temple, there is a Lingam molded out of sand and worshipped by Sage Agasthiyar with his own hands. It is a unique feature of our Poondurai Nadu." },
+          { title: "Recognition from Mysore Maharaja", text: "For a miraculous event where a speechless prince spoke by the Guru's grace, the Mysore Maharaja granted 130 acres of land in Kodumanal and Pasur, which remain Madam properties." },
+          { title: "Social Service and Prime Honors", text: "Historical evidence that our Kaadai clan administered sacred sites like Avinashi, Tiruchengode, and Chennimalai are preserved. Pasur Gurus receive the first honors (Parivattam) in festivals and maintain landmarks like Kuppichi and Singathanakkal." }
+        ],
+        footer: "It is the duty of every citizen of Poondurai Nadu to cherish and protect this noble heritage."
+      }
     }
   },
   ta: {
@@ -603,6 +650,53 @@ export const translations = {
           meaning: "கருணைக்கடலும், ஞானம் மற்றும் வைராக்கியத்தின் ஆபரணமுமாகத் திகழும் இறைவன். ஆன்மீக விடுதலையையும் நித்திய அமைதியையும் பெற ஆதி நாராயணன், மாதவன் மற்றும் கிருஷ்ணனின் நாமங்களை ஓதுகிறோம்."
         }
       ]
+    },
+    kulaguruDetail: {
+      hero: {
+        label: "பூந்துறை காடை",
+        heading: "பூந்துறை நாட்டின் குலகுரு",
+        text: "பூந்துறை நாட்டின் உயரிய வாழ்வியலும், அங்கு வழிவழியாகப் போற்றப்படும் குலகுரு மற்றும் பாசூர் மடத்தின் பெருமைகளும் ஒரு தெய்வகீத வரலாற்றுப் பொக்கிஷமாகும்."
+      },
+      definition: {
+        title: "குலகுரு என்பதன் விளக்கம்",
+        text1: "குரு என்பவர் தாய், தந்தை அடுத்தபடியாக தெய்வத்தை அடைய வழிகாட்டுபவர். பெற்றோர் சில நேரங்களில் மறக்கக்கூடும் என்றாலும், நம் குலதெய்வத்தையும் அதனை வழிபடும் முறையையும் நினைவூட்டி நம்மை நல்வழிப்படுத்துபவர் குலகுருவே ஆவார்.",
+        quote: "குருர் பிரம்மா குருர் விஷ்ணு: குருர் தேவோ மகேஸ்வர: குரு சாக்ஷாத் பரப்பிரம்மா தஸ்மை ஸ்ரீ குரவே நம:",
+        text2: "இந்த சுலோகத்தின் படி, குலத்தைக் காக்கும் குருவானவர் மும்மூர்த்திகளாகவும், பரப்பிரம்மமாகவும் போற்றப்படுகிறார். பூந்துறை நாட்டில் திருமூலர் காலத்திலேயே இந்தக் குலகுரு முறை தோற்றுவிக்கப்பட்டது."
+      },
+      history: {
+        title: "பூந்துறை நாடும் பாசூர் மடமும்",
+        divisions: [
+          { name: "மேல்கரை பூந்துறை நாடு", regions: "பூந்துறை கிராமம், வெள்ளோடு, நசியனூர், எழுமாத்தூர், மொடக்குறிச்சி மற்றும் கொளநல்லி வரையிலான பகுதிகள்." },
+          { name: "கீழ்கரை பூந்துறை நாடு", regions: "ராசிபுரம் மற்றும் சேலம் மாவட்டப் பகுதிகள்." }
+        ],
+        desc: "இப்பகுதிகளில் வாழும் மக்கள் காடை கூட்டம், பயிரன் கூட்டம், சாத்தந்தை கூட்டம், செல்லன் கூட்டம் எனப் பல பிரிவுகளாக வாழ்ந்தாலும், அனைவரும் பாசூர் மடத்தின் பிணைப்பிலேயே இருந்தனர். 'கொங்கு மண்டல சதகம்' காடை குலத்தினர் பாசூர் மடத்தின் மீது கொண்டிருந்த பக்தியைப் போற்றுகிறது."
+      },
+      administration: {
+        title: "மடத்தின் பிரிவுகளும் நிர்வாகமும்",
+        madams: [
+          {
+            name: "பாசூர் பெரிய மடம்",
+            desc: "மேல்கரைப் பூந்துறை நாட்டுப் பிரிவினருக்கு உரியது. இதன் தற்போதைய மடாதிபதி ஸ்ரீஸ்ரீ சிவசுப்பிரமணிய தீட்சிதர் (அசோக் தீட்சிதர்).",
+            img: "img1"
+          },
+          {
+            name: "பாசூர் சின்ன மடம் (நாட்டுப்புறம்)",
+            desc: "பூந்துறை காடை குலம் மற்றும் பிற சீடர்களுக்கு உரியது. இதன் தற்போதைய மடாதிபதி ஸ்ரீஸ்ரீ சந்திரசேகர தீட்சிதர் (கண்ணன் தீட்சிதர்).",
+            img: "img2"
+          }
+        ],
+        tradition: "இவர்கள் போதாயன சூத்திரத்தைப் பின்பற்றும் பாசுபத சைவ மரபைச் சேர்ந்தவர்கள். இவர்களின் பரம்பரை 'சத்தியோஜாத சிலந்தி முடி தரித்த ஞான மாணிக்க சிவாச்சாரிய குருசாமிகள்' என்று அழைக்கப்படுகிறது."
+      },
+      wonders: {
+        title: "வரலாற்று அதிசயங்கள் மற்றும் புனித தலங்கள்",
+        items: [
+          { title: "பாசூரின் எழில்", text: "தாய் காவிரி தான் வந்த பாதையைத் திரும்பிப் பார்ப்பது போன்ற அழகான ஆற்று வளைவில் இந்த மடம் அமைந்துள்ளது." },
+          { title: "மணல் லிங்கத்தின் ரகசியம்", text: "காவிரி ஆற்றின் நடுவில் உள்ள நட்டாற்றீஸ்வரர் கோவிலில், அகத்திய முனிவர் தன் கைகளால் மணலால் பிடித்து வழிபட்ட லிங்கம் உள்ளது. இது நம் பூந்துறை நாட்டின் தனிச்சிறப்பாகும்." },
+          { title: "மைசூர் மகாராஜாவின் அங்கீகாரம்", text: "பேசும் திறன் இழந்த இளவரசர் குருவின் அருளால் பேசத் தொடங்கிய அதிசயத்திற்காக, மைசூர் மகாராஜா கொடுத்த கொடுமணல் 80 ஏக்கர் மற்றும் பாசூர் 50 ஏக்கர் நிலங்கள் இன்றும் மடத்தின் சொத்துக்களாக உள்ளன." },
+          { title: "சமூகப் பணியும் முதன்மை மரியாதையும்", text: "அவிநாசி, திருச்செங்கோடு, சென்னிமலை போன்ற தலங்களை நம் காடை குலத்தினர் நிர்வகித்ததற்கான சான்றுகள் உள்ளன. விசேஷங்களில் பாசூர் குருக்களுக்கு முதல் மரியாதை (பரிவட்டம்) அளிக்கப்படுகிறது மற்றும் குப்பிச்சி, சிங்கத்தணக்கல் போன்ற அடையாளங்களை அவர்கள் பராமரிக்கின்றனர்." }
+        ],
+        footer: "இந்த உன்னத மரபினைப் போற்றிப் பாதுகாப்பது பூந்துறை நாட்டின் ஒவ்வொரு குடிமகனின் கடமையாகும்."
+      }
     }
   }
 };

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import img1 from "../assets/images/pasur_periya_madam-CCPWZxUo.webp";
 import img2 from "../assets/images/pasur_chinna_madam-BOzzffoW.webp";
@@ -78,10 +79,10 @@ const KulaGuru = () => {
               {t.p1}
             </p>
 
-            <button className="group flex items-center gap-3 text-[#5d1712] font-semibold transition-all hover:gap-5">
+            <Link to="/kulaguru" className="group flex items-center gap-3 text-[#5d1712] font-semibold transition-all hover:gap-5">
               <span className="border-b border-current pb-1 uppercase tracking-widest text-xs">{t.link}</span>
               <span className="text-lg transition-transform duration-300">→</span>
-            </button>
+            </Link>
           </motion.div>
 
         </div>

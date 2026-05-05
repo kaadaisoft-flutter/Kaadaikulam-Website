@@ -167,13 +167,13 @@ const CheckCircle = ({ size, className }) => (
 );
 
 const ImageSettingsModal = ({ isOpen, onClose, onSave, initialData }) => {
-    const [data, setData] = useState({ alt: '', width: 100, align: 'center' });
+    const [data, setData] = useState({ alt: '', width: 800, align: 'center' });
 
     useEffect(() => {
         if (initialData) {
             setData({
                 alt: initialData.alt || '',
-                width: initialData.width || 100,
+                width: initialData.width || 800,
                 align: initialData.align || 'center'
             });
         }
@@ -215,12 +215,13 @@ const ImageSettingsModal = ({ isOpen, onClose, onSave, initialData }) => {
                     <div className="space-y-4">
                         <div className="flex justify-between items-center px-1">
                             <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Image Width</label>
-                            <span className="text-xs font-bold text-stone-600 bg-stone-100 px-2 py-0.5 rounded-lg">{data.width}%</span>
+                            <span className="text-xs font-bold text-stone-600 bg-stone-100 px-2 py-0.5 rounded-lg">{data.width}px</span>
                         </div>
                         <input 
                             type="range"
-                            min="10"
-                            max="100"
+                            min="100"
+                            max="1200"
+                            step="10"
                             value={data.width}
                             onChange={(e) => setData({ ...data, width: parseInt(e.target.value) })}
                             className="w-full h-2 bg-stone-100 rounded-lg appearance-none cursor-pointer accent-orange-500"
@@ -267,6 +268,8 @@ const ImageSettingsModal = ({ isOpen, onClose, onSave, initialData }) => {
         </div>
     );
 };
+
+const SlashMenu = ({ position, onSelect, onClose }) => {
     const menuRef = useRef(null);
 
     useEffect(() => {
@@ -416,10 +419,24 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
     const [imageModal, setImageModal] = useState({ isOpen: false, initialData: null, target: null });
     const fileInputRef = useRef(null);
 
-    // Initial content load - only if editor is empty to avoid cursor jumps
+    // Initial content load and reset logic
     useEffect(() => {
-        if (editorRef.current && value && (editorRef.current.innerHTML === '' || editorRef.current.innerHTML === '<p><br></p>')) {
-            editorRef.current.innerHTML = value;
+        if (editorRef.current) {
+            const currentHTML = editorRef.current.innerHTML;
+            const normalizedValue = value || '';
+            
+            // If value is explicitly empty, reset the editor
+            if (normalizedValue === '' || normalizedValue === '<p><br></p>') {
+                if (currentHTML !== '' && currentHTML !== '<p><br></p>') {
+                    editorRef.current.innerHTML = '';
+                }
+                return;
+            }
+
+            // If value is different and editor is empty (initial load)
+            if (currentHTML === '' || currentHTML === '<p><br></p>') {
+                editorRef.current.innerHTML = normalizedValue;
+            }
         }
     }, [value]);
 
@@ -433,7 +450,7 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
                     target: img,
                     initialData: {
                         alt: img.alt || '',
-                        width: parseInt(img.style.width) || 100,
+                        width: parseInt(img.style.width) || 800,
                         align: img.style.display === 'block' ? (img.style.marginLeft === '0px' ? 'left' : (img.style.marginRight === '0px' ? 'right' : 'center')) : 'center'
                     }
                 });
@@ -594,7 +611,7 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
         const { target } = imageModal;
         if (target) {
             target.alt = imgData.alt;
-            target.style.width = `${imgData.width}%`;
+            target.style.width = `${imgData.width}px`;
             target.style.display = 'block';
             
             if (imgData.align === 'left') {
@@ -622,13 +639,23 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
                 const url = await onImageUpload(file);
                 
                 const placeholder = editorRef.current?.querySelector(`#${id}`);
-                if (placeholder) {
+                if (url && placeholder) {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = file.name.split('.')[0]; // Default alt text
+                    img.className = "rounded-2xl shadow-lg my-8 cursor-pointer";
+                    img.style.width = "800px";
+                    img.style.display = "block";
+                    img.style.marginLeft = "auto";
+                    img.style.marginRight = "auto";
+                    placeholder.replaceWith(img);
+                    
+                    // Add a paragraph after the image for easy typing
+                    const p = document.createElement('p');
+                    p.innerHTML = '<br>';
+                    img.after(p);
+                } else if (placeholder) {
                     placeholder.remove();
-                }
-                
-                if (url) {
-                    const imgHtml = `<img src="${url}" alt="" style="width: 100%; display: block; margin-left: auto; margin-right: auto;" class="rounded-2xl shadow-lg my-8 cursor-pointer" />`;
-                    document.execCommand('insertHTML', false, imgHtml + '<p><br></p>');
                 }
                 handleInput();
             } catch (err) {
