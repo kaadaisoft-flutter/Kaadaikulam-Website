@@ -1,6 +1,155 @@
 import { useState, useEffect, useRef } from 'react';
-import { Heading1, Heading2, Heading3, Image as ImageIcon, X, List, Quote, Bold, Italic, Link as LinkIcon, Underline } from 'lucide-react';
+import { Heading1, Heading2, Heading3, Image as ImageIcon, X, List, Quote, Bold, Italic, Link as LinkIcon, Underline, ExternalLink, Mail, Phone, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const LinkModal = ({ isOpen, onClose, onInsert, initialData }) => {
+    const [linkData, setLinkData] = useState({ text: '', url: '', newTab: true });
+
+    useEffect(() => {
+        if (initialData) {
+            setLinkData({
+                text: initialData.text || '',
+                url: initialData.url || '',
+                newTab: initialData.newTab ?? true
+            });
+        }
+    }, [initialData]);
+
+    if (!isOpen) return null;
+
+    const handleQuickAdd = (protocol) => {
+        if (protocol === 'https://' && !linkData.url.startsWith('http')) {
+            setLinkData({ ...linkData, url: 'https://' + linkData.url });
+        } else if (protocol === 'Email') {
+            setLinkData({ ...linkData, url: 'mailto:' + linkData.url });
+        } else if (protocol === 'Phone') {
+            setLinkData({ ...linkData, url: 'tel:' + linkData.url });
+        }
+    };
+
+    return (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-stone-950/40 backdrop-blur-sm">
+            <motion.div 
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                className="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg overflow-hidden border border-stone-100"
+            >
+                <div className="flex items-center justify-between p-6 border-b border-stone-50 bg-stone-50/50">
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                            <LinkIcon size={20} />
+                        </div>
+                        <h3 className="text-lg font-bold text-stone-900">Add Hyperlink</h3>
+                    </div>
+                    <button onClick={onClose} className="p-2 hover:bg-stone-100 rounded-full transition-colors text-stone-400">
+                        <X size={20} />
+                    </button>
+                </div>
+
+                <div className="p-8 space-y-6">
+                    <div className="space-y-2">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest ml-1">Link Text (Optional)</label>
+                        <input 
+                            type="text"
+                            value={linkData.text}
+                            onChange={(e) => setLinkData({ ...linkData, text: e.target.value })}
+                            placeholder="e.g. Visit our website"
+                            className="w-full bg-stone-50 border-stone-100 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-stone-900 placeholder:text-stone-300"
+                        />
+                        <p className="text-[10px] text-stone-400 ml-1">Leave empty to use selected text</p>
+                    </div>
+
+                    <div className="space-y-2 text-stone-900">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest ml-1">URL</label>
+                        <div className="relative">
+                            <input 
+                                type="text"
+                                value={linkData.url}
+                                onChange={(e) => setLinkData({ ...linkData, url: e.target.value })}
+                                placeholder="https://example.com"
+                                className="w-full bg-stone-50 border-stone-100 rounded-2xl px-5 py-4 pr-12 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-stone-900 placeholder:text-stone-300"
+                            />
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-300">
+                                <ExternalLink size={18} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="space-y-3">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest ml-1">Quick Add</label>
+                        <div className="flex gap-2">
+                            {[
+                                { id: 'https://', label: 'https://', icon: ExternalLink },
+                                { id: 'Email', label: 'Email', icon: Mail },
+                                { id: 'Phone', label: 'Phone', icon: Phone }
+                            ].map(btn => (
+                                <button 
+                                    key={btn.id}
+                                    onClick={() => handleQuickAdd(btn.id)}
+                                    className="px-4 py-2 bg-stone-100 hover:bg-stone-200 rounded-xl text-xs font-bold text-stone-600 transition-colors flex items-center gap-2"
+                                >
+                                    <btn.icon size={14} />
+                                    {btn.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <label className="flex items-center gap-3 cursor-pointer group w-fit">
+                        <div className="relative">
+                            <input 
+                                type="checkbox"
+                                checked={linkData.newTab}
+                                onChange={(e) => setLinkData({ ...linkData, newTab: e.target.checked })}
+                                className="peer sr-only"
+                            />
+                            <div className="w-5 h-5 border-2 border-stone-200 rounded-md peer-checked:bg-primary peer-checked:border-primary transition-all"></div>
+                            <CheckCircle size={14} className="absolute inset-0 m-auto text-white opacity-0 peer-checked:opacity-100 transition-opacity" />
+                        </div>
+                        <span className="text-sm font-bold text-stone-600 group-hover:text-stone-900 transition-colors">Open in new tab</span>
+                    </label>
+                </div>
+
+                <div className="p-6 bg-stone-50 border-t border-stone-100 flex items-center justify-between">
+                    <button 
+                        onClick={() => onInsert(null)} // Remove link logic
+                        className="flex items-center gap-2 text-stone-400 hover:text-red-500 font-bold text-xs uppercase tracking-widest transition-colors"
+                    >
+                        <Trash2 size={16} />
+                        Remove Link
+                    </button>
+                    <div className="flex gap-3">
+                        <button onClick={onClose} className="px-6 py-3 border border-stone-200 rounded-xl text-xs font-bold text-stone-500 hover:bg-white transition-all">
+                            Cancel
+                        </button>
+                        <button 
+                            onClick={() => onInsert(linkData)}
+                            className="px-8 py-3 bg-stone-900 text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-primary transition-all shadow-lg"
+                        >
+                            Insert Link
+                        </button>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+const CheckCircle = ({ size, className }) => (
+    <svg 
+        width={size} 
+        height={size} 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="3" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        className={className}
+    >
+        <polyline points="20 6 9 17 4 12" />
+    </svg>
+);
 
 const SlashMenu = ({ position, onSelect, onClose }) => {
     const menuRef = useRef(null);
@@ -104,6 +253,7 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
     const editorRef = useRef(null);
     const [menuState, setMenuState] = useState({ visible: false, position: null });
     const [toolbarState, setToolbarState] = useState({ visible: false, position: null });
+    const [linkModal, setLinkModal] = useState({ isOpen: false, initialData: null });
     const fileInputRef = useRef(null);
 
     // Initial content load - only if editor is empty to avoid cursor jumps
@@ -166,7 +316,6 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            // Ensure we use <p> tags for paragraphs
             document.execCommand('defaultParagraphSeparator', false, 'p');
         }
         if (menuState.visible) {
@@ -179,7 +328,6 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
     const executeCommand = async (command) => {
         setMenuState({ visible: false, position: null });
 
-        // Remove the slash that triggered the menu
         const selection = window.getSelection();
         if (selection.rangeCount > 0) {
             const range = selection.getRangeAt(0);
@@ -209,8 +357,40 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
         if (action === 'underline') document.execCommand('underline');
         if (action === 'h2') document.execCommand('formatBlock', false, 'h2');
         if (action === 'link') {
-            const url = prompt("Enter Link URL:");
-            if (url) document.execCommand('createLink', false, url);
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const container = range.commonAncestorContainer;
+                const link = container.nodeType === 3 ? container.parentNode : container;
+                
+                if (link.tagName === 'A') {
+                    setLinkModal({ 
+                        isOpen: true, 
+                        initialData: { text: link.innerText, url: link.href, newTab: link.target === '_blank' } 
+                    });
+                } else {
+                    setLinkModal({ 
+                        isOpen: true, 
+                        initialData: { text: selection.toString(), url: '', newTab: true } 
+                    });
+                }
+            }
+        }
+        handleInput();
+    };
+
+    const handleLinkInsert = (linkData) => {
+        setLinkModal({ isOpen: false, initialData: null });
+        if (!linkData) {
+            document.execCommand('unlink');
+        } else {
+            const { text, url, newTab } = linkData;
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const html = `<a href="${url}" ${newTab ? 'target="_blank" rel="noopener noreferrer"' : ''} class="text-primary font-bold underline underline-offset-4">${text || selection.toString()}</a>`;
+                document.execCommand('insertHTML', false, html);
+            }
         }
         handleInput();
     };
@@ -230,8 +410,9 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
                 }
                 
                 if (url) {
-                    document.execCommand('insertImage', false, url);
-                    document.execCommand('insertHTML', false, '<p><br></p>');
+                    const altText = prompt("Enter Image Alt Text (SEO):", file.name.split('.')[0]);
+                    const imgHtml = `<img src="${url}" alt="${altText || ''}" class="rounded-2xl shadow-lg my-8" />`;
+                    document.execCommand('insertHTML', false, imgHtml + '<p><br></p>');
                 }
                 handleInput();
             } catch (err) {
@@ -251,7 +432,7 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
                 .slash-editor img { max-width: 100%; border-radius: 1rem; margin: 2rem 0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border: 1px solid #f3f4f6; }
                 .slash-editor ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
                 .slash-editor blockquote { border-left: 4px solid #E5E7EB; padding-left: 1.5rem; font-style: italic; color: #6B7280; margin: 1.5rem 0; }
-                .slash-editor a { color: #800000; text-decoration: underline; text-underline-offset: 4px; }
+                .slash-editor a { color: #800000; text-decoration: underline; text-underline-offset: 4px; font-weight: 700; }
                 .slash-editor:focus { outline: none; }
                 .slash-editor[contenteditable]:empty:before {
                     content: attr(placeholder);
@@ -288,6 +469,13 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
                     />
                 )}
             </AnimatePresence>
+
+            <LinkModal 
+                isOpen={linkModal.isOpen}
+                initialData={linkModal.initialData}
+                onClose={() => setLinkModal({ isOpen: false, initialData: null })}
+                onInsert={handleLinkInsert}
+            />
 
             <input
                 type="file"
