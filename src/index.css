@@ -1,11 +1,16 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap');
+
+/* Fonts moved to index.html to resolve PostCSS import order issues */
 
 @theme {
   --font-sans: "Inter", "Roboto", system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", serif;
   --sacred-bg: #fdfcf7;
   --sacred-accent: #c49a3c;
+  --color-primary: #800000;
+  --color-primary-light: #A52A2A;
+  --color-primary-dark: #4A0000;
+  --color-secondary: #D4AF37;
 }
 
 @layer base {

@@ -162,6 +162,18 @@ export const translations = {
         temple: "Temple Maintenance",
         poor: "Poor Relief",
         edu: "Education"
+      },
+      confirmation: {
+        heading: "Already Contributed?",
+        sub: "If you have already transferred funds via bank transfer or UPI, please provide the details below so we can verify and record your contribution.",
+        name: "Full Name",
+        email: "Email Address",
+        amount: "Transferred Amount (₹)",
+        transactionId: "Transaction ID / Reference No.",
+        purpose: "Purpose of Donation",
+        submit: "Submit Details",
+        success: "Details submitted! Our team will verify and update your status soon.",
+        error: "Failed to submit details. Please try again."
       }
     },
     gallery: {
@@ -453,6 +465,18 @@ export const translations = {
         temple: "கோவில் பராமரிப்பு",
         poor: "ஏழைகளுக்கு உதவி",
         edu: "கல்வி"
+      },
+      confirmation: {
+        heading: "ஏற்கனவே பங்களித்துவிட்டீர்களா?",
+        sub: "வங்கிப் பரிமாற்றம் அல்லது UPI மூலம் ஏற்கனவே நிதியை மாற்றியிருந்தால், உங்கள் பங்களிப்பைச் சரிபார்த்துப் பதிவு செய்ய கீழே உள்ள விவரங்களை வழங்கவும்.",
+        name: "முழு பெயர்",
+        email: "மின்னஞ்சல் முகவரி",
+        amount: "பரிமாற்றப்பட்ட தொகை (₹)",
+        transactionId: "பரிவர்த்தனை ஐடி / குறிப்பு எண்",
+        purpose: "நன்கொடையின் நோக்கம்",
+        submit: "விவரங்களைச் சமர்ப்பிக்கவும்",
+        success: "விவரங்கள் சமர்ப்பிக்கப்பட்டன! எங்கள் குழு விரைவில் சரிபார்த்து உங்களின் நிலையைப் புதுப்பிக்கும்.",
+        error: "விவரங்களைச் சமர்ப்பிப்பதில் தோல்வி. மீண்டும் முயற்சிக்கவும்."
       }
     },
     gallery: {

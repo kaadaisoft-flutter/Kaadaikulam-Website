@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import heroImg from "../assets/images/donation_hero.webp";
+import { addDonation } from "../services/donationService";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Donation = () => {
   const { language } = useLanguage();
@@ -10,16 +12,60 @@ const Donation = () => {
   
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Confirmation Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    amount: "",
+    transactionId: "",
+    purpose: "general"
+  });
 
   const amounts = [101, 251, 501, 1001, 2501, 5001, 10001, 25001];
 
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
-    alert(t.bank.copy);
+    toast.success(t.bank.copy);
+  };
+
+  const handleFormChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.amount || !formData.transactionId) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await addDonation({
+        ...formData,
+        amount: Number(formData.amount),
+        date: new Date().toISOString()
+      });
+      toast.success(t.confirmation.success);
+      setFormData({
+        name: "",
+        email: "",
+        amount: "",
+        transactionId: "",
+        purpose: "general"
+      });
+    } catch (err) {
+      toast.error(t.confirmation.error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-sacred pt-0">
+    <div className="min-h-screen bg-sacred pt-0 pb-20">
+      <Toaster position="bottom-center" />
       {/* Hero Section */}
       <section className="relative w-full min-h-[550px] lg:min-h-[650px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -57,7 +103,7 @@ const Donation = () => {
         </div>
       </section>
 
-      {/* Donation Options */}
+      {/* Donation Selection & Bank Details */}
       <section className="py-24 container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* Left: Donation Selection */}
@@ -81,6 +127,7 @@ const Donation = () => {
                   onClick={() => {
                     setSelectedAmount(amt);
                     setCustomAmount("");
+                    setFormData(prev => ({ ...prev, amount: amt.toString() }));
                   }}
                   className={`py-6 rounded-2xl font-serif text-xl transition-all duration-300 border-2 ${
                     selectedAmount === amt
@@ -101,15 +148,19 @@ const Donation = () => {
                 onChange={(e) => {
                   setCustomAmount(e.target.value);
                   setSelectedAmount(null);
+                  setFormData(prev => ({ ...prev, amount: e.target.value }));
                 }}
                 className="w-full bg-white border-b-2 border-stone-200 px-4 py-4 focus:border-[#5d1712] focus:outline-none transition-colors text-2xl font-serif text-stone-800"
                 placeholder={t.selection.placeholder}
               />
             </div>
 
-            <button className="w-full bg-[#5d1712] text-white py-6 rounded-2xl font-bold tracking-[0.2em] uppercase hover:bg-[#3d0f0c] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-[#5d1712]/20">
+            <a 
+              href="#record-donation"
+              className="block w-full text-center bg-[#5d1712] text-white py-6 rounded-2xl font-bold tracking-[0.2em] uppercase hover:bg-[#3d0f0c] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-[#5d1712]/20"
+            >
               {t.selection.submit}
-            </button>
+            </a>
           </motion.div>
 
           {/* Right: Bank Details & Impact */}
@@ -166,34 +217,105 @@ const Donation = () => {
                 </div>
               </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
 
-            {/* Impact Icons */}
-            <div className="grid grid-cols-3 gap-8 pt-6">
-              <div className="text-center group">
-                <div className="w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <svg className="w-8 h-8 text-[#5d1712]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                </div>
-                <p className="text-[10px] uppercase font-bold tracking-widest text-stone-400">{t.impact.temple}</p>
-              </div>
-              <div className="text-center group">
-                <div className="w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <svg className="w-8 h-8 text-[#c49a3c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </div>
-                <p className="text-[10px] uppercase font-bold tracking-widest text-stone-400">{t.impact.poor}</p>
-              </div>
-              <div className="text-center group">
-                <div className="w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <svg className="w-8 h-8 text-[#5d1712]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.44 0.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                </div>
-                <p className="text-[10px] uppercase font-bold tracking-widest text-stone-400">{t.impact.edu}</p>
-              </div>
+      {/* Record Donation Form */}
+      <section id="record-donation" className="py-24 bg-stone-50 border-y border-stone-100">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white p-10 md:p-16 rounded-[40px] shadow-2xl border border-stone-100"
+          >
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl md:text-4xl text-[#5d1712] mb-4">{t.confirmation.heading}</h2>
+              <p className="text-stone-600 max-w-2xl mx-auto">{t.confirmation.sub}</p>
             </div>
+
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c]">{t.confirmation.name} *</label>
+                  <input 
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleFormChange}
+                    className="w-full bg-stone-50 border-b-2 border-stone-200 px-4 py-4 focus:border-[#5d1712] focus:outline-none transition-colors font-medium text-stone-800"
+                    placeholder="Enter your name"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c]">{t.confirmation.email}</label>
+                  <input 
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleFormChange}
+                    className="w-full bg-stone-50 border-b-2 border-stone-200 px-4 py-4 focus:border-[#5d1712] focus:outline-none transition-colors font-medium text-stone-800"
+                    placeholder="Enter your email"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c]">{t.confirmation.amount} *</label>
+                  <input 
+                    type="number"
+                    name="amount"
+                    required
+                    value={formData.amount}
+                    onChange={handleFormChange}
+                    className="w-full bg-stone-50 border-b-2 border-stone-200 px-4 py-4 focus:border-[#5d1712] focus:outline-none transition-colors font-bold text-[#5d1712] text-xl"
+                    placeholder="₹ 0.00"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c]">{t.confirmation.transactionId} *</label>
+                  <input 
+                    type="text"
+                    name="transactionId"
+                    required
+                    value={formData.transactionId}
+                    onChange={handleFormChange}
+                    className="w-full bg-stone-50 border-b-2 border-stone-200 px-4 py-4 focus:border-[#5d1712] focus:outline-none transition-colors font-mono font-medium text-stone-800"
+                    placeholder="Reference Number / UPI ID"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c]">{t.confirmation.purpose}</label>
+                <select 
+                  name="purpose"
+                  value={formData.purpose}
+                  onChange={handleFormChange}
+                  className="w-full bg-stone-50 border-b-2 border-stone-200 px-4 py-4 focus:border-[#5d1712] focus:outline-none transition-colors font-medium text-stone-800 appearance-none"
+                >
+                  <option value="general">General Temple Fund</option>
+                  <option value="maintenance">Maintenance & Renovation</option>
+                  <option value="annadanam">Annadanam (Food Distribution)</option>
+                  <option value="festival">Festival & Special Poojas</option>
+                </select>
+              </div>
+
+              <div className="pt-8">
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#5d1712] text-white py-6 rounded-2xl font-bold tracking-[0.2em] uppercase hover:bg-[#3d0f0c] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-[#5d1712]/20 flex items-center justify-center gap-3 disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : t.confirmation.submit}
+                </button>
+              </div>
+            </form>
           </motion.div>
         </div>
       </section>
