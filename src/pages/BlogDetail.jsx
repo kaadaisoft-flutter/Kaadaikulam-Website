@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { db } from '../firebase/config';
-import { Calendar, User, ArrowLeft, Clock, Share2, Tag } from 'lucide-react';
+import { Calendar, User, ArrowLeft, ArrowRight, Clock, Share2, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 
