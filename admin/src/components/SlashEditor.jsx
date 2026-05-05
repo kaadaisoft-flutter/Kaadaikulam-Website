@@ -166,7 +166,107 @@ const CheckCircle = ({ size, className }) => (
     </svg>
 );
 
-const SlashMenu = ({ position, onSelect, onClose }) => {
+const ImageSettingsModal = ({ isOpen, onClose, onSave, initialData }) => {
+    const [data, setData] = useState({ alt: '', width: 100, align: 'center' });
+
+    useEffect(() => {
+        if (initialData) {
+            setData({
+                alt: initialData.alt || '',
+                width: initialData.width || 100,
+                align: initialData.align || 'center'
+            });
+        }
+    }, [initialData]);
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-stone-950/40 backdrop-blur-sm">
+            <motion.div 
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                className="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg overflow-hidden border border-stone-100"
+            >
+                <div className="flex items-center justify-between p-6 border-b border-stone-50 bg-stone-50/50">
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-orange-500/10 rounded-xl flex items-center justify-center text-orange-500">
+                            <ImageIcon size={20} />
+                        </div>
+                        <h3 className="text-lg font-bold text-stone-900">Image Settings</h3>
+                    </div>
+                    <button onClick={onClose} className="p-2 hover:bg-stone-100 rounded-full transition-colors text-stone-400">
+                        <X size={20} />
+                    </button>
+                </div>
+
+                <div className="p-8 space-y-8">
+                    <div className="space-y-3">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest ml-1">Alt Text (SEO)</label>
+                        <input 
+                            type="text"
+                            value={data.alt}
+                            onChange={(e) => setData({ ...data, alt: e.target.value })}
+                            placeholder="Describe this image..."
+                            className="w-full bg-stone-50 border-stone-100 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-orange-500/20 transition-all font-medium text-stone-900 placeholder:text-stone-300"
+                        />
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="flex justify-between items-center px-1">
+                            <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Image Width</label>
+                            <span className="text-xs font-bold text-stone-600 bg-stone-100 px-2 py-0.5 rounded-lg">{data.width}%</span>
+                        </div>
+                        <input 
+                            type="range"
+                            min="10"
+                            max="100"
+                            value={data.width}
+                            onChange={(e) => setData({ ...data, width: parseInt(e.target.value) })}
+                            className="w-full h-2 bg-stone-100 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                        />
+                    </div>
+
+                    <div className="space-y-4">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest ml-1">Alignment</label>
+                        <div className="grid grid-cols-3 gap-3">
+                            {[
+                                { id: 'left', icon: AlignLeft, label: 'LEFT' },
+                                { id: 'center', icon: AlignCenter, label: 'CENTER' },
+                                { id: 'right', icon: AlignRight, label: 'RIGHT' }
+                            ].map(align => (
+                                <button
+                                    key={align.id}
+                                    onClick={() => setData({ ...data, align: align.id })}
+                                    className={`flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all ${
+                                        data.align === align.id 
+                                        ? 'bg-orange-50 border-orange-500/20 text-orange-600' 
+                                        : 'bg-stone-50 border-transparent text-stone-400 hover:bg-stone-100'
+                                    }`}
+                                >
+                                    <align.icon size={20} />
+                                    <span className="text-[9px] font-black tracking-widest">{align.label}</span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="p-6 bg-stone-50 border-t border-stone-100 flex items-center justify-center gap-3">
+                    <button onClick={onClose} className="px-10 py-3 border border-stone-200 rounded-xl text-xs font-bold text-stone-500 hover:bg-white transition-all uppercase tracking-widest">
+                        Cancel
+                    </button>
+                    <button 
+                        onClick={() => onSave(data)}
+                        className="px-12 py-3 bg-orange-600 text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-orange-700 transition-all shadow-lg shadow-orange-600/20"
+                    >
+                        Save Changes
+                    </button>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
     const menuRef = useRef(null);
 
     useEffect(() => {
@@ -313,6 +413,7 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
     const [menuState, setMenuState] = useState({ visible: false, position: null });
     const [toolbarState, setToolbarState] = useState({ visible: false, position: null });
     const [linkModal, setLinkModal] = useState({ isOpen: false, initialData: null });
+    const [imageModal, setImageModal] = useState({ isOpen: false, initialData: null, target: null });
     const fileInputRef = useRef(null);
 
     // Initial content load - only if editor is empty to avoid cursor jumps
@@ -321,6 +422,30 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
             editorRef.current.innerHTML = value;
         }
     }, [value]);
+
+    // Handle clicks inside editor (specifically for images)
+    useEffect(() => {
+        const handleEditorClick = (e) => {
+            if (e.target.tagName === 'IMG') {
+                const img = e.target;
+                setImageModal({
+                    isOpen: true,
+                    target: img,
+                    initialData: {
+                        alt: img.alt || '',
+                        width: parseInt(img.style.width) || 100,
+                        align: img.style.display === 'block' ? (img.style.marginLeft === '0px' ? 'left' : (img.style.marginRight === '0px' ? 'right' : 'center')) : 'center'
+                    }
+                });
+            }
+        };
+
+        const editor = editorRef.current;
+        if (editor) {
+            editor.addEventListener('click', handleEditorClick);
+            return () => editor.removeEventListener('click', handleEditorClick);
+        }
+    }, []);
 
     // Selection detection logic for floating toolbar
     useEffect(() => {
@@ -465,6 +590,28 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
         handleInput();
     };
 
+    const handleImageSave = (imgData) => {
+        const { target } = imageModal;
+        if (target) {
+            target.alt = imgData.alt;
+            target.style.width = `${imgData.width}%`;
+            target.style.display = 'block';
+            
+            if (imgData.align === 'left') {
+                target.style.marginLeft = '0';
+                target.style.marginRight = 'auto';
+            } else if (imgData.align === 'right') {
+                target.style.marginLeft = 'auto';
+                target.style.marginRight = '0';
+            } else {
+                target.style.marginLeft = 'auto';
+                target.style.marginRight = 'auto';
+            }
+        }
+        setImageModal({ isOpen: false, target: null, initialData: null });
+        handleInput();
+    };
+
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
         if (file && onImageUpload) {
@@ -480,8 +627,7 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
                 }
                 
                 if (url) {
-                    const altText = prompt("Enter Image Alt Text (SEO):", file.name.split('.')[0]);
-                    const imgHtml = `<img src="${url}" alt="${altText || ''}" class="rounded-2xl shadow-lg my-8" />`;
+                    const imgHtml = `<img src="${url}" alt="" style="width: 100%; display: block; margin-left: auto; margin-right: auto;" class="rounded-2xl shadow-lg my-8 cursor-pointer" />`;
                     document.execCommand('insertHTML', false, imgHtml + '<p><br></p>');
                 }
                 handleInput();
@@ -501,7 +647,8 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
                 .slash-editor h4 { font-size: 1.25rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: inherit; font-family: serif; }
                 .slash-editor h5 { font-size: 1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: inherit; font-family: serif; }
                 .slash-editor p { margin-bottom: 1rem; line-height: 1.7; color: inherit; }
-                .slash-editor img { max-width: 100%; border-radius: 1rem; margin: 2rem 0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border: 1px solid #f3f4f6; }
+                .slash-editor img { max-width: 100%; border-radius: 1rem; margin: 2rem 0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border: 1px solid #f3f4f6; transition: all 0.2s ease; }
+                .slash-editor img:hover { outline: 3px solid #f97316; }
                 .slash-editor ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
                 .slash-editor blockquote { border-left: 4px solid #E5E7EB; padding-left: 1.5rem; font-style: italic; color: #6B7280; margin: 1.5rem 0; }
                 .slash-editor a { color: #800000; text-decoration: underline; text-underline-offset: 4px; font-weight: 700; }
@@ -547,6 +694,13 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
                 initialData={linkModal.initialData}
                 onClose={() => setLinkModal({ isOpen: false, initialData: null })}
                 onInsert={handleLinkInsert}
+            />
+
+            <ImageSettingsModal 
+                isOpen={imageModal.isOpen}
+                initialData={imageModal.initialData}
+                onClose={() => setImageModal({ isOpen: false, initialData: null, target: null })}
+                onSave={handleImageSave}
             />
 
             <input
