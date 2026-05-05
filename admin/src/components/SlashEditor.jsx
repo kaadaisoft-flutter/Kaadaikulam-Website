@@ -1,8 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
-import { Heading1, Heading2, Heading3, Image as ImageIcon, X, List, Quote, Bold, Italic, Link as LinkIcon, Underline, ExternalLink, Mail, Phone, Trash2 } from 'lucide-react';
+import { 
+    Heading1, Heading2, Heading3, Heading4, Heading5, 
+    Image as ImageIcon, X, List, Quote, Bold, Italic, 
+    Link as LinkIcon, Underline, ExternalLink, Mail, 
+    Phone, Trash2, AlignLeft, AlignCenter, AlignRight, 
+    Palette, Type, ChevronDown 
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const COLOR_OPTIONS = [
+    { name: 'Default', color: '#1c1917' },
+    { name: 'Maroon', color: '#800000' },
+    { name: 'Gold', color: '#B8860B' },
+    { name: 'Gray', color: '#6b7280' },
+    { name: 'White', color: '#ffffff' },
+];
+
 const LinkModal = ({ isOpen, onClose, onInsert, initialData }) => {
+// ... (rest of LinkModal code remains the same)
     const [linkData, setLinkData] = useState({ text: '', url: '', newTab: true });
 
     useEffect(() => {
@@ -167,9 +182,11 @@ const SlashMenu = ({ position, onSelect, onClose }) => {
     if (!position) return null;
 
     const items = [
-        { id: 'h1', label: 'Heading 1', icon: Heading1, desc: 'Big section heading' },
-        { id: 'h2', label: 'Heading 2', icon: Heading2, desc: 'Medium section heading' },
-        { id: 'h3', label: 'Heading 3', icon: Heading3, desc: 'Small section heading' },
+        { id: 'h1', label: 'Heading 1', icon: Heading1, desc: 'Large title' },
+        { id: 'h2', label: 'Heading 2', icon: Heading2, desc: 'Medium title' },
+        { id: 'h3', label: 'Heading 3', icon: Heading3, desc: 'Small title' },
+        { id: 'h4', label: 'Heading 4', icon: Heading4, desc: 'Sub-heading' },
+        { id: 'h5', label: 'Heading 5', icon: Heading5, desc: 'Micro-heading' },
         { id: 'image', label: 'Image', icon: ImageIcon, desc: 'Upload an image' },
         { id: 'ul', label: 'Bullet List', icon: List, desc: 'Create a simple list' },
         { id: 'blockquote', label: 'Quote', icon: Quote, desc: 'Capture a quote' },
@@ -188,9 +205,9 @@ const SlashMenu = ({ position, onSelect, onClose }) => {
             }}
         >
             <div className="text-[10px] font-bold text-gray-400 bg-gray-50/50 px-4 py-2 border-b border-gray-100 uppercase tracking-widest">
-                Basic Blocks
+                Elements
             </div>
-            <div className="py-2">
+            <div className="py-2 max-h-[400px] overflow-y-auto">
                 {items.map((item) => (
                     <button
                         key={item.id}
@@ -213,39 +230,81 @@ const SlashMenu = ({ position, onSelect, onClose }) => {
 };
 
 const FloatingToolbar = ({ position, onAction }) => {
+    const [showColors, setShowColors] = useState(false);
     if (!position) return null;
 
     const items = [
         { id: 'bold', icon: Bold, label: 'Bold' },
         { id: 'italic', icon: Italic, label: 'Italic' },
         { id: 'underline', icon: Underline, label: 'Underline' },
+        { id: 'divider-1', type: 'divider' },
+        { id: 'h1', icon: Heading1, label: 'H1' },
         { id: 'h2', icon: Heading2, label: 'H2' },
+        { id: 'h3', icon: Heading3, label: 'H3' },
+        { id: 'h4', icon: Heading4, label: 'H4' },
+        { id: 'h5', icon: Heading5, label: 'H5' },
+        { id: 'divider-2', type: 'divider' },
+        { id: 'justifyLeft', icon: AlignLeft, label: 'Left' },
+        { id: 'justifyCenter', icon: AlignCenter, label: 'Center' },
+        { id: 'justifyRight', icon: AlignRight, label: 'Right' },
+        { id: 'divider-3', type: 'divider' },
         { id: 'link', icon: LinkIcon, label: 'Link' },
+        { id: 'color', icon: Palette, label: 'Color' },
     ];
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="fixed bg-gray-900 shadow-xl rounded-xl overflow-hidden z-[100] flex items-center p-1.5 gap-0.5"
+        <div 
+            className="fixed z-[100]"
             style={{
-                top: position.top - 55,
-                left: position.left - 50
+                top: position.top - 65,
+                left: position.left - 200
             }}
-            onMouseDown={(e) => e.preventDefault()}
         >
-            {items.map((item) => (
-                <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => onAction(item.id)}
-                    className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-                    title={item.label}
-                >
-                    <item.icon size={16} />
-                </button>
-            ))}
-        </motion.div>
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-gray-900 shadow-2xl rounded-2xl overflow-hidden flex items-center p-1.5 gap-0.5 border border-white/10"
+                onMouseDown={(e) => e.preventDefault()}
+            >
+                {items.map((item) => (
+                    item.type === 'divider' ? (
+                        <div key={item.id} className="w-[1px] h-4 bg-white/10 mx-1" />
+                    ) : (
+                        <div key={item.id} className="relative">
+                            <button
+                                type="button"
+                                onClick={() => item.id === 'color' ? setShowColors(!showColors) : onAction(item.id)}
+                                className={`p-2 rounded-xl transition-all ${showColors && item.id === 'color' ? 'bg-primary text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800'}`}
+                                title={item.label}
+                            >
+                                <item.icon size={16} />
+                            </button>
+
+                            {item.id === 'color' && showColors && (
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 bg-gray-900 border border-white/10 rounded-xl p-2 flex gap-2 shadow-2xl"
+                                >
+                                    {COLOR_OPTIONS.map(c => (
+                                        <button 
+                                            key={c.color}
+                                            onClick={() => {
+                                                onAction('foreColor', c.color);
+                                                setShowColors(false);
+                                            }}
+                                            className="w-6 h-6 rounded-full border border-white/20 hover:scale-110 transition-transform"
+                                            style={{ backgroundColor: c.color }}
+                                            title={c.name}
+                                        />
+                                    ))}
+                                </motion.div>
+                            )}
+                        </div>
+                    )
+                ))}
+            </motion.div>
+        </div>
     );
 };
 
@@ -338,6 +397,8 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
         if (command === 'h1') document.execCommand('formatBlock', false, 'h1');
         if (command === 'h2') document.execCommand('formatBlock', false, 'h2');
         if (command === 'h3') document.execCommand('formatBlock', false, 'h3');
+        if (command === 'h4') document.execCommand('formatBlock', false, 'h4');
+        if (command === 'h5') document.execCommand('formatBlock', false, 'h5');
         if (command === 'ul') document.execCommand('insertUnorderedList');
         if (command === 'blockquote') document.execCommand('formatBlock', false, 'blockquote');
 
@@ -351,11 +412,20 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
         }
     };
 
-    const executeToolbarAction = (action) => {
+    const executeToolbarAction = (action, value) => {
         if (action === 'bold') document.execCommand('bold');
         if (action === 'italic') document.execCommand('italic');
         if (action === 'underline') document.execCommand('underline');
+        if (action === 'h1') document.execCommand('formatBlock', false, 'h1');
         if (action === 'h2') document.execCommand('formatBlock', false, 'h2');
+        if (action === 'h3') document.execCommand('formatBlock', false, 'h3');
+        if (action === 'h4') document.execCommand('formatBlock', false, 'h4');
+        if (action === 'h5') document.execCommand('formatBlock', false, 'h5');
+        if (action === 'justifyLeft') document.execCommand('justifyLeft');
+        if (action === 'justifyCenter') document.execCommand('justifyCenter');
+        if (action === 'justifyRight') document.execCommand('justifyRight');
+        if (action === 'foreColor') document.execCommand('foreColor', false, value);
+        
         if (action === 'link') {
             const selection = window.getSelection();
             if (selection.rangeCount > 0) {
@@ -425,10 +495,12 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
     return (
         <div className="relative group/editor">
             <style>{`
-                .slash-editor h1 { font-size: 2.5rem; font-weight: 800; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #111827; font-family: serif; }
-                .slash-editor h2 { font-size: 1.875rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #1f2937; font-family: serif; }
-                .slash-editor h3 { font-size: 1.5rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #374151; font-family: serif; }
-                .slash-editor p { margin-bottom: 1rem; line-height: 1.7; color: #4b5563; }
+                .slash-editor h1 { font-size: 2.5rem; font-weight: 800; margin-top: 1.5rem; margin-bottom: 0.75rem; color: inherit; font-family: serif; }
+                .slash-editor h2 { font-size: 1.875rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; color: inherit; font-family: serif; }
+                .slash-editor h3 { font-size: 1.5rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: inherit; font-family: serif; }
+                .slash-editor h4 { font-size: 1.25rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: inherit; font-family: serif; }
+                .slash-editor h5 { font-size: 1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: inherit; font-family: serif; }
+                .slash-editor p { margin-bottom: 1rem; line-height: 1.7; color: inherit; }
                 .slash-editor img { max-width: 100%; border-radius: 1rem; margin: 2rem 0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border: 1px solid #f3f4f6; }
                 .slash-editor ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
                 .slash-editor blockquote { border-left: 4px solid #E5E7EB; padding-left: 1.5rem; font-style: italic; color: #6B7280; margin: 1.5rem 0; }
