@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
@@ -70,12 +71,12 @@ const ClanGrandeur = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
             >
-              <button className="group flex items-center gap-2 text-[#5d1712] font-semibold transition-colors hover:text-[#c49a3c]">
+              <Link to="/clan-grandeur" className="group flex items-center gap-2 text-[#5d1712] font-semibold transition-colors hover:text-[#c49a3c]">
                 <span className="border-b border-current pb-1 uppercase tracking-widest text-xs">
                   {t.link}
                 </span>
                 <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
-              </button>
+              </Link>
             </motion.div>
           </motion.div>
 

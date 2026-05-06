@@ -345,7 +345,194 @@ export const translations = {
           { title: "Recognition from Mysore Maharaja", text: "For a miraculous event where a speechless prince spoke by the Guru's grace, the Mysore Maharaja granted 130 acres of land in Kodumanal and Pasur, which remain Madam properties." },
           { title: "Social Service and Prime Honors", text: "Historical evidence that our Kaadai clan administered sacred sites like Avinashi, Tiruchengode, and Chennimalai are preserved. Pasur Gurus receive the first honors (Parivattam) in festivals and maintain landmarks like Kuppichi and Singathanakkal." }
         ],
-        footer: "It is the duty of every citizen of Poondurai Nadu to cherish and protect this noble heritage."
+      footer: "It is the duty of every citizen of Poondurai Nadu to cherish and protect this noble heritage."
+      }
+    },
+    clanGrandeurDetail: {
+      hero: {
+        label: "History & Glory",
+        heading: "Glory of the Kongu Vellalar Poondurai Kaadai Clan",
+        text: "The rich heritage and historical honors of the Kaadai Kulam in Kongu Nadu. True to the literary praise \"The Bountiful Poondurai\", the Kongu Vellalar Poondurai Kaadai clan has profoundly enriched the Kongu soil through their extraordinary valor, unwavering social justice, and deep spirituality."
+      },
+      prayer: {
+        title: "Vinayagar Prayer",
+        verse: [
+          "Manakkulathinkili pilavi maaraara",
+          "Ermi ya porutalaa moolathim mutharaai",
+          "Kannerthu lulaiyadhov kalitru maamugap",
+          "Pannavan malaradi paninthu potruvom"
+        ]
+      },
+      sections: [
+        {
+          id: 1,
+          title: "Introduction: The Majesty of Kongu Soil",
+          text: "Hailed as the cradle of world civilization, the Kongu region stands as a grand legacy of the ancient Kumari continent. The word 'Kongu' signifies pollen, honey, and fragrance. Sangam literature and inscriptions proclaim the 2000-year-old antiquity of this land. Upholding the proverb 'Agriculture and Valor are the two eyes', the Kongu Vellalars have thrived."
+        },
+        {
+          id: 2,
+          title: "Leadership of Kongu Region: Poondurai Nadu",
+          text: "Among the 24 nations of Kongu, 'Poondurai Nadu' holds the title of the 'Primary Nation'. The river Kaveri divides it into Melkarai Poondurai and Keezhkarai Poondurai.",
+          subsections: [
+            {
+              title: "Special Verses:",
+              verses: [
+                "\"Pannulagor pugazhnthidum Poondurai Nadu\"",
+                "\"Poondurai Nadu athigamena pugazhnthittare\"",
+                "\"Pannodu pooranam paarthitha Nadu\"",
+                "\"Nalamaagap paniyaayathu Poondurai Nadu\""
+              ]
+            },
+            {
+              title: "Meaning of Poondurai Nadu:",
+              list: [
+                "Praised even by celestial beings for its immense glory.",
+                "Revered by scholars as vaster and far superior to other nations.",
+                "Prosperous enough to shower gold (wealth) and flower rain (natural abundance).",
+                "Acts as a stunning ornament for Mother Earth herself."
+              ]
+            },
+            {
+              title: "Another Verse highlighting Poondurai Nadu's greatness:",
+              verses: [
+                "\"Vandutham thum theni vilasipuram\"",
+                "\"Vatha kaviya puranagal othum\"",
+                "\"Pandithaas pathiruntha sakkara\"",
+                "\"Pannu Poondurai naadangai naadu\"",
+                "\"Dharma dhanam migava vilangum\"",
+                "\"Sagala sathira sada suthitham\"",
+                "\"Perumaiyagave engum pugazhnthidum\"",
+                "\"Ponnu Poondurai naadangai naadu\""
+              ],
+              meaningTitle: "Brief meaning of this verse:",
+              meaningList: [
+                "Wealth: With Goddess Mahalakshmi residing in every home, the nation thrives in profound wealth.",
+                "Education & Spirituality: Educational institutions teaching Vedas, Puranas, and various arts flourish here.",
+                "Tamil Language: Pure Tamil songs are enthusiastically sung everywhere, nurturing the language.",
+                "Righteousness: It stands as a land where charity and dharma flow without interruption."
+              ]
+            },
+            {
+              title: "Detailed Verse on its Resources:",
+              verses: [
+                "\"Maadamaaligai medaiyum soozhthiyum\"",
+                "\"Manasilaatravai yaavumatrith thotravum\"",
+                "\"Needu saathira saalaiyum solaiyum\"",
+                "\"Nithigai muththunap poringal anagamum\"",
+                "\"Sediththum Poondurai Nadu\""
+              ],
+              conclusion: "Through these verses, Poondurai Nadu is described as being equal to the celestial god-like world, excelling remarkably in both education and wealth."
+            },
+            {
+              title: "Borders of Melkarai Poondurai and Keezhkarai Poondurai Nadu:",
+              grid: [
+                {
+                  label: "Melkarai Poondurai Nadu Borders:",
+                  items: [
+                    "East: Kaveri River",
+                    "South: Noyyal River",
+                    "West: Chennimalai",
+                    "North: Vani River"
+                  ]
+                },
+                {
+                  label: "Keezhkarai Poondurai Nadu Borders:",
+                  items: [
+                    "West: Kaveri River",
+                    "East: Namakkal Hills",
+                    "South: Kaveri River",
+                    "North: Servarayan Hills"
+                  ]
+                }
+              ],
+              note: "The Kaveri River served as the natural boundary separating these two regions.",
+              sites: "This land holds the pride of housing sacred sites such as Tiruchengode, Kodumudi, and Chennimalai.",
+              highlights: [
+                { label: "Primary Nation", text: "Among the twenty-four nations of Kongu, Melkarai Poondurai is the foremost nation continuously praised and celebrated by great ancestors." },
+                { label: "Prosperity", text: "This nation is exceptionally rich in natural water resources and fertile land." },
+                { label: "Administrative Divisions (Houses)", text: "This nation is divided into four major sectors: Poondurai, Vellodu, Nasiyanur, and Ezhumathur. These distinct administrative sectors are traditionally known as 'Veedus' (Houses)." }
+              ]
+            },
+            {
+              title: "Verse on the 32 villages of Melkarai Poondurai Nadu:",
+              verse: [
+                "\"Poondurai vellodezhuma thoor valayamatrathu panguntha vellodu piddari nagerum ponnayaru...\""
+              ],
+              note: "Thus, the exact names of all 32 major villages belonging to Melkarai Poondurai Nadu are beautifully preserved and praised in this classic work."
+            }
+          ]
+        },
+        {
+          id: 3,
+          title: "The Kaadai Clan: Lineage and Administration",
+          text: "Among the Kongu Vellalar clans, the 'Kaadai' clan is incredibly ancient and highly skilled in administration.",
+          list: [
+            { label: "Etymology", text: "'Kaadai' refers to the land and the identity of the people who cultivated and reformed it." },
+            { label: "Administration", text: "Centered at Poondurai Nadu, they had an exceptional governance system with powerful village heads (Manikkarars)." },
+            { label: "Branches", text: "Originally taking Poondurai as their prime land, the Kaadai descendants eventually expanded into 18 branches spreading across Kongu Nadu." }
+          ]
+        },
+        {
+          id: 4,
+          title: "The Glory of Placing the Karur Gopura Kalasam",
+          text: "When the great Chera, Chola, and Pandya kings jointly built the Pasupatheeswarar temple in Karur, they faced difficulties establishing the Gopura Kalasam (tower finial). It was only when the hands of the Kongu Vellalar Poondurai Kaadai clan placed the Kalasam, it finally stood firm.",
+          subsections: [
+            {
+              title: "Poondurai Puranam (Verse 30):",
+              verses: [
+                "\"Aarududan markaiyal kalasam vaikka\"",
+                "\"Asuntha maavar enal anbay saari\"",
+                "\"Poovulagil Konginu paththithu neetti\"",
+                "\"Poondurai nadu athigam ena pugazhnthittare\""
+              ],
+              meaning: "Overjoyed by witnessing the Kaadai clan perfectly securing the Kalasam, the three great kings honored them with crowns. Furthermore, they ceremoniously proclaimed that among the 24 nations of Kongu, Poondurai Nadu stands supreme."
+            }
+          ]
+        },
+        {
+          id: 5,
+          title: "The Crown Glories of Varanasi Gounder",
+          text: "Poondurai Varanasi Gounder was not merely a warrior but stood as a protector of social justice and a fair umpire in resolving borders.",
+          highlights: [
+            { label: "The Border Resolver", text: "When complications arose among the three great kings over border demarcations at the Madukkarai Sellandiamman temple, it was Varanasi who smoothly resolved their border disputes." },
+            { label: "Crowned Equal to Kings", text: "Chosen as one of the four key leaders of the Kongu region, he held the great honor of being crowned directly by the three great kings." },
+            { label: "Comparable to Harichandra", text: "Poets praised him as 'Harichandra' for his unyielding truthfulness and as 'Dharman' for his absolute dedication to preserving justice." }
+          ]
+        },
+        {
+          id: 8,
+          title: "Spiritual Missions and Poondurai Puranam",
+          text: "Creating the 'Kaadai Vinayagar' in Poondurai and commissioning a dedicated epic (Puranam) uniquely for the city are among their greatest achievements.",
+          subsections: [
+            {
+              title: "Poondurai Puranam:",
+              verses: [
+                "\"Kukaram theevah Kaadai Vinayagan pathithu moodatudaathi banthuvudan\"",
+                "\"Nanrithu vaazhvaam\""
+              ],
+              explanation: "To remove all obstacles, they installed Vinayagar (Ganesha) using their own clan name as 'Kaadai Vinayagar' and worshipped him devotionally. Furthermore, they commissioned the poet Kaliyanna Kavirayar to compose the epic 'Poondurai Puranam', honoring him immensely by granting lands."
+            }
+          ]
+        },
+        {
+          id: 9,
+          title: "Ruling like Kings ('Mavirasargal')",
+          text: "The ancient 'Kaani' songs indicate that the Poondurai Kaadai clan weren't merely wealthy landlords, but were deeply respected universally entirely as Kings of a nation.",
+          subsections: [
+            {
+              title: "Ancient Kaani Song:",
+              verses: [
+                "\"Selvanga nalingae Kaadaikula Kaalagu\"",
+                "\"Thenkarai saathi kanyam...\"",
+                "\"Vanipoo paththathu nilayan Kaadai kula magarasar\""
+              ]
+            }
+          ]
+        }
+      ],
+      conclusion: {
+        title: "Conclusion",
+        text: "True to the literary praise \"The Bountiful Poondurai\", the Poondurai Kaadai clan has brought tremendous pride to the Kongu soil through their extraordinary valor, their unwavering balanced social justice, and their deep spirituality. Their history continues to proudly proclaim the magnificent civilization and rich culture of the Kongu region even today."
       }
     }
   },
@@ -696,6 +883,193 @@ export const translations = {
           { title: "சமூகப் பணியும் முதன்மை மரியாதையும்", text: "அவிநாசி, திருச்செங்கோடு, சென்னிமலை போன்ற தலங்களை நம் காடை குலத்தினர் நிர்வகித்ததற்கான சான்றுகள் உள்ளன. விசேஷங்களில் பாசூர் குருக்களுக்கு முதல் மரியாதை (பரிவட்டம்) அளிக்கப்படுகிறது மற்றும் குப்பிச்சி, சிங்கத்தணக்கல் போன்ற அடையாளங்களை அவர்கள் பராமரிக்கின்றனர்." }
         ],
         footer: "இந்த உன்னத மரபினைப் போற்றிப் பாதுகாப்பது பூந்துறை நாட்டின் ஒவ்வொரு குடிமகனின் கடமையாகும்."
+      }
+    },
+    clanGrandeurDetail: {
+      hero: {
+        label: "வரலாறு மற்றும் பெருமை",
+        heading: "கொங்கு வெள்ளாளர் பூந்துறை காடை குலத்தின் பெருமை",
+        text: "கொங்கு நாட்டில் காடை குலத்தின் வளமான பாரம்பரியம் மற்றும் வரலாற்றுச் சிறப்புகள். \"வண்மைசேர் பூந்துறை\" என்ற இலக்கியப் புகழுக்கு ஏற்ப, பூந்துறை காடை குலத்தினர் தங்கள் அசாத்திய வீரம், தளராத சமூக நீதி மற்றும் ஆழமான ஆன்மீகத்தின் மூலம் கொங்கு மண்ணை செழிப்படையச் செய்துள்ளனர்."
+      },
+      prayer: {
+        title: "விநாயகர் துதி",
+        verse: [
+          "மனக்குளத்தின்கிளி பிளவி மாறார",
+          "ஏர்மி ய பொறுதலா மூலத்திம் முத்தராய்",
+          "கண்ணேர்த்து லுளையாதொவ் களிற்று மாமுகப்",
+          "பண்ணவன் மலரடி பணிந்து போற்றுவோம்"
+        ]
+      },
+      sections: [
+        {
+          id: 1,
+          title: "அறிமுகம்: கொங்கு மண்ணின் மகத்துவம்",
+          text: "உலக நாகரிகத்தின் தொட்டில் என்று போற்றப்படும் கொங்கு மண்டலம், பண்டைய குமரி கண்டத்தின் ஒரு மாபெரும் பாரம்பரியமாகத் திகழ்கிறது. 'கொங்கு' என்ற சொல்லுக்கு மகரந்தம், தேன் மற்றும் நறுமணம் என்று பொருள். சங்க இலக்கியங்களும் கல்வெட்டுகளும் இந்த நிலத்தின் 2000 ஆண்டுகால பழமையை பறைசாற்றுகின்றன. 'உழவும் வீரமும் இரு கண்கள்' என்ற பழமொழிக்கு ஏற்ப, கொங்கு வெள்ளாளர்கள் தழைத்தோங்கி வாழ்ந்து வருகின்றனர்."
+        },
+        {
+          id: 2,
+          title: "கொங்கு நாட்டின் தலைமை: பூந்துறை நாடு",
+          text: "கொங்கு நாட்டின் 24 நாடுகளில், 'பூந்துறை நாடு' 'முதன்மை நாடு' என்ற பட்டத்தைப் பெற்றுள்ளது. காவிரி ஆறு இதை மேல்கரை பூந்துறை மற்றும் கீழ்கரை பூந்துறை என இரண்டாகப் பிரிக்கிறது.",
+          subsections: [
+            {
+              title: "சிறப்பு பாடல்கள்:",
+              verses: [
+                "\"பண்ணுலகோர் புகழ்ந்திடும் பூந்துறை நாடு\"",
+                "\"பூந்துறை நாடு அதிகமென புகழ்ந்திட்டாரே\"",
+                "\"பண்ணோடு பூரணம் பார்த்தித நாடு\"",
+                "\"நலமாகப் பணியாயது பூந்துறை நாடு\""
+              ]
+            },
+            {
+              title: "பூந்துறை நாட்டின் பொருள்:",
+              list: [
+                "அதன் அபார மகிமைக்காக வானுலகத் தேவர்களாலும் போற்றப்படுகிறது.",
+                "மற்ற நாடுகளை விட பரந்த மற்றும் மிக உயர்ந்த நாடாக அறிஞர்களால் மதிக்கப்படுகிறது.",
+                "பொன்னையும் (செல்வம்) மலர் மழையையும் (இயற்கை வளம்) பொழியும் அளவிற்கு செழிப்பானது.",
+                "பூமி தாய்க்கு ஒரு அழகான ஆபரணமாகத் திகழ்கிறது."
+              ]
+            },
+            {
+              title: "பூந்துறை நாட்டின் பெருமையை விளக்கும் மற்றொரு பாடல்:",
+              verses: [
+                "\"வண்டுத்தம் தும் தேனி விலாசிபுரம்\"",
+                "\"வாத கவிய புராணங்கள் ஓதும்\"",
+                "\"பண்டிதாஸ் பார்த்திருந்த சக்கர\"",
+                "\"பண்ணு பூந்துறை நாடங்கை நாடு\"",
+                "\"தர்ம தானம் மிகவ விளங்கும்\"",
+                "\"சகல சதிர சட சுதித்தம்\"",
+                "\"பெருமையாகவே எங்கும் புகழ்ந்திடும்\"",
+                "\"பொன்னு பூந்துறை நாடங்கை நாடு\""
+              ],
+              meaningTitle: "இப்பாடலின் சுருக்கமான பொருள்:",
+              meaningList: [
+                "செல்வம்: ஒவ்வொரு வீட்டிலும் மகாலட்சுமி வாசம் செய்வதால், இந்நாடு மிகுந்த செல்வச் செழிப்புடன் திகழ்கிறது.",
+                "கல்வி மற்றும் ஆன்மீகம்: வேதங்கள், புராணங்கள் மற்றும் பல்வேறு கலைகளைப் போதிக்கும் கல்வி நிறுவனங்கள் இங்கே செழித்து வளர்கின்றன.",
+                "தமிழ் மொழி: தூய தமிழ் பாடல்கள் எங்கும் ஆர்வத்துடன் பாடப்பட்டு, மொழி வளர்க்கப்படுகிறது.",
+                "அறநெறி: தர்மமும் தானமும் தடையின்றி பாயும் நிலமாக இது திகழ்கிறது."
+              ]
+            },
+            {
+              title: "அதன் வளங்களைப் பற்றிய விரிவான பாடல்:",
+              verses: [
+                "\"மாடமாளிகை மேடையும் சூழ்தியும்\"",
+                "\"மனசிலாற்றவை யாவுமற்றிற்த் தோற்றவும்\"",
+                "\"நீடு சாத்திர சாலையும் சோலையும்\"",
+                "\"நிதிகை முத்துணப் போரிங்கள் அனகமும்\"",
+                "\"செழித்தும் பூந்துறை நாடு\""
+              ],
+              conclusion: "இந்த பாடல்கள் மூலம், பூந்துறை நாடு கல்வி மற்றும் செல்வம் இரண்டிலும் சிறந்து விளங்கி, தேவருலகத்திற்கு சமமாக விவரிக்கப்படுகிறது."
+            },
+            {
+              title: "மேல்கரை பூந்துறை மற்றும் கீழ்கரை பூந்துறை நாட்டின் எல்லைகள்:",
+              grid: [
+                {
+                  label: "மேல்கரை பூந்துறை நாட்டின் எல்லைகள்:",
+                  items: [
+                    "கிழக்கு: காவிரி ஆறு",
+                    "தெற்கு: நொய்யல் ஆறு",
+                    "மேற்கு: சென்னிமலை",
+                    "வடக்கு: வாணி ஆறு"
+                  ]
+                },
+                {
+                  label: "கீழ்கரை பூந்துறை நாட்டின் எல்லைகள்:",
+                  items: [
+                    "மேற்கு: காவிரி ஆறு",
+                    "கிழக்கு: நாமக்கல் மலைகள்",
+                    "தெற்கு: காவிரி ஆறு",
+                    "வடக்கு: சேர்வராயன் மலைகள்"
+                  ]
+                }
+              ],
+              note: "காவிரி ஆறு இந்த இரண்டு பகுதிகளையும் பிரிக்கும் இயற்கையான எல்லையாகச் செயல்பட்டது.",
+              sites: "திருச்செங்கோடு, கொடுமுடி மற்றும் சென்னிமலை போன்ற புனிதத் தலங்களைக் கொண்ட பெருமையை இந்நிலம் பெற்றுள்ளது.",
+              highlights: [
+                { label: "முதன்மை நாடு", text: "கொங்கு நாட்டின் இருபத்து நான்கு நாடுகளில், மேல்கரை பூந்துறை என்பது நம் மூதாதையர்களால் தொடர்ந்து போற்றப்பட்டு கொண்டாடப்படும் முதன்மையான நாடாகும்." },
+                { label: "செழிப்பு", text: "இந்நாடு இயற்கையான நீர் வளங்கள் மற்றும் வளமான நிலங்களைக் கொண்டு சிறப்பாகத் திகழ்கிறது." },
+                { label: "நிர்வாகப் பிரிவுகள் (வீடுகள்)", text: "இந்நாடு பூந்துறை, வெள்ளோடு, நசியனூர் மற்றும் எழுமாத்தூர் என நான்கு முக்கிய பிரிவுகளாகப் பிரிக்கப்பட்டுள்ளது. இந்தத் தனித்துவமான நிர்வாகப் பிரிவுகள் பாரம்பரியமாக 'வீடுகள்' என்று அழைக்கப்படுகின்றன." }
+              ]
+            },
+            {
+              title: "மேல்கரை பூந்துறை நாட்டின் 32 கிராமங்களைப் பற்றிய பாடல்:",
+              verse: [
+                "\"பூந்துறை வெள்ளோடெழும தூர் வளயமற்றது பங்குந்த வெள்ளோடு பிடாரி நகரும் பொன்னயாறு...\""
+              ],
+              note: "இவ்வாறாக, மேல்கரை பூந்துறை நாட்டைச் சேர்ந்த 32 முக்கிய கிராமங்களின் பெயர்களும் இந்த செவ்வியல் படைப்பில் அழகாகப் பாதுகாக்கப்பட்டு போற்றப்படுகின்றன."
+            }
+          ]
+        },
+        {
+          id: 3,
+          title: "காடை குலம்: வம்சம் மற்றும் நிர்வாகம்",
+          text: "கொங்கு வெள்ளாளர் குலங்களில், 'காடை' குலம் மிகவும் பழமையானது மற்றும் நிர்வாகத்தில் மிகுந்த திறமை கொண்டது.",
+          list: [
+            { label: "பெயர்க்காரணம்", text: "'காடை' என்பது நிலத்தையும், அதைத் திருத்திச் செப்பனிட்டு விவசாயம் செய்த மக்களின் அடையாளத்தையும் குறிக்கிறது." },
+            { label: "நிர்வாகம்", text: "பூந்துறை நாட்டை மையமாகக் கொண்டு, அவர்கள் வலிமையான ஊர்த் தலைவர்களுடன் (மாணிக்காரர்கள்) ஒரு சிறப்பான ஆட்சி முறையைக் கொண்டிருந்தனர்." },
+            { label: "கிளைகள்", text: "முதலில் பூந்துறையைத் தங்கள் முதன்மை நிலமாகக் கொண்ட காடை வம்சத்தினர், காலப்போக்கில் கொங்கு நாடு முழுவதும் 18 கிளைகளாகப் பரவினர்." }
+          ]
+        },
+        {
+          id: 4,
+          title: "கரூர் கோபுர கலசம் நிறுவிய பெருமை",
+          text: "மூவேந்தர்களான சேர, சோழ, பாண்டிய மன்னர்கள் இணைந்து கரூரில் பசுபதீஸ்வரர் கோவிலைக் கட்டியபோது, கோபுர கலசத்தை நிலைநிறுத்துவதில் சிரமங்களை எதிர்கொண்டனர். பூந்துறை காடை குலத்தினர் கைகளால் கலசத்தை வைத்த பின்னரே அது இறுதியாக நிலைத்து நின்றது.",
+          subsections: [
+            {
+              title: "பூந்துறை புராணம் (பாடல் 30):",
+              verses: [
+                "\"ஆருடுடன் மார்க்கையால் கலசம் வைக்க\"",
+                "\"அசுந்த மாவர் எனல் அன்பே சாரி\"",
+                "\"பூவுலகில் கொங்கினு பத்தித்து நீட்டி\"",
+                "\"பூந்துறை நாடு அதிகமென புகழ்ந்திட்டாரே\""
+              ],
+              meaning: "காடை குலத்தினர் கலசத்தைச் சரியாக நிலைநிறுத்தியதைக் கண்டு மகிழ்ந்த மூவேந்தர்கள், அவர்களுக்கு முடிசூட்டி கௌரவித்தனர். மேலும், கொங்கு நாட்டின் 24 நாடுகளில் பூந்துறை நாடே முதன்மையானது என்று அவர்கள் சடங்கு பூர்வமாக அறிவித்தனர்."
+            }
+          ]
+        },
+        {
+          id: 5,
+          title: "வாரணாசி கவுண்டரின் மகுடப் பெருமைகள்",
+          text: "பூந்துறை வாரணாசி கவுண்டர் ஒரு வீரர் மட்டுமல்ல, சமூக நீதியின் காவலராகவும், எல்லைத் தகராறுகளைத் தீர்ப்பதில் சிறந்த மத்தியஸ்தராகவும் திகழ்ந்தார்.",
+          highlights: [
+            { label: "எல்லைத் தகராறு தீர்த்தவர்", text: "மதுக்கரை செல்லாண்டியம்மன் கோவிலில் எல்லை நிர்ணயத்தில் மூவேந்தர்களுக்கிடையே சிக்கல்கள் எழுந்தபோது, வாரணாசி கவுண்டரே அந்தத் தகராறுகளை சுமுகமாகத் தீர்த்து வைத்தார்." },
+            { label: "மன்னர்களுக்கு சமமாக முடிசூட்டப்பட்டவர்", text: "கொங்கு மண்டலத்தின் நான்கு முக்கியத் தலைவர்களில் ஒருவராகத் தேர்ந்தெடுக்கப்பட்ட அவர், மூவேந்தர்களால் நேரடியாக முடிசூட்டப்படும் மாபெரும் கௌரவத்தைப் பெற்றார்." },
+            { label: "அரிச்சந்திரனுக்கு ஒப்பானவர்", text: "அவரது தளராத உண்மைத்தன்மைக்காக 'அரிச்சந்திரன்' என்றும், நீதியைக் காப்பதில் அவரது முழு அர்ப்பணிப்பிற்காக 'தர்மன்' என்றும் புலவர்கள் அவரைப் போற்றினர்." }
+          ]
+        },
+        {
+          id: 8,
+          title: "ஆன்மீகப் பணிகள் மற்றும் பூந்துறை புராணம்",
+          text: "பூந்துறையில் 'காடை விநாயகரை' உருவாக்கியதும், அந்நகரிற்கென பிரத்யேகமாக ஒரு புராணத்தை இயற்றச் செய்ததும் அவர்களின் மாபெரும் சாதனைகளில் சிலவாகும்.",
+          subsections: [
+            {
+              title: "பூந்துறை புராணம்:",
+              verses: [
+                "\"குகரம் தீவக் காடை விநாயகன் பதித்து மூததுடாதி பந்துவுடன்\"",
+                "\"நன்றிது வாழ்வாம்\""
+              ],
+              explanation: "அனைத்துத் தடைகளையும் நீக்க, அவர்கள் தங்கள் சொந்த குலப் பெயரிலேயே 'காடை விநாயகர்' என்ற பெயரில் விநாயகரை பிரதிஷ்டை செய்து பக்தியுடன் வழிபட்டனர். மேலும், புலவர் கலியண்ண கவிராயரை கொண்டு 'பூந்துறை புராணம்' என்ற இதிகாசத்தை இயற்றச் செய்து, அவருக்கு நிலங்களை வழங்கிப் பெருமைப்படுத்தினர்."
+            }
+          ]
+        },
+        {
+          id: 9,
+          title: "மன்னர்களைப் போல ஆட்சி செய்தல் ('மாவீராசர்கள்')",
+          text: "பண்டைய 'காணி' பாடல்கள், பூந்துறை காடை குலத்தினர் வெறும் நிலப்பிரபுக்கள் மட்டுமல்ல, அவர்கள் ஒரு நாட்டின் மன்னர்களாகவே உலகளாவிய ரீதியில் மதிக்கப்பட்டனர் என்பதைக் காட்டுகின்றன.",
+          subsections: [
+            {
+              title: "பண்டைய காணி பாடல்:",
+              verses: [
+                "\"செல்வங்க நலிங்கே காடைக்குல காலகு\"",
+                "\"தென்கரை சாதி கன்யம்...\"",
+                "\"வாணிபூ பத்தது நிலயன் காடை குல மகராசர்\""
+              ]
+            }
+          ]
+        }
+      ],
+      conclusion: {
+        title: "முடிவுரை",
+        text: "\"வண்மைசேர் பூந்துறை\" என்ற இலக்கியப் புகழுக்கு ஏற்ப, பூந்துறை காடை குலத்தினர் தங்கள் அசாத்திய வீரம், தளராத சமூக நீதி மற்றும் ஆழமான ஆன்மீகத்தின் மூலம் கொங்கு மண்ணிற்கு மாபெரும் பெருமை சேர்த்துள்ளனர். அவர்களின் வரலாறு இன்றும் கொங்கு மண்டலத்தின் பிரம்மாண்டமான நாகரிகத்தையும் செழுமையான கலாச்சாரத்தையும் பெருமையுடன் பறைசாற்றுகிறது."
       }
     }
   }

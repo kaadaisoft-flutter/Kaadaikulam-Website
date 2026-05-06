@@ -129,12 +129,12 @@ const Temples = ({ showButton = true }) => {
             transition={{ delay: 0.4 }}
             className="mt-16 text-center"
           >
-            <button className="inline-flex items-center gap-2 bg-[#5d1712] text-white px-8 py-3.5 rounded-lg hover:bg-[#3d0f0c] transition-all duration-300 shadow-lg hover:shadow-xl group">
+            <Link to="/temples" className="inline-flex items-center gap-2 bg-[#5d1712] text-white px-8 py-3.5 rounded-lg hover:bg-[#3d0f0c] transition-all duration-300 shadow-lg hover:shadow-xl group">
               <span className="font-serif text-lg font-medium">
                 {t.viewAll}
               </span>
               <span className="text-xl transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </button>
+            </Link>
           </motion.div>
         )}
       </div>

@@ -12,6 +12,7 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Donation from "./pages/Donation";
 import Kulaguru from "./pages/Kulaguru";
+import ClanGrandeurPage from "./pages/ClanGrandeurPage";
 import { LanguageProvider } from "./context/LanguageContext";
 import SmoothScroll from "./components/SmoothScroll";
 import AnimatedBackground from "./components/animations/AnimatedBackground";
@@ -50,6 +51,7 @@ function App() {
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/donation" element={<Donation />} />
                       <Route path="/kulaguru" element={<Kulaguru />} />
+                      <Route path="/clan-grandeur" element={<ClanGrandeurPage />} />
                     </Routes>
                   </main>
                   <Footer />

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import img1 from "../assets/images/angalaaman-DFWBKo-A.webp";
 import img2 from "../assets/images/eswaran_kovil_1-D1sRlrA6.webp";
@@ -131,8 +132,8 @@ const Hero = () => {
                 </p>
 
                 {/* Button */}
-                <button
-                  onClick={() => document.getElementById('temples-section')?.scrollIntoView({ behavior: 'smooth' })}
+                <Link
+                  to="/temples"
                   className="group relative px-10 py-3.5 border-2 border-white/80 text-white rounded-full font-bold overflow-hidden transition-all hover:text-stone-900 mb-10 flex items-center justify-center text-sm md:text-base tracking-widest uppercase"
                 >
                   <span className="absolute inset-0 bg-white translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
@@ -140,7 +141,7 @@ const Hero = () => {
                     {t.explore}
                     <span className="transition-transform group-hover:translate-x-1">→</span>
                   </span>
-                </button>
+                </Link>
               </motion.div>
             </AnimatePresence>
           </div>

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
@@ -27,6 +28,11 @@ const SmoothScroll = ({ children }) => {
       lenis.destroy();
     };
   }, []);
+
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return <>{children}</>;
 };
