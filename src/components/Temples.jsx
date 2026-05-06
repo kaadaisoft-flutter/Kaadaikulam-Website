@@ -12,40 +12,40 @@ const Temples = ({ showButton = true }) => {
   const { language } = useLanguage();
   const t = translations[language].temples;
 
-  const templeData = [
+  const templeData = t.items ? [
     {
       id: 1,
-      name: t.items[0].name,
-      desc: t.items[0].desc,
+      name: t.items[0]?.name || "",
+      desc: t.items[0]?.desc || "",
       image: img1,
       slug: "sri-angalamman-temple",
       tags: language === 'en' ? ["Daily Pooja", "Annual Festival", "Special Abhishekam"] : ["தினசரி பூஜை", "ஆண்டு விழா", "சிறப்பு அபிஷேகம்"]
     },
     {
       id: 2,
-      name: t.items[1].name,
-      desc: t.items[1].desc,
+      name: t.items[1]?.name || "",
+      desc: t.items[1]?.desc || "",
       image: img2,
       slug: "sri-pushpavaneswara-swamy-temple",
       tags: language === 'en' ? ["Shivaratri", "Daily Abhishekam", "Rudra Abhishekam"] : ["சிவராத்திரி", "தினசரி அபிஷேகம்", "ருத்ர அபிஷேகம்"]
     },
     {
       id: 3,
-      name: t.items[2].name,
-      desc: t.items[2].desc,
+      name: t.items[2]?.name || "",
+      desc: t.items[2]?.desc || "",
       image: img3,
       slug: "sri-kariyakali-amman-temple",
       tags: language === 'en' ? ["Aadi Perukku", "Special Arthi", "Navaratri"] : ["ஆடி பெருக்கு", "சிறப்பு ஆரத்தி", "நவராத்திரி"]
     },
     {
       id: 4,
-      name: t.items[4]?.name || t.items[3].name,
-      desc: t.items[4]?.desc || t.items[3].desc,
+      name: t.items[3]?.name || t.items[4]?.name || "",
+      desc: t.items[3]?.desc || t.items[4]?.desc || "",
       image: img4,
       slug: "sri-damodara-perumal-temple",
       tags: language === 'en' ? ["Vaikuntha Ekadashi", "Margazhi Pooja", "Garuda Seva"] : ["வைகுண்ட ஏகாதசி", "மார்கழி பூஜை", "கருட சேவை"]
     }
-  ];
+  ] : [];
 
   return (
     <section id="temples-section" className="relative py-24 bg-transparent overflow-hidden">
@@ -82,7 +82,7 @@ const Temples = ({ showButton = true }) => {
         </div>
 
         {/* Temple Cards Grid with Stagger */}
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
+        <StaggerContainer key={language} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
           {templeData.map((temple) => (
             <StaggerItem key={`${temple.id}-${language}`}>
               <div className="group bg-white p-2 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col border border-[#c49a3c]/20 h-full">
