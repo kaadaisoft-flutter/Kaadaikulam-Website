@@ -13,8 +13,8 @@ const Header = () => {
 
   const navLinks = [
     { name: t.home, path: "/" },
-    { name: t.temples, path: "/temples" },
     { name: t.history, path: "/history" },
+    { name: t.temples, path: "/temples" },
     { name: t.gallery, path: "/gallery" },
     { name: t.blog, path: "/blog" },
     { name: t.donation, path: "/donation" },
