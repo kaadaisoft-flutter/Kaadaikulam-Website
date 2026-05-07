@@ -1,6 +1,7 @@
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import logo from "../assets/logo.webp";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { language } = useLanguage();
@@ -30,9 +31,9 @@ const Footer = () => {
               {t.explore.title}
             </h4>
             <ul className="space-y-3 text-sm font-medium">
-              <li><a href="#" className="hover:text-[#c49a3c] transition-colors duration-300">{t.explore.temples}</a></li>
-              <li><a href="#" className="hover:text-[#c49a3c] transition-colors duration-300">{t.explore.gallery}</a></li>
-              <li><a href="#" className="hover:text-[#c49a3c] transition-colors duration-300">{t.explore.blog}</a></li>
+              <li><Link to="/temples" className="hover:text-[#c49a3c] transition-colors duration-300">{t.explore.temples}</Link></li>
+              <li><Link to="/gallery" className="hover:text-[#c49a3c] transition-colors duration-300">{t.explore.gallery}</Link></li>
+              <li><Link to="/kulaguru" className="hover:text-[#c49a3c] transition-colors duration-300">{t.explore.kulaguru}</Link></li>
             </ul>
           </div>
 
@@ -42,7 +43,7 @@ const Footer = () => {
               {t.services.title}
             </h4>
             <ul className="space-y-3 text-sm font-medium">
-              <li><a href="#" className="hover:text-[#c49a3c] transition-colors duration-300">{t.services.donation}</a></li>
+              <li><Link to="/donation" className="hover:text-[#c49a3c] transition-colors duration-300">{t.services.donation}</Link></li>
             </ul>
           </div>
 
@@ -52,7 +53,7 @@ const Footer = () => {
               {t.connect.title}
             </h4>
             <ul className="space-y-3 text-sm font-medium">
-              <li><a href="#" className="hover:text-[#c49a3c] transition-colors duration-300">{t.connect.contact}</a></li>
+              <li><Link to="/contact" className="hover:text-[#c49a3c] transition-colors duration-300">{t.connect.contact}</Link></li>
             </ul>
           </div>
         </div>
@@ -63,8 +64,8 @@ const Footer = () => {
             © {new Date().getFullYear()} POONDURAI KAADAI. {t.rights}
           </p>
           <div className="flex items-center gap-10 text-[11px] font-bold tracking-[0.2em] uppercase">
-             <a href="#" className="hover:text-[#c49a3c] transition-colors duration-300">{t.privacy}</a>
-             <a href="#" className="hover:text-[#c49a3c] transition-colors duration-300">{t.terms}</a>
+             <Link to="/privacy" className="hover:text-[#c49a3c] transition-colors duration-300">{t.privacy}</Link>
+             <Link to="/terms" className="hover:text-[#c49a3c] transition-colors duration-300">{t.terms}</Link>
           </div>
         </div>
       </div>

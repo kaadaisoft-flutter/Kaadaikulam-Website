@@ -5,7 +5,7 @@ export const translations = {
       temples: "Temples",
       history: "Inscriptions",
       gallery: "Gallery",
-      blog: "Blog",
+      kulaguru: "Clan Guru",
       donation: "Donation",
       contact: "Contact",
       login: "Member Login / Signup"
@@ -94,7 +94,7 @@ export const translations = {
         title: "Explore",
         temples: "Our Temples",
         gallery: "Gallery",
-        blog: "Blog"
+        kulaguru: "Clan Guru"
       },
       services: {
         title: "Online Services",
@@ -542,7 +542,7 @@ export const translations = {
       temples: "கோவில்கள்",
       history: "கல்வெட்டுகள்",
       gallery: "புகைப்படங்கள்",
-      blog: "வலைப்பதிவு",
+      kulaguru: "குலகுரு",
       donation: "நன்கொடை",
       contact: "தொடர்பு",
       login: "உறுப்பினர் உள்நுழைவு / பதிவு"
@@ -631,7 +631,7 @@ export const translations = {
         title: "ஆராயுங்கள்",
         temples: "எங்கள் கோவில்கள்",
         gallery: "படக்காட்சி",
-        blog: "வலைப்பதிவு"
+        kulaguru: "குலகுரு"
       },
       services: {
         title: "மின் சேவைகள்",
