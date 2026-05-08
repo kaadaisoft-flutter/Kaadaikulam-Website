@@ -33,6 +33,10 @@ const Dashboard = () => {
         return () => unsubs.forEach(unsub => unsub());
     }, []);
 
+    const now = new Date();
+    const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+    const sixtyDaysAgo = new Date(now.getTime() - 60 * 24 * 60 * 60 * 1000);
+
     const pendingDonations = data.donations.filter(d => d.status === 'pending');
     const pendingComments = data.comments.filter(c => c.status === 'pending');
     const pendingMessages = data.messages.filter(m => m.status === 'pending');
@@ -41,11 +45,43 @@ const Dashboard = () => {
         .filter(d => d.status === 'approved')
         .reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
 
+    // Revenue Trend
+    const currentPeriodRevenue = data.donations
+        .filter(d => d.status === 'approved' && new Date(d.createdAt) >= thirtyDaysAgo)
+        .reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
+    const previousPeriodRevenue = data.donations
+        .filter(d => d.status === 'approved' && new Date(d.createdAt) >= sixtyDaysAgo && new Date(d.createdAt) < thirtyDaysAgo)
+        .reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
+    const revenueTrend = previousPeriodRevenue === 0 
+        ? (currentPeriodRevenue > 0 ? '+100%' : '0%') 
+        : `${(((currentPeriodRevenue - previousPeriodRevenue) / previousPeriodRevenue) * 100).toFixed(1)}%`;
+
+    // Blogs Trend
+    const recentBlogsCount = data.blogs.filter(b => b.status === 'Published' && new Date(b.createdAt) >= thirtyDaysAgo).length;
+    const blogsTrend = `+${recentBlogsCount} this month`;
+
+    // Media Trend
+    const lastMediaDate = data.gallery.length > 0 
+        ? new Date(Math.max(...data.gallery.map(g => new Date(g.date || g.createdAt).getTime()))) 
+        : null;
+    const mediaTrend = lastMediaDate 
+        ? (now.toDateString() === lastMediaDate.toDateString() ? 'Added today' : `Last added ${Math.floor((now - lastMediaDate) / (1000 * 60 * 60 * 24))}d ago`) 
+        : 'No media';
+
+    // Subscribers Trend
+    const recentMessagesCount = data.messages.filter(m => new Date(m.createdAt || m.date) >= thirtyDaysAgo).length;
+    const subscribersTrend = `+${recentMessagesCount} new`;
+
+    // Performance Score
+    const totalActions = data.donations.length + data.comments.length + data.messages.length;
+    const pendingActions = pendingDonations.length + pendingComments.length + pendingMessages.length;
+    const performanceScore = totalActions === 0 ? 100 : Math.round(((totalActions - pendingActions) / totalActions) * 100);
+
     const stats = [
         { 
             label: 'Total Revenue', 
             value: `₹${totalDonationAmount.toLocaleString('en-IN')}`, 
-            trend: '+12.5%',
+            trend: revenueTrend,
             icon: Banknote, 
             color: 'text-emerald-600', 
             bg: 'bg-emerald-50' 
@@ -53,7 +89,7 @@ const Dashboard = () => {
         { 
             label: 'Active Blogs', 
             value: data.blogs.filter(b => b.status === 'Published').length.toString(), 
-            trend: '+4 this month',
+            trend: blogsTrend,
             icon: FileText, 
             color: 'text-blue-600', 
             bg: 'bg-blue-50' 
@@ -61,15 +97,15 @@ const Dashboard = () => {
         { 
             label: 'Media Items', 
             value: data.gallery.length.toString(), 
-            trend: 'Last added today',
+            trend: mediaTrend,
             icon: ImageIcon, 
             color: 'text-indigo-600', 
             bg: 'bg-indigo-50' 
         },
         { 
             label: 'Subscribers', 
-            value: (data.messages.length + 120).toString(), 
-            trend: '+24 new',
+            value: data.messages.length.toString(), 
+            trend: subscribersTrend,
             icon: Users, 
             color: 'text-rose-600', 
             bg: 'bg-rose-50' 
@@ -213,11 +249,14 @@ const Dashboard = () => {
                         </div>
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-gray-400">Monthly Target</span>
-                                <span className="text-xs font-bold text-primary">85%</span>
+                                <span className="text-xs text-gray-400">System Progress</span>
+                                <span className="text-xs font-bold text-primary">{performanceScore}%</span>
                             </div>
                             <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-                                <div className="w-[85%] h-full bg-primary rounded-full shadow-[0_0_8px_rgba(128,0,0,0.4)]" />
+                                <div 
+                                    className="h-full bg-primary rounded-full shadow-[0_0_8px_rgba(128,0,0,0.4)] transition-all duration-1000" 
+                                    style={{ width: `${performanceScore}%` }}
+                                />
                             </div>
                             <p className="text-[10px] text-gray-500 leading-relaxed italic">
                                 Targets are based on last year's performance for the same period.
