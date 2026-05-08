@@ -56,7 +56,7 @@ const Heritage = () => {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-start"
           >
-            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-[#5d1712] leading-tight mb-8 tracking-wide">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#5d1712] leading-tight mb-8 tracking-wide">
               {t.heading}
             </h2>
             

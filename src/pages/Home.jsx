@@ -14,10 +14,10 @@ const Home = () => {
         <ClanGrandeur />
       </FadeUp>
       <FadeUp>
-        <Heritage />
+        <KulaGuru />
       </FadeUp>
       <FadeUp>
-        <KulaGuru />
+        <Heritage />
       </FadeUp>
       <div id="temples-section">
         <FadeUp>
