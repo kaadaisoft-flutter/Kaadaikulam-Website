@@ -58,7 +58,18 @@ const TempleDetail = () => {
 
               <div>
                 <span className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] block mb-2">{tDetail.address}</span>
-                <p className="text-stone-700 font-medium">{temple.address}</p>
+                <a 
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(temple.name + " " + temple.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-stone-700 font-medium hover:text-[#5d1712] transition-colors group/map"
+                >
+                  {temple.address}
+                  <svg className="w-5 h-5 text-[#c49a3c] group-hover/map:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </a>
               </div>
 
               <div>

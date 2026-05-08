@@ -69,7 +69,12 @@ const Contact = () => {
             </div>
 
             <div className="space-y-8">
-              <div className="flex items-start gap-6 group">
+              <a 
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(t.info.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-6 group cursor-pointer"
+              >
                 <div className="w-14 h-14 rounded-2xl bg-[#c49a3c]/10 flex items-center justify-center shrink-0 group-hover:bg-[#c49a3c] group-hover:text-white transition-all duration-300">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -80,9 +85,9 @@ const Contact = () => {
                   <h4 className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.info.location}</h4>
                   <p className="text-stone-800 font-medium text-lg max-w-[280px]">{t.info.address}</p>
                 </div>
-              </div>
+              </a>
 
-              <div className="flex items-start gap-6 group" onClick={() => handleCopy("+91 99526 93122")}>
+              <div className="flex items-start gap-6 group cursor-pointer" onClick={() => handleCopy("+91 99526 93122")}>
                 <div className="w-14 h-14 rounded-2xl bg-[#5d1712]/10 flex items-center justify-center shrink-0 group-hover:bg-[#5d1712] group-hover:text-white transition-all duration-300">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -95,7 +100,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-6 group" onClick={() => handleCopy("info@kaadaikulam.org")}>
+              <div className="flex items-start gap-6 group cursor-pointer" onClick={() => handleCopy("info@kaadaikulam.org")}>
                 <div className="w-14 h-14 rounded-2xl bg-[#c49a3c]/10 flex items-center justify-center shrink-0 group-hover:bg-[#c49a3c] group-hover:text-white transition-all duration-300">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
