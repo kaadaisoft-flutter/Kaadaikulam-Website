@@ -31,9 +31,9 @@ const Footer = () => {
               {t.explore.title}
             </h4>
             <ul className="space-y-3 text-sm font-medium">
+              <li><Link to="/kulaguru" className="hover:text-[#c49a3c] transition-colors duration-300">{t.explore.kulaguru}</Link></li>
               <li><Link to="/temples" className="hover:text-[#c49a3c] transition-colors duration-300">{t.explore.temples}</Link></li>
               <li><Link to="/gallery" className="hover:text-[#c49a3c] transition-colors duration-300">{t.explore.gallery}</Link></li>
-              <li><Link to="/kulaguru" className="hover:text-[#c49a3c] transition-colors duration-300">{t.explore.kulaguru}</Link></li>
             </ul>
           </div>
 
