@@ -128,7 +128,7 @@ const Header = () => {
 
           {/* Location Icon */}
           <a 
-            href="https://www.google.com/maps/search/?api=1&query=Sri+Angala+Amman+Temple+Avalpoondurai"
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(translations[language].contact.info.address)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors duration-300 hidden sm:block"

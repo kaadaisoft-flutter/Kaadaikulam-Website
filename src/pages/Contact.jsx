@@ -100,7 +100,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-6 group cursor-pointer" onClick={() => handleCopy("info@kaadaikulam.org")}>
+              <div className="flex items-start gap-6 group cursor-pointer" onClick={() => handleCopy("poonduraikaadaikulam@gmail.com")}>
                 <div className="w-14 h-14 rounded-2xl bg-[#c49a3c]/10 flex items-center justify-center shrink-0 group-hover:bg-[#c49a3c] group-hover:text-white transition-all duration-300">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -108,8 +108,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.info.email}</h4>
-                  <p className="text-stone-800 font-medium text-lg">info@kaadaikulam.org</p>
-                  <p className="text-stone-800 font-medium text-lg">support@kaadaikulam.org</p>
+                  <p className="text-stone-800 font-medium text-lg">poonduraikaadaikulam@gmail.com</p>
                 </div>
               </div>
             </div>
