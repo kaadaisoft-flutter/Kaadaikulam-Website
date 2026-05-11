@@ -11,19 +11,19 @@ const Home = () => {
     <div className="bg-sacred-home min-h-screen">
       <Hero />
       <FadeUp>
-        <ClanGrandeur />
+        <Heritage />
       </FadeUp>
       <FadeUp>
         <KulaGuru />
-      </FadeUp>
-      <FadeUp>
-        <Heritage />
       </FadeUp>
       <div id="temples-section">
         <FadeUp>
           <Temples />
         </FadeUp>
       </div>
+      <FadeUp>
+        <ClanGrandeur />
+      </FadeUp>
       <FadeUp>
         <ContactCTA />
       </FadeUp>
