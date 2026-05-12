@@ -17,6 +17,7 @@ const Header = () => {
     { name: t.kulaguru, path: "/kulaguru" },
     { name: t.temples, path: "/temples" },
     { name: t.gallery, path: "/gallery" },
+    { name: t.events, path: "/events" },
     { name: t.donation, path: "/donation" },
     { name: t.contact, path: "/contact" },
   ];
@@ -127,7 +128,7 @@ const Header = () => {
           </div>
 
           {/* Location Icon */}
-          <a 
+          <a
             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(translations[language].contact.info.address)}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -140,15 +141,15 @@ const Header = () => {
           </a>
 
           {/* Hamburger Menu */}
-          <button 
+          <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="flex flex-col gap-[5px] justify-center hover:opacity-75 transition-opacity xl:hidden relative z-[120]"
           >
-            <motion.span 
+            <motion.span
               animate={isMenuOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
               className="w-6 h-[1.5px] bg-stone-800 origin-center"
             ></motion.span>
-            <motion.span 
+            <motion.span
               animate={isMenuOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
               className="w-6 h-[1.5px] bg-stone-800 origin-center"
             ></motion.span>

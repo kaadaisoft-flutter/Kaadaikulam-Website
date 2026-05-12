@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
 import NotFound from '../pages/NotFound';
 
-const VALID_PATHS = ['/', '/gallery', '/blog', '/comments', '/donation', '/contact', '/donation-settings'];
+const VALID_PATHS = ['/', '/gallery', '/blog', '/comments', '/donation', '/contact', '/donation-settings', '/events'];
 const isBlogPath = (p) => p === '/blog' || p.startsWith('/blog/');
 
 const MainLayout = () => {
@@ -31,7 +31,7 @@ const MainLayout = () => {
     // If not authenticated: show 404 with "Go to Login" for unknown paths, else redirect to login
     if (!isAuthenticated) {
         if (is404) return <NotFound />;
-        return <Navigate to="login" replace />;
+        return <Navigate to="/admin/login" replace />;
     }
 
     return (

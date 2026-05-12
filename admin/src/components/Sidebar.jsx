@@ -21,7 +21,8 @@ import {
     BarChart2,
     Users,
     Inbox,
-    HeartHandshake
+    HeartHandshake,
+    CalendarDays
 } from 'lucide-react';
 
 const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
@@ -61,6 +62,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                 { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
                 { path: '/admin/blog', icon: FileText, label: 'All Blogs' },
                 { path: '/admin/gallery', icon: ImageIcon, label: 'Gallery' },
+                { path: '/admin/events', icon: CalendarDays, label: 'Events' },
                 { path: '/admin/comments', icon: MessageSquare, label: 'Comments', badge: counts.comments },
                 { path: '/admin/donation', icon: HeartHandshake, label: 'Donations', badge: counts.donations },
             ]

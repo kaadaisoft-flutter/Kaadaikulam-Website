@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { Toaster } from 'react-hot-toast';
 import './index.css';
@@ -16,6 +16,7 @@ const Comments = React.lazy(() => import('./pages/Comments'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 const DonationSettings = React.lazy(() => import('./pages/DonationSettings'));
 const Donations = React.lazy(() => import('./pages/eservices/Donations'));
+const Events = React.lazy(() => import('./pages/Events'));
 const ForgotPassword = React.lazy(() => import('./pages/ForgotPassword'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
@@ -44,6 +45,7 @@ export function AdminContent() {
             <Route path="donation" element={<Donations />} />
             <Route path="contact" element={<Contact />} />
             <Route path="donation-settings" element={<DonationSettings />} />
+            <Route path="events" element={<Events />} />
             {/* 404 - shows "Go to Dashboard" when auth, "Go to Login" when not (via MainLayout redirect) */}
             <Route path="*" element={<NotFound />} />
           </Route>
@@ -56,7 +58,10 @@ export function AdminContent() {
 function App() {
   return (
     <BrowserRouter>
-      <AdminContent />
+      <Routes>
+        <Route path="admin/*" element={<AdminContent />} />
+        <Route path="*" element={<Navigate to="/admin" replace />} />
+      </Routes>
     </BrowserRouter>
   );
 }

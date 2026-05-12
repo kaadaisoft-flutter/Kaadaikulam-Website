@@ -6,6 +6,7 @@ export const translations = {
       history: "Inscriptions",
       gallery: "Gallery",
       kulaguru: "Clan Guru",
+      events: "Events",
       donation: "Donation",
       contact: "Contact",
       login: "Member Login / Signup"
@@ -191,6 +192,26 @@ export const translations = {
       items: {
         video: "VIDEO",
         kumbhabhishekam: "Kumbhabhishekam Yagasalai"
+      }
+    },
+    events: {
+      hero: {
+        label: "Temple Events",
+        heading: "Upcoming Ceremonies & Announcements",
+        text: "Stay informed about the sacred rituals, festivals, and community gatherings of the Poondurai Kaadai clan."
+      },
+      noEvents: "No upcoming events at the moment.",
+      viewDetails: "View Event Details",
+      details: {
+        heading: "Event Details",
+        date: "Date",
+        time: "Time",
+        location: "Location",
+        description: "About the Event",
+        close: "Close",
+        upcoming: "Upcoming Event",
+        new: "New Event Alert",
+        see: "See Details"
       }
     },
     history: {
@@ -543,6 +564,7 @@ export const translations = {
       history: "கல்வெட்டுகள்",
       gallery: "புகைப்படங்கள்",
       kulaguru: "குலகுரு",
+      events: "நிகழ்வுகள்",
       donation: "நன்கொடை",
       contact: "தொடர்பு",
       login: "உறுப்பினர் உள்நுழைவு / பதிவு"
@@ -728,6 +750,26 @@ export const translations = {
       items: {
         video: "காணொளி",
         kumbhabhishekam: "கும்பாபிஷேக யாகசாலை"
+      }
+    },
+    events: {
+      hero: {
+        label: "கோவில் நிகழ்வுகள்",
+        heading: "வரவிருக்கும் விழாக்கள் மற்றும் அறிவிப்புகள்",
+        text: "பூந்துறை காடை குலத்தின் புனித சடங்குகள், திருவிழாக்கள் மற்றும் சமூகக் கூட்டங்கள் பற்றிய தகவல்களை உடனுக்குடன் தெரிந்துகொள்ளுங்கள்."
+      },
+      noEvents: "தற்போது வரவிருக்கும் நிகழ்வுகள் எதுவும் இல்லை.",
+      viewDetails: "நிகழ்வு விவரங்களை பார்க்க",
+      details: {
+        heading: "நிகழ்வு விவரங்கள்",
+        date: "தேதி",
+        time: "நேரம்",
+        location: "இடம்",
+        description: "நிகழ்வைப் பற்றி",
+        close: "மூடுக",
+        upcoming: "அடுத்த நிகழ்வு",
+        new: "புதிய நிகழ்வு அறிவிப்பு",
+        see: "விவரம்"
       }
     },
     history: {
