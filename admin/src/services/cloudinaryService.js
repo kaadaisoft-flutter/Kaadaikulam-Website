@@ -4,7 +4,7 @@
  * Delete uses env credentials (temporary - move to backend later).
  */
 
-const CLOUD_NAME = 'dx7hpo0o8';
+const CLOUD_NAME = 'dy8uty5uo';
 const UPLOAD_PRESET_GALLERY = 'poondurai_kaadai_gallery';
 const UPLOAD_PRESET_QR = 'poondurai_kaadai_qr';
 const UPLOAD_PRESET_BLOG = 'poondurai_kaadai_blog';

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import logo from "../assets/logo.webp";
@@ -7,6 +8,8 @@ import logo from "../assets/logo.webp";
 const ClanGrandeur = () => {
   const { language } = useLanguage();
   const t = translations[language].clanGrandeur;
+  const m = translations[language].membership;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section className="py-24 bg-[#fdfaf3] overflow-hidden relative border-t border-[#c49a3c]/10">
@@ -50,9 +53,21 @@ const ClanGrandeur = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="font-serif text-3xl md:text-5xl text-[#5d1712] font-bold mb-8 leading-tight tracking-tight"
+              className="font-serif text-3xl md:text-5xl text-[#5d1712] font-bold mb-8 leading-tight tracking-tight flex flex-wrap items-center gap-4"
             >
-              {t.heading}
+              <span>{t.heading}</span>
+              <motion.button 
+                onClick={() => setIsModalOpen(true)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 bg-[#8b1d1d] text-white px-3 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase shadow-lg shadow-[#8b1d1d]/20"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                </span>
+                {language === 'ta' ? 'உறுப்பினர்' : 'MEMBER'}
+              </motion.button>
             </motion.h2>
             
             <motion.p 
@@ -125,22 +140,102 @@ const ClanGrandeur = () => {
                 </div>
               </div>
 
-              {/* Decorative Particles / Icons */}
-              <motion.div 
-                animate={{ y: [0, -15, 0], x: [0, 10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-0 -right-8 w-24 h-16 bg-[#c49a3c]/10 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg border border-[#c49a3c]/20 z-20 px-3"
+              {/* Decorative Particles / Icons - Now with Blinking and Click functionality */}
+              <motion.button 
+                onClick={() => setIsModalOpen(true)}
+                animate={{ 
+                  y: [0, -15, 0], 
+                  x: [0, 10, 0],
+                  opacity: [1, 0.4, 1] // Blinking effect
+                }}
+                transition={{ 
+                  y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+                  x: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+                  opacity: { duration: 1.5, repeat: Infinity, ease: "easeInOut" } // Blink timing
+                }}
+                whileHover={{ scale: 1.1, opacity: 1 }}
+                className="absolute top-0 -right-8 w-24 h-16 bg-[#c49a3c] text-white backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg border border-white/40 z-20 px-3 cursor-pointer overflow-hidden group/badge"
               >
-                <div className="flex flex-col items-center">
-                  <span className="text-[#c49a3c] text-[13px] font-bold tracking-tighter leading-none">{t.badgeKaadai}</span>
-                  <span className="text-[#c49a3c] text-[13px] font-bold tracking-tighter leading-none mt-1">{t.badgeKulam}</span>
+                <div className="flex flex-col items-center relative z-10">
+                  <span className="text-white text-[13px] font-bold tracking-tighter leading-none">{t.badgeKaadai}</span>
+                  <span className="text-white text-[13px] font-bold tracking-tighter leading-none mt-1">{t.badgeKulam}</span>
                 </div>
-              </motion.div>
+                {/* Shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-700" />
+              </motion.button>
             </div>
           </motion.div>
 
         </div>
       </div>
+
+      {/* Membership Popup Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-stone-900/60 backdrop-blur-sm"
+            />
+            
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden border border-[#c49a3c]/20"
+            >
+              {/* Modal Header */}
+              <div className="bg-[#5d1712] p-6 text-center relative">
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                <div className="w-20 h-20 bg-white rounded-full mx-auto mb-4 p-2 shadow-inner">
+                  <img src={logo} alt="Logo" className="w-full h-full object-contain" />
+                </div>
+                <h3 className="text-xl font-serif text-white">{t.heading}</h3>
+              </div>
+
+              {/* Modal Body */}
+              <div className="p-8 text-center bg-[#fdfaf3]">
+                <div className="mb-8 p-4 bg-white rounded-xl border-2 border-dashed border-[#c49a3c]/30">
+                  <p className="text-stone-500 text-xs uppercase tracking-widest mb-1">{m.idLabel}</p>
+                  <p className="text-2xl font-bold text-[#5d1712] tracking-wider">{m.idValue}</p>
+                </div>
+
+                <p className="text-stone-600 mb-8 leading-relaxed">
+                  {language === 'ta' 
+                    ? "பூந்துறை காடை குலத்தின் அதிகாரப்பூர்வ உறுப்பினராக இணைந்து நமது பாரம்பரியத்தைப் பாதுகாப்போம்." 
+                    : "Join as an official member of the Poondurai Kaadai clan and help preserve our rich heritage."}
+                </p>
+
+                <a 
+                  href="https://member.kaadaikulam.org/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block w-full py-4 bg-[#c49a3c] hover:bg-[#b38a2c] text-white font-bold rounded-xl shadow-lg transition-all transform hover:-translate-y-1 active:scale-95 text-center uppercase tracking-widest text-sm"
+                >
+                  {m.becomeButton}
+                </a>
+                
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  className="mt-4 text-stone-400 hover:text-stone-600 text-xs font-medium transition-colors"
+                >
+                  {m.close}
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

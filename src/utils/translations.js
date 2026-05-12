@@ -267,6 +267,12 @@ export const translations = {
       thuthi: "Thuthi:",
       poemTitle: "Clan Heritage Poem"
     },
+    membership: {
+      idLabel: "Kaadai ID",
+      idValue: "KK-2024-001",
+      becomeButton: "Become a Member",
+      close: "Close"
+    },
     spiritualOfferings: {
       heading: "Spiritual Offerings",
       essence: "The Essence",
@@ -824,6 +830,12 @@ export const translations = {
       historical: "வரலாற்று பொருள்",
       thuthi: "துதி:",
       poemTitle: "குல பாரம்பரிய பாடல்"
+    },
+    membership: {
+      idLabel: "காடை அடையாள எண்",
+      idValue: "KK-2024-001",
+      becomeButton: "உறுப்பினர் ஆக",
+      close: "மூடுக"
     },
     spiritualOfferings: {
       heading: "ஆன்மீகத் துதிகள்",

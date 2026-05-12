@@ -33,7 +33,7 @@ exports.cloudinaryDelete = onRequest(
       }
 
       cloudinary.config({
-        cloud_name: 'dx7hpo0o8',
+        cloud_name: 'dy8uty5uo',
         api_key: cloudinaryApiKey.value(),
         api_secret: cloudinaryApiSecret.value(),
       });
