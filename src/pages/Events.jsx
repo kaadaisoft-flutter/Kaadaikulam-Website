@@ -155,6 +155,76 @@ const EventDetailModal = ({ event, onClose }) => {
     );
 };
 
+/* ─── Event Card Component ─────────────────────────────────── */
+const EventCard = ({ event, i, openEvent, language, t, isCompleted }) => {
+    const { day, month } = formatShortDate(event.eventDate, language);
+    return (
+        <motion.article
+            layout
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.5, delay: i * 0.05 }}
+            className={`group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-stone-100 transition-all duration-500 cursor-pointer flex flex-col ${isCompleted ? 'grayscale-[0.5] hover:grayscale-0' : ''}`}
+            onClick={() => openEvent(event)}
+        >
+            {/* Thumbnail */}
+            <div className="relative h-48 overflow-hidden bg-[#c2b09a]">
+                {event.image ? (
+                    <img
+                        src={event.image}
+                        alt={event.title}
+                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                        <CalendarDays size={48} className="text-white/40" />
+                    </div>
+                )}
+                {/* Date stamp */}
+                <div className={`absolute top-3 left-3 text-white rounded-xl px-3 py-1.5 text-center shadow-md ${isCompleted ? 'bg-stone-500' : 'bg-[#5d1712]'}`}>
+                    <div className="text-lg font-bold leading-none">{day}</div>
+                    <div className="text-[9px] uppercase tracking-widest">{month}</div>
+                </div>
+                {/* Category */}
+                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-[#5d1712] text-[9px] font-black uppercase tracking-widest rounded-full px-2.5 py-1 shadow">
+                    {event.category || 'Event'}
+                </div>
+                {isCompleted && (
+                    <div className="absolute inset-0 bg-black/10 flex items-center justify-center pointer-events-none">
+                        <span className="bg-white/90 backdrop-blur-sm text-stone-600 text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-lg border border-stone-200">
+                            {t.completedEvents}
+                        </span>
+                    </div>
+                )}
+            </div>
+
+            {/* Body */}
+            <div className="p-5 flex-1 flex flex-col gap-2">
+                <h2 className={`font-serif text-lg font-bold leading-snug line-clamp-2 group-hover:underline underline-offset-2 transition-all ${isCompleted ? 'text-stone-600' : 'text-[#5d1712]'}`}>
+                    {event.title}
+                </h2>
+
+                {event.location && (
+                    <div className="flex items-center gap-1.5 text-stone-500 text-xs">
+                        <MapPin size={12} className={`${isCompleted ? 'text-stone-400' : 'text-[#5d1712]'} shrink-0`} />
+                        <span className="line-clamp-1">{event.location}</span>
+                    </div>
+                )}
+
+                <p className="text-stone-600 text-sm leading-relaxed line-clamp-2 mt-1 flex-1">
+                    {event.shortDescription || event.description}
+                </p>
+
+                <div className={`mt-3 flex items-center gap-1.5 font-bold text-xs group/link ${isCompleted ? 'text-stone-400' : 'text-[#5d1712]'}`}>
+                    {t.viewDetails}
+                    <ArrowRight size={13} className="transform group-hover/link:translate-x-1 transition-transform" />
+                </div>
+            </div>
+        </motion.article>
+    );
+};
+
 /* ─── Main Events Page ──────────────────────────────────────── */
 const Events = () => {
     const { language } = useLanguage();
@@ -181,6 +251,8 @@ const Events = () => {
         document.body.style.overflow = '';
     }, []);
 
+    const [activeTab, setActiveTab] = useState('upcoming');
+
     if (loading) {
         return (
             <div className="min-h-screen bg-[#FAF5EE] flex items-center justify-center">
@@ -188,6 +260,33 @@ const Events = () => {
             </div>
         );
     }
+
+    const now = new Date().getTime();
+    const buffer = 2 * 60 * 60 * 1000;
+
+    const upcomingEvents = events
+        .filter(e => {
+            const d = e.eventDate?.toDate ? e.eventDate.toDate() : new Date(e.eventDate);
+            return d.getTime() + buffer >= now;
+        })
+        .sort((a, b) => {
+            const da = a.eventDate?.toDate ? a.eventDate.toDate() : new Date(a.eventDate);
+            const db = b.eventDate?.toDate ? b.eventDate.toDate() : new Date(b.eventDate);
+            return da - db;
+        });
+
+    const completedEvents = events
+        .filter(e => {
+            const d = e.eventDate?.toDate ? e.eventDate.toDate() : new Date(e.eventDate);
+            return d.getTime() + buffer < now;
+        })
+        .sort((a, b) => {
+            const da = a.eventDate?.toDate ? a.eventDate.toDate() : new Date(a.eventDate);
+            const db = b.eventDate?.toDate ? b.eventDate.toDate() : new Date(b.eventDate);
+            return db - da;
+        });
+
+    const displayedEvents = activeTab === 'upcoming' ? upcomingEvents : completedEvents;
 
     return (
         <div className="min-h-screen bg-[#FAF5EE]">
@@ -209,88 +308,72 @@ const Events = () => {
                         {t_events.hero.text}
                     </p>
                 </motion.div>
-                {/* decorative circles */}
                 <div className="absolute -top-10 -right-10 w-56 h-56 rounded-full bg-[#5d1712]/5 pointer-events-none" />
                 <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-[#5d1712]/5 pointer-events-none" />
             </section>
 
-            {/* Event Grid */}
+            {/* Tab Switcher */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+                <div className="flex items-center justify-center gap-4 bg-stone-200/50 p-1.5 rounded-2xl w-fit mx-auto shadow-sm border border-stone-200">
+                    <button
+                        onClick={() => setActiveTab('upcoming')}
+                        className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                            activeTab === 'upcoming' 
+                            ? "bg-[#5d1712] text-white shadow-lg scale-105" 
+                            : "text-stone-500 hover:text-stone-800 hover:bg-stone-200"
+                        }`}
+                    >
+                        <CalendarDays size={18} />
+                        {t_events.upcomingEvents}
+                        <span className={`ml-1 text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'upcoming' ? 'bg-white/20' : 'bg-stone-300 text-stone-600'}`}>
+                            {upcomingEvents.length}
+                        </span>
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('completed')}
+                        className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                            activeTab === 'completed' 
+                            ? "bg-[#5d1712] text-white shadow-lg scale-105" 
+                            : "text-stone-500 hover:text-stone-800 hover:bg-stone-200"
+                        }`}
+                    >
+                        <Tag size={18} />
+                        {t_events.completedEvents}
+                        <span className={`ml-1 text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'completed' ? 'bg-white/20' : 'bg-stone-300 text-stone-600'}`}>
+                            {completedEvents.length}
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            {/* Event List */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                {events.length === 0 ? (
+                {displayedEvents.length === 0 ? (
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                        key={activeTab}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
                         className="text-center py-32 bg-white rounded-3xl border border-stone-100 shadow-sm"
                     >
                         <CalendarDays className="w-16 h-16 text-stone-200 mx-auto mb-5" />
                         <h3 className="text-xl font-bold text-stone-800">
-                            {t_events.noEvents}
+                            {activeTab === 'upcoming' ? t_events.noEvents : t_events.noCompletedEvents}
                         </h3>
                     </motion.div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <AnimatePresence>
-                            {events.map((event, i) => {
-                                const { day, month, year } = formatShortDate(event.eventDate, language);
-                                return (
-                                    <motion.article
-                                        key={event.id}
-                                        layout
-                                        initial={{ opacity: 0, y: 30 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.5, delay: i * 0.08 }}
-                                        className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-stone-100 transition-all duration-500 cursor-pointer flex flex-col"
-                                        onClick={() => openEvent(event)}
-                                    >
-                                        {/* Thumbnail */}
-                                        <div className="relative h-48 overflow-hidden bg-[#c2b09a]">
-                                            {event.image ? (
-                                                <img
-                                                    src={event.image}
-                                                    alt={event.title}
-                                                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full flex items-center justify-center">
-                                                    <CalendarDays size={48} className="text-white/40" />
-                                                </div>
-                                            )}
-                                            {/* Date stamp */}
-                                            <div className="absolute top-3 left-3 bg-[#5d1712] text-white rounded-xl px-3 py-1.5 text-center shadow-md">
-                                                <div className="text-lg font-bold leading-none">{day}</div>
-                                                <div className="text-[9px] uppercase tracking-widest">{month}</div>
-                                            </div>
-                                            {/* Category */}
-                                            <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-[#5d1712] text-[9px] font-black uppercase tracking-widest rounded-full px-2.5 py-1 shadow">
-                                                {event.category || 'Event'}
-                                            </div>
-                                        </div>
-
-                                        {/* Body */}
-                                        <div className="p-5 flex-1 flex flex-col gap-2">
-                                            <h2 className="font-serif text-lg font-bold text-[#5d1712] leading-snug line-clamp-2 group-hover:underline underline-offset-2 transition-all">
-                                                {event.title}
-                                            </h2>
-
-                                            {event.location && (
-                                                <div className="flex items-center gap-1.5 text-stone-500 text-xs">
-                                                    <MapPin size={12} className="text-[#5d1712] shrink-0" />
-                                                    <span className="line-clamp-1">{event.location}</span>
-                                                </div>
-                                            )}
-
-                                            <p className="text-stone-600 text-sm leading-relaxed line-clamp-2 mt-1 flex-1">
-                                                {event.shortDescription || event.description}
-                                            </p>
-
-                                            <div className="mt-3 flex items-center gap-1.5 text-[#5d1712] font-bold text-xs group/link">
-                                                {t_events.viewDetails}
-                                                <ArrowRight size={13} className="transform group-hover/link:translate-x-1 transition-transform" />
-                                            </div>
-                                        </div>
-                                    </motion.article>
-                                );
-                            })}
+                        <AnimatePresence mode="popLayout">
+                            {displayedEvents.map((event, i) => (
+                                <EventCard 
+                                    key={event.id} 
+                                    event={event} 
+                                    i={i} 
+                                    openEvent={openEvent} 
+                                    language={language} 
+                                    t={t_events} 
+                                    isCompleted={activeTab === 'completed'} 
+                                />
+                            ))}
                         </AnimatePresence>
                     </div>
                 )}

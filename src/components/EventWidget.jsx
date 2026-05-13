@@ -132,7 +132,13 @@ const EventWidget = () => {
 
     useEffect(() => {
         const unsub = subscribeEvents((data) => {
-            setEvents(data);
+            const now = new Date();
+            const upcoming = data.filter(event => {
+                const eventDate = event.eventDate?.toDate ? event.eventDate.toDate() : new Date(event.eventDate);
+                // Buffer of 2 hours for ongoing events
+                return eventDate.getTime() + (2 * 60 * 60 * 1000) >= now.getTime();
+            });
+            setEvents(upcoming);
         });
         return () => unsub();
     }, []);

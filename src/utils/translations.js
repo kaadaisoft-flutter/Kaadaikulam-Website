@@ -201,6 +201,9 @@ export const translations = {
         text: "Stay informed about the sacred rituals, festivals, and community gatherings of the Poondurai Kaadai clan."
       },
       noEvents: "No upcoming events at the moment.",
+      noCompletedEvents: "No completed events found.",
+      upcomingEvents: "Upcoming Events",
+      completedEvents: "Completed Events",
       viewDetails: "View Event Details",
       details: {
         heading: "Event Details",
@@ -765,6 +768,9 @@ export const translations = {
         text: "பூந்துறை காடை குலத்தின் புனித சடங்குகள், திருவிழாக்கள் மற்றும் சமூகக் கூட்டங்கள் பற்றிய தகவல்களை உடனுக்குடன் தெரிந்துகொள்ளுங்கள்."
       },
       noEvents: "தற்போது வரவிருக்கும் நிகழ்வுகள் எதுவும் இல்லை.",
+      noCompletedEvents: "முடிவடைந்த நிகழ்வுகள் எதுவும் இல்லை.",
+      upcomingEvents: "வரவிருக்கும் நிகழ்வுகள்",
+      completedEvents: "முடிவடைந்த நிகழ்வுகள்",
       viewDetails: "நிகழ்வு விவரங்களை பார்க்க",
       details: {
         heading: "நிகழ்வு விவரங்கள்",
