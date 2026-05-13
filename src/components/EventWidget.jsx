@@ -209,7 +209,7 @@ const EventWidget = () => {
                                 <div className="flex items-center gap-2">
                                     <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-200">
-                                        {event.category || t.new}
+                                        UPCOMING
                                     </span>
                                 </div>
                                 <span className="text-sm font-serif font-bold tracking-wide group-hover:text-amber-200 transition-colors">
