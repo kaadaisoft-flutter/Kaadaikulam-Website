@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Modal from '../components/Modal';
 import ConfirmDialog from '../components/ConfirmDialog';
 import ImageUploadField from '../components/ImageUploadField';
 import DataTable from '../components/DataTable';
-import { Plus, Trash2, Pencil, CalendarDays, MapPin, Tag } from 'lucide-react';
+import { Plus, Trash2, Pencil, CalendarDays, MapPin, Tag, Clock } from 'lucide-react';
 import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select';
 import toast from 'react-hot-toast';
@@ -23,6 +23,21 @@ const CATEGORY_OPTIONS = [
     { value: 'Community', label: 'Community' },
     { value: 'Other', label: 'Other' },
 ];
+
+const AM_PM_OPTIONS = [
+    { value: 'AM', label: 'AM' },
+    { value: 'PM', label: 'PM' },
+];
+
+const HOUR_OPTIONS = Array.from({ length: 12 }, (_, i) => {
+    const h = i + 1;
+    return { value: h, label: String(h).padStart(2, '0') };
+});
+
+const MINUTE_OPTIONS = Array.from({ length: 60 }, (_, i) => ({
+    value: i,
+    label: String(i).padStart(2, '0')
+}));
 
 const selectStyles = {
     control: (base, state) => ({
@@ -49,7 +64,9 @@ const defaultValues = {
     shortDescription: '',
     description: '',
     eventDateOnly: '',
-    eventTimeOnly: '',
+    eventHour: { value: 10, label: '10' },
+    eventMinute: { value: 0, label: '00' },
+    eventAmPm: AM_PM_OPTIONS[0],
     location: '',
     category: null,
     status: STATUS_OPTIONS[0],
@@ -71,6 +88,7 @@ const Events = () => {
         handleSubmit,
         reset,
         control,
+        setValue,
         formState: { errors },
     } = useForm({ defaultValues });
 
@@ -81,6 +99,8 @@ const Events = () => {
         });
         return () => unsub();
     }, []);
+
+
 
     const openAdd = () => {
         setEditingEvent(null);
@@ -96,7 +116,6 @@ const Events = () => {
         setImageFile(null);
 
         let dateOnly = '';
-        let timeOnly = '';
 
         if (event.eventDate) {
             const d = event.eventDate.toDate ? event.eventDate.toDate() : new Date(event.eventDate);
@@ -104,26 +123,31 @@ const Events = () => {
                 const year = d.getFullYear();
                 const month = String(d.getMonth() + 1).padStart(2, '0');
                 const day = String(d.getDate()).padStart(2, '0');
-                const hours = String(d.getHours()).padStart(2, '0');
-                const minutes = String(d.getMinutes()).padStart(2, '0');
                 
+                let hours = d.getHours();
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                const minutes = d.getMinutes();
+
                 dateOnly = `${year}-${month}-${day}`;
-                timeOnly = `${hours}:${minutes}`;
+                
+                reset({
+                    title: event.title || '',
+                    shortDescription: event.shortDescription || '',
+                    description: event.description || '',
+                    eventDateOnly: dateOnly,
+                    eventHour: HOUR_OPTIONS.find(o => o.value === hours),
+                    eventMinute: MINUTE_OPTIONS.find(o => o.value === minutes),
+                    eventAmPm: AM_PM_OPTIONS.find(o => o.value === ampm),
+                    location: event.location || '',
+                    category: CATEGORY_OPTIONS.find(o => o.value === event.category) || null,
+                    status: STATUS_OPTIONS.find(o => o.value === event.status) || STATUS_OPTIONS[0],
+                    image: event.image || '',
+                });
+                setIsModalOpen(true);
             }
         }
-
-        reset({
-            title: event.title || '',
-            shortDescription: event.shortDescription || '',
-            description: event.description || '',
-            eventDateOnly: dateOnly,
-            eventTimeOnly: timeOnly,
-            location: event.location || '',
-            category: CATEGORY_OPTIONS.find(o => o.value === event.category) || null,
-            status: STATUS_OPTIONS.find(o => o.value === event.status) || STATUS_OPTIONS[0],
-            image: event.image || '',
-        });
-        setIsModalOpen(true);
     };
 
     const closeModal = () => {
@@ -147,8 +171,14 @@ const Events = () => {
                 title: data.title,
                 shortDescription: data.shortDescription,
                 description: data.description,
-                eventDate: (data.eventDateOnly && data.eventTimeOnly) 
-                    ? new Date(`${data.eventDateOnly}T${data.eventTimeOnly}`) 
+                eventDate: (data.eventDateOnly && data.eventHour && data.eventMinute && data.eventAmPm) 
+                    ? (() => {
+                        let h = data.eventHour.value;
+                        if (data.eventAmPm.value === 'PM' && h < 12) h += 12;
+                        if (data.eventAmPm.value === 'AM' && h === 12) h = 0;
+                        const m = String(data.eventMinute.value).padStart(2, '0');
+                        return new Date(`${data.eventDateOnly}T${String(h).padStart(2, '0')}:${m}`);
+                      })()
                     : (data.eventDateOnly ? new Date(data.eventDateOnly) : null),
                 location: data.location,
                 category: data.category?.value || 'Other',
@@ -370,81 +400,138 @@ const Events = () => {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Event Date & Time */}
-                        <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* Event Date */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-medium text-gray-700 mb-1.5 flex items-center gap-2">
+                                    <CalendarDays size={14} className="text-primary" />
                                     Date <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     {...register('eventDateOnly', { required: 'Date is required' })}
                                     type="date"
-                                    className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
+                                    className="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm"
                                 />
                                 {errors.eventDateOnly && <p className="text-red-500 text-xs mt-1">{errors.eventDateOnly.message}</p>}
                             </div>
+
+                            {/* Event Time */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-medium text-gray-700 mb-1.5 flex items-center gap-2">
+                                    <Clock size={14} className="text-primary" />
                                     Time <span className="text-red-500">*</span>
                                 </label>
-                                <input
-                                    {...register('eventTimeOnly', { required: 'Time is required' })}
-                                    type="time"
-                                    className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
-                                />
-                                {errors.eventTimeOnly && <p className="text-red-500 text-xs mt-1">{errors.eventTimeOnly.message}</p>}
+                                <div className="flex items-center gap-2">
+                                    <div className="w-20">
+                                        <Controller
+                                            name="eventHour"
+                                            control={control}
+                                            rules={{ required: true }}
+                                            render={({ field }) => (
+                                                <Select
+                                                    {...field}
+                                                    options={HOUR_OPTIONS}
+                                                    styles={selectStyles}
+                                                    placeholder="HH"
+                                                    isSearchable={false}
+                                                />
+                                            )}
+                                        />
+                                    </div>
+                                    <span className="text-gray-400 font-bold">:</span>
+                                    <div className="w-20">
+                                        <Controller
+                                            name="eventMinute"
+                                            control={control}
+                                            rules={{ required: true }}
+                                            render={({ field }) => (
+                                                <Select
+                                                    {...field}
+                                                    options={MINUTE_OPTIONS}
+                                                    styles={selectStyles}
+                                                    placeholder="MM"
+                                                    isSearchable={true}
+                                                />
+                                            )}
+                                        />
+                                    </div>
+                                    <div className="w-24">
+                                        <Controller
+                                            name="eventAmPm"
+                                            control={control}
+                                            rules={{ required: true }}
+                                            render={({ field }) => (
+                                                <Select
+                                                    {...field}
+                                                    options={AM_PM_OPTIONS}
+                                                    styles={selectStyles}
+                                                    isSearchable={false}
+                                                />
+                                            )}
+                                        />
+                                    </div>
+                                </div>
+                                {(errors.eventHour || errors.eventMinute || errors.eventAmPm) && (
+                                    <p className="text-red-500 text-xs mt-1">Time is required</p>
+                                )}
                             </div>
                         </div>
 
                         {/* Location */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                            <input
-                                {...register('location')}
-                                type="text"
-                                placeholder="e.g. Sri Angalamman Temple, Poondurai"
-                                className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
-                            />
-                        </div>
-
-                        {/* Category */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Category <span className="text-red-500">*</span>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5 flex items-center gap-2">
+                                <MapPin size={14} className="text-primary" />
+                                Location
                             </label>
-                            <Controller
-                                name="category"
-                                control={control}
-                                rules={{ required: 'Category is required' }}
-                                render={({ field }) => (
-                                    <Select
-                                        {...field}
-                                        options={CATEGORY_OPTIONS}
-                                        styles={selectStyles}
-                                        placeholder="Select category..."
-                                        isClearable
-                                    />
-                                )}
-                            />
-                            {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category.message}</p>}
+                                <input
+                                    {...register('location')}
+                                    type="text"
+                                    placeholder="e.g. Sri Angalamman Temple, Poondurai"
+                                    className="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm"
+                                />
                         </div>
 
-                        {/* Status */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                            <Controller
-                                name="status"
-                                control={control}
-                                render={({ field }) => (
-                                    <Select
-                                        {...field}
-                                        options={STATUS_OPTIONS}
-                                        styles={selectStyles}
-                                        placeholder="Select status..."
-                                    />
-                                )}
-                            />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* Category */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1.5 flex items-center gap-2">
+                                    <Tag size={14} className="text-primary" />
+                                    Category <span className="text-red-500">*</span>
+                                </label>
+                                <Controller
+                                    name="category"
+                                    control={control}
+                                    rules={{ required: 'Category is required' }}
+                                    render={({ field }) => (
+                                        <Select
+                                            {...field}
+                                            options={CATEGORY_OPTIONS}
+                                            styles={selectStyles}
+                                            placeholder="Select category..."
+                                            isClearable
+                                        />
+                                    )}
+                                />
+                                {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category.message}</p>}
+                            </div>
+
+                            {/* Status */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1.5">Status</label>
+                                <Controller
+                                    name="status"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Select
+                                            {...field}
+                                            options={STATUS_OPTIONS}
+                                            styles={selectStyles}
+                                            placeholder="Select status..."
+                                        />
+                                    )}
+                                />
+                            </div>
                         </div>
                     </div>
 

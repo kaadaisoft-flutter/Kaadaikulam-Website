@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { subscribeEvents } from '../services/eventService';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../utils/translations';
-import { X, CalendarDays, MapPin, ArrowRight } from 'lucide-react';
+import { X, CalendarDays, MapPin, ArrowRight, Clock } from 'lucide-react';
 
 /* ─── helpers ─────────────────────────────── */
 const formatDate = (ts, lang) => {
@@ -218,6 +218,10 @@ const EventWidget = () => {
                                 <div className="flex items-center gap-1.5 text-[11px] text-white/70">
                                     <CalendarDays size={12} className="text-amber-400" />
                                     <span>{formatDate(event.eventDate, language)}</span>
+                                </div>
+                                <div className="flex items-center gap-1.5 text-[11px] text-white/70">
+                                    <Clock size={12} className="text-amber-400" />
+                                    <span>{formatTime(event.eventDate, language)}</span>
                                 </div>
                                 {event.location && (
                                     <div className="flex items-center gap-1.5 text-[11px] text-white/70">
