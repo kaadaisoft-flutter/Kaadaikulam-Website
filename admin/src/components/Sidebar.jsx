@@ -86,8 +86,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             {/* Logo Section */}
             <div className="h-24 flex items-center px-6 mb-4">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/20">
-                        <img src={logo} alt="Logo" className="w-6 h-6 object-contain brightness-0 invert" />
+                    <div className="w-12 h-12 flex items-center justify-center shrink-0">
+                        <img src={logo} alt="Logo" className="w-full h-full object-contain" />
                     </div>
                     {!isCollapsed && (
                         <motion.div
