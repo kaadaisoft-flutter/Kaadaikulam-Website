@@ -34,21 +34,41 @@ const formatShortDate = (ts, lang) => {
 /* ─── Event Detail Modal ─── */
 const EventDetailModal = ({ event, onClose, t }) => {
     const { language } = useLanguage();
-    const { day, month, year } = formatShortDate(event?.eventDate, language);
+
+    useEffect(() => {
+        if (event) {
+            const scrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.width = '100%';
+            if (window.lenis && typeof window.lenis.stop === 'function') window.lenis.stop();
+        }
+        return () => {
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+            if (window.lenis && typeof window.lenis.start === 'function') window.lenis.start();
+        };
+    }, [event]);
+
     if (!event) return null;
+    const { day, month, year } = formatShortDate(event?.eventDate, language);
 
     return (
         <AnimatePresence>
             <motion.div
-                className="fixed inset-0 z-[1000] flex items-center justify-center p-4"
+                className="fixed inset-0 z-[1000] flex items-center justify-center p-2 sm:p-4"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={onClose}
+                data-lenis-prevent
             >
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
                 <motion.div
-                    className="relative z-10 bg-[#FAF5EE] rounded-3xl overflow-hidden shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col"
+                    className="relative z-10 bg-[#FAF5EE] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col"
                     initial={{ opacity: 0, scale: 0.92, y: 30 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.92, y: 30 }}
@@ -70,7 +90,10 @@ const EventDetailModal = ({ event, onClose, t }) => {
                             <X size={20} />
                         </button>
                     </div>
-                    <div className="p-8 overflow-y-auto flex-1">
+                    <div 
+                        className="p-5 sm:p-8 overflow-y-auto flex-1 overscroll-contain"
+                        data-lenis-prevent
+                    >
                         <div className="flex items-center gap-2 mb-2">
                             <span className="px-2 py-0.5 bg-amber-100 text-amber-700 text-[10px] font-bold uppercase tracking-wider rounded">
                                 {event.category || 'Event'}
@@ -107,7 +130,7 @@ const EventDetailModal = ({ event, onClose, t }) => {
                             <p className="text-stone-700 text-base leading-relaxed whitespace-pre-line">{event.description || event.shortDescription}</p>
                         </div>
                     </div>
-                    <div className="p-4 border-t border-stone-100 bg-stone-50/50 flex justify-end">
+                    <div className="p-4 border-t border-stone-100 bg-stone-50/50 flex justify-end shrink-0">
                         <button onClick={onClose} className="px-6 py-2 bg-stone-200 hover:bg-stone-300 text-stone-700 rounded-xl font-bold transition-colors">
                             {t.close}
                         </button>

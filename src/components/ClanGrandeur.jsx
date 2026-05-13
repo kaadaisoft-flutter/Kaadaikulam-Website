@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import logo from "../assets/logo.webp";
@@ -10,6 +10,31 @@ const ClanGrandeur = () => {
   const t = translations[language].clanGrandeur;
   const m = translations[language].membership;
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      if (window.lenis && typeof window.lenis.stop === 'function') window.lenis.stop();
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+      if (window.lenis && typeof window.lenis.start === 'function') window.lenis.start();
+    }
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      if (window.lenis && typeof window.lenis.start === 'function') window.lenis.start();
+    };
+  }, [isModalOpen]);
 
   return (
     <section className="py-24 bg-[#fdfaf3] overflow-hidden relative border-t border-[#c49a3c]/10">

@@ -48,7 +48,8 @@ const defaultValues = {
     title: '',
     shortDescription: '',
     description: '',
-    eventDate: '',
+    eventDateOnly: '',
+    eventTimeOnly: '',
     location: '',
     category: null,
     status: STATUS_OPTIONS[0],
@@ -93,15 +94,30 @@ const Events = () => {
         setEditingEvent(event);
         setImagePreview(event.image || '');
         setImageFile(null);
+
+        let dateOnly = '';
+        let timeOnly = '';
+
+        if (event.eventDate) {
+            const d = event.eventDate.toDate ? event.eventDate.toDate() : new Date(event.eventDate);
+            if (!isNaN(d.getTime())) {
+                const year = d.getFullYear();
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                const hours = String(d.getHours()).padStart(2, '0');
+                const minutes = String(d.getMinutes()).padStart(2, '0');
+                
+                dateOnly = `${year}-${month}-${day}`;
+                timeOnly = `${hours}:${minutes}`;
+            }
+        }
+
         reset({
             title: event.title || '',
             shortDescription: event.shortDescription || '',
             description: event.description || '',
-            eventDate: event.eventDate
-                ? (event.eventDate.toDate
-                    ? event.eventDate.toDate().toISOString().slice(0, 16)
-                    : new Date(event.eventDate).toISOString().slice(0, 16))
-                : '',
+            eventDateOnly: dateOnly,
+            eventTimeOnly: timeOnly,
             location: event.location || '',
             category: CATEGORY_OPTIONS.find(o => o.value === event.category) || null,
             status: STATUS_OPTIONS.find(o => o.value === event.status) || STATUS_OPTIONS[0],
@@ -131,7 +147,9 @@ const Events = () => {
                 title: data.title,
                 shortDescription: data.shortDescription,
                 description: data.description,
-                eventDate: data.eventDate ? new Date(data.eventDate) : null,
+                eventDate: (data.eventDateOnly && data.eventTimeOnly) 
+                    ? new Date(`${data.eventDateOnly}T${data.eventTimeOnly}`) 
+                    : (data.eventDateOnly ? new Date(data.eventDateOnly) : null),
                 location: data.location,
                 category: data.category?.value || 'Other',
                 status: data.status?.value || 'Draft',
@@ -353,17 +371,30 @@ const Events = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Event Date */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Event Date & Time <span className="text-red-500">*</span>
-                            </label>
-                            <input
-                                {...register('eventDate', { required: 'Event date is required' })}
-                                type="datetime-local"
-                                className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
-                            />
-                            {errors.eventDate && <p className="text-red-500 text-xs mt-1">{errors.eventDate.message}</p>}
+                        {/* Event Date & Time */}
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Date <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    {...register('eventDateOnly', { required: 'Date is required' })}
+                                    type="date"
+                                    className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
+                                />
+                                {errors.eventDateOnly && <p className="text-red-500 text-xs mt-1">{errors.eventDateOnly.message}</p>}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Time <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    {...register('eventTimeOnly', { required: 'Time is required' })}
+                                    type="time"
+                                    className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
+                                />
+                                {errors.eventTimeOnly && <p className="text-red-500 text-xs mt-1">{errors.eventTimeOnly.message}</p>}
+                            </div>
                         </div>
 
                         {/* Location */}
