@@ -1,6 +1,7 @@
 import {
     collection,
     doc,
+    getDoc,
     addDoc,
     updateDoc,
     deleteDoc,
@@ -10,6 +11,7 @@ import {
     serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import { uploadToCloudinary, deleteFromCloudinary } from './cloudinaryService';
 
 const EVENT_COLLECTION = 'events';
 
@@ -30,8 +32,6 @@ export const subscribeEvents = (callback) => {
     });
 };
 
-import { uploadFile } from '../utils/uploadUtils';
-
 /**
  * Save or Update an event.
  */
@@ -48,10 +48,25 @@ export const saveEvent = async (id, data, imageFile) => {
 
     // Handle Image Upload if a new file is provided
     if (imageFile) {
-        const fileName = `${Date.now()}_${imageFile.name}`;
-        const uploadPath = `events/${fileName}`;
-        const downloadUrl = await uploadFile(imageFile, uploadPath);
-        eventData.image = downloadUrl;
+        // Delete old image if updating
+        if (id) {
+            const oldDoc = await getDoc(doc(db, EVENT_COLLECTION, id));
+            const oldData = oldDoc.data();
+            if (oldData?.cloudinaryPublicId) {
+                try {
+                    await deleteFromCloudinary(oldData.cloudinaryPublicId);
+                } catch (err) {
+                    console.warn('Failed to delete old event image from Cloudinary:', err);
+                }
+            }
+        }
+
+        const { url, publicId } = await uploadToCloudinary(imageFile, { 
+            preset: 'events', 
+            folder: 'events' 
+        });
+        eventData.image = url;
+        eventData.cloudinaryPublicId = publicId;
     }
 
     if (id) {
@@ -68,5 +83,18 @@ export const saveEvent = async (id, data, imageFile) => {
  * Delete an event.
  */
 export const deleteEvent = async (id) => {
-    await deleteDoc(doc(db, EVENT_COLLECTION, id));
+    // Delete image from Cloudinary first
+    const docRef = doc(db, EVENT_COLLECTION, id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data.cloudinaryPublicId) {
+            try {
+                await deleteFromCloudinary(data.cloudinaryPublicId);
+            } catch (err) {
+                console.warn('Failed to delete event image from Cloudinary:', err);
+            }
+        }
+    }
+    await deleteDoc(docRef);
 };

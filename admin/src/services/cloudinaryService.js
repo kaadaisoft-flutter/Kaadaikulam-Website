@@ -5,9 +5,10 @@
  */
 
 const CLOUD_NAME = 'dy8uty5uo';
-const UPLOAD_PRESET_GALLERY = 'poondurai_kaadai_gallery';
-const UPLOAD_PRESET_QR = 'poondurai_kaadai_qr';
-const UPLOAD_PRESET_BLOG = 'poondurai_kaadai_blog';
+const UPLOAD_PRESET_GALLERY = 'ml_default';
+const UPLOAD_PRESET_QR = 'ml_default';
+const UPLOAD_PRESET_BLOG = 'ml_default';
+const UPLOAD_PRESET_EVENTS = 'ml_default';
 const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
 
 const API_KEY = import.meta.env.VITE_CLOUDINARY_API_KEY;
@@ -67,14 +68,17 @@ function sanitizeForPublicId(str) {
  */
 export const uploadToCloudinary = async (file, options = {}) => {
     let preset = UPLOAD_PRESET_GALLERY;
-    let folder = options.folder || 'gallery';
+    let folder = options.folder ? `Kaadai_web/${options.folder}` : 'Kaadai_web/gallery';
 
     if (options.preset === 'qr') {
         preset = UPLOAD_PRESET_QR;
-        folder = options.folder || 'qr';
+        folder = options.folder ? `Kaadai_web/${options.folder}` : 'Kaadai_web/qr';
     } else if (options.preset === 'blog') {
         preset = UPLOAD_PRESET_BLOG;
-        folder = options.folder || 'blog';
+        folder = options.folder ? `Kaadai_web/${options.folder}` : 'Kaadai_web/blog';
+    } else if (options.preset === 'events') {
+        preset = UPLOAD_PRESET_EVENTS;
+        folder = options.folder ? `Kaadai_web/${options.folder}` : 'Kaadai_web/events';
     }
 
     const baseName = file.name ? file.name.replace(/\.[^/.]+$/, '') : 'media';

@@ -39,6 +39,7 @@ function App() {
               <Route path="*" element={
                 <>
                   <Header />
+                  <EventWidget />
                   <main className="flex-grow">
                     <Routes>
                       <Route path="/" element={<Home />} />
@@ -53,7 +54,6 @@ function App() {
                       <Route path="/events" element={<Events />} />
                     </Routes>
                   </main>
-                  <EventWidget />
                   <Footer />
                 </>
               } />

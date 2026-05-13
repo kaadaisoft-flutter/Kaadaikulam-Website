@@ -121,6 +121,12 @@ const Events = () => {
     const onSubmit = async (data) => {
         setIsSubmitting(true);
         try {
+            // SECURITY: Ensure we don't accidentally save a local blob URL to Firestore
+            let currentImage = editingEvent?.image || '';
+            if (currentImage.startsWith('blob:')) {
+                currentImage = ''; 
+            }
+
             const payload = {
                 title: data.title,
                 shortDescription: data.shortDescription,
@@ -129,7 +135,7 @@ const Events = () => {
                 location: data.location,
                 category: data.category?.value || 'Other',
                 status: data.status?.value || 'Draft',
-                image: editingEvent?.image || '', // Keep existing if not changing
+                image: currentImage,
             };
             await saveEvent(editingEvent?.id || null, payload, imageFile);
             toast.success(editingEvent ? 'Event updated!' : 'Event created!', { id: 'event-save' });
@@ -170,8 +176,17 @@ const Events = () => {
             sortable: false,
             render: (item) => (
                 <div className="w-14 h-14 rounded-xl overflow-hidden bg-gray-100 shrink-0">
-                    {item.image
-                        ? <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                    {item.image && !item.image.startsWith('blob:')
+                        ? <img 
+                            src={item.image} 
+                            alt={item.title} 
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = ''; // Clear source to show fallback
+                                e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-300"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>';
+                            }}
+                          />
                         : <div className="w-full h-full flex items-center justify-center text-gray-300"><CalendarDays size={24} /></div>
                     }
                 </div>

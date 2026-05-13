@@ -118,127 +118,92 @@ const EventDetailModal = ({ event, onClose, t }) => {
     );
 };
 
-/* ─── Global Event Widget ─── */
+/* ─── Global Event Widget (Scrolling Ticker) ─── */
 const EventWidget = () => {
     const { language } = useLanguage();
     const location = useLocation();
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
-    const [isDismissed, setIsDismissed] = useState(false);
 
     const t = translations[language].events.details;
 
-    // Don't show the floating card on the main Events page
+    // Don't show the ticker on the main Events page
     const isEventsPage = location.pathname === '/events';
 
     useEffect(() => {
         const unsub = subscribeEvents((data) => {
             setEvents(data);
-            
-            // Check if this specific event was already dismissed
-            if (data.length > 0) {
-                const nextId = data[0].id;
-                const dismissedId = localStorage.getItem('dismissed_event_id');
-                if (dismissedId === nextId) {
-                    setIsDismissed(true);
-                } else {
-                    setIsDismissed(false);
-                }
-            }
         });
         return () => unsub();
     }, []);
 
-    const nextEvent = events[0] || null;
+    if (events.length === 0 || isEventsPage) return <EventDetailModal event={selectedEvent} onClose={() => setSelectedEvent(null)} t={t} />;
 
-    const handleDismiss = (e) => {
-        e.stopPropagation();
-        setIsDismissed(true);
-        if (nextEvent) {
-            localStorage.setItem('dismissed_event_id', nextEvent.id);
-        }
-    };
-
-    if (!nextEvent || isEventsPage || isDismissed) return <EventDetailModal event={selectedEvent} onClose={() => setSelectedEvent(null)} t={t} />;
-
-    const { day, month, year } = formatShortDate(nextEvent.eventDate, language);
+    // Ensure we have enough items to fill the screen and loop smoothly
+    let baseEvents = [...events];
+    while (baseEvents.length > 0 && baseEvents.length < 6) {
+        baseEvents = [...baseEvents, ...events];
+    }
+    const tickerEvents = [...baseEvents, ...baseEvents];
+    
+    // Adjust animation speed: more items = slower duration to keep speed consistent
+    // Increased multiplier to 15s per item for better readability
+    const scrollDuration = Math.max(30, baseEvents.length * 15);
 
     return (
         <>
-            <motion.div
-                className="fixed bottom-8 left-8 z-[150] max-w-[400px] w-full"
-                initial={{ opacity: 0, x: -50, y: 30 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 25, delay: 1.5 }}
+            <motion.div 
+                className="w-full bg-[#5d1712] text-white py-2.5 relative z-[100] border-y border-amber-500/20 shadow-lg overflow-hidden sticky top-[80px]"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
             >
-                <div className="relative bg-white rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden border border-amber-100 flex flex-col group transition-all duration-500 hover:shadow-[0_25px_60px_rgba(93,23,18,0.2)]">
-                    {/* Premium Header Strip */}
-                    <div className="bg-gradient-to-r from-[#5d1712] to-[#8a241b] px-5 py-2 flex justify-between items-center shadow-sm relative z-20">
-                        <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                            <span className="text-[10px] text-white/95 font-bold uppercase tracking-[0.25em]">
-                                {t.new}
-                            </span>
-                        </div>
-                        <button 
-                            onClick={handleDismiss} 
-                            className="text-white/60 hover:text-white transition-colors p-1 relative z-30"
-                        >
-                            <X size={14} />
-                        </button>
-                    </div>
-
-                    {/* Content Row (Equal 50/50 Split) */}
-                    <div className="flex h-[150px] relative">
-                        {/* Hidden clickable area for the whole card - moved to lower z-index or sibling */}
-                        <button 
-                            onClick={() => setSelectedEvent(nextEvent)}
-                            className="absolute inset-0 z-10 opacity-0 cursor-pointer"
-                            aria-label="View event details"
-                        />
-
-                        {/* Left: Image Column (50%) */}
-                        <div className="w-1/2 shrink-0 relative overflow-hidden bg-[#c2b09a]">
-                            {nextEvent.image ? (
-                                <img src={nextEvent.image} alt={nextEvent.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out" />
-                            ) : (
-                                <div className="w-full h-full flex flex-col items-center justify-center text-white/40">
-                                    <CalendarDays size={40} />
+                <motion.div 
+                    className="flex items-center w-max"
+                    animate={{ x: ["0%", "-50%"] }}
+                    transition={{
+                        x: {
+                          repeat: Infinity,
+                          repeatType: "loop",
+                          duration: scrollDuration,
+                          ease: "linear",
+                        },
+                    }}
+                >
+                    <div className="flex items-center gap-4">
+                        {tickerEvents.map((event, idx) => (
+                            <div 
+                                key={`${event.id}-${idx}`}
+                                onClick={() => setSelectedEvent(event)}
+                                className="flex items-center gap-6 px-8 border-r border-white/10 cursor-pointer hover:bg-white/10 transition-colors group shrink-0"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-200">
+                                        {event.category || t.new}
+                                    </span>
                                 </div>
-                            )}
-                            
-                            {/* Stylish Date Badge Overlay */}
-                            <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px] flex flex-col items-center justify-center text-white">
-                                <div className="border border-white/40 rounded-2xl px-4 py-2 flex flex-col items-center bg-black/10">
-                                    <span className="text-3xl font-black leading-none drop-shadow-lg">{day}</span>
-                                    <span className="text-[11px] uppercase font-black tracking-[0.2em] mt-1 drop-shadow-md text-amber-400">{month}</span>
-                                    <span className="text-[9px] font-bold opacity-80 mt-0.5 tracking-widest">{year}</span>
+                                <span className="text-sm font-serif font-bold tracking-wide group-hover:text-amber-200 transition-colors">
+                                    {event.title}
+                                </span>
+                                <div className="flex items-center gap-1.5 text-[11px] text-white/70">
+                                    <CalendarDays size={12} className="text-amber-400" />
+                                    <span>{formatDate(event.eventDate, language)}</span>
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* Right: Info Column (50%) */}
-                        <div className="w-1/2 p-5 flex flex-col justify-center min-w-0 bg-gradient-to-br from-white to-[#FAF5EE] border-l border-amber-50">
-                            <h3 className="text-[16px] font-serif font-extrabold text-[#5d1712] leading-tight line-clamp-2 mb-3 transition-colors group-hover:text-[#8a241b]">
-                                {nextEvent.title}
-                            </h3>
-                            
-                            {nextEvent.location && (
-                                <div className="flex items-center gap-1.5 text-[11px] text-stone-500 mb-4">
-                                    <MapPin size={12} className="text-amber-600 shrink-0" />
-                                    <span className="truncate italic font-medium">{nextEvent.location}</span>
-                                </div>
-                            )}
-
-                            <div className="flex items-center gap-2 text-[11px] font-black text-amber-600 uppercase tracking-[0.15em] group/btn">
-                                <span>{t.see}</span>
-                                <div className="w-6 h-6 rounded-full bg-amber-50 flex items-center justify-center group-hover/btn:bg-amber-100 transition-all group-hover/btn:shadow-sm">
-                                    <ArrowRight size={12} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                                {event.location && (
+                                    <div className="flex items-center gap-1.5 text-[11px] text-white/70">
+                                        <MapPin size={12} className="text-amber-400" />
+                                        <span className="italic">{event.location}</span>
+                                    </div>
+                                )}
+                                <div className="flex items-center gap-1 text-[10px] font-bold text-amber-400 uppercase tracking-widest ml-2 opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
+                                    <span>{t.see}</span>
+                                    <ArrowRight size={10} />
                                 </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
-                </div>
+                </motion.div>
             </motion.div>
             <EventDetailModal event={selectedEvent} onClose={() => setSelectedEvent(null)} t={t} />
         </>
