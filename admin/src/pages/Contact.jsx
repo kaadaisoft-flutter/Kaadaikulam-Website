@@ -65,7 +65,6 @@ const Contact = () => {
                 <div>
                     <div className="font-medium text-gray-900">{item.name}</div>
                     <div className="text-xs text-gray-500">{item.email}</div>
-                    <div className="text-xs text-gray-400">{item.phone}</div>
                 </div>
             )
         },
@@ -126,7 +125,6 @@ const Contact = () => {
                                 <div>
                                     <h4 className="font-bold text-gray-900">{SUBJECT_LABELS[selectedMsg.subject] || selectedMsg.subject}</h4>
                                     <p className="text-sm text-gray-600">From: {selectedMsg.name} ({selectedMsg.email})</p>
-                                    <p className="text-xs text-gray-500">Phone: {selectedMsg.phone}</p>
                                 </div>
                                 <span className="text-xs text-gray-500">{formatDateTime(selectedMsg.createdAt || selectedMsg.date)}</span>
                             </div>
