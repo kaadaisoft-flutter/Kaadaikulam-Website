@@ -313,33 +313,33 @@ const Events = () => {
             </section>
 
             {/* Tab Switcher */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-                <div className="flex items-center justify-center gap-4 bg-stone-200/50 p-1.5 rounded-2xl w-fit mx-auto shadow-sm border border-stone-200">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 hidden sm:block">
+                <div className="flex items-center justify-center gap-1 sm:gap-4 bg-stone-200/50 p-1 sm:p-1.5 rounded-2xl w-full max-w-[500px] sm:w-fit mx-auto shadow-sm border border-stone-200">
                     <button
                         onClick={() => setActiveTab('upcoming')}
-                        className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                        className={`flex-1 sm:flex-none px-3 sm:px-8 py-2.5 sm:py-3 rounded-xl text-[10px] xs:text-xs sm:text-sm font-bold transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 ${
                             activeTab === 'upcoming' 
-                            ? "bg-[#5d1712] text-white shadow-lg scale-105" 
+                            ? "bg-[#5d1712] text-white shadow-lg sm:scale-105" 
                             : "text-stone-500 hover:text-stone-800 hover:bg-stone-200"
                         }`}
                     >
-                        <CalendarDays size={18} />
-                        {t_events.upcomingEvents}
-                        <span className={`ml-1 text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'upcoming' ? 'bg-white/20' : 'bg-stone-300 text-stone-600'}`}>
+                        <CalendarDays size={16} className="sm:w-[18px] sm:h-[18px]" />
+                        <span className="whitespace-nowrap">{t_events.upcomingEvents}</span>
+                        <span className={`ml-0.5 sm:ml-1 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'upcoming' ? 'bg-white/20' : 'bg-stone-300 text-stone-600'}`}>
                             {upcomingEvents.length}
                         </span>
                     </button>
                     <button
                         onClick={() => setActiveTab('completed')}
-                        className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                        className={`flex-1 sm:flex-none px-3 sm:px-8 py-2.5 sm:py-3 rounded-xl text-[10px] xs:text-xs sm:text-sm font-bold transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 ${
                             activeTab === 'completed' 
-                            ? "bg-[#5d1712] text-white shadow-lg scale-105" 
+                            ? "bg-[#5d1712] text-white shadow-lg sm:scale-105" 
                             : "text-stone-500 hover:text-stone-800 hover:bg-stone-200"
                         }`}
                     >
-                        <Tag size={18} />
-                        {t_events.completedEvents}
-                        <span className={`ml-1 text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'completed' ? 'bg-white/20' : 'bg-stone-300 text-stone-600'}`}>
+                        <Tag size={16} className="sm:w-[18px] sm:h-[18px]" />
+                        <span className="whitespace-nowrap">{t_events.completedEvents}</span>
+                        <span className={`ml-0.5 sm:ml-1 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'completed' ? 'bg-white/20' : 'bg-stone-300 text-stone-600'}`}>
                             {completedEvents.length}
                         </span>
                     </button>
@@ -347,13 +347,15 @@ const Events = () => {
             </div>
 
             {/* Event List */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-[600px]">
                 {displayedEvents.length === 0 ? (
                     <motion.div
                         key={activeTab}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-center py-32 bg-white rounded-3xl border border-stone-100 shadow-sm"
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-center py-32 bg-white rounded-3xl border border-stone-100 shadow-sm w-full"
                     >
                         <CalendarDays className="w-16 h-16 text-stone-200 mx-auto mb-5" />
                         <h3 className="text-xl font-bold text-stone-800">
@@ -362,7 +364,7 @@ const Events = () => {
                     </motion.div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <AnimatePresence mode="popLayout">
+                        <AnimatePresence mode="wait">
                             {displayedEvents.map((event, i) => (
                                 <EventCard 
                                     key={event.id} 
