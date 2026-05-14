@@ -7,6 +7,7 @@ import {
     Palette, Type, ChevronDown 
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 const COLOR_OPTIONS = [
     { name: 'Default', color: '#1c1917' },
@@ -282,6 +283,30 @@ const SlashMenu = ({ position, onSelect, onClose }) => {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [onClose]);
 
+    const [menuStyle, setMenuStyle] = useState({});
+
+    useEffect(() => {
+        if (position && menuRef.current) {
+            const menuHeight = menuRef.current.offsetHeight || 380;
+            const viewportHeight = window.innerHeight;
+            const spaceBelow = viewportHeight - position.top;
+            
+            if (spaceBelow < menuHeight + 50) {
+                // Not enough space below, open upwards
+                setMenuStyle({
+                    bottom: viewportHeight - position.top + 10,
+                    left: position.left
+                });
+            } else {
+                // Open downwards
+                setMenuStyle({
+                    top: position.top + 24,
+                    left: position.left
+                });
+            }
+        }
+    }, [position]);
+
     if (!position) return null;
 
     const items = [
@@ -298,14 +323,11 @@ const SlashMenu = ({ position, onSelect, onClose }) => {
     return (
         <motion.div
             ref={menuRef}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95 }}
             className="fixed bg-white shadow-2xl border border-gray-200 rounded-2xl overflow-hidden z-[100] w-72"
-            style={{
-                top: position.top + 24,
-                left: position.left
-            }}
+            style={menuStyle}
         >
             <div className="text-[10px] font-bold text-gray-400 bg-gray-50/50 px-4 py-2 border-b border-gray-100 uppercase tracking-widest">
                 Elements
@@ -632,11 +654,13 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
         if (file && onImageUpload) {
+            const id = `upload-${Date.now()}`;
             try {
-                const id = `upload-${Date.now()}`;
+                console.log("Starting image upload for file:", file.name);
                 document.execCommand('insertHTML', false, `<p id="${id}" class="text-gray-400 italic animate-pulse py-4 flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Uploading image...</p>`);
                 
                 const url = await onImageUpload(file);
+                console.log("Upload successful, URL:", url);
                 
                 const placeholder = editorRef.current?.querySelector(`#${id}`);
                 if (url && placeholder) {
@@ -650,19 +674,25 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
                     img.style.marginRight = "auto";
                     placeholder.replaceWith(img);
                     
-                    // Add a paragraph after the image for easy typing
                     const p = document.createElement('p');
                     p.innerHTML = '<br>';
                     img.after(p);
                 } else if (placeholder) {
+                    console.warn("Placeholder not found or URL empty");
                     placeholder.remove();
                 }
                 handleInput();
             } catch (err) {
-                console.error("Upload failed", err);
-                alert("Upload failed");
+                console.error("Upload failed error:", err);
+                const placeholder = editorRef.current?.querySelector(`#${id}`);
+                if (placeholder) {
+                    placeholder.innerHTML = `<span class="text-red-500 font-bold">Failed to upload image. Please try again.</span>`;
+                }
+                toast.error("Image upload failed");
             }
         }
+        // Reset file input so same file can be uploaded again
+        e.target.value = '';
     };
 
     return (

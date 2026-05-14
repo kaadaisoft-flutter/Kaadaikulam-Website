@@ -126,10 +126,6 @@ const Comments = () => {
         }
     ];
 
-    const filterOptions = [
-        { key: 'status', label: 'Status', options: COMMENT_STATUS_OPTIONS },
-    ];
-
     return (
         <div className="space-y-6">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -145,9 +141,7 @@ const Comments = () => {
                     columns={columns}
                     loading={loading}
                     searchPlaceholder="Search comments, author, email, or article..."
-                    filterOptions={filterOptions}
                     showExport={false}
-                    initialFilters={{ status: 'pending' }}
                 />
             </div>
 

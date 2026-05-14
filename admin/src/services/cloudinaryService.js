@@ -4,11 +4,11 @@
  * Delete uses env credentials (temporary - move to backend later).
  */
 
-const CLOUD_NAME = 'dy8uty5uo';
-const UPLOAD_PRESET_GALLERY = 'ml_default';
-const UPLOAD_PRESET_QR = 'ml_default';
-const UPLOAD_PRESET_BLOG = 'ml_default';
-const UPLOAD_PRESET_EVENTS = 'ml_default';
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dx7hpo0o8';
+const UPLOAD_PRESET_GALLERY = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'ml_default';
+const UPLOAD_PRESET_QR = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'ml_default';
+const UPLOAD_PRESET_BLOG = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'ml_default';
+const UPLOAD_PRESET_EVENTS = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'ml_default';
 const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
 
 const API_KEY = import.meta.env.VITE_CLOUDINARY_API_KEY;

@@ -77,6 +77,8 @@ const Blog = () => {
                                         <img 
                                             src={blog.image} 
                                             alt={blog.title}
+                                            crossOrigin="anonymous"
+                                            referrerPolicy="no-referrer"
                                             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                                         />
                                         <div className="absolute top-4 left-4">

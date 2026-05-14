@@ -121,6 +121,8 @@ const BlogDetail = () => {
                 <img 
                     src={blog.image} 
                     alt={blog.title}
+                    crossOrigin="anonymous"
+                    referrerPolicy="no-referrer"
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute top-10 left-10">
