@@ -204,11 +204,6 @@ const Donations = () => {
                 columns={columns} 
                 exportFileName="Donations_Export" 
                 searchPlaceholder="Search devotees, transaction ID..." 
-                filterOptions={[
-                    { key: 'status', label: 'Status', options: DONATION_STATUS_OPTIONS },
-                    { key: 'purpose', label: 'Purpose', options: DONATION_PURPOSE_OPTIONS },
-                ]} 
-                initialFilters={{ status: 'pending' }} 
             />
         </div>
     );

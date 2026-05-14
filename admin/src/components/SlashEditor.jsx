@@ -439,7 +439,38 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
     const [toolbarState, setToolbarState] = useState({ visible: false, position: null });
     const [linkModal, setLinkModal] = useState({ isOpen: false, initialData: null });
     const [imageModal, setImageModal] = useState({ isOpen: false, initialData: null, target: null });
+    const [imageHover, setImageHover] = useState({ visible: false, target: null, position: null });
     const fileInputRef = useRef(null);
+
+    // Handle mouse move to detect image hover
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            if (e.target.tagName === 'IMG' && editorRef.current?.contains(e.target)) {
+                const rect = e.target.getBoundingClientRect();
+                setImageHover({
+                    visible: true,
+                    target: e.target,
+                    position: { 
+                        top: rect.top + window.scrollY + 10, 
+                        left: rect.left + rect.width - 40 
+                    }
+                });
+            } else if (!e.target.closest('.image-delete-btn')) {
+                setImageHover(prev => ({ ...prev, visible: false }));
+            }
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
+    const removeImage = () => {
+        if (imageHover.target) {
+            imageHover.target.remove();
+            setImageHover({ visible: false, target: null, position: null });
+            handleInput();
+        }
+    };
 
     // Initial content load and reset logic
     useEffect(() => {
@@ -759,6 +790,25 @@ const SlashEditor = ({ value, onChange, onImageUpload, placeholder = "Type '/' f
                 onClose={() => setImageModal({ isOpen: false, initialData: null, target: null })}
                 onSave={handleImageSave}
             />
+
+            {/* Image Delete Button on Hover */}
+            <AnimatePresence>
+                {imageHover.visible && (
+                    <motion.button
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="fixed z-[150] w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-red-600 transition-colors image-delete-btn"
+                        style={{
+                            top: imageHover.position.top - window.scrollY,
+                            left: imageHover.position.left
+                        }}
+                        onClick={removeImage}
+                    >
+                        <X size={16} />
+                    </motion.button>
+                )}
+            </AnimatePresence>
 
             <input
                 type="file"
