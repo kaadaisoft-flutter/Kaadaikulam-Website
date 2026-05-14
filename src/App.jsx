@@ -12,6 +12,8 @@ import Donation from "./pages/Donation";
 import Kulaguru from "./pages/Kulaguru";
 import ClanGrandeurPage from "./pages/ClanGrandeurPage";
 import Events from "./pages/Events";
+import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 import EventWidget from "./components/EventWidget";
 import { LanguageProvider } from "./context/LanguageContext";
 import SmoothScroll from "./components/SmoothScroll";
@@ -52,6 +54,8 @@ function App() {
                       <Route path="/kulaguru" element={<Kulaguru />} />
                       <Route path="/clan-grandeur" element={<ClanGrandeurPage />} />
                       <Route path="/events" element={<Events />} />
+                      <Route path="/blog" element={<Blog />} />
+                      <Route path="/blog/:slug" element={<BlogDetail />} />
                     </Routes>
                   </main>
                   <Footer />

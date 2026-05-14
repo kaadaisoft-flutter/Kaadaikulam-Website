@@ -9,6 +9,7 @@ export const translations = {
       events: "Events",
       donation: "Donation",
       contact: "Contact",
+      blog: "Blog",
       login: "Member Login / Signup"
     },
     hero: {
@@ -576,6 +577,7 @@ export const translations = {
       events: "நிகழ்வுகள்",
       donation: "நன்கொடை",
       contact: "தொடர்பு",
+      blog: "வலைப்பதிவு",
       login: "உறுப்பினர் உள்நுழைவு / பதிவு"
     },
     hero: {

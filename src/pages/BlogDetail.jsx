@@ -67,7 +67,7 @@ const BlogDetail = () => {
         
         setSubmitting(true);
         try {
-            await addComment(blog.id, {
+            await addComment(blog.id, blog.slug, {
                 userName: commentForm.name,
                 content: commentForm.text
             });
@@ -265,16 +265,16 @@ const BlogDetail = () => {
                                     <div className="flex items-center justify-between mb-4">
                                         <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
-                                                {comment.userName.charAt(0)}
+                                                {comment.name?.charAt(0) || 'U'}
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-stone-900">{comment.userName}</h4>
+                                                <h4 className="font-bold text-stone-900">{comment.name}</h4>
                                                 <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">{formatDate(comment.createdAt)}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <p className="text-stone-600 leading-relaxed text-lg italic pl-16">
-                                        "{comment.content}"
+                                        "{comment.comment}"
                                     </p>
                                 </motion.div>
                             ))}

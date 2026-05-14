@@ -104,13 +104,16 @@ export const deleteBlog = async (id) => {
 /**
  * Add a comment to a blog post
  */
-export const addComment = async (blogId, data) => {
+export const addComment = async (blogId, postSlug, data) => {
     try {
-        const docRef = await addDoc(collection(db, "comments"), {
+        const docRef = await addDoc(collection(db, "blogComments"), {
             blogId,
-            ...data,
+            postSlug,
+            name: data.userName,
+            comment: data.content,
+            email: data.email || "",
             createdAt: serverTimestamp(),
-            status: "approved" // Auto-approve for now
+            status: "pending"
         });
         return { id: docRef.id, ...data };
     } catch (error) {
@@ -123,17 +126,28 @@ export const addComment = async (blogId, data) => {
  * Subscribe to comments for a blog post
  */
 export const subscribeComments = (blogId, callback) => {
+    if (!blogId) return () => {};
+
     const q = query(
-        collection(db, "comments"), 
-        where("blogId", "==", blogId),
-        orderBy("createdAt", "desc")
+        collection(db, "blogComments"), 
+        where("blogId", "==", blogId)
     );
+
     return onSnapshot(q, (snapshot) => {
-        const comments = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-        }));
-        callback(comments);
+        const comments = snapshot.docs
+            .map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            .filter(c => c.status === 'approved'); // Filter in memory
+        
+        const sortedComments = comments.sort((a, b) => {
+            const dateA = a.createdAt?.toDate?.() || new Date(a.createdAt || 0);
+            const dateB = b.createdAt?.toDate?.() || new Date(b.createdAt || 0);
+            return dateB - dateA;
+        });
+
+        callback(sortedComments);
     }, (error) => {
         console.error("Error subscribing to comments: ", error);
     });

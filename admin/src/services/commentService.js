@@ -17,15 +17,22 @@ const COMMENTS_COLLECTION = 'blogComments';
  */
 export const subscribeComments = (callback) => {
     const q = query(
-        collection(db, COMMENTS_COLLECTION),
-        orderBy('createdAt', 'desc')
+        collection(db, COMMENTS_COLLECTION)
     );
     return onSnapshot(q, (snapshot) => {
         const items = snapshot.docs.map((docSnap) => ({
             id: docSnap.id,
             ...docSnap.data(),
         }));
-        callback(items);
+        
+        // Sort in memory to avoid composite index requirement with status filter
+        const sortedItems = items.sort((a, b) => {
+            const dateA = a.createdAt?.toDate?.() || new Date(a.createdAt || 0);
+            const dateB = b.createdAt?.toDate?.() || new Date(b.createdAt || 0);
+            return dateB - dateA;
+        });
+
+        callback(sortedItems);
     });
 };
 
