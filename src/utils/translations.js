@@ -100,7 +100,8 @@ export const translations = {
       },
       services: {
         title: "Online Services",
-        donation: "Donation"
+        donation: "Donation",
+        benefits: "ID Card Benefits"
       },
       connect: {
         title: "Connect",
@@ -565,6 +566,85 @@ export const translations = {
         title: "Conclusion",
         text: "True to the literary praise \"The Bountiful Poondurai\", the Poondurai Kaadai clan has brought tremendous pride to the Kongu soil through their extraordinary valor, their unwavering balanced social justice, and their deep spirituality. Their history continues to proudly proclaim the magnificent civilization and rich culture of the Kongu region even today."
       }
+    },
+    idCardBenefits: {
+      hero: {
+        label: "EXCLUSIVE PRIVILEGES",
+        title: "Advantages of the ID Card Initiative",
+        desc: "The Poondurai Kaadai ID Card is more than an identity; it is a gateway to collective security, community prosperity, and cultural preservation. Explore the twelve core benefits designed to support and elevate our members.",
+        applyBtn: "Apply for ID Card"
+      },
+      card: {
+        front: {
+          orgName: "Poondurai Kaadaikula",
+          orgSub: "Makkal Narpani Mandram",
+          nameLabel: "Name",
+          phoneLabel: "Phone",
+          bloodLabel: "Blood Group",
+          idLabel: "Member ID",
+          emergencyLabel: "Emergency Contact",
+          maskedName: "XXXXXXXX",
+          maskedPhone: "XXXXXXXX",
+          bloodValue: "XXXXXXXX",
+          idValue: "ERD000001"
+        },
+        back: {
+          scanText: "Scan to view member details",
+          address: "Sri Krishna Tower, Door No.75/2, Muthukumarasamy Temple Street, Erode Road, Avalpoondurai, Erode District - 638115",
+          website: "kaadaikulam.org"
+        },
+        flipHint: "Hover or click to flip the card"
+      },
+      advantages: [
+        {
+          title: "Emergency Response Support",
+          desc: "Provides immediate identification and quick support for safety and crisis management."
+        },
+        {
+          title: "Unified ID Card System",
+          desc: "Streamlines identification and connectivity across the entire organization or community."
+        },
+        {
+          title: "QR Code with Family Details",
+          desc: "Advanced digital integration for quick and secure access to essential kinship information."
+        },
+        {
+          title: "Business Offers & Discounts",
+          desc: "Acts as a premium membership pass for exclusive economic benefits and discounts."
+        },
+        {
+          title: "Durable PVC ID Card",
+          desc: "A durable, high-quality physical card format suitable for long-term daily use."
+        },
+        {
+          title: "Temple Pooja Initiatives",
+          desc: "Facilitates seamless participation, priority bookings, and recognition in traditional community activities."
+        },
+        {
+          title: "Business Promotion Tools",
+          desc: "Serves as an influential tool for networking, professional visibility, and business growth."
+        },
+        {
+          title: "Agricultural Resources & Support",
+          desc: "Connects agrarian members directly to sector-specific modern resources, guidance, and aid."
+        },
+        {
+          title: "Education Support & Career Guidance",
+          desc: "Identifies students and young professionals for targeted academic scholarships and mentorship."
+        },
+        {
+          title: "Employment Assistance & Support",
+          desc: "Validates member status for community-driven job placements, references, and assistance."
+        },
+        {
+          title: "Group Insurance Benefits",
+          desc: "Links the cardholder to collective medical security, health benefits, and life cover."
+        },
+        {
+          title: "Water Welfare & Ecological Renewal",
+          desc: "Directs contributions and volunteer efforts to community-driven pond renovations and water body revival."
+        }
+      ]
     }
   },
   ta: {
@@ -668,7 +748,8 @@ export const translations = {
       },
       services: {
         title: "மின் சேவைகள்",
-        donation: "நன்கொடை"
+        donation: "நன்கொடை",
+        benefits: "அடையாள அட்டை நன்மைகள்"
       },
       connect: {
         title: "இணைக்கவும்",
@@ -1133,6 +1214,85 @@ export const translations = {
         title: "முடிவுரை",
         text: "\"வண்மைசேர் பூந்துறை\" என்ற இலக்கியப் புகழுக்கு ஏற்ப, பூந்துறை காடை குலத்தினர் தங்கள் அசாத்திய வீரம், தளராத சமூக நீதி மற்றும் ஆழமான ஆன்மீகத்தின் மூலம் கொங்கு மண்ணிற்கு மாபெரும் பெருமை சேர்த்துள்ளனர். அவர்களின் வரலாறு இன்றும் கொங்கு மண்டலத்தின் பிரம்மாண்டமான நாகரிகத்தையும் செழுமையான கலாச்சாரத்தையும் பெருமையுடன் பறைசாற்றுகிறது."
       }
+    },
+    idCardBenefits: {
+      hero: {
+        label: "பிரத்யேக சலுகைகள்",
+        title: "அடையாள அட்டை திட்டத்தின் நன்மைகள்",
+        desc: "பூந்துறை காடை அடையாள அட்டை என்பது வெறும் அடையாளம் மட்டுமல்ல; இது கூட்டு பாதுகாப்பு, சமூக செழிப்பு மற்றும் பண்பாட்டு பாதுகாப்பிற்கான ஒரு நுழைவாயிலாகும். நமது உறுப்பினர்களை ஆதரிப்பதற்காக வடிவமைக்கப்பட்ட பன்னிரண்டு முக்கிய நன்மைகளை இங்கே ஆராயுங்கள்.",
+        applyBtn: "அடையாள அட்டைக்கு விண்ணப்பிக்கவும்"
+      },
+      card: {
+        front: {
+          orgName: "பூந்துறை காடைகுல",
+          orgSub: "மக்கள் நற்பணி மன்றம்",
+          nameLabel: "பெயர்",
+          phoneLabel: "தொலைபேசி",
+          bloodLabel: "இரத்த பிரிவு",
+          idLabel: "உறுப்பினர் எண்",
+          emergencyLabel: "அவசர தொடர்பு",
+          maskedName: "XXXXXXXX",
+          maskedPhone: "XXXXXXXX",
+          bloodValue: "XXXXXXXX",
+          idValue: "ERD000001"
+        },
+        back: {
+          scanText: "உறுப்பினர் விவரங்களைக் காண ஸ்கேன் செய்யவும்",
+          address: "ஸ்ரீ கிருஷ்ணா டவர், கதவு எண்.75/2, முத்துகுமாரசாமி கோவில் வீதி, அவல்பூந்துறை, ஈரோடு மாவட்டம் - 638115",
+          website: "kaadaikulam.org"
+        },
+        flipHint: "அட்டையைத் திருப்ப அதன் மீது நகர்த்தவும் அல்லது அழுத்தவும்"
+      },
+      advantages: [
+        {
+          title: "அவசர கால உதவி ஆதரவு",
+          desc: "பாதுகாப்பு மற்றும் பேரிடர் மேலாண்மைக்கு உடனடி அடையாளத்தையும் விரைவான ஆதரவையும் வழங்குகிறது."
+        },
+        {
+          title: "ஒருங்கிணைந்த அடையாள அட்டை",
+          desc: "ஒட்டுமொத்த சமூகம் மற்றும் அமைப்பிற்குள் தடையற்ற அடையாளப்படுத்தலையும் இணைப்பையும் எளிதாக்குகிறது."
+        },
+        {
+          title: "குடும்ப விவரங்களுடன் QR குறியீடு",
+          desc: "அத்தியாவசிய குடும்ப விவரங்களை விரைவாகவும் பாதுகாப்பாகவும் அணுக உதவும் மேம்பட்ட டிஜிட்டல் ஒருங்கிணைப்பு."
+        },
+        {
+          title: "பிரத்யேக வணிக சலுகைகள் & தள்ளுபடிகள்",
+          desc: "பிரத்யேக பொருளாதார நன்மைகள் மற்றும் தள்ளுபடிகளைப் பெற ஒரு பிரீமியம் உறுப்பினர் அட்டையாகச் செயல்படுகிறது."
+        },
+        {
+          title: "நீடித்த PVC அடையாள அட்டை",
+          desc: "நீண்ட கால தினசரி பயன்பாட்டிற்கு ஏற்ற நீடித்த, உயர்தர இயற்பியல் அட்டை வடிவம்."
+        },
+        {
+          title: "கோயில் பூஜை வழிபாட்டு முன்னுரிமை",
+          desc: "பாரம்பரிய சமூக மற்றும் ஆன்மீக வழிபாடுகளில் தடையற்ற பங்கேற்பு மற்றும் முன்னுரிமையை வழங்குகிறது."
+        },
+        {
+          title: "வணிக மேம்பாட்டு வாய்ப்புகள்",
+          desc: "சமூக உறவுகள், தொழில்முறை அங்கீகாரம் மற்றும் வணிக வளர்ச்சிக்கு ஒரு சிறந்த கருவியாக அமைகிறது."
+        },
+        {
+          title: "விவசாய ஆதரவு மற்றும் வழிகாட்டுதல்",
+          desc: "விவசாயப் பெருமக்களை நேரடியாக நவீன விவசாய வளங்கள், வழிகாட்டுதல் மற்றும் உதவிகளுடன் இணைக்கிறது."
+        },
+        {
+          title: "கல்வி உதவி & தொழில் வழிகாட்டுதல்",
+          desc: "மாணவச் செல்வங்கள் மற்றும் இளம் பட்டதாரிகளை அடையாளம் கண்டு பிரத்யேக கல்வி உதவித்தொகை மற்றும் வழிகாட்டுதலை வழங்குகிறது."
+        },
+        {
+          title: "வேலைவாய்ப்பு ஆதரவு மற்றும் வழிகாட்டல்",
+          desc: "சமூக அளவிலான வேலைவாய்ப்பு, பரிந்துரைகள் மற்றும் உதவிக்கு உறுப்பினரின் தகுதியை உறுதிப்படுத்துகிறது."
+        },
+        {
+          title: "குழு காப்பீட்டுத் திட்டம்",
+          desc: "அட்டைதாரர்களை கூட்டு மருத்துவப் பாதுகாப்பு, சுகாதார நன்மைகள் மற்றும் ஆயுள் காப்பீட்டுடன் இணைக்கிறது."
+        },
+        {
+          title: "நீர்வழி தடம் & குளம் சீரமைப்பு",
+          desc: "சமூக அளவிலான குளம் சீரமைப்பு மற்றும் நீர்நிலை மீட்புப் பணிகளுக்கு பங்களிப்புகளையும் தன்னார்வ முயற்சிகளையும் வழிநடத்துகிறது."
+        }
+      ]
     }
   }
 };

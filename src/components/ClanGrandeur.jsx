@@ -5,6 +5,8 @@ import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import logo from "../assets/logo.webp";
 
+const MotionLink = motion(Link);
+
 const ClanGrandeur = () => {
   const { language } = useLanguage();
   const t = translations[language].clanGrandeur;
@@ -93,6 +95,31 @@ const ClanGrandeur = () => {
                 </span>
                 {language === 'ta' ? 'உறுப்பினர்' : 'MEMBER'}
               </motion.button>
+              <MotionLink 
+                to="/id-card-benefits"
+                className="inline-flex items-center gap-2 border text-[#c49a3c] px-3 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase hover:bg-[#c49a3c] hover:text-stone-900 transition-all duration-300 shadow-lg"
+                animate={{
+                  boxShadow: [
+                    "0 0 4px rgba(196, 154, 60, 0.2)",
+                    "0 0 16px rgba(196, 154, 60, 0.75)",
+                    "0 0 4px rgba(196, 154, 60, 0.2)"
+                  ],
+                  borderColor: [
+                    "rgba(196, 154, 60, 0.4)",
+                    "rgba(196, 154, 60, 1)",
+                    "rgba(196, 154, 60, 0.4)"
+                  ]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {language === 'ta' ? 'அட்டை நன்மைகள்' : 'CARD BENEFITS'}
+              </MotionLink>
             </motion.h2>
             
             <motion.p 
@@ -249,6 +276,14 @@ const ClanGrandeur = () => {
                 >
                   {m.becomeButton}
                 </a>
+
+                <Link 
+                  to="/id-card-benefits"
+                  onClick={() => setIsModalOpen(false)}
+                  className="mt-4 block text-[#8b1d1d] hover:text-[#c49a3c] font-bold text-xs uppercase tracking-widest transition-colors duration-300"
+                >
+                  {language === 'ta' ? 'அடையாள அட்டையின் 12 நன்மைகள் →' : '12 Benefits of ID Card →'}
+                </Link>
                 
                 <button 
                   onClick={() => setIsModalOpen(false)}

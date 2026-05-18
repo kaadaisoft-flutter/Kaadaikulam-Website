@@ -15,6 +15,7 @@ import Events from "./pages/Events";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import EventWidget from "./components/EventWidget";
+import IDCardBenefits from "./pages/IDCardBenefits";
 import { LanguageProvider } from "./context/LanguageContext";
 import SmoothScroll from "./components/SmoothScroll";
 import AnimatedBackground from "./components/animations/AnimatedBackground";
@@ -56,6 +57,7 @@ function App() {
                       <Route path="/events" element={<Events />} />
                       <Route path="/blog" element={<Blog />} />
                       <Route path="/blog/:slug" element={<BlogDetail />} />
+                      <Route path="/id-card-benefits" element={<IDCardBenefits />} />
                     </Routes>
                   </main>
                   <Footer />
