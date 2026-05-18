@@ -244,8 +244,8 @@ const ClanGrandeur = () => {
             </h3>
             <p className="text-stone-600 text-sm md:text-base leading-relaxed">
               {language === 'ta' 
-                ? 'அட்டை வடிவமைப்பு மற்றும் அதன் 12 நன்மைகளை அறிய கிளிக் செய்யவும்.'
-                : 'Click the card to explore its design and the 12 core member benefits.'}
+                ? 'அட்டை வடிவமைப்பு மற்றும் அதன் நன்மைகளை அறிய கிளிக் செய்யவும்.'
+                : 'Click the card to explore its design and member benefits.'}
             </p>
           </motion.div>
 

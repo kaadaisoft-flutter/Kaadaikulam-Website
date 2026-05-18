@@ -570,7 +570,7 @@ export const translations = {
     idCardBenefits: {
       hero: {
         label: "EXCLUSIVE PRIVILEGES",
-        title: "Advantages of the ID Card Initiative",
+        title: "Advantages of the ID Card",
         desc: "The Poondurai Kaadai ID Card is more than an identity; it is a gateway to collective security, community prosperity, and cultural preservation. Explore the twelve core benefits designed to support and elevate our members.",
         applyBtn: "Apply for ID Card"
       },
