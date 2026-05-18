@@ -5,6 +5,8 @@ import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import logo from "../assets/logo.webp";
 import { User, Phone, Droplet } from "lucide-react";
+import idCardFront from "../assets/images/ID_Card_Front.webp";
+import idCardBack from "../assets/images/ID_Card_Back.webp";
 
 const MotionLink = motion(Link);
 
@@ -238,7 +240,7 @@ const ClanGrandeur = () => {
             className="text-center max-w-xl mb-10"
           >
             <h3 className="font-serif text-2xl md:text-3xl text-[#5d1712] font-bold mb-3">
-              {language === 'ta' ? 'அதிகாரப்பூர்வ குல உறுப்பினர் அடையாள அட்டை' : 'Official Clan Membership ID Card'}
+              {language === 'ta' ? 'உறுப்பினர் அடையாள அட்டை' : 'Member ID Card'}
             </h3>
             <p className="text-stone-600 text-sm md:text-base leading-relaxed">
               {language === 'ta' 
@@ -248,102 +250,11 @@ const ClanGrandeur = () => {
           </motion.div>
 
           {/* Interactive Small ID Card Wrapper (Link to benefits page) */}
-          <Link to="/id-card-benefits" className="relative group block select-none cursor-pointer max-w-[360px] w-full h-[225px] mb-8" style={{ perspective: "1000px" }}>
-            <motion.div
-              whileHover={{ scale: 1.05, rotateY: 10, rotateX: 5 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full h-full relative rounded-2xl flex flex-col justify-between overflow-hidden shadow-xl border border-white/20 transition-all duration-300 bg-gradient-to-r from-[#4d050f] via-[#5a0914] to-[#1f0206] shadow-[#8b1d1d]/10 hover:shadow-[#c49a3c]/20 hover:border-[#c49a3c]/50"
-              style={{ transformStyle: "preserve-3d" }}
-            >
-              {/* Card shine effect on hover */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              
-              {/* Background glowing texture */}
-              <div className="absolute inset-0 bg-card-glow opacity-[0.04] pointer-events-none mix-blend-overlay"></div>
-              
-              {/* Card Header & Body */}
-              <div className="p-3.5 flex-1 flex flex-col justify-between relative z-10">
-                {/* Top Row: Logo & Organization Name */}
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full border border-[#c49a3c] p-0.5 bg-[#4d050f] shadow-md flex items-center justify-center shrink-0">
-                    <img src={logo} alt="Kaadaikula Emblem" className="w-[90%] h-[90%] object-contain" />
-                  </div>
-                  <div className="flex-1 flex flex-col text-center pr-2">
-                    <h4 className="text-[#ffdf8c] text-[13px] font-bold font-serif leading-none tracking-normal drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-                      {language === 'ta' ? 'பூந்துறை காடைகுல' : 'Poondurai Kaadaikula'}
-                    </h4>
-                    <div className="flex items-center justify-center w-full my-0.5 opacity-60">
-                      <div className="h-[0.5px] bg-[#c49a3c] flex-1"></div>
-                      <div className="w-0.5 h-0.5 bg-[#c49a3c] rotate-45 mx-1"></div>
-                      <div className="h-[0.5px] bg-[#c49a3c] flex-1"></div>
-                    </div>
-                    <p className="text-white text-[8px] font-semibold tracking-wider font-serif opacity-90 drop-shadow-[0_1px_1.5px_rgba(0,0,0,0.5)] leading-none">
-                      {language === 'ta' ? 'மக்கள் நற்பணி மன்றம்' : 'Makkal Narpani Mandram'}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Middle Row: Photo Frame & Details */}
-                <div className="flex items-center gap-4 mt-2">
-                  {/* Photo Column */}
-                  <div className="flex flex-col items-center">
-                    <div className="w-16 h-20 rounded-lg border border-[#c49a3c]/70 p-0.5 bg-stone-950 overflow-hidden relative flex items-center justify-center shadow-inner">
-                      <div className="w-full h-full bg-[#3d2b27] flex items-center justify-center relative">
-                        <User className="w-10 h-10 text-stone-500/70" />
-                        {/* Glassmorphic secure mask */}
-                        <div className="absolute inset-0 bg-stone-900/60 backdrop-blur-[1px] flex flex-col items-center justify-center">
-                          <span className="text-[6px] text-[#ffdf8c] font-bold tracking-widest bg-stone-900/80 px-1 py-0.5 rounded border border-[#c49a3c]/20 leading-none">
-                            SECURE
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    {/* ID Number */}
-                    <div className="mt-1 bg-[#380208] border border-[#c49a3c]/30 rounded py-0.5 px-2">
-                      <span className="text-white font-mono text-[8px] font-bold tracking-wider leading-none">
-                        ERD000001
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Detail Columns */}
-                  <div className="flex-1 flex flex-col gap-1.5 text-left">
-                    <div className="flex items-center gap-2">
-                      <User className="w-3 h-3 text-[#c49a3c] shrink-0" />
-                      <div className="flex flex-col">
-                        <span className="text-[6px] text-white/50 uppercase tracking-widest leading-none mb-0.5">{language === 'ta' ? 'பெயர்' : 'Name'}</span>
-                        <span className="text-white text-xs font-bold leading-none">XXXXXXXX</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Phone className="w-3 h-3 text-[#c49a3c] shrink-0" />
-                      <div className="flex flex-col">
-                        <span className="text-[6px] text-white/50 uppercase tracking-widest leading-none mb-0.5">{language === 'ta' ? 'தொலைபேசி' : 'Phone'}</span>
-                        <span className="text-white text-xs font-bold leading-none">XXXXXXXX</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Droplet className="w-3 h-3 text-[#c49a3c] shrink-0" />
-                      <div className="flex flex-col">
-                        <span className="text-[6px] text-white/50 uppercase tracking-widest leading-none mb-0.5">{language === 'ta' ? 'இரத்த பிரிவு' : 'Blood Group'}</span>
-                        <span className="text-white text-xs font-bold leading-none">XXXXXXXX</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom Emergency Contact Strip */}
-              <div className="bg-[#01331a] border-t border-[#c49a3c]/60 py-1.5 px-4 flex items-center justify-center gap-1.5 relative z-10">
-                <Phone className="w-2.5 h-2.5 text-[#ffdf8c] fill-[#ffdf8c]" />
-                <p className="text-white text-[9px] font-bold tracking-wide leading-none">
-                  {language === 'ta' ? 'அவசர தொடர்பு' : 'Emergency Contact'} : 99526 93122 / 99524 93122
-                </p>
-              </div>
-
-              {/* Glowing decorative border and pulse ring */}
-              <div className="absolute inset-0 rounded-2xl border border-[#c49a3c]/20 pointer-events-none group-hover:border-[#c49a3c]/50 transition-all duration-300"></div>
-            </motion.div>
+          <Link 
+            to="/id-card-benefits" 
+            className="relative group block select-none cursor-pointer max-w-[360px] w-full h-[225px] mb-8 rounded-2xl overflow-hidden shadow-xl border border-white/20 hover:border-[#c49a3c]/50 transition-all duration-300 shadow-[#8b1d1d]/10 hover:shadow-[#c49a3c]/20"
+          >
+            <img src={idCardFront} alt="ID Card Front" className="w-full h-full object-cover" />
             
             {/* Interactive hint overlay (Slide down arrow and text) */}
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex flex-col items-center">

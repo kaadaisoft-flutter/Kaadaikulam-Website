@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import logo from "../assets/logo.webp";
+import idCardFront from "../assets/images/ID_Card_Front.webp";
+import idCardBack from "../assets/images/ID_Card_Back.webp";
 import {
   ShieldAlert,
   Fingerprint,
@@ -156,214 +158,18 @@ const IDCardBenefits = () => {
                 
                 {/* --- OFFICIAL FRONT OF CARD --- */}
                 <div 
-                  className="absolute inset-0 w-full h-full rounded-2xl flex flex-col justify-between overflow-hidden shadow-2xl border border-white/20 select-none bg-gradient-to-r from-[#4d050f] via-[#5a0914] to-[#1f0206]"
+                  className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/20 select-none bg-gradient-to-r from-[#4d050f] via-[#5a0914] to-[#1f0206]"
                   style={{ backfaceVisibility: "hidden" }}
                 >
-                  {/* Glowing background line textures */}
-                  <div className="absolute inset-0 bg-card-glow opacity-[0.04] pointer-events-none mix-blend-overlay"></div>
-                  
-                  {/* Card Content Area */}
-                  <div className="p-4 flex-1 flex flex-col justify-between">
-                    
-                    {/* Top Row: Emblem and Organization Header */}
-                    <div className="flex items-center gap-3">
-                      {/* Circular Emblem with Gold boundary */}
-                      <div className="w-14 h-14 rounded-full border-2 border-[#c49a3c] p-0.5 bg-[#4d050f] shadow-lg flex items-center justify-center shrink-0 relative">
-                        <img src={logo} alt="Kaadaikula Emblem" className="w-[90%] h-[90%] object-contain" />
-                        <div className="absolute inset-0.5 rounded-full border border-[#c49a3c]/30"></div>
-                      </div>
-                      
-                      {/* Header Text Block */}
-                      <div className="flex-1 flex flex-col items-center text-center">
-                        <h2 className="text-[#ffdf8c] text-xl font-bold font-serif tracking-normal leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-                          {t.card.front.orgName}
-                        </h2>
-                        
-                        {/* Elegant Decorative separator */}
-                        <div className="flex items-center justify-center w-full my-0.5">
-                          <div className="h-[0.5px] bg-gradient-to-r from-transparent via-[#c49a3c]/80 to-transparent flex-1"></div>
-                          <div className="w-1 h-1 bg-[#c49a3c] rotate-45 mx-1.5 shrink-0"></div>
-                          <div className="h-[0.5px] bg-gradient-to-r from-transparent via-[#c49a3c]/80 to-transparent flex-1"></div>
-                        </div>
-
-                        <p className="text-white text-xs font-semibold tracking-wider font-serif opacity-90 drop-shadow-[0_1.5px_2px_rgba(0,0,0,0.5)]">
-                          {t.card.front.orgSub}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Middle Row: Photo Frame & Profile Details */}
-                    <div className="flex items-center gap-5 mt-2.5">
-                      
-                      {/* Photo Column */}
-                      <div className="flex flex-col items-center">
-                        {/* Rounded Photo frame with bold Gold border */}
-                        <div className="w-24 h-28 rounded-xl border-2 border-[#c49a3c] p-0.5 bg-stone-950 overflow-hidden relative flex items-center justify-center shadow-lg group-hover:border-yellow-400 transition-colors">
-                          
-                          {/* Profile Photo - Mocking a blurred/masked photo exactly as requested */}
-                          <div className="w-full h-full bg-[#3d2b27] flex items-center justify-center relative">
-                            {/* Masked placeholder user avatar shape */}
-                            <svg className="w-16 h-16 text-stone-500/70" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                            </svg>
-                            
-                            {/* Glassmorphic Mask badge overlay */}
-                            <div className="absolute inset-0 bg-stone-900/60 backdrop-blur-[2.5px] flex flex-col items-center justify-center gap-1">
-                              <div className="w-6 h-6 rounded-full border border-[#c49a3c]/40 bg-stone-900/75 flex items-center justify-center text-[#c49a3c]">
-                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                                </svg>
-                              </div>
-                              <span className="text-[8px] text-[#ffdf8c] font-bold tracking-widest uppercase bg-stone-900/80 px-1 py-0.5 rounded border border-[#c49a3c]/20 leading-none">
-                                SECURE
-                              </span>
-                            </div>
-                          </div>
-
-                        </div>
-                        
-                        {/* Member ID Badge below photo */}
-                        <div className="mt-1.5 bg-[#380208] border border-[#c49a3c]/30 rounded-md py-0.5 px-3 shadow-inner">
-                          <span className="text-white font-mono text-[10px] font-bold tracking-wider leading-none">
-                            {t.card.front.idValue}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Detail Fields Column */}
-                      <div className="flex-1 flex flex-col gap-2">
-                        
-                        {/* Row 1: Name */}
-                        <div className="flex items-center gap-3">
-                          <div className="w-7 h-7 rounded-full border border-[#c49a3c] flex items-center justify-center text-[#c49a3c] bg-stone-900/40 shrink-0">
-                            <User className="w-3.5 h-3.5" />
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-[7.5px] text-white/50 uppercase tracking-widest leading-none mb-0.5">{t.card.front.nameLabel}</span>
-                            <span className="text-white text-sm font-bold tracking-wide drop-shadow-sm leading-tight">
-                              {t.card.front.maskedName}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Row 2: Phone */}
-                        <div className="flex items-center gap-3">
-                          <div className="w-7 h-7 rounded-full border border-[#c49a3c] flex items-center justify-center text-[#c49a3c] bg-stone-900/40 shrink-0">
-                            <Phone className="w-3.5 h-3.5" />
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-[7.5px] text-white/50 uppercase tracking-widest leading-none mb-0.5">{t.card.front.phoneLabel}</span>
-                            <span className="text-white text-sm font-bold tracking-wide drop-shadow-sm leading-tight">
-                              {t.card.front.maskedPhone}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Row 3: Blood Group */}
-                        <div className="flex items-center gap-3">
-                          <div className="w-7 h-7 rounded-full border border-[#c49a3c] flex items-center justify-center text-[#c49a3c] bg-stone-900/40 shrink-0">
-                            <Droplet className="w-3.5 h-3.5" />
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-[7.5px] text-white/50 uppercase tracking-widest leading-none mb-0.5">{t.card.front.bloodLabel}</span>
-                            <span className="text-white text-sm font-bold tracking-wide drop-shadow-sm leading-tight">
-                              {t.card.front.bloodValue}
-                            </span>
-                          </div>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  {/* Deep Green bottom emergency contact footer */}
-                  <div className="bg-[#01331a] border-t-2 border-[#c49a3c] py-2 px-4 flex items-center justify-center gap-2">
-                    <div className="w-5 h-5 rounded-full border border-[#ffdf8c]/50 flex items-center justify-center text-[#ffdf8c]">
-                      <Phone className="w-3 h-3 fill-[#ffdf8c]" />
-                    </div>
-                    <p className="text-white text-[11px] font-bold tracking-wide">
-                      {t.card.front.emergencyLabel} : 99526 93122 / 99524 93122
-                    </p>
-                  </div>
-                  
-                  {/* Gold outer border ring */}
-                  <div className="absolute inset-0 rounded-2xl border border-[#c49a3c]/20 pointer-events-none"></div>
+                  <img src={idCardFront} alt="ID Card Front" className="w-full h-full object-cover" />
                 </div>
 
                 {/* --- OFFICIAL BACK OF CARD --- */}
                 <div 
-                  className="absolute inset-0 w-full h-full rounded-2xl flex flex-col justify-between overflow-hidden shadow-2xl border border-white/20 select-none bg-gradient-to-r from-[#4d050f] via-[#5a0914] to-[#1a2d21]"
+                  className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/20 select-none bg-gradient-to-r from-[#4d050f] via-[#5a0914] to-[#1a2d21]"
                   style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                 >
-                  
-                  {/* Elegant Golden Gopuram Outlines in Back Background */}
-                  <div className="absolute inset-0 pointer-events-none opacity-[0.07] flex justify-between px-6 items-center">
-                    {/* Left Gopuram Vector */}
-                    <svg className="w-16 h-28 text-[#c49a3c]" viewBox="0 0 100 200" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M50 10 L40 30 L60 30 Z M30 30 H70 V60 H30 Z M20 60 H80 V100 H20 Z M10 100 H90 V150 H10 Z M5 150 H95 V200 H5 Z" />
-                      <line x1="50" y1="30" x2="50" y2="200" />
-                    </svg>
-                    {/* Right Gopuram Vector */}
-                    <svg className="w-16 h-28 text-[#c49a3c]" viewBox="0 0 100 200" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M50 10 L40 30 L60 30 Z M30 30 H70 V60 H30 Z M20 60 H80 V100 H20 Z M10 100 H90 V150 H10 Z M5 150 H95 V200 H5 Z" />
-                      <line x1="50" y1="30" x2="50" y2="200" />
-                    </svg>
-                  </div>
-
-                  <div className="p-4 flex-1 flex flex-col items-center justify-between relative z-10">
-                    
-                    {/* Centered Large QR Code */}
-                    <div className="w-[96px] h-[96px] bg-white p-1 rounded-xl flex items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.3)] relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
-                      
-                      {/* Customized Golden QR Code graphic with circular emblem in the center */}
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        <svg className="w-full h-full text-[#c49a3c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                          <path d="M2 2h6v6H2V2zM2 16h6v6H2v-6zM16 2h6v6h-6V2z" />
-                          <path d="M16 16h3v3h-3v-3zM19 19h3v3h-3v-3zM16 19h3v3h-3v-3z" />
-                          <rect x="4" y="4" width="2" height="2" fill="currentColor" stroke="none" />
-                          <rect x="4" y="18" width="2" height="2" fill="currentColor" stroke="none" />
-                          <rect x="18" y="4" width="2" height="2" fill="currentColor" stroke="none" />
-                          <path d="M11 2v4m0-4h2M2 11v2m0-2h2m14-2v2" />
-                          <path d="M11 11h2v2h-2v-2z" />
-                          <circle cx="12" cy="12" r="2.5" fill="white" stroke="white" strokeWidth="1" />
-                        </svg>
-                        {/* Miniature Circular Logo in the absolute center of the QR code */}
-                        <div className="absolute inset-0 m-auto w-5 h-5 rounded-full border-[0.5px] border-[#c49a3c] bg-white p-0.5 flex items-center justify-center">
-                          <img src={logo} alt="Emblem center" className="w-full h-full object-contain" />
-                        </div>
-                      </div>
-
-                    </div>
-
-                    {/* Scan caption in elegant Gold */}
-                    <h4 className="text-[#ffdf8c] text-[11px] font-bold tracking-widest font-serif uppercase mt-2 text-center drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-                      {t.card.back.scanText}
-                    </h4>
-
-                    {/* Centered address in white */}
-                    <p className="text-white text-[9px] font-medium leading-relaxed max-w-xs text-center font-serif opacity-90 mt-1 pb-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-                      {t.card.back.address}
-                    </p>
-
-                  </div>
-
-                  {/* Deep Green Bottom Website Footer */}
-                  <div className="bg-[#01331a] border-t-2 border-[#c49a3c] py-2 px-4 flex items-center justify-center gap-2">
-                    <Globe className="w-3.5 h-3.5 text-[#ffdf8c]" />
-                    <a 
-                      href="https://kaadaikulam.org"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#ffdf8c] text-[11px] font-bold tracking-[0.2em] uppercase hover:underline"
-                    >
-                      {t.card.back.website}
-                    </a>
-                  </div>
-
-                  {/* Gold outer border ring */}
-                  <div className="absolute inset-0 rounded-2xl border border-[#c49a3c]/20 pointer-events-none"></div>
+                  <img src={idCardBack} alt="ID Card Back" className="w-full h-full object-cover" />
                 </div>
 
               </motion.div>
