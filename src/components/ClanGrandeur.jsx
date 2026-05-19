@@ -222,14 +222,16 @@ const ClanGrandeur = () => {
             <h3 className="font-serif text-2xl md:text-3xl text-[#5d1712] font-bold mb-3">
               {language === 'ta' ? 'உறுப்பினர் அடையாள அட்டை' : 'Member ID Card'}
             </h3>
+            <p className="text-stone-600 text-sm md:text-base leading-relaxed px-4">
+              {language === 'ta' 
+                ? 'உங்கள் உறுப்பினர் அடையாள அட்டையைப் பெற, கீழே கிளிக் செய்து உள்நுழையவும் / பதிவு செய்யவும்.'
+                : 'To get your member ID card, please click below to login or register.'}
+            </p>
           </motion.div>
 
-          {/* Auto-rotating 3D ID Card Wrapper (Clickable) */}
-          <a 
-            href="https://member.kaadaikulam.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block relative select-none max-w-[360px] w-full h-[225px] mb-8 cursor-pointer"
+          {/* Auto-rotating 3D ID Card Wrapper */}
+          <div 
+            className="block relative select-none max-w-[360px] w-full h-[225px] mb-8"
             style={{ perspective: "1500px" }}
           >
             {/* Card Container with CSS 3D flips */}
@@ -257,7 +259,20 @@ const ClanGrandeur = () => {
               </div>
 
             </motion.div>
-          </a>
+          </div>
+
+          <motion.a
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            href="https://member.kaadaikulam.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 bg-[#8b1d1d] hover:bg-[#5d1712] text-white px-8 py-3.5 rounded-full font-bold tracking-widest uppercase transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 text-sm md:text-base mt-2"
+          >
+            {language === 'ta' ? 'உள்நுழைவு / பதிவு' : 'Login / Register'}
+          </motion.a>
         </div>
       </div>
 
