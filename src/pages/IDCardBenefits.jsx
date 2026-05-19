@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import logo from "../assets/logo.webp";
-import idCardFront from "../assets/images/ID_Card_Front.webp";
+import idCardFront from "../assets/images/ID-Card_Front.webp";
 import idCardBack from "../assets/images/ID_Card_Back.webp";
 import {
   ShieldAlert,

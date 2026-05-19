@@ -4,17 +4,22 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import logo from "../assets/logo.webp";
-import { User, Phone, Droplet } from "lucide-react";
-import idCardFront from "../assets/images/ID_Card_Front.webp";
+import idCardFront from "../assets/images/ID-Card_Front.webp";
 import idCardBack from "../assets/images/ID_Card_Back.webp";
-
-const MotionLink = motion(Link);
 
 const ClanGrandeur = () => {
   const { language } = useLanguage();
   const t = translations[language].clanGrandeur;
   const m = translations[language].membership;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsFlipped((prev) => !prev);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     if (isModalOpen) {
@@ -98,31 +103,6 @@ const ClanGrandeur = () => {
                 </span>
                 {language === 'ta' ? 'உறுப்பினர்' : 'MEMBER'}
               </motion.button>
-              <MotionLink 
-                to="/id-card-benefits"
-                className="inline-flex items-center gap-2 border text-[#c49a3c] px-3 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase hover:bg-[#c49a3c] hover:text-stone-900 transition-all duration-300 shadow-lg"
-                animate={{
-                  boxShadow: [
-                    "0 0 4px rgba(196, 154, 60, 0.2)",
-                    "0 0 16px rgba(196, 154, 60, 0.75)",
-                    "0 0 4px rgba(196, 154, 60, 0.2)"
-                  ],
-                  borderColor: [
-                    "rgba(196, 154, 60, 0.4)",
-                    "rgba(196, 154, 60, 1)",
-                    "rgba(196, 154, 60, 0.4)"
-                  ]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {language === 'ta' ? 'அட்டை நன்மைகள்' : 'CARD BENEFITS'}
-              </MotionLink>
             </motion.h2>
             
             <motion.p 
@@ -242,27 +222,39 @@ const ClanGrandeur = () => {
             <h3 className="font-serif text-2xl md:text-3xl text-[#5d1712] font-bold mb-3">
               {language === 'ta' ? 'உறுப்பினர் அடையாள அட்டை' : 'Member ID Card'}
             </h3>
-            <p className="text-stone-600 text-sm md:text-base leading-relaxed">
-              {language === 'ta' 
-                ? 'அட்டை வடிவமைப்பு மற்றும் அதன் நன்மைகளை அறிய கிளிக் செய்யவும்.'
-                : 'Click the card to explore its design and member benefits.'}
-            </p>
           </motion.div>
 
-          {/* Interactive Small ID Card Wrapper (Link to benefits page) */}
-          <Link 
-            to="/id-card-benefits" 
-            className="relative group block select-none cursor-pointer max-w-[360px] w-full h-[225px] mb-8 rounded-2xl overflow-hidden shadow-xl border border-white/20 hover:border-[#c49a3c]/50 transition-all duration-300 shadow-[#8b1d1d]/10 hover:shadow-[#c49a3c]/20"
+          {/* Auto-rotating 3D ID Card Wrapper (Non-clickable) */}
+          <div 
+            className="relative select-none max-w-[360px] w-full h-[225px] mb-8"
+            style={{ perspective: "1500px" }}
           >
-            <img src={idCardFront} alt="ID Card Front" className="w-full h-full object-cover" />
-            
-            {/* Interactive hint overlay (Slide down arrow and text) */}
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex flex-col items-center">
-              <span className="text-[10px] text-[#c49a3c] font-bold tracking-widest uppercase bg-[#fdfaf3] px-2 py-0.5 rounded shadow border border-[#c49a3c]/20 whitespace-nowrap">
-                {language === 'ta' ? 'நன்மைகளைக் காண கிளிக் செய்க' : 'Click to View Benefits'}
-              </span>
-            </div>
-          </Link>
+            {/* Card Container with CSS 3D flips */}
+            <motion.div
+              className="w-full h-full relative"
+              style={{ transformStyle: "preserve-3d" }}
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ type: "spring", stiffness: 80, damping: 12, mass: 1 }}
+            >
+              
+              {/* --- OFFICIAL FRONT OF CARD --- */}
+              <div 
+                className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-xl border border-white/20 bg-stone-950 shadow-[#8b1d1d]/10 hover:shadow-[#c49a3c]/20 hover:border-[#c49a3c]/50 transition-all duration-300"
+                style={{ backfaceVisibility: "hidden" }}
+              >
+                <img src={idCardFront} alt="ID Card Front" className="w-full h-full object-cover rounded-2xl" />
+              </div>
+
+              {/* --- OFFICIAL BACK OF CARD --- */}
+              <div 
+                className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-xl border border-white/20 bg-stone-950 shadow-[#8b1d1d]/10 hover:shadow-[#c49a3c]/20 hover:border-[#c49a3c]/50 transition-all duration-300"
+                style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+              >
+                <img src={idCardBack} alt="ID Card Back" className="w-full h-full object-cover rounded-2xl" />
+              </div>
+
+            </motion.div>
+          </div>
         </div>
       </div>
 

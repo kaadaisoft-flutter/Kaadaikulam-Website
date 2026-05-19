@@ -44,11 +44,6 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 text-sm font-medium">
               <li><Link to="/donation" className="hover:text-[#c49a3c] transition-colors duration-300">{t.services.donation}</Link></li>
-              <li>
-                <Link to="/id-card-benefits" className="hover:text-[#c49a3c] transition-colors duration-300">
-                  {t.services.benefits}
-                </Link>
-              </li>
             </ul>
           </div>
 
