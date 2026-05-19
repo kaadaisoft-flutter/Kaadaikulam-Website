@@ -96,7 +96,7 @@ const Header = () => {
               className="flex items-center gap-1 hover:text-white transition-colors duration-300 text-stone-700 font-bold"
             >
               {t.login}
-              <svg className="w-3.5 h-3.5 mix-blend-multiply" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-3.5 h-3.5 shrink-0 mix-blend-multiply" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
@@ -198,7 +198,7 @@ const Header = () => {
                   className="flex items-center gap-2 hover:text-white transition-colors duration-300 text-stone-900 font-bold"
                 >
                   {t.login}
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </a>

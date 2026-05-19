@@ -17,7 +17,7 @@ const ClanGrandeur = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setIsFlipped((prev) => !prev);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(timer);
   }, []);
 
@@ -224,14 +224,17 @@ const ClanGrandeur = () => {
             </h3>
           </motion.div>
 
-          {/* Auto-rotating 3D ID Card Wrapper (Non-clickable) */}
-          <div 
-            className="relative select-none max-w-[360px] w-full h-[225px] mb-8"
+          {/* Auto-rotating 3D ID Card Wrapper (Clickable) */}
+          <a 
+            href="https://member.kaadaikulam.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block relative select-none max-w-[360px] w-full h-[225px] mb-8 cursor-pointer"
             style={{ perspective: "1500px" }}
           >
             {/* Card Container with CSS 3D flips */}
             <motion.div
-              className="w-full h-full relative"
+              className="w-full h-full relative group"
               style={{ transformStyle: "preserve-3d" }}
               animate={{ rotateY: isFlipped ? 180 : 0 }}
               transition={{ type: "spring", stiffness: 80, damping: 12, mass: 1 }}
@@ -239,7 +242,7 @@ const ClanGrandeur = () => {
               
               {/* --- OFFICIAL FRONT OF CARD --- */}
               <div 
-                className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-xl border border-white/20 bg-stone-950 shadow-[#8b1d1d]/10 hover:shadow-[#c49a3c]/20 hover:border-[#c49a3c]/50 transition-all duration-300"
+                className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-xl border border-white/20 bg-stone-950 shadow-[#8b1d1d]/10 group-hover:shadow-[#c49a3c]/30 group-hover:border-[#c49a3c]/50 transition-all duration-300"
                 style={{ backfaceVisibility: "hidden" }}
               >
                 <img src={idCardFront} alt="ID Card Front" className="w-full h-full object-cover rounded-2xl" />
@@ -247,14 +250,14 @@ const ClanGrandeur = () => {
 
               {/* --- OFFICIAL BACK OF CARD --- */}
               <div 
-                className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-xl border border-white/20 bg-stone-950 shadow-[#8b1d1d]/10 hover:shadow-[#c49a3c]/20 hover:border-[#c49a3c]/50 transition-all duration-300"
+                className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-xl border border-white/20 bg-stone-950 shadow-[#8b1d1d]/10 group-hover:shadow-[#c49a3c]/30 group-hover:border-[#c49a3c]/50 transition-all duration-300"
                 style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
               >
                 <img src={idCardBack} alt="ID Card Back" className="w-full h-full object-cover rounded-2xl" />
               </div>
 
             </motion.div>
-          </div>
+          </a>
         </div>
       </div>
 
