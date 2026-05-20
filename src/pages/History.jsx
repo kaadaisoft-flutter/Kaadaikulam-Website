@@ -161,8 +161,14 @@ const History = () => {
       {t.suvadi && (
         <section className="relative py-24 bg-white border-t border-[#c49a3c]/15">
           <div className="container mx-auto px-6">
-            {/* Header */}
-            <div className="text-center max-w-3xl mx-auto mb-16">
+            {/* Header with Scroll Animation */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-center max-w-3xl mx-auto mb-16"
+            >
               <div className="flex items-center justify-center gap-4 mb-4">
                 <span className="w-8 h-[1.5px] bg-[#c49a3c]"></span>
                 <span className="text-[#c49a3c] font-bold tracking-[0.3em] uppercase text-[12px]">
@@ -176,13 +182,40 @@ const History = () => {
               <p className="text-stone-600 text-sm md:text-base leading-relaxed font-light">
                 {t.suvadi.text}
               </p>
-            </div>
+            </motion.div>
 
-            {/* Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Grid with Staggered Scroll Animation */}
+            <motion.div 
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.15
+                  }
+                }
+              }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+            >
               {suvadiImages.map((img, index) => (
-                <div
+                <motion.div
                   key={index}
+                  variants={{
+                    hidden: { opacity: 0, y: 50, scale: 0.95 },
+                    show: { 
+                      opacity: 1, 
+                      y: 0, 
+                      scale: 1,
+                      transition: { 
+                        type: "spring", 
+                        stiffness: 70, 
+                        damping: 15 
+                      } 
+                    }
+                  }}
                   className="bg-white rounded-[32px] overflow-hidden border border-[#c49a3c]/10 shadow-md aspect-[4/3]"
                 >
                   <img
@@ -190,9 +223,9 @@ const History = () => {
                     alt={`Suvadi ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
       )}
