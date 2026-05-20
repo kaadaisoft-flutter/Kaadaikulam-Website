@@ -203,41 +203,48 @@ const History = () => {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
             >
               {suvadiImages.map((img, index) => (
+                // Outer: handles scroll-in entrance (variants from parent)
                 <motion.div
                   key={index}
                   variants={{
-                    hidden: { opacity: 0, y: 50, scale: 0.95 },
-                    show: { 
-                      opacity: 1, 
-                      y: 0, 
+                    hidden: { opacity: 0, scale: 0.95 },
+                    show: {
+                      opacity: 1,
                       scale: 1,
-                      transition: { 
-                        type: "spring", 
-                        stiffness: 70, 
-                        damping: 15 
-                      } 
+                      transition: { type: "spring", stiffness: 70, damping: 15 }
                     }
                   }}
-                  whileHover={{ y: -12, scale: 1.02 }}
-                  onClick={() => setSelectedSuvadiIndex(index)}
-                  className="group bg-white rounded-[32px] overflow-hidden border border-[#c49a3c]/10 shadow-md hover:shadow-2xl transition-all cursor-pointer aspect-[4/3] relative"
                 >
-                  <img
-                    src={img}
-                    alt={`Suvadi ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Hover Overlay Zoom Icon */}
-                  <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        <line x1="11" y1="8" x2="11" y2="14"></line>
-                        <line x1="8" y1="11" x2="14" y2="11"></line>
-                      </svg>
+                  {/* Inner: handles continuous auto-float animation */}
+                  <motion.div
+                    animate={{ y: [0, -14, 0] }}
+                    transition={{
+                      duration: 3,
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      delay: index * 0.6,
+                    }}
+                    whileHover={{ y: -18, scale: 1.04 }}
+                    onClick={() => setSelectedSuvadiIndex(index)}
+                    className="group bg-white rounded-[32px] overflow-hidden border border-[#c49a3c]/10 shadow-md hover:shadow-2xl transition-shadow cursor-pointer aspect-[4/3] relative"
+                  >
+                    <img
+                      src={img}
+                      alt={`Suvadi ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Hover Overlay Zoom Icon */}
+                    <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                          <circle cx="11" cy="11" r="8"></circle>
+                          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                          <line x1="11" y1="8" x2="11" y2="14"></line>
+                          <line x1="8" y1="11" x2="14" y2="11"></line>
+                        </svg>
+                      </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </motion.div>
