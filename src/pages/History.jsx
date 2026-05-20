@@ -252,59 +252,56 @@ const History = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md"
           >
             {/* Close trigger background */}
             <div className="absolute inset-0 cursor-zoom-out" onClick={() => setSelectedSuvadiIndex(null)} />
 
-            {/* Modal Container */}
-            <div className="relative max-w-4xl max-h-[85vh] z-10 flex flex-col items-center justify-center">
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedSuvadiIndex(null)}
-                className="absolute -top-14 right-0 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors border border-white/10"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
+            {/* Close Button — top right corner */}
+            <button
+              onClick={() => setSelectedSuvadiIndex(null)}
+              className="absolute top-6 right-6 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors border border-white/20"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
 
-              {/* Main Image */}
+            {/* Prev Arrow — left side of screen */}
+            <button
+              onClick={(e) => { e.stopPropagation(); setSelectedSuvadiIndex((prev) => (prev - 1 + suvadiImages.length) % suvadiImages.length); }}
+              className="absolute left-4 md:left-8 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all border border-white/20 active:scale-95"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+
+            {/* Main Image — centred, full height */}
+            <div className="relative z-10 flex items-center justify-center w-full h-full px-20">
               <motion.img
                 key={selectedSuvadiIndex}
-                initial={{ scale: 0.95, opacity: 0 }}
+                initial={{ scale: 0.93, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.95, opacity: 0 }}
+                exit={{ scale: 0.93, opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 src={suvadiImages[selectedSuvadiIndex]}
                 alt={`Suvadi ${selectedSuvadiIndex + 1}`}
-                className="max-w-full max-h-[75vh] object-contain rounded-2xl border border-white/10 shadow-2xl"
+                className="max-w-full max-h-[65vh] object-contain rounded-2xl shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
               />
-
-              {/* Navigation and Indicator Overlay */}
-              <div className="mt-6 flex items-center gap-6 text-white z-20">
-                <button
-                  onClick={() => setSelectedSuvadiIndex((prev) => (prev - 1 + suvadiImages.length) % suvadiImages.length)}
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all border border-white/10 active:scale-95"
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M15 18l-6-6 6-6" />
-                  </svg>
-                </button>
-                <span className="text-stone-300 text-sm font-light select-none tracking-widest">
-                  {selectedSuvadiIndex + 1} / {suvadiImages.length}
-                </span>
-                <button
-                  onClick={() => setSelectedSuvadiIndex((prev) => (prev + 1) % suvadiImages.length)}
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all border border-white/10 active:scale-95"
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M9 5l6 6-6 6" />
-                  </svg>
-                </button>
-              </div>
             </div>
+
+            {/* Next Arrow — right side of screen */}
+            <button
+              onClick={(e) => { e.stopPropagation(); setSelectedSuvadiIndex((prev) => (prev + 1) % suvadiImages.length); }}
+              className="absolute right-4 md:right-8 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all border border-white/20 active:scale-95"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M9 5l6 6-6 6" />
+              </svg>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
