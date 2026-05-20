@@ -4,13 +4,17 @@ import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import heroImg from "../assets/images/inscriptions_hero.webp";
 import premiumBg from "../assets/images/inscriptions_premium_bg.webp";
+import suvadi1 from "../assets/images/suvadi1.webp";
+import suvadi2 from "../assets/images/suvadi2.webp";
+import suvadi3 from "../assets/images/suvadi3.webp";
+import suvadi4 from "../assets/images/suvadi4.webp";
 
 const History = () => {
   const { language } = useLanguage();
   const t = translations[language].history;
   const [activeIndex, setActiveIndex] = useState(0);
-
   const inscriptions = t.items;
+  const suvadiImages = [suvadi1, suvadi2, suvadi3, suvadi4];
 
   return (
     <div className="min-h-screen bg-sacred-history pt-0">
@@ -152,6 +156,46 @@ const History = () => {
           </button>
         </div>
       </section>
+
+      {/* Suvadi (Palm-leaf Manuscripts) Section */}
+      {t.suvadi && (
+        <section className="relative py-24 bg-white border-t border-[#c49a3c]/15">
+          <div className="container mx-auto px-6">
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <span className="w-8 h-[1.5px] bg-[#c49a3c]"></span>
+                <span className="text-[#c49a3c] font-bold tracking-[0.3em] uppercase text-[12px]">
+                  {language === "ta" ? "ஓலைச்சுவடிகள்" : "Manuscripts"}
+                </span>
+                <span className="w-8 h-[1.5px] bg-[#c49a3c]"></span>
+              </div>
+              <h2 className="font-serif text-3xl md:text-5xl text-[#5d1712] mb-6">
+                {t.suvadi.heading}
+              </h2>
+              <p className="text-stone-600 text-sm md:text-base leading-relaxed font-light">
+                {t.suvadi.text}
+              </p>
+            </div>
+
+            {/* Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {suvadiImages.map((img, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-[32px] overflow-hidden border border-[#c49a3c]/10 shadow-md aspect-[4/3]"
+                >
+                  <img
+                    src={img}
+                    alt={`Suvadi ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

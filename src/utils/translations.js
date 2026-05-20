@@ -258,6 +258,17 @@ export const translations = {
           significance: ""
         }
       ]
+      ,
+      suvadi: {
+        heading: "Historical Palm-Leaf Manuscripts",
+        text: "Authentic historical palm-leaf manuscripts (Suvadigal) preserving the genealogy, temple honors, and ancestral records of the Poondurai Kaadai clan.",
+        items: [
+          { title: "Olai Chuvadi - Record 1", desc: "Lineage records and ancestral history of Poondurai Kaadai clan." },
+          { title: "Olai Chuvadi - Record 2", desc: "Ancient agreements regarding temple administration and borders." },
+          { title: "Olai Chuvadi - Record 3", desc: "Vedic rites, sacred chants, and rituals of the clan deity." },
+          { title: "Olai Chuvadi - Record 4", desc: "Donation agreements and honors conferred by Kongu rulers." }
+        ]
+      }
     },
     templeDetail: {
       back: "Back to Temples",
@@ -906,6 +917,17 @@ export const translations = {
           significance: ""
         }
       ]
+      ,
+      suvadi: {
+        heading: "வரலாற்று ஓலைச்சுவடிகள்",
+        text: "பூந்துறை காடை குலத்தின் பாரம்பரியம், வம்சாவளி, வழிபாட்டு முறைகள் மற்றும் வரலாற்றுச் சிறப்புகளை விவரிக்கும் ஆதி ஓலைச்சுவடிகள்.",
+        items: [
+          { title: "ஓலைச்சுவடி - பதிவு 1", desc: "பூந்துறை காடை குலத்தின் வம்சாவளி மற்றும் ஆதி வரலாற்றுப் பதிவுகள்." },
+          { title: "ஓலைச்சுவடி - பதிவு 2", desc: "கோவில் நிர்வாகம் மற்றும் எல்லைகள் குறித்த பண்டைய உடன்படிக்கைகள்." },
+          { title: "ஓலைச்சுவடி - பதிவு 3", desc: "குலதெய்வ வழிபாட்டு முறைகள் மற்றும் ஆன்மீக சடங்கு விதிகள்." },
+          { title: "ஓலைச்சுவடி - பதிவு 4", desc: "கொங்கு நாட்டு மன்னர்களால் வழங்கப்பட்ட நன்கொடை மற்றும் சிறப்புரிமைப் பதிவுகள்." }
+        ]
+      }
     },
     templeDetail: {
       back: "கோவில்களுக்குத் திரும்புக",
