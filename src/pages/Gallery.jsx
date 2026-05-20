@@ -3,10 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import heroImg from "../assets/images/gallery_hero.webp";
-import img1 from "../assets/images/gallery_temple_1.webp";
-import img2 from "../assets/images/gallery_temple_2.webp";
-import img3 from "../assets/images/gallery_temple_3.webp";
-import img4 from "../assets/images/gallery_temple_4.webp";
+import templeFn from "../assets/images/temple fn.webp";
 
 const Gallery = () => {
   const { language } = useLanguage();
@@ -23,31 +20,10 @@ const Gallery = () => {
   const galleryItems = [
     {
       id: 1,
-      title: "Kumbhabhishekam Yagasalai",
+      title: "48-வது நாள் மண்டல பூஜை",
       category: "Festivals",
-      image: img1,
-      temple: "Sri Arulmigu Angalamman Temple"
-    },
-    {
-      id: 2,
-      title: "Ancient Architecture",
-      category: "Architecture",
-      image: img2,
-      temple: "Sri Pushpavaneswara Swamy Temple"
-    },
-    {
-      id: 3,
-      title: "Heritage Structure",
-      category: "Heritage",
-      image: img3,
-      temple: "Sri Karikaliamman Temple"
-    },
-    {
-      id: 4,
-      title: "Sacred Shrine",
-      category: "Architecture",
-      image: img4,
-      temple: "Sri Damodara Perumal Temple"
+      image: templeFn,
+      temple: "Sri Angalamman Temple, Erode"
     }
   ];
 
