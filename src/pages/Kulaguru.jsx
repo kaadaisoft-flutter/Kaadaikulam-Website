@@ -3,7 +3,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import img1 from "../assets/images/pasur_periya_madam-CCPWZxUo.webp";
 import img2 from "../assets/images/pasur_chinna_madam-BOzzffoW.webp";
-import heroImg from "../assets/images/kulaguru_hero_bg.webp";
+import heroImg from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
 import { FadeUp } from "../components/animations/Reveal";
 
 const Kulaguru = () => {
@@ -15,7 +15,7 @@ const Kulaguru = () => {
       {/* Hero Section - Matching History.jsx style */}
       <section className="relative w-full min-h-[550px] lg:min-h-[650px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src={heroImg} alt={t.hero.heading} className="w-full h-full object-cover" />
+          <img src={heroImg} alt={t.hero.heading} className="w-full h-full object-cover object-[center_35%]" />
         </div>
 
         {/* Cinematic Overlays matching History.jsx */}
