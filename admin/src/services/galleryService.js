@@ -1,7 +1,9 @@
 import {
     collection,
     doc,
+    getDoc,
     addDoc,
+    updateDoc,
     deleteDoc,
     onSnapshot,
     query,
@@ -12,6 +14,53 @@ import { db } from '../firebase';
 import { uploadToCloudinary, deleteFromCloudinary } from './cloudinaryService';
 
 const GALLERY_COLLECTION = 'gallery';
+
+/**
+ * Save or Update a gallery item (metadata and optional file upload).
+ */
+export const saveGalleryItem = async (id, data, file) => {
+    const now = serverTimestamp();
+    const itemData = {
+        ...data,
+        updatedAt: now,
+    };
+
+    if (!id) {
+        itemData.createdAt = now;
+    }
+
+    // Handle Cloudinary upload if a file is provided
+    if (file) {
+        // Delete old asset if updating
+        if (id) {
+            try {
+                const oldDoc = await getDoc(doc(db, GALLERY_COLLECTION, id));
+                const oldData = oldDoc.data();
+                if (oldData?.cloudinaryPublicId) {
+                    await deleteFromCloudinary(oldData.cloudinaryPublicId, oldData.cloudinaryResourceType || 'image');
+                }
+            } catch (err) {
+                console.warn('Failed to delete old asset from Cloudinary during save:', err);
+            }
+        }
+
+        const { url, publicId, resourceType } = await uploadToCloudinary(file);
+        itemData.imageUrl = url;
+        itemData.thumbnail = url;
+        itemData.fullUrl = url;
+        itemData.cloudinaryPublicId = publicId;
+        itemData.cloudinaryResourceType = resourceType;
+    }
+
+    if (id) {
+        const docRef = doc(db, GALLERY_COLLECTION, id);
+        await updateDoc(docRef, itemData);
+        return { id, ...itemData };
+    } else {
+        const docRef = await addDoc(collection(db, GALLERY_COLLECTION), itemData);
+        return { id: docRef.id, ...itemData };
+    }
+};
 
 /**
  * Add a gallery item to Firestore (metadata only, for YouTube or after file upload).
@@ -26,16 +75,21 @@ export const addGalleryItem = async (item) => {
 
 /**
  * Upload file to Cloudinary, then add gallery item to Firestore.
- * Stores cloudinaryPublicId and cloudinaryResourceType for delete.
  */
 export const uploadGalleryMedia = async (file, metadata) => {
     const { url, publicId, resourceType } = await uploadToCloudinary(file);
     const item = {
         title: metadata.title,
+        description: metadata.description || '',
         category: metadata.category,
+        templeName: metadata.templeName || '',
         type: metadata.type,
         thumbnail: url,
         fullUrl: url,
+        imageUrl: url,
+        featured: metadata.featured || false,
+        published: metadata.published !== undefined ? metadata.published : true,
+        uploadedBy: metadata.uploadedBy || '',
         cloudinaryPublicId: publicId,
         cloudinaryResourceType: resourceType,
     };
@@ -61,7 +115,7 @@ export const subscribeGallery = (callback) => {
             return {
                 id: docSnap.id,
                 ...d,
-                date: createdAt ? createdAt.toISOString() : d.date,
+                date: createdAt ? createdAt.toISOString() : (d.date || new Date().toISOString()),
             };
         });
         callback(items);
@@ -70,7 +124,6 @@ export const subscribeGallery = (callback) => {
 
 /**
  * Delete a gallery item. Deletes from Cloudinary (if applicable) then Firestore.
- * Uses VITE_CLOUDINARY_API_KEY/SECRET from env. Move to backend when possible.
  */
 export const deleteGalleryItem = async (id, item = {}) => {
     const { cloudinaryPublicId, cloudinaryResourceType } = item;

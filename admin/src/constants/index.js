@@ -5,9 +5,15 @@
 
 // Gallery
 export const GALLERY_CATEGORIES = [
-  { value: 'Architecture', label: 'Architecture' },
-  { value: 'Festivals', label: 'Festivals' },
-  { value: 'Rituals', label: 'Rituals' },
+  { value: 'Festival', label: 'Festival' },
+  { value: 'Events', label: 'Events' },
+  { value: 'Pooja', label: 'Pooja' },
+  { value: 'Temple', label: 'Temple' },
+  { value: 'Gods', label: 'Gods' },
+  { value: 'Annadhanam', label: 'Annadhanam' },
+  { value: 'Special Days', label: 'Special Days' },
+  { value: 'Videos', label: 'Videos' },
+  { value: 'Others', label: 'Others' },
 ];
 
 export const GALLERY_MEDIA_TYPES = [
