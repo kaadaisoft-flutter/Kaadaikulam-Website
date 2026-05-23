@@ -76,7 +76,11 @@ export const deleteGalleryItem = async (id, item = {}) => {
     const { cloudinaryPublicId, cloudinaryResourceType } = item;
 
     if (cloudinaryPublicId) {
-        await deleteFromCloudinary(cloudinaryPublicId, cloudinaryResourceType || 'image');
+        try {
+            await deleteFromCloudinary(cloudinaryPublicId, cloudinaryResourceType || 'image');
+        } catch (err) {
+            console.warn('Cloudinary delete failed, proceeding with Firestore deletion:', err.message);
+        }
     }
 
     await deleteDoc(doc(db, GALLERY_COLLECTION, id));
