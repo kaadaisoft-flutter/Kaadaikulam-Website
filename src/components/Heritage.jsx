@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import img1 from "../assets/images/angalaaman-DFWBKo-A.webp";
-import img2 from "../assets/images/eswaran_kovil_1-D1sRlrA6.webp";
+import img1 from "../assets/Angalamman_Temple/Angalamman_Temple_Hero_optimized.webp";
+import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
 import img3 from "../assets/images/karikaliaman_1-BmA6tM5O.webp";
-import img4 from "../assets/images/perumal_kovil_1-nbee0m8b.webp";
+import img4 from "../assets/Perumal_Temple/Perumal_Temple_Hero_optimized.webp";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 
@@ -15,6 +15,12 @@ const Heritage = () => {
   const images = [img1, img2, img3, img4];
 
   useEffect(() => {
+    // Preload slideshow images to prevent transition lag/flash
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
     const timer = setInterval(() => {
       setCurrentImg((prev) => (prev + 1) % images.length);
     }, 4000);
@@ -93,7 +99,7 @@ const Heritage = () => {
             className="relative w-full max-w-lg lg:ml-auto"
           >
             <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden shadow-xl border-4 border-white bg-stone-200">
-              <AnimatePresence mode="wait">
+              <AnimatePresence>
                 <motion.img
                   key={currentImg}
                   src={images[currentImg]}

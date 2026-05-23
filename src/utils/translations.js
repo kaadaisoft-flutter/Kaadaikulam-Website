@@ -183,13 +183,13 @@ export const translations = {
       hero: {
         label: "Visual Heritage",
         heading: "Sacred Gallery",
-        text: "Explore the timeless beauty, vibrant festivals, and ancient architecture of the Kaadai clan temples."
+        text: "Explore the timeless beauty, vibrant festivals, and sacred temples of the Kaadai clan."
       },
       categories: {
         all: "All",
         festivals: "Festivals",
-        architecture: "Architecture",
-        heritage: "Heritage"
+        temples: "Temples",
+        gods: "Gods"
       },
       items: {
         video: "VIDEO",
@@ -842,13 +842,13 @@ export const translations = {
       hero: {
         label: "காட்சி பாரம்பரியம்",
         heading: "புனித படக்காட்சி",
-        text: "காடை குல கோவில்களின் காலமற்ற அழகு, துடிப்பான திருவிழாக்கள் மற்றும் பண்டைய கட்டிடக்கலைகளை ஆராயுங்கள்."
+        text: "காடை குல கோவில்களின் காலமற்ற அழகு, துடிப்பான திருவிழாக்கள் மற்றும் புனித கோவில்களை ஆராயுங்கள்."
       },
       categories: {
         all: "அனைத்தும்",
         festivals: "திருவிழாக்கள்",
-        architecture: "கட்டிடக்கலை",
-        heritage: "பாரம்பரியம்"
+        temples: "கோவில்கள்",
+        gods: "கடவுள்கள்"
       },
       items: {
         video: "காணொளி",

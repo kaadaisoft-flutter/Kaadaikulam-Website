@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import img1 from "../assets/images/angalaaman-DFWBKo-A.webp";
-import img2 from "../assets/images/eswaran_kovil_1-D1sRlrA6.webp";
+import img1 from "../assets/Angalamman_Temple/Angalamman_Temple_Hero_optimized.webp";
+import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
 import img3 from "../assets/images/karikaliaman_1-BmA6tM5O.webp";
-import img4 from "../assets/images/perumal_kovil_1-nbee0m8b.webp";
+import img4 from "../assets/Perumal_Temple/Perumal_Temple_Hero_optimized.webp";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import { StaggerContainer, StaggerItem } from "./animations/Reveal";

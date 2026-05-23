@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import { submitContactMessage } from "../services/contactService";
-import heroImg from "../assets/images/contact_hero.webp";
+import heroImg from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
 
 const Contact = () => {
   const { language } = useLanguage();

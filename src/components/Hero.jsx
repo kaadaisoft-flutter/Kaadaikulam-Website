@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import img1 from "../assets/images/angalaaman-DFWBKo-A.webp";
-import img2 from "../assets/images/eswaran_kovil_1-D1sRlrA6.webp";
+import img1 from "../assets/Angalamman_Temple/Angalamman_Temple_Hero_optimized.webp";
+import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
 import img3 from "../assets/images/karikaliaman_1-BmA6tM5O.webp";
-import img4 from "../assets/images/perumal_kovil_1-nbee0m8b.webp";
+import img4 from "../assets/Perumal_Temple/Perumal_Temple_Hero_optimized.webp";
 import logo from "../assets/logo.webp";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
@@ -14,42 +14,26 @@ const Hero = () => {
   const { language } = useLanguage();
   const t = translations[language].hero;
 
+  const bgImages = [logo, img1, img2, img3, img4];
+
   useEffect(() => {
+    // Preload background images to prevent flash/jank during slide transitions
+    bgImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % 5);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  const bgImages = [logo, img1, img2, img3, img4];
-
-  const kenBurnsVariants = [
-    {
-      initial: { opacity: 0 },
-      animate: { opacity: 1, transition: { duration: 0.8 } },
-      exit: { opacity: 0, transition: { duration: 0.8 } }
-    },
-    {
-      initial: { opacity: 0, scale: 1 },
-      animate: { opacity: 1, scale: 1.12, transition: { opacity: { duration: 1.2 }, scale: { duration: 5.5, ease: "easeInOut" } } },
-      exit: { opacity: 0, transition: { duration: 1.2 } }
-    },
-    {
-      initial: { opacity: 0, scale: 1.1, x: 0 },
-      animate: { opacity: 1, scale: 1, x: -30, transition: { opacity: { duration: 1.2 }, scale: { duration: 5.5, ease: "easeInOut" }, x: { duration: 5.5, ease: "easeInOut" } } },
-      exit: { opacity: 0, transition: { duration: 1.2 } }
-    },
-    {
-      initial: { opacity: 0, scale: 1, x: 0 },
-      animate: { opacity: 1, scale: 1.1, x: 20, transition: { opacity: { duration: 1.2 }, scale: { duration: 5.5, ease: "easeInOut" }, x: { duration: 5.5, ease: "easeInOut" } } },
-      exit: { opacity: 0, transition: { duration: 1.2 } }
-    },
-    {
-      initial: { opacity: 0, scale: 1.08, y: 0 },
-      animate: { opacity: 1, scale: 1, y: -20, transition: { opacity: { duration: 1.2 }, scale: { duration: 5.5, ease: "easeInOut" }, y: { duration: 5.5, ease: "easeInOut" } } },
-      exit: { opacity: 0, transition: { duration: 1.2 } }
-    }
-  ];
+  const slideVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition: { duration: 1.2 } },
+    exit: { opacity: 0, transition: { duration: 1.2 } }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -64,20 +48,23 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full min-h-[550px] lg:min-h-[650px] bg-[#fdfcf7] overflow-hidden flex items-center justify-center font-sans mt-0">
+    <section className="relative w-full h-[600px] md:h-[650px] lg:h-[700px] bg-[#fdfcf7] overflow-hidden flex items-center justify-center font-sans mt-0">
 
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           <motion.div
             key={activeIndex}
-            variants={kenBurnsVariants[activeIndex]}
+            variants={slideVariants}
             initial="initial"
             animate="animate"
             exit="exit"
             className="absolute inset-0 w-full h-full"
           >
             {activeIndex === 0 ? (
-              <div className="w-full h-full flex items-center justify-center lg:justify-end p-8 md:p-16 lg:p-24 lg:pr-[12%] bg-sacred-home">
+              <div 
+                className="w-full h-full flex items-center justify-center lg:justify-end p-8 md:p-16 lg:p-24 lg:pr-[12%] bg-sacred-home"
+                style={{ backgroundAttachment: "scroll" }}
+              >
                 <img
                   src={bgImages[0]}
                   alt="Clan Logo"
@@ -88,7 +75,7 @@ const Hero = () => {
               <img
                 src={bgImages[activeIndex]}
                 alt={`Background ${activeIndex}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-[center_35%]"
               />
             )}
           </motion.div>
@@ -103,7 +90,7 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
           {/* Left Column: Text Content */}
-          <div className="flex flex-col items-start max-w-xl">
+          <div className="flex flex-col items-start max-w-xl min-h-[400px] sm:min-h-[380px] lg:min-h-[350px] justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`${activeIndex}-${language}`}
