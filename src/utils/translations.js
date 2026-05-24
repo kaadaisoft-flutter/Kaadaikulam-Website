@@ -289,7 +289,7 @@ export const translations = {
       becomeButton: "Become a Member",
       close: "Close"
     },
-    spiritualOfferings: {
+        spiritualOfferings: {
       heading: "Spiritual Offerings",
       essence: "The Essence",
       verses: [
@@ -303,7 +303,7 @@ export const translations = {
             "Vazhipadubavaridar Neekkum Umasutha Gunanithi",
             "Nama Nama Ganapathi Thayaguna Varanithi"
           ],
-          meaning: "By worshipping Ganapathi, the elephant-faced son of Parvathi, the sorrows of our lives will be removed. He stands as the abode of virtues and showers grace abundantly to those who seek it."
+          meaning: "By worshipping the elephant-faced Lord Ganesha, the son of Goddess Parvati, all obstacles and sorrows in our life are removed. He is the abode of noble virtues and mercifully bestows blessings upon those who seek him."
         },
         {
           id: 2,
@@ -316,7 +316,7 @@ export const translations = {
             "Maraineri Vaazhvum Makkalperum",
             "Vaari Vazhangiduvaal Nalvaazhvu Nalkiduvaal"
           ],
-          meaning: "Those who worship Angalamman, residing in the Poondurai region surrounded by the sacred Kaveri, will be blessed with an auspicious life, good character, and childbirth (wealth of children). The Goddess abundantly bestows all necessities and grants a good life."
+          meaning: "For those who worship Goddess Angalamman in the sacred Poondurai region surrounded by the fertile Kaveri, she will bestow auspiciousness, dignity, pure virtues, righteous life, and the blessing of children, granting them a prosperous and blessed life."
         },
         {
           id: 3,
@@ -324,26 +324,28 @@ export const translations = {
           subtitle: "Sacred Worship",
           verse: [
             "Kaarirul Neengi Kathiravan Oli Paravidave",
-            "Maaritharul Seiyum Madurai Maamuniye",
-            "Baaril Anaithuyirum Imbum Vaazhve",
-            "Seeriyu Arul Seiyum Sivanadi Potruvom"
+            "Madhi Irul Neengi Maayai Vilagidave",
+            "Ulagellam Uyirgal Inbutru Vaazhthidave",
+            "Pathiyudan Ambigai Magizhvudan Therinil Ulaa Varuga Varugave"
           ],
-          meaning: "Just as the morning sun dispels darkness, the great Madurai Muni showers grace and rain. We worship the feet of Lord Shiva, who ensures that all beings in this world live in eternal happiness and prosperity."
+          meaning: "As the morning sun dispels the dark night, may the darkness of the mind and illusion be removed. It is prayed that the Goddess, along with her Consort (Lord Shiva), joyfully process in the temple chariot to bless all living beings in this universe with happiness and well-being."
         },
         {
           id: 4,
           title: "Great Grace of Maha Vishnu",
           subtitle: "Supreme Bliss",
           verse: [
-            "Thamodhara Thaya Sindhum Gnana Vairaakkiya Bhooshanam",
-            "Sridhara Sripriyaa Seetha Raama Lakshmana Bharatha",
-            "Aadhi Naarayana Maadhava Govindha",
-            "Kesava Krishna Mukundha Hare"
+            "Damodara Thaya Sindhum Gnana Vairaggiya Bhooshanam",
+            "Alamelumanga Lakshmi Sametham",
+            "Anugraha Karuna Saagaram",
+            "Dharma Artha Kama Moksham Kadaksham",
+            "Bhakta Vatsalya Anugraha Pradhanam"
           ],
-          meaning: "The Lord who is the ocean of compassion and the ornament of wisdom and renunciation. We chant the names of the ancient Narayana, Madhava, and Krishna to attain spiritual liberation and eternal peace."
+          meaning: "Lord Vishnu, manifested as Damodara along with Mother Alamelumanga Lakshmi, is the ocean of grace and compassion who adorns Himself with the ornaments of wisdom and renunciation. He bestows the four ultimate pursuits of human life—Righteousness (Dharma), Wealth (Artha), Desires (Kama), and Liberation (Moksha)—and protects His devotees with parental affection."
         }
       ]
     },
+
     kulaguruDetail: {
       hero: {
         label: "Poondurai Kaadai",
@@ -948,61 +950,63 @@ export const translations = {
       becomeButton: "உறுப்பினர் ஆக",
       close: "மூடுக"
     },
-    spiritualOfferings: {
+        spiritualOfferings: {
       heading: "ஆன்மீகத் துதிகள்",
       essence: "சாராம்சம்",
       verses: [
         {
           id: 1,
-          title: "கணபதி துதி",
+          title: "விநாயகர் துதி",
           subtitle: "தடைகளை நீக்குதல்",
           verse: [
             "கரிமுக கணபதி கஜ கண அதிபதி",
             "சிவசுத கணபதி மோதக பிரியசுகி",
-            "வழிபடுபவரிடர் நீக்கும் உமசுத குணநிதி",
-            "நம நம கணபதி தயகுண வாரநிதி"
+            "வழிபடுபவரிடர் நீக்கும் உமாசுத குணநிதி",
+            "நம நம கணபதி தயாகுண வரநிதி"
           ],
-          meaning: "பார்வதியின் மைந்தனும், யானை முகத்தானுமாகிய கணபதியை வணங்குவதன் மூலம் நம் வாழ்வின் துயரங்கள் நீங்கும். அவர் நற்பண்புகளின் உறைவிடமாகத் திகழ்ந்து, அவரை நாடுபவர்களுக்கு அருளைப் பொழிகிறார்."
+          meaning: "யானை முகத்தோனும், பார்வதி மைந்தனுமான கணபதியை வணங்குவதன் மூலம் நம் வாழ்வின் துன்பங்கள் நீங்கும். அவர் நற்பண்புகளின் இருப்பிடமாகவும், வேண்டுவோருக்கு அருளை வாரி வழங்குபவராகவும் திகழ்கிறார்."
         },
         {
           id: 2,
           title: "அங்காளம்மன் அருள்",
-          subtitle: "செழிப்பு பெறுதல்",
+          subtitle: "வளம் பெறுதல்",
           verse: [
-            "புண்ணிய காவிரி பொழில்சூழ் பூந்துறை நாதனிலே",
-            "அன்புடனே அருள்தரும் அங்காளம்மனைத் தொழுபவர்க்கு",
+            "புண்ணிய காவிரி பொழில்சூழ் பூந்துறை நாடதனில்",
+            "அன்புடனே அருள்தரும் அங்காளம்மனை தொழுபவர்க்கு",
             "மங்கலம் மாண்பும் மாசறு குணமும்",
             "மறைநெறி வாழ்வும் மக்கட்பேறும்",
             "வாரி வழங்கிடுவாள் நல்வாழ்வு நல்கிடுவாள்"
           ],
-          meaning: "புனிதக் காவிரி சூழ்ந்த பூந்துறை நல்நாட்டில் வீற்றிருக்கும் அங்காளம்மனைத் தொழுபவர்களுக்கு மங்கலம், மாண்பு, மாசற்ற குணம் மற்றும் மக்கட்பேறு (குழந்தைச் செல்வம்) கிட்டும். அன்னை அனைத்துத் தேவைகளையும் வாரி வழங்கி நல்வாழ்வு நல்குவாள்."
+          meaning: "காவிரி சூழ்ந்த பூந்துறை நாதனில் வீற்றிருக்கும் அங்காளம்மனைத் தொழுபவர்களுக்கு: மங்கலமான வாழ்வு, நற்குணம், மற்றும் மக்கட்பேறு (குழந்தை செல்வம்) கிடைக்கும். அன்னை தன் பக்தர்களுக்குத் தேவையான அனைத்து நன்மைகளையும் வாரி வழங்கி நல்வாழ்வு தருவாள்."
         },
         {
           id: 3,
           title: "உலக நலன்",
-          subtitle: "புனித வழிபாடு",
+          subtitle: "வழிபாடு",
           verse: [
             "காரிருள் நீங்கி கதிரவன் ஒளி பரவிடவே",
-            "மாறித்தருள் செய்யும் மதுரை மாமுனியே",
-            "பாரில் அனைத்துயிரும் இன்பம் வாழ்வே",
-            "சீறியு அருள் செய்யும் சிவனடி போற்றுவோம்"
+            "மதி இருள் நீங்கி மாயை விலகிடவே",
+            "உலகெல்லாம் உயிர்கள் இன்புற்று வாழ்திடவே",
+            "பதியுடன் அம்பிகை மகிழ்வுடன் தேரினில் உலா வருக வருகவே"
           ],
-          meaning: "காலைக்கதிரவன் இருளை நீக்குவது போல, மதுரை மாமுனிவர் அருளையும் மழையையும் பொழிகிறார். இவ்வுலகில் உள்ள அனைத்து உயிர்களும் என்றும் இன்பமாகவும் செழிப்பாகவும் வாழ்வதை உறுதி செய்யும் சிவபெருமானின் திருவடிகளைப் போற்றுகிறோம்."
+          meaning: "அறியாமை என்னும் இருள் நீங்கி, ஞான ஒளி பரவவும், உலகில் உள்ள அனைத்து உயிர்களும் மகிழ்ச்சியாக வாழவும், அம்பிகை தன் நாயகனுடன் தேரில் பவனி வந்து அருள்பாலிக்க வேண்டும் என வேண்டப்படுகிறது."
         },
         {
           id: 4,
-          title: "மகா விஷ்ணுவின் பேரருள்",
-          subtitle: "பரமானந்தம்",
+          title: "மகாவிஷ்ணுவின் பேரருள்",
+          subtitle: "பேரின்பம்",
           verse: [
-            "தாமோதர தய சிந்தும் ஞான வைராக்கிய பூஷணம்",
-            "ஸ்ரீதர ஸ்ரீப்ரியா சீதா ராம லட்சுமண பரத",
-            "ஆதி நாராயண மாதவ கோவிந்தா",
-            "கேசவ கிருஷ்ண முகுந்த ஹரே"
+            "தாமோதர தயா சிந்தும் ஞான வைராக்கிய பூஷணம்",
+            "அலேமலுமங்கா லக்ஷ்மி சமேதம்",
+            "அனுக்கிரக கருணா சாகரம்",
+            "தர்மா அர்த்த காம மோக்க்ஷம் கடாக்ஷம்",
+            "பக்த வாத்ஸல்ய அனுக்கிரக பிரதானம்"
           ],
-          meaning: "கருணைக்கடலும், ஞானம் மற்றும் வைராக்கியத்தின் ஆபரணமுமாகத் திகழும் இறைவன். ஆன்மீக விடுதலையையும் நித்திய அமைதியையும் பெற ஆதி நாராயணன், மாதவன் மற்றும் கிருஷ்ணனின் நாமங்களை ஓதுகிறோம்."
+          meaning: "தாமோதரனாகிய திருமால், அலேமலுமங்கை தாயாருடன் இணைந்து: அறம், பொருள், இன்பம், வீடுபேறு (மோட்சம்) ஆகிய நான்கு வகை பலன்களையும் தருவார். அவர் கருணைக் கடலாக இருந்து பக்தர்களுக்குப் பாதுகாப்பு அளிக்கிறார்."
         }
       ]
     },
+
     kulaguruDetail: {
       hero: {
         label: "பூந்துறை காடை",
