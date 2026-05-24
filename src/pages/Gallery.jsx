@@ -4,6 +4,8 @@ import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import heroImg from "../assets/Eswaran_Temple/DJI_20260429101906_0061_D.webp";
 import templeFn from "../assets/images/temple fn.webp";
+import kari_g1 from "../assets/images/karikaliaman_1-BmA6tM5O.webp";
+
 
 // Services
 import { subscribeGalleryItems } from "../services/galleryService";
@@ -490,12 +492,72 @@ const Gallery = () => {
 
   // Grouped Temples Grid Data
   const TEMPLE_ORDER = [ANG, ESW, KARI, PER];
+  
+  const getMainGodItem = (name) => {
+    if (name === ANG) {
+      return {
+        id: "main-god-angalamman",
+        title: isEn ? "Sri Angalamman - Moolavar Deity" : "ஸ்ரீ அங்காளம்மன் - மூலவர் தெய்வம்",
+        category: "Temple",
+        image: ang_g1,
+        group: ANG,
+        templeId: "sri-angalamman-temple"
+      };
+    }
+    if (name === ESW) {
+      return {
+        id: "main-god-eswaran",
+        title: isEn ? "Sri Pushpavaneswara Swamy - Moolavar Deity" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி - மூலவர் தெய்வம்",
+        category: "Temple",
+        image: esw_g1,
+        group: ESW,
+        templeId: "sri-pushpavaneswara-swamy-temple"
+      };
+    }
+    if (name === KARI) {
+      return {
+        id: "main-god-karikali",
+        title: isEn ? "Sri Kariyakali Amman - Moolavar Deity" : "ஸ்ரீ கரியகாளியம்மன் - மூலவர் தெய்வம்",
+        category: "Temple",
+        image: kari_g1,
+        group: KARI,
+        templeId: "sri-kariyakali-amman-temple"
+      };
+    }
+    if (name === PER) {
+      return {
+        id: "main-god-perumal",
+        title: isEn ? "Sri Damodara Perumal - Moolavar Deity" : "ஸ்ரீ தாமோதர பெருமாள் - மூலவர் தெய்வம்",
+        category: "Temple",
+        image: per_g1,
+        group: PER,
+        templeId: "sri-damodara-perumal-temple"
+      };
+    }
+    return null;
+  };
+
   const templeGroups = TEMPLE_ORDER.map((name) => {
-    const groupItems = filteredItems.filter(
+    let groupItems = filteredItems.filter(
       (item) => (item.category === "Temple" || item.category === "Temples" || item.category === "Videos") && item.group === name
     );
+    
+    // Add the main god image for the particular temple at the first
+    const mainGod = getMainGodItem(name);
+    if (mainGod) {
+      const matchesSearch = !searchQuery || mainGod.title.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesTemple = !selectedTemple || mainGod.templeId === selectedTemple;
+      
+      if (matchesSearch && matchesTemple) {
+        if (!groupItems.some(i => i.image === mainGod.image)) {
+          groupItems = [mainGod, ...groupItems];
+        }
+      }
+    }
+    
     return { name, items: groupItems };
   }).filter((g) => g.items.length > 0);
+
 
   // Grouped Gods Grid Data
   const GOD_ORDER = [ANG_GOD, ESW_GOD, KARI_GOD, PER_GOD];
