@@ -27,18 +27,18 @@ const AdminContent = lazy(() => import("@admin/App").then(module => ({ default: 
 
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
-  const [preloaderDuration, setPreloaderDuration] = useState(3000); // 3 s on initial load
+  const [preloaderDuration, setPreloaderDuration] = useState(1200); // 1.2 s on initial load
   const [preloaderTheme, setPreloaderTheme] = useState(() => localStorage.getItem("preloaderTheme") || "maroon");
   const location = useLocation();
   const isFirstRender = useRef(true);
 
-  // Navigation preloader — short (1.2 s), not waiting for video
+  // Navigation preloader — short (0.5 s), not waiting for video
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-    setPreloaderDuration(1200);
+    setPreloaderDuration(500);
     setIsLoading(true);
   }, [location.pathname]);
 
@@ -95,7 +95,7 @@ function AppContent() {
           {/* Preview button */}
           <button
             type="button"
-            onClick={() => { setPreloaderDuration(2000); setIsLoading(true); }}
+            onClick={() => { setPreloaderDuration(1000); setIsLoading(true); }}
             className="flex items-center gap-1.5 px-3 py-1 rounded-xl text-[10px] font-semibold cursor-pointer text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
             title="Preview preloader again"
           >
