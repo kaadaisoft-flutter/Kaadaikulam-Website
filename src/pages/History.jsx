@@ -18,6 +18,14 @@ const History = () => {
   const inscriptions = t.items;
   const suvadiImages = [suvadi1, suvadi2, suvadi3, suvadi4];
 
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + inscriptions.length) % inscriptions.length);
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % inscriptions.length);
+  };
+
   return (
     <div className="min-h-screen bg-sacred-history pt-0">
       {/* Hero Section */}
@@ -59,7 +67,7 @@ const History = () => {
       </section>
 
       {/* Inscriptions Slideshow Section */}
-      <section className="relative py-24 flex flex-col items-center min-h-[700px] justify-center overflow-hidden bg-transparent">
+      <section className="relative py-24 flex flex-col items-center min-h-[700px] justify-start overflow-hidden bg-transparent">
         {/* Premium Cinematic Background Image - Reduced opacity to blend with specialized art */}
         <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none">
           <img src={premiumBg} alt="" className="w-full h-full object-cover" />
@@ -89,7 +97,7 @@ const History = () => {
                 <span className="text-[10px] uppercase font-bold tracking-[0.4em] text-[#c49a3c] block mb-2">
                   {t.recordLabel}{inscriptions[activeIndex].id}
                 </span>
-                <h3 className="font-serif text-xl md:text-2xl text-[#5d1712] leading-tight px-2">
+                <h3 className="font-serif text-xl md:text-2xl text-[#5d1712] leading-tight px-2 break-words">
                   {inscriptions[activeIndex].title}
                 </h3>
               </div>
@@ -141,16 +149,16 @@ const History = () => {
 
           {/* Navigation Arrows */}
           <button 
-            onClick={() => setActiveIndex((prev) => (prev - 1 + inscriptions.length) % inscriptions.length)}
-            className="absolute left-[-70px] top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/80 shadow-lg text-[#5d1712] hover:bg-white hover:scale-110 transition-all hidden xl:flex border border-[#c49a3c]/10"
+            onClick={handlePrev}
+            className="absolute left-2 md:left-4 xl:left-[-70px] top-[260px] -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/90 shadow-lg text-[#5d1712] hover:bg-white hover:scale-110 transition-all duration-300 z-20 border border-[#c49a3c]/10 opacity-100 scale-100 pointer-events-auto"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
           <button 
-            onClick={() => setActiveIndex((prev) => (prev + 1) % inscriptions.length)}
-            className="absolute right-[-70px] top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/80 shadow-lg text-[#5d1712] hover:bg-white hover:scale-110 transition-all hidden xl:flex border border-[#c49a3c]/10"
+            onClick={handleNext}
+            className="absolute right-2 md:right-4 xl:right-[-70px] top-[260px] -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/90 shadow-lg text-[#5d1712] hover:bg-white hover:scale-110 transition-all duration-300 z-20 border border-[#c49a3c]/10 opacity-100 scale-100 pointer-events-auto"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M9 5l6 6-6 6" />
@@ -178,7 +186,7 @@ const History = () => {
                 </span>
                 <span className="w-8 h-[1.5px] bg-[#c49a3c]"></span>
               </div>
-              <h2 className="font-serif text-3xl md:text-5xl text-[#5d1712] mb-6">
+              <h2 className="font-serif text-3xl md:text-5xl text-[#5d1712] mb-6 break-words">
                 {t.suvadi.heading}
               </h2>
               <p className="text-stone-600 text-sm md:text-base leading-relaxed font-light">

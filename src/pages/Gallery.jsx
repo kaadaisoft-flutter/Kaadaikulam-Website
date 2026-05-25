@@ -495,68 +495,81 @@ const Gallery = () => {
   // Grouped Temples Grid Data
   const TEMPLE_ORDER = [ANG, ESW, KARI, PER];
   
-  const getMainGodItem = (name) => {
-    if (name === ANG) {
-      return {
-        id: "main-god-angalamman",
-        title: isEn ? "Sri Angalamman - Moolavar Deity" : "ஸ்ரீ அங்காளம்மன் - மூலவர் தெய்வம்",
-        category: "Temple",
-        image: ang_g1,
-        group: ANG,
-        templeId: "sri-angalamman-temple"
-      };
-    }
-    if (name === ESW) {
-      return {
-        id: "main-god-eswaran",
-        title: isEn ? "Sri Pushpavaneswara Swamy - Moolavar Deity" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி - மூலவர் தெய்வம்",
-        category: "Temple",
-        image: esw_g1,
-        group: ESW,
-        templeId: "sri-pushpavaneswara-swamy-temple"
-      };
-    }
-    if (name === KARI) {
-      return {
-        id: "main-god-karikali",
-        title: isEn ? "Sri Kariyakali Amman - Moolavar Deity" : "ஸ்ரீ கரியகாளியம்மன் - மூலவர் தெய்வம்",
-        category: "Temple",
-        image: kari_g1,
-        group: KARI,
-        templeId: "sri-kariyakali-amman-temple"
-      };
-    }
-    if (name === PER) {
-      return {
-        id: "main-god-perumal",
-        title: isEn ? "Sri Damodara Perumal - Moolavar Deity" : "ஸ்ரீ தாமோதர பெருமாள் - மூலவர் தெய்வம்",
-        category: "Temple",
-        image: per_g1,
-        group: PER,
-        templeId: "sri-damodara-perumal-temple"
-      };
-    }
-    return null;
+  // Returns ALL god images for a given temple group name
+  const getGodItems = (name) => {
+    const godImageSets = {
+      [ANG]: [
+        { id: "god-ang-1",  image: ang_g1,  title: isEn ? "Sri Angalamman – Photo 1"  : "ஸ்ரீ அங்காளம்மன் – படம் 1",  templeId: "sri-angalamman-temple", group: ANG },
+        { id: "god-ang-2",  image: ang_g2,  title: isEn ? "Sri Angalamman – Photo 2"  : "ஸ்ரீ அங்காளம்மன் – படம் 2",  templeId: "sri-angalamman-temple", group: ANG },
+        { id: "god-ang-3",  image: ang_g3,  title: isEn ? "Sri Angalamman – Photo 3"  : "ஸ்ரீ அங்காளம்மன் – படம் 3",  templeId: "sri-angalamman-temple", group: ANG },
+        { id: "god-ang-4",  image: ang_g4,  title: isEn ? "Sri Angalamman – Photo 4"  : "ஸ்ரீ அங்காளம்மன் – படம் 4",  templeId: "sri-angalamman-temple", group: ANG },
+        { id: "god-ang-5",  image: ang_g5,  title: isEn ? "Sri Angalamman – Photo 5"  : "ஸ்ரீ அங்காளம்மன் – படம் 5",  templeId: "sri-angalamman-temple", group: ANG },
+        { id: "god-ang-6",  image: ang_g6,  title: isEn ? "Sri Angalamman – Photo 6"  : "ஸ்ரீ அங்காளம்மன் – படம் 6",  templeId: "sri-angalamman-temple", group: ANG },
+        { id: "god-ang-7",  image: ang_g7,  title: isEn ? "Sri Angalamman – Photo 7"  : "ஸ்ரீ அங்காளம்மன் – படம் 7",  templeId: "sri-angalamman-temple", group: ANG },
+        { id: "god-ang-8",  image: ang_g8,  title: isEn ? "Sri Angalamman – Photo 8"  : "ஸ்ரீ அங்காளம்மன் – படம் 8",  templeId: "sri-angalamman-temple", group: ANG },
+        { id: "god-ang-9",  image: ang_g9,  title: isEn ? "Sri Angalamman – Photo 9"  : "ஸ்ரீ அங்காளம்மன் – படம் 9",  templeId: "sri-angalamman-temple", group: ANG },
+      ],
+      [ESW]: [
+        { id: "god-esw-1",  image: esw_g1,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 1"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 1",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-2",  image: esw_g2,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 2"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 2",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-3",  image: esw_g3,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 3"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 3",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-4",  image: esw_g4,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 4"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 4",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-5",  image: esw_g5,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 5"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 5",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-6",  image: esw_g6,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 6"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 6",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-7",  image: esw_g7,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 7"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 7",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-8",  image: esw_g8,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 8"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 8",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-9",  image: esw_g9,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 9"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 9",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-10", image: esw_g10, title: isEn ? "Sri Pushpavaneswara Swamy – Photo 10" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 10", templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-11", image: esw_g11, title: isEn ? "Sri Pushpavaneswara Swamy – Photo 11" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 11", templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+        { id: "god-esw-12", image: esw_g12, title: isEn ? "Sri Pushpavaneswara Swamy – Photo 12" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 12", templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
+      ],
+      [KARI]: [
+        { id: "god-kari-1", image: kari_g1, title: isEn ? "Sri Kariyakali Amman – Photo 1" : "ஸ்ரீ கரியகாளியம்மன் – படம் 1", templeId: "sri-kariyakali-amman-temple", group: KARI },
+      ],
+      [PER]: [
+        { id: "god-per-1",  image: per_g1,  title: isEn ? "Sri Damodara Perumal – Photo 1"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 1",  templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-2",  image: per_g2,  title: isEn ? "Sri Damodara Perumal – Photo 2"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 2",  templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-3",  image: per_g3,  title: isEn ? "Sri Damodara Perumal – Photo 3"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 3",  templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-4",  image: per_g4,  title: isEn ? "Sri Damodara Perumal – Photo 4"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 4",  templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-5",  image: per_g5,  title: isEn ? "Sri Damodara Perumal – Photo 5"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 5",  templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-6",  image: per_g6,  title: isEn ? "Sri Damodara Perumal – Photo 6"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 6",  templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-7",  image: per_g7,  title: isEn ? "Sri Damodara Perumal – Photo 7"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 7",  templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-8",  image: per_g8,  title: isEn ? "Sri Damodara Perumal – Photo 8"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 8",  templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-9",  image: per_g9,  title: isEn ? "Sri Damodara Perumal – Photo 9"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 9",  templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-10", image: per_g10, title: isEn ? "Sri Damodara Perumal – Photo 10" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 10", templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-11", image: per_g11, title: isEn ? "Sri Damodara Perumal – Photo 11" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 11", templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-12", image: per_g12, title: isEn ? "Sri Damodara Perumal – Photo 12" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 12", templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-13", image: per_g13, title: isEn ? "Sri Damodara Perumal – Photo 13" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 13", templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-14", image: per_g14, title: isEn ? "Sri Damodara Perumal – Photo 14" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 14", templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-15", image: per_g15, title: isEn ? "Sri Damodara Perumal – Photo 15" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 15", templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-16", image: per_g16, title: isEn ? "Sri Damodara Perumal – Photo 16" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 16", templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-17", image: per_g17, title: isEn ? "Sri Damodara Perumal – Photo 17" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 17", templeId: "sri-damodara-perumal-temple", group: PER },
+        { id: "god-per-18", image: per_g18, title: isEn ? "Sri Damodara Perumal – Photo 18" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 18", templeId: "sri-damodara-perumal-temple", group: PER },
+      ],
+    };
+    return (godImageSets[name] || []).map(g => ({ ...g, category: "Temple" }));
   };
 
   const templeGroups = TEMPLE_ORDER.map((name) => {
-    let groupItems = filteredItems.filter(
+    // Temple drone/exterior shots
+    const templeShots = filteredItems.filter(
       (item) => (item.category === "Temple" || item.category === "Temples" || item.category === "Videos") && item.group === name
     );
-    
-    // Add the main god image for the particular temple at the first
-    const mainGod = getMainGodItem(name);
-    if (mainGod) {
-      const matchesSearch = !searchQuery || mainGod.title.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesTemple = !selectedTemple || mainGod.templeId === selectedTemple;
-      
-      if (matchesSearch && matchesTemple) {
-        if (!groupItems.some(i => i.image === mainGod.image)) {
-          groupItems = [mainGod, ...groupItems];
-        }
-      }
-    }
-    
+
+    // All god images for this temple
+    const godImages = getGodItems(name).filter((g) => {
+      const matchesSearch = !searchQuery || g.title.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesTemple = !selectedTemple || g.templeId === selectedTemple;
+      return matchesSearch && matchesTemple;
+    });
+
+    // De-duplicate by image src (avoid duplicates if already in static list)
+    const existingImages = new Set(templeShots.map(i => i.image));
+    const newGodImages = godImages.filter(g => !existingImages.has(g.image));
+
+    // God images first, then temple exterior shots
+    const groupItems = [...newGodImages, ...templeShots];
+
     return { name, items: groupItems };
   }).filter((g) => g.items.length > 0);
 

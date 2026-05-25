@@ -399,6 +399,14 @@ export const translations = {
         heading: "Glory of the Kongu Vellalar Poondurai Kaadai Clan",
         text: "The rich heritage and historical honors of the Kaadai Kulam in Kongu Nadu. True to the literary praise \"The Bountiful Poondurai\", the Kongu Vellalar Poondurai Kaadai clan has profoundly enriched the Kongu soil through their extraordinary valor, unwavering social justice, and deep spirituality."
       },
+      prologue: `In the Kongu soil, known for its cool sands and temples of the heart, if we browse the pages of history, there shines a name with absolute grandeur — Poondurai Kaadai Clan. This is not a pride born of power, but an identity born of righteousness!
+
+Even in the 11th century, it was a clan inscribed as 'Sagadaigal' in the Erode Adhi Narayana Perumal Temple inscriptions. Back then, their word stood as a 'witness' between the deity and the devotee. An administrative skill admired even by the three great kings! The title 'Saapudaiyar' and the fame 'Poondurai Nadu Athigam' were recognition for their hard work and honesty. The stones of Karur Pasupatheeswarar Temple still sing their glory. For those seeking justice, they were the abode of dharma!
+
+When kingdoms clashed, the Madukkarai Sellandiamman Temple inscriptions, which resolved the border disputes, tell a truth... that this clan lived as a court of justice! The hands that held swords also wrote land grants for Tamil. The Poondurai Puranam, which patronized poets, stands as witness to their culture. The justice, valor, and compassion of Kongu Nadu are deeply ingrained in their blood.
+
+Carrying these famous historical fragments of our clan, our Kaadai Kulam website begins. This will serve as the starting point of a noble journey to document our complete history. Poondurai Kaadai Clan... it is not just a name, it is the living history of Kongu soil!`,
+
       prayer: {
         title: "Vinayagar Prayer",
         verse: [
@@ -1060,6 +1068,14 @@ export const translations = {
         heading: "கொங்கு வெள்ளாளர் பூந்துறை காடை குலத்தின் பெருமை",
         text: "கொங்கு நாட்டில் காடை குலத்தின் வளமான பாரம்பரியம் மற்றும் வரலாற்றுச் சிறப்புகள். \"வண்மைசேர் பூந்துறை\" என்ற இலக்கியப் புகழுக்கு ஏற்ப, பூந்துறை காடை குலத்தினர் தங்கள் அசாத்திய வீரம், தளராத சமூக நீதி மற்றும் ஆழமான ஆன்மீகத்தின் மூலம் கொங்கு மண்ணை செழிப்படையச் செய்துள்ளனர்."
       },
+      prologue: `பூந்துறையின் மணிமகுடம் மண்குளிர்ச்சியும், மனக்கோயிலும் கொண்ட கொங்கு மண்ணில்... வரலாற்றின் பக்கங்களை உரசிப் பார்த்தால், அங்கே கம்பீரமாகச் சுடர்விடுகிறது ஒரு பெயர் — பூந்துறை காடை குலம். இது அதிகாரத்தால் வந்த பெருமையல்ல, அறத்தால் வந்த அடையாளம்!
+
+11-ஆம் நூற்றாண்டிலேயே, ஈரோடு ஆதிநாராயணப் பெருமாள் கோயில் கல்வெட்டுகளில் “சாகாடைகள்” என்று பொறிக்கப்பட்ட குலம். அன்று இறைவனுக்கும் பக்தனுக்கும் இடையே இவர்களின் சொல்லே ‘சாட்சியாக’ நின்றது. மூவேந்தர்களும் வியந்து போற்றிய நிர்வாகத் திறன்! “சாபுடையார்” என்ற பட்டமும், “பூந்துறை நாடு அதிகம்” என்ற புகழும் இவர்களின் உழைப்பிற்கும், நேர்மைக்கும் கிடைத்த அங்கீகாரம். கருவூர் பசுபதீஸ்வரர் கோயில் கற்கள் இன்றும் இவர்களின் புகழைப் பாடிக் கொண்டிருக்கின்றன. நீதி தேடியவர்களுக்குத் தர்மத்தின் இருப்பிடம் இவர்களே!
+
+நாடுகள் மோதிக்கொண்டபோது, எல்லைப் பிணக்குகளைத் தீர்த்து வைத்த மதுக்கரை செல்லாண்டியம்மன் கோயில் கல்வெட்டுகள் ஒரு உண்மையைச் சொல்கின்றன... அன்று இக்குலம் ஒரு நீதிமன்றமாகவே வாழ்ந்தது! வாள் ஏந்திய கைகள், தமிழுக்கு நிலம் எழுதித் தந்தன. புலவர்களைப் புரந்த பூந்துறை புராணமே இவர்களின் பண்பாட்டுக்குச் சாட்சி. கொங்கு நாட்டின் நீதியும், வீரமும், ஈரமும் இவர்களின் ரத்தத்தில் ஊறியவை.
+
+நமது குலத்தின் புகழ்பெற்ற இந்த வரலாற்றுத் துளிகளைத் தாங்கித் தொடங்குகிறது நமது காடை குலம் இணையதளம். முழுமையான வரலாற்றை ஆவணப்படுத்தும் ஒரு உன்னத பயணத்தின் தொடக்கப் புள்ளியாக இது அமையும். பூந்துறை காடை குலம்... இது வெறும் பெயரல்ல, கொங்கு மண்ணின் வாழும் வரலாறு!`,
+
       prayer: {
         title: "விநாயகர் துதி",
         verse: [

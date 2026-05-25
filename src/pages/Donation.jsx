@@ -114,7 +114,7 @@ const Donation = () => {
             className="space-y-12"
           >
             <div>
-              <h2 className="font-serif text-4xl text-[#5d1712] mb-6">{t.selection.heading}</h2>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#5d1712] mb-6 break-words">{t.selection.heading}</h2>
               <p className="text-stone-700 text-lg leading-relaxed">
                 {t.selection.text}
               </p>
@@ -171,14 +171,14 @@ const Donation = () => {
             className="space-y-12"
           >
             {/* Bank Card */}
-            <div className="bg-[#fdfcf7] p-8 md:p-12 rounded-[40px] border border-[#c49a3c]/20 shadow-2xl relative overflow-hidden">
+            <div className="bg-[#fdfcf7] p-5 sm:p-8 md:p-12 rounded-[40px] border border-[#c49a3c]/20 shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 p-8 opacity-10">
                 <svg width="120" height="120" viewBox="0 0 24 24" fill="#c49a3c">
                   <path d="M11.5,1L2,6v2h19V6L11.5,1z M11.5,3.1L18.4,6.7H4.6L11.5,3.1z M3,10v10h1v2h16v-2h1V10H3z M5,12h2v6H5V12z M9,12h2v6H9V12z M13,12h2v6h-2V12z M17,12h2v6h-2V12z M5,20h14v1H5V20z" />
                 </svg>
               </div>
 
-              <h3 className="font-serif text-3xl text-[#5d1712] mb-10">{t.bank.heading}</h3>
+              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-[#5d1712] mb-10 break-words">{t.bank.heading}</h3>
               
               <div className="space-y-8">
                 <div className="group cursor-pointer" onClick={() => handleCopy("Poondurai Kadaikula Makkal Narpani")}>
@@ -201,7 +201,7 @@ const Donation = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="group cursor-pointer" onClick={() => handleCopy("SBIN0001234")}>
                     <p className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.bank.ifsc}</p>
                     <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-stone-100 group-hover:border-[#c49a3c] transition-colors">
@@ -228,10 +228,10 @@ const Donation = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white p-10 md:p-16 rounded-[40px] shadow-2xl border border-stone-100"
+            className="bg-white p-6 sm:p-10 md:p-16 rounded-[40px] shadow-2xl border border-stone-100"
           >
             <div className="text-center mb-12">
-              <h2 className="font-serif text-3xl md:text-4xl text-[#5d1712] mb-4">{t.confirmation.heading}</h2>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#5d1712] mb-4 break-words">{t.confirmation.heading}</h2>
               <p className="text-stone-600 max-w-2xl mx-auto">{t.confirmation.sub}</p>
             </div>
 
