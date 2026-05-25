@@ -4,6 +4,60 @@ import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
 import img3 from "../assets/images/karikaliaman_1-BmA6tM5O.webp";
 import img4 from "../assets/Perumal_Temple/Perumal_Temple_Hero_optimized.webp";
 
+// New Temple Details Deity Images
+import newAngImg from "../assets/Temple_Data/Change_frame_and_background_202605251617.webp";
+import newEswImg from "../assets/Temple_Data/change_frame_background_same_202605251615.webp";
+import newKariImg from "../assets/Temple_Data/Change_frame_same_background_202605251619.webp";
+import newPerImg from "../assets/Temple_Data/Change_frame_dont_change_background_202605251630.webp";
+
+// Angalamman God Images
+import ang_g1 from "../assets/Angalamman_God/DSC01350.webp";
+import ang_g2 from "../assets/Angalamman_God/DSC01359.webp";
+import ang_g3 from "../assets/Angalamman_God/DSC01366.webp";
+import ang_g4 from "../assets/Angalamman_God/DSC01381.webp";
+import ang_g5 from "../assets/Angalamman_God/DSC01384.webp";
+import ang_g6 from "../assets/Angalamman_God/DSC01392.webp";
+import ang_g7 from "../assets/Angalamman_God/DSC01401.webp";
+import ang_g8 from "../assets/Angalamman_God/DSC01403.webp";
+import ang_g9 from "../assets/Angalamman_God/DSC01405.webp";
+
+// Eswaran God Images
+import esw_g1 from "../assets/Eswaran_God/DSC01409.webp";
+import esw_g2 from "../assets/Eswaran_God/DSC01415.webp";
+import esw_g3 from "../assets/Eswaran_God/DSC01417.webp";
+import esw_g4 from "../assets/Eswaran_God/DSC01419.webp";
+import esw_g5 from "../assets/Eswaran_God/DSC01431.webp";
+import esw_g6 from "../assets/Eswaran_God/DSC01435.webp";
+import esw_g7 from "../assets/Eswaran_God/DSC01439.webp";
+import esw_g8 from "../assets/Eswaran_God/DSC01444.webp";
+import esw_g9 from "../assets/Eswaran_God/DSC01451.webp";
+import esw_g10 from "../assets/Eswaran_God/DSC01454.webp";
+import esw_g11 from "../assets/Eswaran_God/DSC01458.webp";
+import esw_g12 from "../assets/Eswaran_God/DSC01464.webp";
+
+// Kariyakaliyamman God Images
+import kari_g1 from "../assets/Kariyakaliyamman_God/WhatsApp Image 2026-05-24 at 12.55.12 PM.webp";
+
+// Perumal God Images
+import per_g1 from "../assets/Perumal_God/DSC01216.webp";
+import per_g2 from "../assets/Perumal_God/DSC01229.webp";
+import per_g3 from "../assets/Perumal_God/DSC01240.webp";
+import per_g4 from "../assets/Perumal_God/DSC01245.webp";
+import per_g5 from "../assets/Perumal_God/DSC01250.webp";
+import per_g6 from "../assets/Perumal_God/DSC01254.webp";
+import per_g7 from "../assets/Perumal_God/DSC01264.webp";
+import per_g8 from "../assets/Perumal_God/DSC01288.webp";
+import per_g9 from "../assets/Perumal_God/DSC01292.webp";
+import per_g10 from "../assets/Perumal_God/DSC01293.webp";
+import per_g11 from "../assets/Perumal_God/DSC01298.webp";
+import per_g12 from "../assets/Perumal_God/DSC01311.webp";
+import per_g13 from "../assets/Perumal_God/DSC01325.webp";
+import per_g14 from "../assets/Perumal_God/DSC01334.webp";
+import per_g15 from "../assets/Perumal_God/DSC01338.webp";
+import per_g16 from "../assets/Perumal_God/DSC01341.webp";
+import per_g17 from "../assets/Perumal_God/DSC01343.webp";
+import per_g18 from "../assets/Perumal_God/DSC01345.webp";
+
 export const getTempleInfo = (language, t) => {
   const isTa = language === "ta";
   
@@ -11,6 +65,7 @@ export const getTempleInfo = (language, t) => {
     "sri-angalamman-temple": {
       name: t.items[0].name,
       image: img1,
+      godImages: [newAngImg, ang_g1, ang_g2, ang_g3, ang_g4, ang_g5, ang_g6, ang_g7, ang_g8, ang_g9],
       visitingHours: isTa ? "காலை 6:00 - மதியம் 12:00, மாலை 4:00 - இரவு 8:00" : "6:00 AM - 12:00 PM, 4:00 PM - 8:00 PM",
       address: isTa ? "அவல்பூந்துறை, தமிழ்நாடு 638115" : "Avalpoondurai, Tamil Nadu 638115",
       features: isTa ? ["தினசரி பூஜை", "ஆண்டு திருவிழா", "சிறப்பு அபிஷேகம்"] : ["Daily Pooja", "Annual Festival", "Special Abhishekam"],
@@ -42,6 +97,7 @@ export const getTempleInfo = (language, t) => {
     "sri-pushpavaneswara-swamy-temple": {
       name: t.items[1].name,
       image: img2,
+      godImages: [newEswImg, esw_g1, esw_g2, esw_g3, esw_g4, esw_g5, esw_g6, esw_g7, esw_g8, esw_g9, esw_g10, esw_g11, esw_g12],
       visitingHours: isTa ? "காலை 6:00 - 11:30, மாலை 4:30 - இரவு 8:30" : "6:00 AM - 11:30 AM, 4:30 PM - 8:30 PM",
       address: isTa ? "அவல்பூந்துறை, தமிழ்நாடு 638115" : "Avalpoondurai, Tamil Nadu 638115",
       features: isTa ? ["சிவராத்திரி", "தினசரி அபிஷேகம்", "ருத்ர அபிஷேகம்"] : ["Shivaratri", "Daily Abhishekam", "Rudra Abhishekam"],
@@ -73,6 +129,7 @@ export const getTempleInfo = (language, t) => {
     "sri-kariyakali-amman-temple": {
       name: t.items[2].name,
       image: img3,
+      godImages: [newKariImg, kari_g1],
       visitingHours: isTa ? "காலை 7:00 - மதியம் 12:00, மாலை 5:00 - இரவு 8:00" : "7:00 AM - 12:00 PM, 5:00 PM - 8:00 PM",
       address: isTa ? "அவல்பூந்துறை, தமிழ்நாடு 638115" : "Avalpoondurai, Tamil Nadu 638115",
       features: isTa ? ["ஆடிப் பெருக்கு", "சிறப்பு ஆரத்தி", "நவராத்திரி"] : ["Aadi Perukku", "Special Arthi", "Navaratri"],
@@ -90,6 +147,7 @@ export const getTempleInfo = (language, t) => {
     "sri-damodara-perumal-temple": {
       name: t.items[4]?.name || t.items[3].name,
       image: img4,
+      godImages: [newPerImg, per_g1, per_g2, per_g3, per_g4, per_g5, per_g6, per_g7, per_g8, per_g9, per_g10, per_g11, per_g12, per_g13, per_g14, per_g15, per_g16, per_g17, per_g18],
       visitingHours: isTa ? "காலை 6:30 - 11:30, மாலை 5:00 - இரவு 8:30" : "6:30 AM - 11:30 AM, 5:00 PM - 8:30 PM",
       address: isTa ? "அவல்பூந்துறை, தமிழ்நாடு 638115" : "Avalpoondurai, Tamil Nadu 638115",
       features: isTa ? ["வைகுண்ட ஏகாதசி", "மார்கழி பூஜை", "கருட சேவை"] : ["Vaikuntha Ekadashi", "Margazhi Pooja", "Garuda Seva"],

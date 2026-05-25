@@ -23,6 +23,11 @@ const TempleDetail = () => {
     );
   }
 
+  // Get the main god image (the first one) or fallback to temple main image
+  const mainImage = temple.godImages && temple.godImages.length > 0 
+    ? temple.godImages[0] 
+    : temple.image;
+
   return (
     <div className="pt-24 pb-20 bg-sacred min-h-screen">
       <div className="container mx-auto px-6">
@@ -37,9 +42,27 @@ const TempleDetail = () => {
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-7 rounded-[32px] overflow-hidden shadow-2xl border border-[#c49a3c]/10"
+            className="lg:col-span-7 rounded-[32px] overflow-hidden shadow-2xl border border-[#c49a3c]/20 relative aspect-[4/3] bg-stone-950 flex items-center justify-center group"
           >
-            <img src={temple.image} alt={temple.name} className="w-full aspect-[4/3] object-cover" />
+            {/* Ambient Blurred Background reflection of the deity image */}
+            <img 
+              src={mainImage} 
+              alt="" 
+              className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110 select-none pointer-events-none" 
+            />
+            
+            {/* Soft dark vignette over background for depth */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/50 z-0 pointer-events-none" />
+
+            {/* Inner gold frame border */}
+            <div className="absolute inset-4 sm:inset-5 border border-[#c49a3c]/30 rounded-[20px] sm:rounded-[24px] pointer-events-none z-10" />
+            
+            {/* Main deity image (displayed fully, filling the layout) */}
+            <img 
+              src={mainImage} 
+              alt={temple.name} 
+              className="relative z-10 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
+            />
           </motion.div>
 
           {/* Info Card */}
