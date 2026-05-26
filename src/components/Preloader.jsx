@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import preloaderVideo from "../assets/Preloader/bd2507452ac54f0e8cc439035aac5e35.webm";
+import logo from "../assets/logo.webp";
 
 /**
  * Preloader
@@ -44,6 +45,7 @@ const Preloader = ({ theme = "maroon", duration = 1500, onComplete }) => {
       >
         <video
           src={preloaderVideo}
+          poster={logo}
           autoPlay
           muted
           playsInline

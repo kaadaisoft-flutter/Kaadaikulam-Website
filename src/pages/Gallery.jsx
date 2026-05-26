@@ -101,61 +101,75 @@ const extractYoutubeId = (url) => {
 };
 
 /* ─── Masonry card (natural image height) ────────────────────────────── */
-const MasonryCard = ({ item, index, onOpen }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-60px" }}
-    whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
-    transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1], delay: (index % 3) * 0.08 }}
-    className="break-inside-avoid mb-5 group relative rounded-2xl overflow-hidden cursor-pointer
-               shadow-md hover:shadow-2xl transition-shadow duration-500 bg-white"
-    onClick={() => onOpen(item)}
-  >
-    {/* Video indicator badge */}
-    {(item.type === "YouTube Video" || item.type === "Video Upload") && (
-      <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-[#c49a3c] p-2.5 rounded-full z-10 border border-[#c49a3c]/30 shadow-md">
-        <svg className="w-4 h-4 fill-[#c49a3c]" viewBox="0 0 24 24">
-          <path d="M8 5v14l11-7z" />
-        </svg>
+const MasonryCard = ({ item, index, onOpen }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
+      transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1], delay: (index % 3) * 0.08 }}
+      className="break-inside-avoid mb-5 group relative rounded-2xl overflow-hidden cursor-pointer
+                 shadow-md hover:shadow-2xl transition-shadow duration-500 bg-stone-100"
+      onClick={() => onOpen(item)}
+    >
+      {/* Video indicator badge */}
+      {(item.type === "YouTube Video" || item.type === "Video Upload") && (
+        <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-[#c49a3c] p-2.5 rounded-full z-10 border border-[#c49a3c]/30 shadow-md">
+          <svg className="w-4 h-4 fill-[#c49a3c]" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+      )}
+
+      {/* Shimmer/Skeleton placeholder */}
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-stone-200/50 animate-pulse flex items-center justify-center min-h-[200px]">
+          <div className="w-6 h-6 border-2 border-[#5d1712]/30 border-t-[#5d1712] rounded-full animate-spin" />
+        </div>
+      )}
+
+      {/* Image — natural height, no forced ratio */}
+      <img
+        src={item.image}
+        alt={item.title}
+        onLoad={() => setIsLoaded(true)}
+        className={`w-full h-auto block transition-all duration-700 group-hover:scale-[1.04] ${
+          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        }`}
+        loading="lazy"
+      />
+
+      {/* Gradient overlay on hover */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-400
+                      flex flex-col justify-end p-5">
+        <motion.div
+          initial={false}
+          className="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-400"
+        >
+          <span className="text-[#c49a3c] text-[9px] uppercase font-bold tracking-[0.2em] mb-1 block">
+            {item.category}
+          </span>
+          <h3 className="text-white font-serif text-base leading-snug mb-0.5">{item.title}</h3>
+          {item.group && <p className="text-white/55 text-xs font-light italic">{item.group}</p>}
+        </motion.div>
       </div>
-    )}
 
-    {/* Image — natural height, no forced ratio */}
-    <img
-      src={item.image}
-      alt={item.title}
-      className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.04]"
-      loading="lazy"
-    />
-
-    {/* Gradient overlay on hover */}
-    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-400
-                    flex flex-col justify-end p-5">
-      <motion.div
-        initial={false}
-        className="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-400"
-      >
-        <span className="text-[#c49a3c] text-[9px] uppercase font-bold tracking-[0.2em] mb-1 block">
-          {item.category}
-        </span>
-        <h3 className="text-white font-serif text-base leading-snug mb-0.5">{item.title}</h3>
-        {item.group && <p className="text-white/55 text-xs font-light italic">{item.group}</p>}
-      </motion.div>
-    </div>
-
-    {/* Always-visible bottom tag strip */}
-    {item.group && (
-      <div className="absolute bottom-0 inset-x-0 h-10
-                      bg-gradient-to-t from-black/50 to-transparent
-                      group-hover:opacity-0 transition-opacity duration-300
-                      flex items-end px-4 pb-2">
-        <span className="text-white/70 text-[10px] font-medium truncate">{item.group}</span>
-      </div>
-    )}
-  </motion.div>
-);
+      {/* Always-visible bottom tag strip */}
+      {item.group && (
+        <div className="absolute bottom-0 inset-x-0 h-10
+                        bg-gradient-to-t from-black/50 to-transparent
+                        group-hover:opacity-0 transition-opacity duration-300
+                        flex items-end px-4 pb-2">
+          <span className="text-white/70 text-[10px] font-medium truncate">{item.group}</span>
+        </div>
+      )}
+    </motion.div>
+  );
+};
 
 /* ─── Masonry grid ───────────────────────────────────────────────────── */
 const MasonryGrid = ({ items, onOpen }) => (
@@ -166,42 +180,72 @@ const MasonryGrid = ({ items, onOpen }) => (
   </div>
 );
 
+/* ─── Grouped block component for lazy-rendering group items ─────────── */
+const GroupedBlock = ({ name, items, groupLabel, countLabel, groupIdx, onOpen }) => {
+  const [showAll, setShowAll] = useState(false);
+  const initialLimit = 6;
+  const displayedItems = showAll ? items : items.slice(0, initialLimit);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: groupIdx * 0.1 }}
+    >
+      {/* Section header */}
+      <div className="flex items-center gap-5 mb-10">
+        <span className="hidden sm:block w-10 h-[2px] bg-[#c49a3c] shrink-0 rounded-full" />
+        <div className="flex-1 min-w-0">
+          <p className="text-[#c49a3c] text-[10px] font-bold tracking-[0.35em] uppercase mb-1">
+            {groupLabel}
+          </p>
+          <h2 className="font-serif text-2xl md:text-3xl text-[#5d1712] leading-tight">
+            {name}
+          </h2>
+        </div>
+        <span className="shrink-0 inline-flex items-center gap-1.5 bg-[#5d1712]/5
+                         border border-[#c49a3c]/30 text-[#5d1712] text-xs font-bold
+                         tracking-widest uppercase px-4 py-2 rounded-full">
+          <svg className="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          {items.length}&nbsp;{countLabel}
+        </span>
+        <span className="hidden md:block flex-1 h-px bg-gradient-to-r from-[#c49a3c]/40 to-transparent" />
+      </div>
+
+      {/* Masonry grid for this group */}
+      <MasonryGrid items={displayedItems} onOpen={onOpen} />
+
+      {/* Show More / Show Less Button for Group */}
+      {items.length > initialLimit && (
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="px-6 py-2.5 bg-white hover:bg-[#5d1712] text-[#5d1712] hover:text-white border border-[#5d1712] hover:border-transparent font-bold tracking-wider uppercase rounded-full shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer text-[10px] md:text-xs"
+          >
+            {showAll ? "Show Less" : `Show More (+${items.length - initialLimit} photos)`}
+          </button>
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
 /* ─── Grouped section (Temples / Gods tabs) ──────────────────────────── */
 const GroupedSection = ({ groups, groupLabel, countLabel, onOpen }) => (
   <div className="space-y-20">
     {groups.map(({ name, items }, groupIdx) => (
-      <motion.div
+      <GroupedBlock
         key={name}
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: groupIdx * 0.1 }}
-      >
-        {/* Section header */}
-        <div className="flex items-center gap-5 mb-10">
-          <span className="hidden sm:block w-10 h-[2px] bg-[#c49a3c] shrink-0 rounded-full" />
-          <div className="flex-1 min-w-0">
-            <p className="text-[#c49a3c] text-[10px] font-bold tracking-[0.35em] uppercase mb-1">
-              {groupLabel}
-            </p>
-            <h2 className="font-serif text-2xl md:text-3xl text-[#5d1712] leading-tight">
-              {name}
-            </h2>
-          </div>
-          <span className="shrink-0 inline-flex items-center gap-1.5 bg-[#5d1712]/5
-                           border border-[#c49a3c]/30 text-[#5d1712] text-xs font-bold
-                           tracking-widest uppercase px-4 py-2 rounded-full">
-            <svg className="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            {items.length}&nbsp;{countLabel}
-          </span>
-          <span className="hidden md:block flex-1 h-px bg-gradient-to-r from-[#c49a3c]/40 to-transparent" />
-        </div>
-
-        {/* Masonry grid for this group */}
-        <MasonryGrid items={items} onOpen={onOpen} />
-      </motion.div>
+        name={name}
+        items={items}
+        groupLabel={groupLabel}
+        countLabel={countLabel}
+        groupIdx={groupIdx}
+        onOpen={onOpen}
+      />
     ))}
   </div>
 );
@@ -567,8 +611,8 @@ const Gallery = () => {
     const existingImages = new Set(templeShots.map(i => i.image));
     const newGodImages = godImages.filter(g => !existingImages.has(g.image));
 
-    // God images first, then temple exterior shots
-    const groupItems = [...newGodImages, ...templeShots];
+    // Only one main god image first, then temple exterior shots
+    const groupItems = [...newGodImages.slice(0, 1), ...templeShots];
 
     return { name, items: groupItems };
   }).filter((g) => g.items.length > 0);

@@ -8,9 +8,42 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="/src/assets/Preloader/bd2507452ac54f0e8cc439035aac5e35.webm" as="video" type="video/webm" />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Instant HTML/CSS preloader that renders immediately while JS bundle is loading -->
+      <style>
+        .initial-preloader {
+          position: fixed;
+          inset: 0;
+          z-index: 99999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #2a0603, #4a0a05, #1a0302);
+        }
+        .initial-preloader-logo {
+          width: clamp(120px, 16vw, 180px);
+          height: clamp(120px, 16vw, 180px);
+          object-fit: contain;
+          animation: initial-pulse 1.8s ease-in-out infinite;
+        }
+        @keyframes initial-pulse {
+          0%, 100% {
+            opacity: 0.6;
+            transform: scale(0.95);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.05);
+          }
+        }
+      </style>
+      <div class="initial-preloader">
+        <img class="initial-preloader-logo" src="/favicon.webp" alt="Poondurai Kaadai" />
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

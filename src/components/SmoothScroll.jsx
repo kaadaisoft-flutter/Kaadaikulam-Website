@@ -19,6 +19,16 @@ const SmoothScroll = ({ children }) => {
 
     window.lenis = lenis;
 
+    let scrollTimeout;
+    
+    lenis.on('scroll', () => {
+      document.documentElement.classList.add('is-scrolling');
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        document.documentElement.classList.remove('is-scrolling');
+      }, 1000);
+    });
+
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -27,6 +37,8 @@ const SmoothScroll = ({ children }) => {
     requestAnimationFrame(raf);
 
     return () => {
+      clearTimeout(scrollTimeout);
+      document.documentElement.classList.remove('is-scrolling');
       lenis.destroy();
     };
   }, []);
