@@ -129,7 +129,7 @@ const Donation = () => {
                     setCustomAmount("");
                     setFormData(prev => ({ ...prev, amount: amt.toString() }));
                   }}
-                  className={`py-6 rounded-2xl font-serif text-xl transition-all duration-300 border-2 ${
+                  className={`py-6 rounded-2xl font-sans text-xl transition-all duration-300 border-2 ${
                     selectedAmount === amt
                       ? "bg-[#5d1712] text-white border-[#5d1712] shadow-xl scale-105"
                       : "bg-white text-stone-700 border-stone-100 hover:border-[#c49a3c] hover:text-[#c49a3c]"
@@ -150,7 +150,7 @@ const Donation = () => {
                   setSelectedAmount(null);
                   setFormData(prev => ({ ...prev, amount: e.target.value }));
                 }}
-                className="w-full bg-white border-b-2 border-stone-200 px-4 py-4 focus:border-[#5d1712] focus:outline-none transition-colors text-2xl font-serif text-stone-800"
+                className="w-full bg-white border-b-2 border-stone-200 px-4 py-4 focus:border-[#5d1712] focus:outline-none transition-colors text-2xl font-sans text-stone-800"
                 placeholder={t.selection.placeholder}
               />
             </div>
@@ -194,7 +194,7 @@ const Donation = () => {
                 <div className="group cursor-pointer" onClick={() => handleCopy("12345678901235")}>
                   <p className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.bank.accNum}</p>
                   <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-stone-100 group-hover:border-[#c49a3c] transition-colors">
-                    <span className="text-xl font-serif text-stone-800 tracking-wider">12345678901235</span>
+                    <span className="text-xl font-sans text-stone-800 tracking-wider">12345678901235</span>
                     <svg className="w-5 h-5 text-stone-300 group-hover:text-[#c49a3c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
