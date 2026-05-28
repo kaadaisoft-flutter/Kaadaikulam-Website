@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import preloaderVideo from "../assets/Preloader/bd2507452ac54f0e8cc439035aac5e35.webm";
 import logo from "../assets/logo.webp";
 
 /**
@@ -10,6 +9,7 @@ import logo from "../assets/logo.webp";
  * - Video plays as a visual only (muted, no onEnded)
  */
 const Preloader = ({ theme = "maroon", duration = 1500, onComplete }) => {
+  const preloaderVideo = "/preloader.webm";
   const isGold = theme === "gold" || theme === "yellow";
 
   /* Fixed timer — page never waits for video to finish */

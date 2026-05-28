@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import heroImg from "../assets/images/donation_hero.webp";
+import qrCodeImg from "../assets/images/Donation_QR.webp";
 import { addDonation } from "../services/donationService";
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -13,6 +14,7 @@ const Donation = () => {
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("bank"); // "bank" or "qr"
 
   // Confirmation Form State
   const [formData, setFormData] = useState({
@@ -168,55 +170,123 @@ const Donation = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-12"
+            className="space-y-8"
           >
-            {/* Bank Card */}
-            <div className="bg-[#fdfcf7] p-5 sm:p-8 md:p-12 rounded-[40px] border border-[#c49a3c]/20 shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-8 opacity-10">
-                <svg width="120" height="120" viewBox="0 0 24 24" fill="#c49a3c">
-                  <path d="M11.5,1L2,6v2h19V6L11.5,1z M11.5,3.1L18.4,6.7H4.6L11.5,3.1z M3,10v10h1v2h16v-2h1V10H3z M5,12h2v6H5V12z M9,12h2v6H9V12z M13,12h2v6h-2V12z M17,12h2v6h-2V12z M5,20h14v1H5V20z" />
-                </svg>
-              </div>
-
-              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-[#5d1712] mb-10 break-words">{t.bank.heading}</h3>
-              
-              <div className="space-y-8">
-                <div className="group cursor-pointer" onClick={() => handleCopy("Poondurai Kadaikula Makkal Narpani")}>
-                  <p className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.bank.accName}</p>
-                  <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-stone-100 group-hover:border-[#c49a3c] transition-colors">
-                    <span className="text-stone-800 font-medium text-sm md:text-base">Poondurai Kadaikula Makkal Narpani</span>
-                    <svg className="w-5 h-5 text-stone-300 group-hover:text-[#c49a3c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                </div>
-
-                <div className="group cursor-pointer" onClick={() => handleCopy("12345678901235")}>
-                  <p className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.bank.accNum}</p>
-                  <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-stone-100 group-hover:border-[#c49a3c] transition-colors">
-                    <span className="text-xl font-sans text-stone-800 tracking-wider">12345678901235</span>
-                    <svg className="w-5 h-5 text-stone-300 group-hover:text-[#c49a3c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="group cursor-pointer" onClick={() => handleCopy("SBIN0001234")}>
-                    <p className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.bank.ifsc}</p>
-                    <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-stone-100 group-hover:border-[#c49a3c] transition-colors">
-                      <span className="font-bold text-stone-800">SBIN0001234</span>
-                    </div>
-                  </div>
-                  <div className="group cursor-pointer" onClick={() => handleCopy("Avalpoondurai")}>
-                    <p className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.bank.branch}</p>
-                    <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-stone-100 group-hover:border-[#c49a3c] transition-colors">
-                      <span className="font-bold text-stone-800">Avalpoondurai</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* Payment Method Selector */}
+            <div className="flex bg-stone-100 p-1.5 rounded-2xl max-w-md mx-auto border border-stone-200/50 shadow-inner">
+              <button
+                type="button"
+                onClick={() => setPaymentMethod("bank")}
+                className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm tracking-wider uppercase transition-all duration-300 relative cursor-pointer ${
+                  paymentMethod === "bank"
+                    ? "bg-[#5d1712] text-white shadow-md"
+                    : "text-stone-600 hover:text-stone-900"
+                }`}
+              >
+                {t.bank.methodBank}
+              </button>
+              <button
+                type="button"
+                onClick={() => setPaymentMethod("qr")}
+                className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm tracking-wider uppercase transition-all duration-300 relative cursor-pointer ${
+                  paymentMethod === "qr"
+                    ? "bg-[#5d1712] text-white shadow-md"
+                    : "text-stone-600 hover:text-stone-900"
+                }`}
+              >
+                {t.bank.methodQR}
+              </button>
             </div>
+
+            <AnimatePresence mode="wait">
+              {paymentMethod === "bank" ? (
+                <motion.div
+                  key="bank"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Bank Card */}
+                  <div className="bg-[#fdfcf7] p-5 sm:p-8 md:p-12 rounded-[40px] border border-[#c49a3c]/20 shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-8 opacity-10">
+                      <svg width="120" height="120" viewBox="0 0 24 24" fill="#c49a3c">
+                        <path d="M11.5,1L2,6v2h19V6L11.5,1z M11.5,3.1L18.4,6.7H4.6L11.5,3.1z M3,10v10h1v2h16v-2h1V10H3z M5,12h2v6H5V12z M9,12h2v6H9V12z M13,12h2v6h-2V12z M17,12h2v6h-2V12z M5,20h14v1H5V20z" />
+                      </svg>
+                    </div>
+
+                    <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-[#5d1712] mb-10 break-words">{t.bank.heading}</h3>
+                    
+                    <div className="space-y-8">
+                      <div className="group cursor-pointer" onClick={() => handleCopy("Poondurai Kadaikula Makkal Narpani")}>
+                        <p className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.bank.accName}</p>
+                        <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-stone-100 group-hover:border-[#c49a3c] transition-colors">
+                          <span className="text-stone-800 font-medium text-sm md:text-base">Poondurai Kadaikula Makkal Narpani</span>
+                          <svg className="w-5 h-5 text-stone-300 group-hover:text-[#c49a3c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                      </div>
+
+                      <div className="group cursor-pointer" onClick={() => handleCopy("231602000022222")}>
+                        <p className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.bank.accNum}</p>
+                        <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-stone-100 group-hover:border-[#c49a3c] transition-colors">
+                          <span className="text-xl font-sans text-stone-800 tracking-wider">231602000022222</span>
+                          <svg className="w-5 h-5 text-stone-300 group-hover:text-[#c49a3c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div className="group cursor-pointer" onClick={() => handleCopy("IOBA0002316")}>
+                          <p className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.bank.ifsc}</p>
+                          <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-stone-100 group-hover:border-[#c49a3c] transition-colors">
+                            <span className="font-bold text-stone-800">IOBA0002316</span>
+                          </div>
+                        </div>
+                        <div className="group cursor-pointer" onClick={() => handleCopy("Avalpoondurai")}>
+                          <p className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-1">{t.bank.branch}</p>
+                          <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-stone-100 group-hover:border-[#c49a3c] transition-colors">
+                            <span className="font-bold text-stone-800">Avalpoondurai</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="qr"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* QR Card */}
+                  <div className="bg-[#fdfcf7] p-5 sm:p-8 md:p-12 rounded-[40px] border border-[#c49a3c]/20 shadow-2xl relative overflow-hidden flex flex-col items-center text-center">
+                    <div className="absolute top-0 right-0 p-8 opacity-10">
+                      <svg width="120" height="120" viewBox="0 0 24 24" fill="#c49a3c">
+                        <path d="M4 4h6v6H4V4zm2 2v2h2V6H6zm8-2h6v6h-6V4zm2 2v2h2V6h-2zM4 14h6v6H4v-6zm2 2v2h2v-2H6zm10 0h2v2h-2v-2zm2-2h2v2h-2v-2zm-2 4h2v2h-2v-2zm2 0h2v2h-2v-2zM14 14h2v2h-2v-2zm0 4h2v2h-2v-2z" />
+                      </svg>
+                    </div>
+
+                    <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-[#5d1712] mb-4 break-words">{t.bank.qrHeading}</h3>
+                    <p className="text-stone-600 text-sm max-w-sm mb-8 leading-relaxed">
+                      {t.bank.qrSub}
+                    </p>
+
+                    <div className="relative group p-4 bg-white rounded-3xl border border-[#c49a3c]/20 shadow-lg max-w-[280px] w-full transition-all duration-300 hover:border-[#c49a3c] hover:shadow-xl">
+                      <img
+                        src={qrCodeImg}
+                        alt={t.bank.qrHeading}
+                        className="w-full h-auto rounded-2xl"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </section>

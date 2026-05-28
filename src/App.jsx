@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import TemplesPage from "./pages/TemplesPage";
 import TempleDetail from "./pages/TempleDetail";
-import History from "./pages/History";
+import Chronicles from "./pages/Chronicles";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Donation from "./pages/Donation";
@@ -69,7 +69,7 @@ function AppContent() {
                     <Route path="/" element={<Home />} />
                     <Route path="/temples" element={<TemplesPage />} />
                     <Route path="/temples/:slug" element={<TempleDetail />} />
-                    <Route path="/history" element={<History />} />
+                    <Route path="/chronicles" element={<Chronicles />} />
                     <Route path="/gallery" element={<Gallery />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/donation" element={<Donation />} />

@@ -120,12 +120,12 @@ const Hero = () => {
 
                 {/* Button */}
                 <Link
-                  to="/temples"
+                  to={activeIndex === 0 ? "/clan-grandeur" : "/temples"}
                   className="group relative px-10 py-3.5 border-2 border-white/80 text-white rounded-full font-bold overflow-hidden transition-all hover:text-stone-900 mb-10 flex items-center justify-center text-sm md:text-base tracking-widest uppercase"
                 >
                   <span className="absolute inset-0 bg-white translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
                   <span className="relative z-10 flex items-center gap-2">
-                    {t.explore}
+                    {activeIndex === 0 ? t.exploreClan : t.explore}
                     <span className="transition-transform group-hover:translate-x-1">→</span>
                   </span>
                 </Link>

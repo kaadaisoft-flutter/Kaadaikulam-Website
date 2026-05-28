@@ -4,12 +4,15 @@ import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import heroImg from "../assets/images/inscriptions_hero.webp";
 import premiumBg from "../assets/images/inscriptions_premium_bg.webp";
-import suvadi1 from "../assets/images/suvadi1.webp";
-import suvadi2 from "../assets/images/suvadi2.webp";
-import suvadi3 from "../assets/images/suvadi3.webp";
-import suvadi4 from "../assets/images/suvadi4.webp";
+import suvadi1 from "../assets/chronicles page/suvadi1.webp";
+import suvadi2 from "../assets/chronicles page/suvadi2.webp";
+import suvadi3 from "../assets/chronicles page/suvadi3.webp";
+import suvadi4 from "../assets/chronicles page/suvadi4.webp";
+import suvadi5 from "../assets/chronicles page/suvadi5.webp";
+import suvadi6 from "../assets/chronicles page/suvadi6.webp";
+import suvadi7 from "../assets/chronicles page/suvadi7.webp";
 
-const History = () => {
+const Chronicles = () => {
   const { language } = useLanguage();
   const t = translations[language].history;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -17,6 +20,8 @@ const History = () => {
 
   const inscriptions = t.items;
   const suvadiImages = [suvadi1, suvadi2, suvadi3, suvadi4];
+  const inscriptionImages = [suvadi5, suvadi6, suvadi7];
+  const allImages = [...suvadiImages, ...inscriptionImages];
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev - 1 + inscriptions.length) % inscriptions.length);
@@ -260,6 +265,98 @@ const History = () => {
         </section>
       )}
 
+      {/* Inscriptions Section */}
+      <section className="relative py-24 bg-stone-50 border-t border-[#c49a3c]/15">
+        <div className="container mx-auto px-6">
+          {/* Header with Scroll Animation */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <span className="w-8 h-[1.5px] bg-[#c49a3c]"></span>
+              <span className="text-[#c49a3c] font-bold tracking-[0.3em] uppercase text-[12px]">
+                {language === "ta" ? "கல்வெட்டுகள்" : "Inscriptions"}
+              </span>
+              <span className="w-8 h-[1.5px] bg-[#c49a3c]"></span>
+            </div>
+            <h2 className="font-serif text-3xl md:text-5xl text-[#5d1712] mb-6 break-words">
+              {language === "ta" ? "கல்வெட்டுகள்" : "Temple Inscriptions"}
+            </h2>
+            <p className="text-stone-600 text-sm md:text-base leading-relaxed font-light">
+              {language === "ta" 
+                ? "கோவில்களில் கண்டெடுக்கப்பட்ட வரலாற்று சிறப்புமிக்க கல்வெட்டுப் படங்கள் மற்றும் சான்றுகள்." 
+                : "Historical stone inscriptions and archaeological images preserved at our temples."}
+            </p>
+          </motion.div>
+
+          {/* Grid with Staggered Scroll Animation */}
+          <motion.div 
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.15
+                }
+              }
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
+          >
+            {inscriptionImages.map((img, index) => (
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.95 },
+                  show: {
+                    opacity: 1,
+                    scale: 1,
+                    transition: { type: "spring", stiffness: 70, damping: 15 }
+                  }
+                }}
+              >
+                {/* Inner: handles continuous auto-float animation */}
+                <motion.div
+                  animate={{ y: [0, -14, 0] }}
+                  transition={{
+                    duration: 3,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                    delay: index * 0.6,
+                  }}
+                  whileHover={{ y: -18, scale: 1.04 }}
+                  onClick={() => setSelectedSuvadiIndex(index + suvadiImages.length)}
+                  className="group bg-white rounded-[32px] overflow-hidden border border-[#c49a3c]/10 shadow-md hover:shadow-2xl transition-shadow cursor-pointer aspect-[4/3] relative"
+                >
+                  <img
+                    src={img}
+                    alt={`Inscription ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Hover Overlay Zoom Icon */}
+                  <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                      </svg>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Lightbox Modal for Fullscreen View */}
       <AnimatePresence>
         {selectedSuvadiIndex !== null && (
@@ -285,7 +382,7 @@ const History = () => {
 
             {/* Prev Arrow — left side of screen */}
             <button
-              onClick={(e) => { e.stopPropagation(); setSelectedSuvadiIndex((prev) => (prev - 1 + suvadiImages.length) % suvadiImages.length); }}
+              onClick={(e) => { e.stopPropagation(); setSelectedSuvadiIndex((prev) => (prev - 1 + allImages.length) % allImages.length); }}
               className="absolute left-4 md:left-8 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all border border-white/20 active:scale-95"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -301,8 +398,8 @@ const History = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.93, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                src={suvadiImages[selectedSuvadiIndex]}
-                alt={`Suvadi ${selectedSuvadiIndex + 1}`}
+                src={allImages[selectedSuvadiIndex]}
+                alt={`Image ${selectedSuvadiIndex + 1}`}
                 className="max-w-full max-h-[65vh] object-contain rounded-2xl shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               />
@@ -310,7 +407,7 @@ const History = () => {
 
             {/* Next Arrow — right side of screen */}
             <button
-              onClick={(e) => { e.stopPropagation(); setSelectedSuvadiIndex((prev) => (prev + 1) % suvadiImages.length); }}
+              onClick={(e) => { e.stopPropagation(); setSelectedSuvadiIndex((prev) => (prev + 1) % allImages.length); }}
               className="absolute right-4 md:right-8 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all border border-white/20 active:scale-95"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -324,4 +421,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default Chronicles;

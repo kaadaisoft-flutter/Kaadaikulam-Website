@@ -3,7 +3,7 @@ export const translations = {
     nav: {
       home: "Home",
       temples: "Temples",
-      history: "Inscriptions",
+      history: "Chronicles",
       gallery: "Gallery",
       kulaguru: "Clan Guru",
       events: "Events",
@@ -15,6 +15,7 @@ export const translations = {
     hero: {
       label: "Poondurai Kaadai",
       explore: "Explore Temples",
+      exploreClan: "Explore Clan Grandeur",
       heritage: "Divine Heritage",
       established: "Established for generations",
       items: [
@@ -159,7 +160,11 @@ export const translations = {
         accNum: "Account Number",
         ifsc: "IFSC Code",
         branch: "Branch",
-        copy: "Copied to clipboard!"
+        copy: "Copied to clipboard!",
+        qrHeading: "UPI Scan & Pay",
+        qrSub: "Scan the QR code below using any UPI app (GPay, PhonePe, Paytm, etc.) to pay instantly.",
+        methodBank: "Bank Transfer",
+        methodQR: "UPI QR Code"
       },
       impact: {
         temple: "Temple Maintenance",
@@ -222,8 +227,8 @@ export const translations = {
     history: {
       hero: {
         label: "Poondurai Kaadai",
-        heading: "Historical Inscriptions",
-        text: "These archaeological inscriptions confirm the important role played by the Kongu Vellalar Poondurai Kaadai clan in the spiritual and administrative domains of the Kongu region."
+        heading: "Historical Chronicles",
+        text: "These archaeological inscriptions and chronicles confirm the important role played by the Kongu Vellalar Poondurai Kaadai clan in the spiritual and administrative domains of the Kongu region."
       },
       recordLabel: "Historical Record #",
       sacredMessage: "The Sacred Message",
@@ -672,7 +677,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
     nav: {
       home: "முகப்பு",
       temples: "கோவில்கள்",
-      history: "கல்வெட்டுகள்",
+      history: "சுவடுகள்",
       gallery: "புகைப்படங்கள்",
       kulaguru: "குலகுரு",
       events: "நிகழ்வுகள்",
@@ -684,6 +689,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
     hero: {
       label: "பூந்துறை காடை",
       explore: "கோவில்களை ஆராயுங்கள்",
+      exploreClan: "குலப்பெருமைகளை ஆராயுங்கள்",
       heritage: "தெய்வீக பாரம்பரியம்",
       established: "தலைமுறை தலைமுறையாக நிலைநாட்டப்பட்டது",
       items: [
@@ -828,7 +834,11 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
         accNum: "கணக்கு எண்",
         ifsc: "IFSC குறியீடு",
         branch: "கிளை",
-        copy: "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!"
+        copy: "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!",
+        qrHeading: "UPI ஸ்கேன் & பே",
+        qrSub: "உடனடியாகப் பணம் செலுத்த ஏதேனும் ஒரு UPI செயலியைப் (GPay, PhonePe, Paytm போன்றவை) பயன்படுத்தி கீழே உள்ள QR குறியீட்டை ஸ்கேன் செய்யவும்.",
+        methodBank: "வங்கி பரிமாற்றம்",
+        methodQR: "UPI QR குறியீடு"
       },
       impact: {
         temple: "கோவில் பராமரிப்பு",
@@ -891,8 +901,8 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
     history: {
       hero: {
         label: "பூந்துறை காடை",
-        heading: "வரலாற்று கல்வெட்டுகள்",
-        text: "இந்த தொல்பொருள் கல்வெட்டுகள் கொங்கு பிராந்தியத்தின் ஆன்மீக மற்றும் நிர்வாக களங்களில் கொங்கு வெள்ளாளர் பூந்துறை காடை குலத்தினர் ஆற்றிய முக்கிய பங்கை உறுதிப்படுத்துகின்றன."
+        heading: "சுவடுகள்",
+        text: "இந்த தொல்பொருள் கல்வெட்டுகள் மற்றும் சுவடுகள் கொங்கு பிராந்தியத்தின் ஆன்மீக மற்றும் நிர்வாக களங்களில் கொங்கு வெள்ளாளர் பூந்துறை காடை குலத்தினர் ஆற்றிய முக்கிய பங்கை உறுதிப்படுத்துகின்றன."
       },
       recordLabel: "வரலாற்று பதிவு #",
       sacredMessage: "புனித செய்தி",
