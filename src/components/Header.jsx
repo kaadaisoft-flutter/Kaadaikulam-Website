@@ -44,7 +44,7 @@ const Header = () => {
     <>
       <header className="w-full bg-[#c2b09a] text-stone-800 px-6 py-4 flex items-center justify-between font-sans sticky top-0 z-[110] shadow-sm">
         {/* Logo & Title */}
-        <Link to="/" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-2">
           <motion.img
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -65,7 +65,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className={`hidden 2xl:flex items-center gap-5 2xl:gap-7 font-medium tracking-wide ${language === 'ta' ? 'text-[11.5px] 2xl:text-[12.5px]' : 'text-[14px] 2xl:text-[15px]'
+        <nav className={`hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-7 font-medium tracking-wide ${language === 'ta' ? 'text-[11px] xl:text-[12px] 2xl:text-[12.5px]' : 'text-[13px] xl:text-[14px] 2xl:text-[15px]'
           }`}>
           {navLinks.map((link, index) => (
             <motion.div
@@ -144,7 +144,7 @@ const Header = () => {
           {/* Hamburger Menu */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="flex flex-col gap-[5px] justify-center hover:opacity-75 transition-opacity 2xl:hidden relative z-[120]"
+            className="flex flex-col gap-[5px] justify-center hover:opacity-75 transition-opacity lg:hidden relative z-[120]"
           >
             <motion.span
               animate={isMenuOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
@@ -166,7 +166,7 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 bg-[#c2b09a] z-[105] flex flex-col pt-32 px-10 2xl:hidden"
+            className="fixed inset-0 bg-[#c2b09a] z-[105] flex flex-col pt-32 px-10 lg:hidden"
           >
             <nav className="flex flex-col gap-6 text-2xl font-serif text-[#5d1712]">
               {navLinks.map((link, index) => (
