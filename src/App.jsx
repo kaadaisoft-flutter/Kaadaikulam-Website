@@ -27,17 +27,17 @@ const AdminContent = lazy(() => import("@admin/App").then(module => ({ default: 
 
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
-  const [preloaderDuration, setPreloaderDuration] = useState(1200); // 1.2 s on initial load
+  const [preloaderDuration, setPreloaderDuration] = useState(800); // 800 ms on initial load
   const location = useLocation();
   const isFirstRender = useRef(true);
 
-  // Navigation preloader — short (0.5 s), not waiting for video
+  // Navigation preloader — short (300 ms)
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-    setPreloaderDuration(500);
+    setPreloaderDuration(300);
     setIsLoading(true);
   }, [location.pathname]);
 
