@@ -163,7 +163,7 @@ const ClanGrandeurPage = () => {
             {/* Section header */}
             <div className="flex items-center gap-5 mb-8">
               <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-[#5d1712] flex items-center justify-center shadow-lg">
-                <span className="font-serif text-[#e5bc54] text-xl font-bold">{section.id}</span>
+                <span className="font-serif text-[#e5bc54] text-2xl font-bold">{section.id}</span>
               </div>
               <div>
                 <h2 className="font-serif text-2xl md:text-3xl text-[#5d1712] leading-tight">
