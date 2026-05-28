@@ -188,10 +188,12 @@ const ClanGrandeurPage = () => {
                     key={sidx}
                     className="mb-8 last:mb-0 bg-[#fdfcf7] rounded-2xl border border-[#c49a3c]/10 p-7"
                   >
-                    <h3 className="inline-flex items-center gap-2 font-bold text-[#5d1712] mb-5 uppercase tracking-widest text-xs">
-                      <span className="w-4 h-[1.5px] bg-[#c49a3c]" />
-                      {sub.title}
-                    </h3>
+                    {sub.title && (
+                      <h3 className="inline-flex items-center gap-2 font-bold text-[#5d1712] mb-5 uppercase tracking-widest text-xs">
+                        <span className="w-4 h-[1.5px] bg-[#c49a3c]" />
+                        {sub.title}
+                      </h3>
+                    )}
 
                     {sub.verses && (
                       <div className="space-y-2 text-stone-800 italic mb-6 pl-4 border-l-2 border-[#c49a3c]/30">
@@ -254,6 +256,15 @@ const ClanGrandeurPage = () => {
                     )}
                     {sub.sites && (
                       <p className="mt-4 text-stone-700 font-medium">{sub.sites}</p>
+                    )}
+                    {sub.meaning && (
+                      <p className="mt-4 text-stone-700 font-light leading-relaxed">{sub.meaning}</p>
+                    )}
+                    {sub.explanation && (
+                      <p className="mt-4 text-stone-700 font-light leading-relaxed">{sub.explanation}</p>
+                    )}
+                    {sub.conclusion && (
+                      <p className="mt-4 text-stone-700 font-light leading-relaxed">{sub.conclusion}</p>
                     )}
 
                     {sub.highlights && (
@@ -327,7 +338,7 @@ const ClanGrandeurPage = () => {
             <h2 className="font-serif text-3xl md:text-4xl text-white mb-6">
               {t.conclusion.title}
             </h2>
-            <p className="text-lg md:text-xl font-light leading-relaxed text-white/85 max-w-2xl mx-auto">
+            <p className="whitespace-pre-line text-lg md:text-xl font-light leading-relaxed text-white/85 max-w-2xl mx-auto">
               {t.conclusion.text}
             </p>
 
