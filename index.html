@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="preload" href="/preloader.webm" as="video" type="video/webm" />
+    <link rel="preload" href="/preloader.mp4" as="video" type="video/mp4" />
   </head>
   <body>
     <div id="root">
@@ -29,10 +29,14 @@
           object-fit: contain;
           pointer-events: none;
           user-select: none;
+          mix-blend-mode: screen;
         }
       </style>
       <div class="initial-preloader">
-        <video class="initial-preloader-video" src="/preloader.webm" autoplay muted playsinline loop></video>
+        <video class="initial-preloader-video" autoplay muted playsinline loop>
+          <source src="/preloader.mp4" type="video/mp4" />
+          <source src="/preloader.webm" type="video/webm" />
+        </video>
       </div>
     </div>
     <script type="module" src="/src/main.jsx"></script>

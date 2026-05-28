@@ -9,7 +9,6 @@ import logo from "../assets/logo.webp";
  * - Video plays as a visual only (muted, no onEnded)
  */
 const Preloader = ({ theme = "maroon", duration = 1500, onComplete }) => {
-  const preloaderVideo = "/preloader.webm";
   const isGold = theme === "gold" || theme === "yellow";
 
   /* Fixed timer — page never waits for video to finish */
@@ -44,14 +43,22 @@ const Preloader = ({ theme = "maroon", duration = 1500, onComplete }) => {
         }}
       >
         <video
-          src={preloaderVideo}
           poster={logo}
           autoPlay
           muted
           playsInline
           loop
-          style={{ width: "100%", height: "100%", objectFit: "contain" }}
-        />
+          style={{ width: "100%", height: "100%", objectFit: "contain", mixBlendMode: "screen" }}
+          ref={(el) => {
+            if (el) {
+              el.setAttribute("muted", "");
+              el.muted = true;
+            }
+          }}
+        >
+          <source src="/preloader.mp4" type="video/mp4" />
+          <source src="/preloader.webm" type="video/webm" />
+        </video>
       </div>
     </motion.div>
   );

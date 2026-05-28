@@ -44,7 +44,7 @@ const Header = () => {
     <>
       <header className="w-full bg-[#c2b09a] text-stone-800 px-6 py-4 flex items-center justify-between font-sans sticky top-0 z-[110] shadow-sm">
         {/* Logo & Title */}
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-1">
           <motion.img
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
