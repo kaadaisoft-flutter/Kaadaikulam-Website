@@ -156,7 +156,7 @@ const Kulaguru = () => {
                       <h3 className="font-serif text-xl text-[#5d1712] mb-3 group-hover:text-[#b23a2b] transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-stone-600 leading-relaxed font-light">
+                      <p className="whitespace-pre-line text-stone-600 leading-relaxed font-light">
                         {item.text}
                       </p>
                     </div>
