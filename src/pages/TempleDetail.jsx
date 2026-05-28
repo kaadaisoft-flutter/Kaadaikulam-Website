@@ -173,9 +173,13 @@ const TempleDetail = () => {
             {/* Maha Kumbhabhishekam Section */}
             {temple.kumbhabhishekam && (
               <div className="mb-12">
-                <h3 className="font-serif text-2xl text-stone-800 mb-6 flex items-center gap-3">
+                <h3 className="font-serif text-2xl text-stone-800 mb-6 flex items-center flex-wrap gap-3">
                   <span className="w-8 h-[1px] bg-[#c49a3c]"></span>
-                  Maha Kumbhabhishekam ({temple.kumbhabhishekam.date})
+                  <span>{tDetail.kumbhabhishekamHeading} ({temple.kumbhabhishekam.date})</span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 uppercase tracking-wider">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    {tDetail.completed}
+                  </span>
                 </h3>
                 <div className="bg-white/40 p-8 rounded-3xl border border-[#c49a3c]/10 text-stone-600 leading-relaxed">
                   {temple.kumbhabhishekam.details}

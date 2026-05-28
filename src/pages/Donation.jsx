@@ -116,7 +116,7 @@ const Donation = () => {
             className="space-y-12"
           >
             <div>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#5d1712] mb-6 break-words">{t.selection.heading}</h2>
+              <h2 className="font-serif text-xl sm:text-3xl md:text-4xl text-[#5d1712] mb-6 break-normal">{t.selection.heading}</h2>
               <p className="text-stone-700 text-lg leading-relaxed">
                 {t.selection.text}
               </p>
@@ -215,7 +215,7 @@ const Donation = () => {
                       </svg>
                     </div>
 
-                    <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-[#5d1712] mb-10 break-words">{t.bank.heading}</h3>
+                    <h3 className="font-serif text-lg sm:text-2xl md:text-3xl text-[#5d1712] mb-10 break-normal">{t.bank.heading}</h3>
                     
                     <div className="space-y-8">
                       <div className="group cursor-pointer" onClick={() => handleCopy("Poondurai Kadaikula Makkal Narpani")}>
@@ -271,7 +271,7 @@ const Donation = () => {
                       </svg>
                     </div>
 
-                    <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-[#5d1712] mb-4 break-words">{t.bank.qrHeading}</h3>
+                    <h3 className="font-serif text-lg sm:text-2xl md:text-3xl text-[#5d1712] mb-4 break-normal">{t.bank.qrHeading}</h3>
                     <p className="text-stone-600 text-sm max-w-sm mb-8 leading-relaxed">
                       {t.bank.qrSub}
                     </p>
@@ -301,7 +301,7 @@ const Donation = () => {
             className="bg-white p-6 sm:p-10 md:p-16 rounded-[40px] shadow-2xl border border-stone-100"
           >
             <div className="text-center mb-12">
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#5d1712] mb-4 break-words">{t.confirmation.heading}</h2>
+              <h2 className="font-serif text-xl sm:text-3xl md:text-4xl text-[#5d1712] mb-4 break-normal">{t.confirmation.heading}</h2>
               <p className="text-stone-600 max-w-2xl mx-auto">{t.confirmation.sub}</p>
             </div>
 

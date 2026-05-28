@@ -286,7 +286,9 @@ export const translations = {
       explanatory: "Explanatory Meaning",
       historical: "Historical Meaning",
       thuthi: "Thuthi:",
-      poemTitle: "Clan Heritage Poem"
+      poemTitle: "Clan Heritage Poem",
+      completed: "Completed",
+      kumbhabhishekamHeading: "Maha Kumbhabhishekam"
     },
     membership: {
       idLabel: "Kaadai ID",
@@ -415,9 +417,9 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
       prayer: {
         title: "Vinayagar Prayer",
         verse: [
-          "Manakkulathinkili pilavi maaraara",
-          "Ermi ya porutalaa moolathim mutharaai",
-          "Kannerthu lulaiyadhov kalitru maamugap",
+          "Mannulagathinir piravi maasara",
+          "Enniya porulela melidinmutrarark",
+          "Kannutha ludaiyadhor kalitru maamugap",
           "Pannavan malaradi paninthu potruvom"
         ]
       },
@@ -435,10 +437,10 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "Special Verses:",
               verses: [
-                "\"Pannulagor pugazhnthidum Poondurai Nadu\"",
-                "\"Poondurai Nadu athigamena pugazhnthittare\"",
-                "\"Pannodu pooranam paarthitha Nadu\"",
-                "\"Nalamaagap paniyaayathu Poondurai Nadu\""
+                "\"Ponnulagor pugazhthidum Poondurai Nadu\"",
+                "\"Poondurai Nadu athigamenap puganrittare\"",
+                "\"Ponnodu poomaari pozhindha Nadu\"",
+                "\"Nilamagat kaniyaayathu Poondurai Nadu\""
               ]
             },
             {
@@ -453,14 +455,14 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "Another Verse highlighting Poondurai Nadu's greatness:",
               verses: [
-                "\"Vandutham thum theni vilasipuram\"",
-                "\"Vatha kaviya puranagal othum\"",
-                "\"Pandithaas pathiruntha sakkara\"",
-                "\"Pannu Poondurai naadangai naadu\"",
-                "\"Dharma dhanam migava vilangum\"",
-                "\"Sagala sathira sada suthitham\"",
+                "\"Veedellaam thirumin vilaiyaadum\"",
+                "\"Vedha kaaviya puraanangal odhum\"",
+                "\"Paadellaam painthamizhai aakkum\"",
+                "\"Pannu Poondurai naadengal naade\"",
+                "\"Tharumathaanam migave vilangum\"",
+                "\"Sagala saathira saalai sezhithidum\"",
                 "\"Perumaiyagave engum pugazhnthidum\"",
-                "\"Ponnu Poondurai naadangai naadu\""
+                "\"Periya Poondurai naadengal naade\""
               ],
               meaningTitle: "Brief meaning of this verse:",
               meaningList: [
@@ -473,11 +475,11 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "Detailed Verse on its Resources:",
               verses: [
-                "\"Maadamaaligai medaiyum soozhthiyum\"",
-                "\"Manasilaatravai yaavumatrith thotravum\"",
+                "\"Maadamaaligai medaiyum sechchaiyum\"",
+                "\"Mannar koottamum maamalart thottamum\"",
                 "\"Needu saathira saalaiyum solaiyum\"",
-                "\"Nithigai muththunap poringal anagamum\"",
-                "\"Sediththum Poondurai Nadu\""
+                "\"Nidhigal muththup podhigal anegamum\"",
+                "\"Sezhikkum Poondurai Nadu\""
               ],
               conclusion: "Through these verses, Poondurai Nadu is described as being equal to the celestial god-like world, excelling remarkably in both education and wealth."
             },
@@ -538,10 +540,10 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "Poondurai Puranam (Verse 30):",
               verses: [
-                "\"Aarududan markaiyal kalasam vaikka\"",
-                "\"Asuntha maavar enal anbay saari\"",
-                "\"Poovulagil Konginu paththithu neetti\"",
-                "\"Poondurai nadu athigam ena pugazhnthittare\""
+                "\"Aavaludan ivarkaiyaal kalasam vaikka\"",
+                "\"Avanirka moovarmmudi anpaayach choottip\"",
+                "\"Poovalagil kongiliru paththu naattil\"",
+                "\"Poondhurai naadu adhigam enap puganrittaare!\""
               ],
               meaning: "Overjoyed by witnessing the Kaadai clan perfectly securing the Kalasam, the three great kings honored them with crowns. Furthermore, they ceremoniously proclaimed that among the 24 nations of Kongu, Poondurai Nadu stands supreme."
             }
@@ -555,6 +557,49 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             { label: "The Border Resolver", text: "When complications arose among the three great kings over border demarcations at the Madukkarai Sellandiamman temple, it was Varanasi who smoothly resolved their border disputes." },
             { label: "Crowned Equal to Kings", text: "Chosen as one of the four key leaders of the Kongu region, he held the great honor of being crowned directly by the three great kings." },
             { label: "Comparable to Harichandra", text: "Poets praised him as 'Harichandra' for his unyielding truthfulness and as 'Dharman' for his absolute dedication to preserving justice." }
+          ],
+          subsections: [
+            {
+              title: "Special Verse:",
+              verses: [
+                "\"Saandru mozhithanil arichsan thiranik kaadaikula\"",
+                "\"Tharumanip poganidhiyai\"",
+                "\"Thendurai seguthulavu kongu mandalaththiluyar\"",
+                "\"Theeranvaa ranaavaasiyai\""
+              ]
+            }
+          ]
+        },
+        {
+          id: 6,
+          title: "The Heroic Valor of Kuppichi",
+          text: "Kuppan Azhaipichan (Kuppichi) from the Poondurai Kaadai clan was an unparalleled warrior in wrestling and horse riding. In the court of the Vijayanagar king, he tamed an untameable 'wild horse' and defeated the wrestler there, bringing immense glory to Kongu Nadu.",
+          subsections: [
+            {
+              title: "Kongu Mandala Sathakam:",
+              verses: [
+                "\"Thesur rilagu visaya nagarath thiralArasan\"",
+                "\"Vaasar panikkanai mankowvak kuththiAm mannanaikandu\"",
+                "\"Esar padummasa maavinai aatti evarumechcha\"",
+                "\"Maasatra naadukol kuppichchi yumakongu mandalame!\""
+              ]
+            }
+          ]
+        },
+        {
+          id: 7,
+          title: "Kanagasellan: The Patron Who Protected Poets",
+          text: "This verse is about the Poondurai Kaadai clan leader who generously patronized Tamil poets.",
+          subsections: [
+            {
+              title: "Kongu Mandala Sathakam (Verse 46):",
+              verses: [
+                "\"Aadaiyum muththum animaarpa sozhan agalangkanmun\"",
+                "\"Medai pugazhndhu varumpula vorai vizhaindhazhaiththuk\"",
+                "\"Kaadai kulaathipan Poondurai naadan kanagasellan\"",
+                "\"Maadaiyundh theiva amudhalith thaankongu mandalame!\""
+              ]
+            }
           ]
         },
         {
@@ -565,8 +610,8 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "Poondurai Puranam:",
               verses: [
-                "\"Kukaram theevah Kaadai Vinayagan pathithu moodatudaathi banthuvudan\"",
-                "\"Nanrithu vaazhvaam\""
+                "\"Kulavum theivak kaadaivinaa yaganpadhatthai emathulathil kandanalam\"",
+                "\"Kaninthu vaazhvaam\""
               ],
               explanation: "To remove all obstacles, they installed Vinayagar (Ganesha) using their own clan name as 'Kaadai Vinayagar' and worshipped him devotionally. Furthermore, they commissioned the poet Kaliyanna Kavirayar to compose the epic 'Poondurai Puranam', honoring him immensely by granting lands."
             }
@@ -580,9 +625,9 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "Ancient Kaani Song:",
               verses: [
-                "\"Selvanga nalingae Kaadaikula Kaalagu\"",
-                "\"Thenkarai saathi kanyam...\"",
-                "\"Vanipoo paththathu nilayan Kaadai kula magarasar\""
+                "\"Selvamiku vallinagark kaadaikula vallalgal\"",
+                "\"Theerkkara saatsipuriyum...\"",
+                "\"Vannipoo pathi uthavu sellayanKaadaikula magarasar\""
               ]
             }
           ]
@@ -960,7 +1005,9 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
       explanatory: "விளக்க உரை",
       historical: "வரலாற்று பொருள்",
       thuthi: "துதி:",
-      poemTitle: "குல பாரம்பரிய பாடல்"
+      poemTitle: "குல பாரம்பரிய பாடல்",
+      completed: "நிறைவுற்றது",
+      kumbhabhishekamHeading: "மகா கும்பாபிஷேகம்"
     },
     membership: {
       idLabel: "காடை அடையாள எண்",
@@ -1089,9 +1136,9 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
       prayer: {
         title: "விநாயகர் துதி",
         verse: [
-          "மனக்குளத்தின்கிளி பிளவி மாறார",
-          "ஏர்மி ய பொறுதலா மூலத்திம் முத்தராய்",
-          "கண்ணேர்த்து லுளையாதொவ் களிற்று மாமுகப்",
+          "மன்னுலகத்தினிற் பிறவி மாசற",
+          "எண்ணிய பொருளெலா மெளிதின்முற்றறக்",
+          "கண்ணுத லுடையதோர் களிற்று மாமுகப்",
           "பண்ணவன் மலரடி பணிந்து போற்றுவோம்"
         ]
       },
@@ -1107,12 +1154,12 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
           text: "கொங்கு நாட்டின் 24 நாடுகளில், 'பூந்துறை நாடு' 'முதன்மை நாடு' என்ற பட்டத்தைப் பெற்றுள்ளது. காவிரி ஆறு இதை மேல்கரை பூந்துறை மற்றும் கீழ்கரை பூந்துறை என இரண்டாகப் பிரிக்கிறது.",
           subsections: [
             {
-              title: "சிறப்பு பாடல்கள்:",
+              title: "சிறப்புப் பாடல்கள்:",
               verses: [
-                "\"பண்ணுலகோர் புகழ்ந்திடும் பூந்துறை நாடு\"",
-                "\"பூந்துறை நாடு அதிகமென புகழ்ந்திட்டாரே\"",
-                "\"பண்ணோடு பூரணம் பார்த்தித நாடு\"",
-                "\"நலமாகப் பணியாயது பூந்துறை நாடு\""
+                "\"பொன்னுலகோர் புகழ்திடும் பூந்துறை நாடு\"",
+                "\"பூந்துறை நாடு அதிகமெனப் புகன்றிட்டாரே\"",
+                "\"பொன்னொடு பூமாரி பொழிந்த நாடு\"",
+                "\"நிலமகட் கணியாயது பூந்துறை நாடு\""
               ]
             },
             {
@@ -1127,14 +1174,14 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "பூந்துறை நாட்டின் பெருமையை விளக்கும் மற்றொரு பாடல்:",
               verses: [
-                "\"வண்டுத்தம் தும் தேனி விலாசிபுரம்\"",
-                "\"வாத கவிய புராணங்கள் ஓதும்\"",
-                "\"பண்டிதாஸ் பார்த்திருந்த சக்கர\"",
-                "\"பண்ணு பூந்துறை நாடங்கை நாடு\"",
-                "\"தர்ம தானம் மிகவ விளங்கும்\"",
-                "\"சகல சதிர சட சுதித்தம்\"",
+                "\"வீடெல்லாம் திருமின் விளையாடும்\"",
+                "\"வேத காவிய புராணங்கள் ஓதும்\"",
+                "\"பாடெல்லாம் பைந்தமிழை ஆக்கும்\"",
+                "\"பன்னு பூந்துறை நாடெங்கள் நாடே\"",
+                "\"தருமதானம் மிகவே விளங்கும்\"",
+                "\"சகல சாத்திர சாலை செழித்திடும்\"",
                 "\"பெருமையாகவே எங்கும் புகழ்ந்திடும்\"",
-                "\"பொன்னு பூந்துறை நாடங்கை நாடு\""
+                "\"பெரிய பூந்துறை நாடெங்கள் நாடே\""
               ],
               meaningTitle: "இப்பாடலின் சுருக்கமான பொருள்:",
               meaningList: [
@@ -1147,11 +1194,11 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "அதன் வளங்களைப் பற்றிய விரிவான பாடல்:",
               verses: [
-                "\"மாடமாளிகை மேடையும் சூழ்தியும்\"",
-                "\"மனசிலாற்றவை யாவுமற்றிற்த் தோற்றவும்\"",
+                "\"மாடமாளிகை மேடையும் செச்சையும்\"",
+                "\"மன்னர் கூட்டமும் மாமலர்த் தோட்டமும்\"",
                 "\"நீடு சாத்திர சாலையும் சோலையும்\"",
-                "\"நிதிகை முத்துணப் போரிங்கள் அனகமும்\"",
-                "\"செழித்தும் பூந்துறை நாடு\""
+                "\"நிதிகள் முத்துப் பொதிகள் அநேகமும்\"",
+                "\"செழிக்கும் பூந்துறை நாடு\""
               ],
               conclusion: "இந்த பாடல்கள் மூலம், பூந்துறை நாடு கல்வி மற்றும் செல்வம் இரண்டிலும் சிறந்து விளங்கி, தேவருலகத்திற்கு சமமாக விவரிக்கப்படுகிறது."
             },
@@ -1188,7 +1235,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "மேல்கரை பூந்துறை நாட்டின் 32 கிராமங்களைப் பற்றிய பாடல்:",
               verse: [
-                "\"பூந்துறை வெள்ளோடெழும தூர் வளயமற்றது பங்குந்த வெள்ளோடு பிடாரி நகரும் பொன்னயாறு...\""
+                "\"பூந்துறைசை வெள்ளோடைப் நசி யனூர் ஏழுமாதை புகழ் சேர் பிடாரி நகரம் - பூங்கழு மீங்கையூர் பெருந்துறை சாத்தனூர் பொன்காள மங்கள மதும் ஆய்ந்த தமிழ் கூறும் கொளநிலை கிழாம்பாடி ஆண்மைகொள் முடக்குறிச்சி அனுமநகர் பழமங்கை குலவிளக்குக் காகம் அறச்சாலையூர் விளக்கேத்தியும் வேந்தர் மகிழ் ஈஞ்சை சத்திய மங்கலமதும் மிக்க சேமூர் மங்கலம் வீரநகர் ஈரோடு பேரோடு சித்தோடு மிக்கான திண்டல் புதூர் சேர்ந்து மழை செய்தருளும் இலவமலை திருவாச்சி திகழ் பனசை ஓடா நிலை தென் முருங்கத் தொழுவு முப்பத்தியிரண்டூர் சிறந்த பூந்துறைசை நாடே\""
               ],
               note: "இவ்வாறாக, மேல்கரை பூந்துறை நாட்டைச் சேர்ந்த 32 முக்கிய கிராமங்களின் பெயர்களும் இந்த செவ்வியல் படைப்பில் அழகாகப் பாதுகாக்கப்பட்டு போற்றப்படுகின்றன."
             }
@@ -1212,10 +1259,10 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "பூந்துறை புராணம் (பாடல் 30):",
               verses: [
-                "\"ஆருடுடன் மார்க்கையால் கலசம் வைக்க\"",
-                "\"அசுந்த மாவர் எனல் அன்பே சாரி\"",
-                "\"பூவுலகில் கொங்கினு பத்தித்து நீட்டி\"",
-                "\"பூந்துறை நாடு அதிகமென புகழ்ந்திட்டாரே\""
+                "\"ஆவலுடன் இவர்கையால் கலசம் வைக்க\"",
+                "\"அவநிற்க மூவர்முடி அன்பாய்ச் சூட்டிப்\"",
+                "\"பூவலகில் கொங்கிலிரு பத்து நாட்டில்\"",
+                "\"பூந்துறைநாடு அதிகம் எனப் புகன்றிட்டாரே!\""
               ],
               meaning: "காடை குலத்தினர் கலசத்தைச் சரியாக நிலைநிறுத்தியதைக் கண்டு மகிழ்ந்த மூவேந்தர்கள், அவர்களுக்கு முடிசூட்டி கௌரவித்தனர். மேலும், கொங்கு நாட்டின் 24 நாடுகளில் பூந்துறை நாடே முதன்மையானது என்று அவர்கள் சடங்கு பூர்வமாக அறிவித்தனர்."
             }
@@ -1229,6 +1276,49 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             { label: "எல்லைத் தகராறு தீர்த்தவர்", text: "மதுக்கரை செல்லாண்டியம்மன் கோவிலில் எல்லை நிர்ணயத்தில் மூவேந்தர்களுக்கிடையே சிக்கல்கள் எழுந்தபோது, வாரணாசி கவுண்டரே அந்தத் தகராறுகளை சுமுகமாகத் தீர்த்து வைத்தார்." },
             { label: "மன்னர்களுக்கு சமமாக முடிசூட்டப்பட்டவர்", text: "கொங்கு மண்டலத்தின் நான்கு முக்கியத் தலைவர்களில் ஒருவராகத் தேர்ந்தெடுக்கப்பட்ட அவர், மூவேந்தர்களால் நேரடியாக முடிசூட்டப்படும் மாபெரும் கௌரவத்தைப் பெற்றார்." },
             { label: "அரிச்சந்திரனுக்கு ஒப்பானவர்", text: "அவரது தளராத உண்மைத்தன்மைக்காக 'அரிச்சந்திரன்' என்றும், நீதியைக் காப்பதில் அவரது முழு அர்ப்பணிப்பிற்காக 'தர்மன்' என்றும் புலவர்கள் அவரைப் போற்றினர்." }
+          ],
+          subsections: [
+            {
+              title: "தனிப்பாடல்:",
+              verses: [
+                "\"சான்று மொழிதனில் அரிச்சந் திரனைக் காடைகுல\"",
+                "\"தருமனைப் போகநிதியை\"",
+                "\"தெண்டிரை செகுத்துலவு கொங்கு மண்டலத்திலுயர்\"",
+                "\"தீரன்வா ரணவாசியை\""
+              ]
+            }
+          ]
+        },
+        {
+          id: 6,
+          title: "மாவீரன் குப்பிச்சியின் வீரப் பிரதாபம்",
+          text: "பூந்துறை காடை குலத்தைச் சேர்ந்த குப்பன் அழைப்பிச்சான் (குப்பிச்சி) என்பவர் மல்யுத்தம் மற்றும் குதிரையேற்றத்தில் ஈடு இணையற்ற வீரராகத் திகழ்ந்தார். விஜயநகர மன்னரின் அவையில் எவருக்கும் அடங்காத 'மசக்குதிரையை' அடக்கி, அங்கிருந்த மல்லனை வென்று கொங்கு நாட்டுக்குப் பெருமை சேர்த்தார்.",
+          subsections: [
+            {
+              title: "கொங்கு மண்டல சதகம்:",
+              verses: [
+                "\"தேசுற் றிலகு விசய நகரத் திறல்அரசன்\"",
+                "\"வாசர் பணிக்கனை மண்கௌவக் குத்திஅம் மன்னனைக்கண்டு\"",
+                "\"ஏசற் படும்மச மாவினை ஆட்டி எவரும்மெச்ச\"",
+                "\"மாசற்ற நாடுகொள் குப்பிச்சி யுமகொங்கு மண்டலமே!\""
+              ]
+            }
+          ]
+        },
+        {
+          id: 7,
+          title: "புலவர்களைக் காத்த புரவலர் கனகசெல்லன்",
+          text: "தமிழ்ப் புலவர்களுக்கு வாரி வழங்கும் வள்ளலாக விளங்கிய பூந்துறை காடை குலத் தலைவரைப் பற்றிய பாடல் இது.",
+          subsections: [
+            {
+              title: "கொங்கு மண்டல சதகம் (பாடல் 46):",
+              verses: [
+                "\"ஆடையும் முத்தும் அணிமார்ப சோழன் அகளங்கன்முன்\"",
+                "\"மேடை புகழ்ந்து வரும்புல வோரை விழைந்தழைத்துக்\"",
+                "\"காடை குலாதிபன் பூந்துறை நாடன் கனகசெல்லன்\"",
+                "\"மாடையுந் தெய்வ அமுதளித் தான்கொங்கு மண்டலமே!\""
+              ]
+            }
           ]
         },
         {
@@ -1239,8 +1329,8 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "பூந்துறை புராணம்:",
               verses: [
-                "\"குகரம் தீவக் காடை விநாயகன் பதித்து மூததுடாதி பந்துவுடன்\"",
-                "\"நன்றிது வாழ்வாம்\""
+                "\"குலவும் தெய்வக் காடைவிநா யகன்பதத்தை எமதுளத்தில் கண்டநலம்\"",
+                "\"கனிந்து வாழ்வாம்\""
               ],
               explanation: "அனைத்துத் தடைகளையும் நீக்க, அவர்கள் தங்கள் சொந்த குலப் பெயரிலேயே 'காடை விநாயகர்' என்ற பெயரில் விநாயகரை பிரதிஷ்டை செய்து பக்தியுடன் வழிபட்டனர். மேலும், புலவர் கலியண்ண கவிராயரை கொண்டு 'பூந்துறை புராணம்' என்ற இதிகாசத்தை இயற்றச் செய்து, அவருக்கு நிலங்களை வழங்கிப் பெருமைப்படுத்தினர்."
             }
@@ -1254,9 +1344,9 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
             {
               title: "பண்டைய காணி பாடல்:",
               verses: [
-                "\"செல்வங்க நலிங்கே காடைக்குல காலகு\"",
-                "\"தென்கரை சாதி கன்யம்...\"",
-                "\"வாணிபூ பத்தது நிலயன் காடை குல மகராசர்\""
+                "\"செல்வமிகு வள்ளிநகர்க் காடைகுல வள்ளல்கள்\"",
+                "\"தீர்க்கர சாட்சிபுரியும்...\"",
+                "\"வன்னிபூ பதி உதவு செல்லயன் காடைகுல மகராசர்\""
               ]
             }
           ]
