@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import img1 from "../assets/Angalamman_Temple/Angalamman_Temple_Hero_optimized.webp";
 import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
 import img3 from "../assets/images/karikaliaman_1-BmA6tM5O.webp";
-import img4 from "../assets/Perumal_Temple/Perumal_Temple_Hero_optimized.webp";
+import img4 from "../assets/Perumal_Temple/Peruma_Hero.webp";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 
@@ -31,7 +31,7 @@ const Heritage = () => {
     <section className="py-16 bg-sacred overflow-hidden relative">
       {/* Spinning Sacred Sun / Chakra - Slightly more visible */}
       <div className="absolute right-[0%] bottom-[5%] pointer-events-none select-none opacity-45 z-0">
-        <motion.svg 
+        <motion.svg
           width="320" height="320" viewBox="0 0 200 200"
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
@@ -53,9 +53,9 @@ const Heritage = () => {
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
+
           {/* Left Column: Text Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -65,7 +65,7 @@ const Heritage = () => {
             <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-[#5d1712] leading-tight mb-8 tracking-wide whitespace-pre-line">
               {t.heading}
             </h2>
-            
+
             <div className="space-y-6 text-stone-700 text-base leading-relaxed">
               <p>
                 {t.p1}
@@ -91,7 +91,7 @@ const Heritage = () => {
           </motion.div>
 
           {/* Right Column: Slideshow */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -111,22 +111,21 @@ const Heritage = () => {
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </AnimatePresence>
-              
+
               {/* Image Indicators */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                 {images.map((_, i) => (
-                  <div 
+                  <div
                     key={i}
-                    className={`h-1 rounded-full transition-all duration-500 ${
-                      currentImg === i ? "w-6 bg-white" : "w-1 bg-white/50"
-                    }`}
+                    className={`h-1 rounded-full transition-all duration-500 ${currentImg === i ? "w-6 bg-white" : "w-1 bg-white/50"
+                      }`}
                   />
                 ))}
               </div>
             </div>
 
             {/* Decorative Badge from Image */}
-            <motion.div 
+            <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}

@@ -57,7 +57,7 @@ const Contact = () => {
         <div className="absolute inset-0 z-[2] bg-gradient-to-b from-black/45 via-transparent to-black/20 pointer-events-none" />
 
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -74,7 +74,7 @@ const Contact = () => {
             <h1 className="font-serif text-4xl md:text-6xl leading-[1.1] text-white mb-6 drop-shadow-2xl">
               {t.hero.heading}
             </h1>
-            
+
             <p className="max-w-xl text-white/90 text-base md:text-lg leading-relaxed font-light drop-shadow-xl">
               {t.hero.text}
             </p>
@@ -117,7 +117,7 @@ const Contact = () => {
               </svg>
             </div>
             <h4 className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c] mb-2">{t.info.phone}</h4>
-            <p className="text-stone-800 font-medium text-base leading-relaxed">+91 99526 93122<br/>+91 99524 93122</p>
+            <p className="text-stone-800 font-medium text-base leading-relaxed">+91 99526 93122<br />+91 99524 93122</p>
           </motion.div>
 
           <motion.div
@@ -150,7 +150,7 @@ const Contact = () => {
               <h3 className="font-serif text-4xl text-[#5d1712] mb-4">{t.form.heading}</h3>
               <div className="w-24 h-1 bg-[#c49a3c]/30 mx-auto rounded-full"></div>
             </div>
-            
+
             <AnimatePresence mode="wait">
               {submitted ? (
                 <motion.div
@@ -172,8 +172,8 @@ const Contact = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2">
                       <label className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c]">{t.form.name}</label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
@@ -184,8 +184,8 @@ const Contact = () => {
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c]">{t.form.email}</label>
-                      <input 
-                        type="email" 
+                      <input
+                        type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
@@ -198,8 +198,8 @@ const Contact = () => {
 
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c]">{t.form.subject}</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
@@ -211,7 +211,7 @@ const Contact = () => {
 
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase font-bold tracking-widest text-[#c49a3c]">{t.form.message}</label>
-                    <textarea 
+                    <textarea
                       rows="4"
                       name="message"
                       value={formData.message}
@@ -222,7 +222,7 @@ const Contact = () => {
                     ></textarea>
                   </div>
 
-                  <button 
+                  <button
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full bg-[#5d1712] text-white py-5 rounded-2xl font-bold tracking-[0.2em] uppercase hover:bg-[#3d0f0c] hover:scale-[1.01] active:scale-[0.99] transition-all shadow-xl shadow-[#5d1712]/20 disabled:opacity-70 disabled:cursor-not-allowed"

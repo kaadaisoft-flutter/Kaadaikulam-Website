@@ -24,7 +24,7 @@ const Kulaguru = () => {
 
         <div className="container mx-auto px-6 py-12 lg:py-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -41,7 +41,7 @@ const Kulaguru = () => {
               <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl leading-[1.1] text-white mb-6 drop-shadow-2xl">
                 {t.hero.heading}
               </h1>
-              
+
               <p className="max-w-2xl text-white/90 text-base md:text-xl leading-relaxed font-light drop-shadow-xl">
                 {t.hero.text}
               </p>
@@ -78,7 +78,7 @@ const Kulaguru = () => {
       <section className="py-24 bg-[#fdfcf7] relative">
         {/* Subtle Decorative Elements */}
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#c49a3c]/20 to-transparent" />
-        
+
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-20">
@@ -111,10 +111,10 @@ const Kulaguru = () => {
                   <FadeUp key={idx} delay={idx * 0.2}>
                     <div className="flex flex-col h-full">
                       <div className="aspect-[4/5] rounded-[40px] overflow-hidden shadow-2xl border-8 border-white bg-white mb-8 group">
-                        <img 
-                          src={idx === 0 ? img1 : img2} 
-                          alt={madam.name} 
-                          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-1000" 
+                        <img
+                          src={idx === 0 ? img1 : img2}
+                          alt={madam.name}
+                          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-1000"
                         />
                       </div>
                       <div className="text-center px-4">
@@ -143,7 +143,7 @@ const Kulaguru = () => {
           <h2 className="font-serif text-3xl md:text-4xl text-[#5d1712] text-center mb-16">
             {t.wonders.title}
           </h2>
-          
+
           <div className="space-y-8">
             {t.wonders.items.map((item, idx) => (
               <FadeUp key={idx} delay={idx * 0.1}>

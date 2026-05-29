@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import img1 from "../assets/Angalamman_Temple/Angalamman_Temple_Hero_optimized.webp";
-import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
+import img1 from "../assets/Angalamman_Temple/Angalamman_Hero.webp";
+import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero.webp";
 import img3 from "../assets/images/karikaliaman_1-BmA6tM5O.webp";
-import img4 from "../assets/Perumal_Temple/Perumal_Temple_Hero_optimized.webp";
+import img4 from "../assets/Perumal_Temple/Peruma_Hero.webp";
 import logo from "../assets/logo.webp";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
@@ -48,7 +48,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full h-[600px] md:h-[650px] lg:h-[700px] bg-[#fdfcf7] overflow-hidden flex items-center justify-center font-sans mt-0">
+    <section className="relative w-full h-[500px] md:h-[550px] lg:h-[600px] bg-[#fdfcf7] overflow-hidden flex items-center justify-center font-sans mt-0">
 
       <div className="absolute inset-0 z-0 overflow-hidden">
         <AnimatePresence>
@@ -90,7 +90,7 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
           {/* Left Column: Text Content */}
-          <div className="flex flex-col items-start max-w-xl min-h-[400px] sm:min-h-[380px] lg:min-h-[350px] justify-center">
+          <div className="flex flex-col items-start max-w-xl min-h-[320px] sm:min-h-[300px] lg:min-h-[280px] justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`${activeIndex}-${language}`}

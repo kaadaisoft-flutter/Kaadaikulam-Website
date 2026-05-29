@@ -53,11 +53,14 @@ const Preloader = ({ theme = "maroon", duration = 1500, onComplete }) => {
             if (el) {
               el.setAttribute("muted", "");
               el.muted = true;
+              el.play().catch((err) => {
+                console.log("Autoplay was prevented:", err);
+              });
             }
           }}
         >
-          <source src="/preloader.mp4" type="video/mp4" />
-          <source src="/preloader.webm" type="video/webm" />
+          <source src={`${import.meta.env.BASE_URL}preloader.mp4`} type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}preloader.webm`} type="video/webm" />
         </video>
       </div>
     </motion.div>

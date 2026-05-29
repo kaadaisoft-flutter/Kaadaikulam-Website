@@ -2,7 +2,7 @@
 import img1 from "../assets/Angalamman_Temple/Angalamman_Temple_Hero_optimized.webp";
 import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
 import img3 from "../assets/images/karikaliaman_1-BmA6tM5O.webp";
-import img4 from "../assets/Perumal_Temple/Perumal_Temple_Hero_optimized.webp";
+import img4 from "../assets/Perumal_Temple/Peruma_Hero.webp";
 
 // New Temple Details Deity Images
 import newAngImg from "../assets/Temple_Data/Change_frame_and_background_202605251617.webp";
@@ -60,7 +60,7 @@ import per_g18 from "../assets/Perumal_God/DSC01345.webp";
 
 export const getTempleInfo = (language, t) => {
   const isTa = language === "ta";
-  
+
   return {
     "sri-angalamman-temple": {
       name: t.items[0].name,
@@ -69,27 +69,27 @@ export const getTempleInfo = (language, t) => {
       visitingHours: isTa ? "காலை 6:00 - மதியம் 12:00, மாலை 4:00 - இரவு 8:00" : "6:00 AM - 12:00 PM, 4:00 PM - 8:00 PM",
       address: isTa ? "அவல்பூந்துறை, தமிழ்நாடு 638115" : "Avalpoondurai, Tamil Nadu 638115",
       features: isTa ? ["தினசரி பூஜை", "ஆண்டு திருவிழா", "சிறப்பு அபிஷேகம்"] : ["Daily Pooja", "Annual Festival", "Special Abhishekam"],
-      about: isTa ? 
+      about: isTa ?
         "எல்லாம் வல்ல பராசக்தியானவள் சிவபெருமானுடைய அங்கத்தில் தோன்றி இந்த லோகத்தை காக்கின்றாள், அந்த வண்ணம் முன்னோரு காலத்தில் பிரம்ம தேவனுக்கு ஐந்து தலைகள் இருந்தது அதனால் நான் சிவ பெருமானுக்கு நிகரானவர் என்ற அகந்தை கொண்டு இருந்தார் பிரம்ம தேவர் இதனால் கோபமுற்ற சிவபெருமான் பிரம்ம தேவனின் ஒரு தலையை கொய்து விடுகின்றார். அதனால பிரம்மாவின் அந்த தலை சிவபெருமானின் கையில் ஒட்டி கொள்ள பிரம்ம ஹத்தி தோஷமும் பிடித்து கொள்கிறது. இதை அறிந்த பராசக்தியானவள் சிவபெருமானை காக்க அவருடைய அங்கத்திலே இருந்து பிரிந்து அங்காளபரமேஸ்வரியாக மயானத்தில் காட்சி தருகின்றாள் சிவபெருமான் பிச்சை எடுத்து வருகின்றார். தன் கையில் ஒட்டி உள்ள பிரம்ம கபாலம் நீங்கவும் பிரம்ம ஹத்தி தோஷம் போகவும் அங்காளபரமேஸ்வரியிடம் பிச்சை கேட்டு உணவு வாங்கும் போது அந்த கபாலத்தை காலால் மிதித்து சிவபெருமானை காப்பாற்றி தாண்டவம் அதாவது சிவபெருமானுடன் சேர்ந்து நடனம் ஆடுகின்றாள் அதைதான் “அந்திப்பிைற பரமனுடனாடல் புரியங்காள பரமேஸ்வரியானந்த ரூபியே\" என்று அங்காளம்மன் துதியிலே குறிப்பிடப்பட்டுள்ளது. இவ்வாறாக அங்காள பரமேஸ்வரி தோன்றினாள். சிவபெருமானுடன் பம்பை உடுக்கை ஒலியுடன் ஆனந்த தாண்டவம் ஆடுகின்ற இந்த அங்காளபரமேஸ்வரியை வழிபட்டால் சகலவித பாவங்கள் பில்லி, சூனியம், ஏவல், செய்வினை கோளாறுகள் அனைத்து தோஷங்களும் நிவர்த்திஆகும். \n\nஇச்சிறப்புகளை பெற்ற அங்காளபரமேஸ்வரி ஆலயம் பார் புகழும் கொங்கு நாட்டின் முதன்மையாக விளங்குகின்ற பூந்துறை நாட்டில் சிறப்புடன் விளங்கிவரும் இந்த திருக்கோவில், பூந்துறை காடைகுல கொங்கு வேளாளகவுண்டர்களால் பல நூற்றாண்டுகளாக பல்வேறு திருப்பணிகளும் நடைபெற்றதும். 1947ல் பூந்துறை காடை குல கொங்கு வேளாளகவுண்டர்களால் மஹாகும்பாபிஷேகமும், 23.08.2010 மிகப்பெரிய திருப்பணிகள் செய்து மஹாகும்பாபிஷேகமும் சிறப்பாக நடைபெற்றது. இந்த ஆலயத்தில் மீண்டும் திருப்பணிகள் செய்து கோபுரங்கள் மஹாமண்டபங்கள் வர்ணங்கள் தீட்டப்பெற்றும் கன்னிமூலகணபதி ஆலயம், ஸ்ரீ சப்தகன்னிமார்கள் ஆலயம், இருளப்பர், பேச்சியம்மன், கருப்பண்ணசுவாமி ஆகிய ஆலயங்களும் திருப்பணிகள் செய்விக்கப்பெற்று குருவருளும், திருவருளும் கூட்டிவைத்த வண்ணம் நிகழும் மங்களகரமான விசுவாவசு வருடம் பங்குனி மாதம் 11-ஆம் நாள் 25.03.2026 புதன்கிழமை வளர்பிறை சப்தமி திதியும், மிருகசீரிஷ நட்சத்திரமும், சித்தயோகமும் கூடிய சுபயோக சுபதினத்தில் அன்று காலை 5.45 மணிக்குமேல் 6.30 மணிக்குள் மீன லக்னத்தில் பரிவார சகித அருள்தரும் அங்காளம்மனுக்கு மஹாகும்பாபிஷேகம் வேத சிவாகம முறைப்படி சிவாச்சாரியார்களை கொண்டு மிகச்சிறப்பான முறையில் நடைபெற்றது. பூந்துறை காடை குலத்தவர்களுக்கு அருள்மிகு அங்காளம்மன் மற்றும் அருள்மிகு கரிய காளியம்மன் ஆகிய இரு அன்னையரும் குலதெய்வங்களாக விளங்குகின்றனர்." :
         "The all-powerful Parasakthi appeared from Lord Shiva's body to protect the universe. In ancient times, Lord Brahma had five heads, which made him egoistic, claiming he was equal to Lord Shiva. Angered by this, Lord Shiva severed one of Brahma's heads. However, that severed skull stuck to Shiva's palm, and He was afflicted with the dreaded Brahmahatti Dosha. Upon learning this, Parasakthi, in order to save Lord Shiva, separated from His body and manifested as Angalaparameswari at the cremation grounds. Lord Shiva wandered seeking alms. To remove the skull stuck to His hand and cure the Brahmahatti Dosha, when He accepted food from Angalaparameswari, she dropped food on the ground, and as Shiva bent down, she stepped on the skull with her foot, releasing Him from the curse. She then performed the cosmic dance (Thandava) with Him, which is celebrated in the verse: 'Anthipirai paramanudan aadal puri Angalaparameswari ananda roopiye'. \n\nThus Angalaparameswari manifested. Worshipping Goddess Angalaparameswari, who dances with Lord Shiva to the rhythmic beats of Pambai and Udukkai, eradicates all sins, black magic, evil forces, sorcery, and planetary doshas. This temple, located in Poondurai Nadu, the foremost of the world-famous Kongu regions, has been preserved and renovated for centuries by the Poondurai Kaadai Kula Kongu Vellalar Gounders. A Maha Kumbhabhishekam was conducted in 1947, followed by another grand Kumbhabhishekam on 23.08.2010 after extensive renovations. Under the grace of Gurus and the divine, after rebuilding the towers (Gopurams), Maha Mandapams, applying vibrant paintings, and restoring the shrines of Kannimoola Ganapathi, Sri Saptha Kannimar, Irulappar, Pechiamman, and Karuppannaswamy, the grand Maha Kumbhabhishekam was celebrated on the auspicious day of Wednesday, 25.03.2026 (Visuvavasu Year, Panguni Month 11th day), during Sukla Paksha Saptami, Mrigaseerisha Nakshathra, and Siddha Yoga, between 5:45 AM and 6:30 AM in Meena Lagnam by learned Sivacharyas in accordance with Veda Sivagama principles. For the Poondurai Kaadai lineage, Arulmigu Angalamman and Arulmigu Kariya Kaliamman are worshipped as the dual clan deities.",
       kumbhabhishekam: {
         date: "25.03.2026",
-        details: isTa ? 
+        details: isTa ?
           "குருவருளும், திருவருளும் கூட்டிவைத்த வண்ணம் நிகழும் மங்களகரமான விசுவாவசு வருடம் பங்குனி மாதம் 11-ஆம் நாள் 25.03.2026 புதன்கிழமை வளர்பிறை சப்தமி திதியும், மிருகசீரிஷ நட்சத்திரமும், சித்தயோகமும் கூடிய சுபதினத்தில் காலை 5.45 மணிக்குமேல் 6.30 மணிக்குள் மீன லக்னத்தில் பரிவார சகித அருள்தரும் அங்காளம்மனுக்கு மஹாகும்பாபிஷேகம் வேத சிவாகம முறைப்படி சிவாச்சாரியார்களை கொண்டு மிகச்சிறப்பான முறையில் நடைபெற்றது." :
           "Under the grace of Gurus and the divine, the grand Maha Kumbhabhishekam for Arulmigu Angalamman along with Her parivaram was performed on the auspicious day of Wednesday, 25.03.2026 (Visuvavasu Year, Panguni Month 11th day), during Sukla Paksha Saptami, Mrigaseerisha Nakshathra, and Siddha Yoga, between 5:45 AM and 6:30 AM in Meena Lagnam by learned Sivacharyas in accordance with Veda Sivagama principles."
       },
       thuthi: {
         title: isTa ? "அருள்தரும் அங்காளம்மன் துதி:" : "Sri Angalamman Thuthi:",
-        verse: isTa ? 
+        verse: isTa ?
           "வந்திப்பவர்க்கு வாழ்வுங் கதியு மகிழ்ந்தளிக்கு மழகிய திருவடியு மன்போடு சிந்திப்பவருளத் திருளைப் போக்கு ஞானத்தழற் கையுந் திரிசூலமுங்கொண்டு நந்திக் கணத்தவருடனே பம்பை முழங்கவொரு நாகத்துடுக்கையாலியும் அந்திப் பிறைப் பரமனுடனாடல் புரியங்காள பரமேஸ்வரி யானந்திரூபியே" :
           "Vanthippavarkku Vaazhvum Gathiyum Magizhnthalikkum Azhagiya Thiruvadiyum Anbodu Sinthippavarulath Thiruvaip Pokkum Gnanathazhar Kaiyum Thirisulamum Kondu Nanthi Ganathavarudane Pambai Muzhanga Oru Naagathudukkaiyoliyum Anthipirai Paramanudan Aadal Puri Angala Parameswari Ananda Roopiye",
         sub: isTa ? "(உலகைக் காக்க சிவனின் திருமேனியிலிருந்து தோன்றி ஆனந்த தாண்டவம் ஆடும் அன்னை)" : "(Praising Goddess Angalaparameswari who dances with Lord Shiva to protect the world)"
       },
       poem: {
-        verse: isTa ? 
+        verse: isTa ?
           "மன்னர்பணி யும்பேரிய நாயகி மனோன்மணியின் மலரடியை மறவாதவர் - வன்மைசேர் \n\nவன்னிப்பூ பதி உதவு செல்லயன் காடைகுல மகராசர் காணியிது வே!" :
           "Mannarpani Yum Periya Nayagi Manonmaniyin Malaradiyai Maravathavar - Vanmaiser \n\nVannippoo Pathi Uthavu Sellayan Kaadaikula Magarasar Kaaniyithu Ve!",
-        meaning: isTa ? 
+        meaning: isTa ?
           "மன்னர்களே பணியும் 'பெரிய நாயகி' எனப்படும் அங்காளம்மனின் திருவடிகளை மறவாமல் போற்றி வணங்குபவர்கள் பூந்துறை காடை குலத்தினர். இவர்களின் ஆட்சிப்பகுதி (காணி) அம்மனின் அருளால் செழிப்பானது என்பது இதன் பொருள்." :
           "The Poondurai Kaadai clan are those who never forget and devoutly praise the sacred feet of Goddess Angalamman (known as Periya Nayagi), whom even kings worship. By Her divine grace, their ancestral land (Kaani) is blessed with eternal prosperity."
       }

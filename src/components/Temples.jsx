@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import img1 from "../assets/Angalamman_Temple/Angalamman_Temple_Hero_optimized.webp";
 import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
 import img3 from "../assets/images/karikaliaman_1-BmA6tM5O.webp";
-import img4 from "../assets/Perumal_Temple/Perumal_Temple_Hero_optimized.webp";
+import img4 from "../assets/Perumal_Temple/Peruma_Hero.webp";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import { StaggerContainer, StaggerItem } from "./animations/Reveal";
@@ -52,7 +52,7 @@ const Temples = ({ showButton = true }) => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Header Section */}
         <div className="text-center max-w-4xl mx-auto mb-16">
-          <motion.h2 
+          <motion.h2
             key={`${language}-heading`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +61,7 @@ const Temples = ({ showButton = true }) => {
           >
             {t.heading}
           </motion.h2>
-          <motion.p 
+          <motion.p
             key={`${language}-sub`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -88,9 +88,9 @@ const Temples = ({ showButton = true }) => {
               <div className="group bg-white p-2 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col border border-[#c49a3c]/20 h-full">
                 {/* Image Container */}
                 <div className="relative w-full aspect-video overflow-hidden rounded-xl">
-                  <motion.img 
-                    src={temple.image} 
-                    alt={temple.name} 
+                  <motion.img
+                    src={temple.image}
+                    alt={temple.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
@@ -105,7 +105,7 @@ const Temples = ({ showButton = true }) => {
                   </p>
 
                   {/* Learn More Link */}
-                  <Link 
+                  <Link
                     to={`/temples/${temple.slug}`}
                     className="group/link inline-flex items-center gap-1.5 text-[#5d1712] font-bold hover:opacity-80 transition-opacity mt-auto"
                   >
@@ -122,7 +122,7 @@ const Temples = ({ showButton = true }) => {
 
         {/* View All Button - Conditional */}
         {showButton && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
