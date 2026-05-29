@@ -48,7 +48,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full h-[500px] md:h-[550px] lg:h-[600px] bg-[#fdfcf7] overflow-hidden flex items-center justify-center font-sans mt-0">
+    <section className="relative w-full h-[550px] md:h-[600px] lg:h-[650px] bg-[#fdfcf7] overflow-hidden flex items-center justify-center font-sans mt-0">
 
       <div className="absolute inset-0 z-0 overflow-hidden">
         <AnimatePresence>
@@ -90,7 +90,7 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
           {/* Left Column: Text Content */}
-          <div className="flex flex-col items-start max-w-xl min-h-[320px] sm:min-h-[300px] lg:min-h-[280px] justify-center">
+          <div className="flex flex-col items-start max-w-xl min-h-[360px] sm:min-h-[340px] lg:min-h-[320px] justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`${activeIndex}-${language}`}
