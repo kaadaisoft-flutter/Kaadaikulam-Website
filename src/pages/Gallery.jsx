@@ -636,7 +636,7 @@ const Gallery = () => {
     <div className="min-h-screen bg-sacred pt-0">
 
       {/* ── Hero ────────────────────────────────────────────────────── */}
-      <section className="relative w-full h-[360px] md:h-[420px] lg:h-[480px] flex items-center overflow-hidden">
+      <section className="relative w-full h-[550px] md:h-[600px] lg:h-[650px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img src={heroImg} alt={t.hero.label} className="w-full h-full object-cover object-[center_30%]" />
         </div>

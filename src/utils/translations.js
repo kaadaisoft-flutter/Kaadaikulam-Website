@@ -44,6 +44,7 @@ export const translations = {
     temples: {
       heading: "Our Sacred Temples",
       sub: "Four temples, each with unique significance, form the spiritual center of the Kongu Vellalar Poondurai Kaadai Koottam.",
+      quote: "The temples built by our ancestors are not just monuments of stone, but living repositories of our heritage, culture, and divine grace.",
       viewAll: "View All Temples",
       learnMore: "Learn More",
       items: [
@@ -763,6 +764,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
     temples: {
       heading: "எங்கள் புனித கோவில்கள்",
       sub: "நான்கு கோவில்கள், ஒவ்வொன்றும் தனித்துவமான முக்கியத்துவத்துடன், கொங்கு வெள்ளாளர் பூந்துறை காடை கூட்டத்தின் ஆன்மீக மையத்தை உருவாக்குகின்றன",
+      quote: "கோவில் இல்லா ஊரில் குடியிருக்க வேண்டாம். நமது முன்னோர்கள் கட்டிய கோயில்கள் வெறும் கற்கள் அல்ல; அவை நமது பாரம்பரியம், பண்பாடு மற்றும் இறை அருளின் வாழும் கருவூலங்கள்.",
       viewAll: "அனைத்து கோவில்களையும் பார்க்க",
       learnMore: "மேலும் அறிய",
       items: [
