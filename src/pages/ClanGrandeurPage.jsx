@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
-import heroImg from "../assets/images/sacred_temple_hero_new.webp";
+import heroImg from "../assets/images/clan_grandeur_hero.webp";
 
 /* ── Reusable fade-up animation variant ── */
 const fadeUp = {
