@@ -5,6 +5,7 @@ import { translations } from "../utils/translations";
 import heroImg from "../assets/Eswaran_Temple/DJI_20260429101906_0061_D.webp";
 import templeFn from "../assets/images/temple fn.webp";
 import kari_g1 from "../assets/Kariyakaliyamman_God/WhatsApp Image 2026-05-24 at 12.55.12 PM.webp";
+import kari_g2 from "../assets/Kariyakaliyamman_God/WhatsApp Image 2026-06-01 at 11.59.37 AM.webp";
 
 
 
@@ -446,7 +447,8 @@ const Gallery = () => {
     { id: "static-67", title: isEn ? "Sri Damodara Perumal – Photo 16" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 16", category: "Gods", image: per_g16, group: PER_GOD },
     { id: "static-68", title: isEn ? "Sri Damodara Perumal – Photo 17" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 17", category: "Gods", image: per_g17, group: PER_GOD },
     { id: "static-69", title: isEn ? "Sri Damodara Perumal – Photo 18" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 18", category: "Gods", image: per_g18, group: PER_GOD },
-    { id: "static-70", title: isEn ? "Sri Kariyakali Amman" : "ஸ்ரீ கரியகாளியம்மன்", category: "Gods", image: kari_g1, group: KARI_GOD },
+    { id: "static-70", title: isEn ? "Sri Kariyakali Amman – Photo 1" : "ஸ்ரீ கரியகாளியம்மன் – படம் 1", category: "Gods", image: kari_g1, group: KARI_GOD },
+    { id: "static-71", title: isEn ? "Sri Kariyakali Amman – Photo 2" : "ஸ்ரீ கரியகாளியம்மன் – படம் 2", category: "Gods", image: kari_g2, group: KARI_GOD },
   ];
 
   // Map dynamic items from Firestore
@@ -586,6 +588,7 @@ const Gallery = () => {
       ],
       [KARI]: [
         { id: "god-kari-1", image: kari_g1, title: isEn ? "Sri Kariyakali Amman – Photo 1" : "ஸ்ரீ கரியகாளியம்மன் – படம் 1", templeId: "sri-kariyakali-amman-temple", group: KARI },
+        { id: "god-kari-2", image: kari_g2, title: isEn ? "Sri Kariyakali Amman – Photo 2" : "ஸ்ரீ கரியகாளியம்மன் – படம் 2", templeId: "sri-kariyakali-amman-temple", group: KARI },
       ],
       [PER]: [
         { id: "god-per-1",  image: per_g1,  title: isEn ? "Sri Damodara Perumal – Photo 1"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 1",  templeId: "sri-damodara-perumal-temple", group: PER },
