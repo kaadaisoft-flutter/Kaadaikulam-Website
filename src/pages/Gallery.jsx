@@ -531,6 +531,22 @@ const Gallery = () => {
     ? filteredItems.filter((item) => item.category === "Temple" || item.category === "Temples" || item.category === "Videos")
     : [];
 
+  const festivalItems = filteredItems.filter((item) => 
+    item.category === "Festival" || 
+    item.category === "Festivals" ||
+    item.category === "Events" ||
+    item.category === "Pooja" ||
+    item.category === "Annadhanam" ||
+    item.category === "Special Days" ||
+    item.category === "Others"
+  );
+
+  const getDeityItemsForTemple = (templeId) => 
+    filteredItems.filter((item) => item.templeId === templeId && (item.category === "Gods" || item.category === "God"));
+
+  const getTempleItemsForTemple = (templeId) => 
+    filteredItems.filter((item) => item.templeId === templeId && (item.category === "Temple" || item.category === "Temples" || item.category === "Videos"));
+
   // Grouped Temples Grid Data
   const TEMPLE_ORDER = [KARI, ANG, ESW, PER];
   
@@ -847,8 +863,113 @@ const Gallery = () => {
           </div>
         )}
 
-        {/* Gallery Grid UI (All / Festivals) */}
-        {!loading && !isGodTabActive && (
+        {/* Gallery Grid UI (All grouped by category/temple) */}
+        {!loading && activeCategory === "All" && (
+          <div className="space-y-24">
+            {/* Festivals */}
+            {festivalItems.length > 0 && (
+              <GroupedBlock
+                name={isEn ? "Festivals" : "திருவிழாக்கள்"}
+                items={festivalItems}
+                groupLabel={isEn ? "Celebrations" : "கொண்டாட்டங்கள்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={0}
+                onOpen={setLightbox}
+              />
+            )}
+
+            {/* Kariyakali */}
+            {getDeityItemsForTemple("sri-kariyakali-amman-temple").length > 0 && (
+              <GroupedBlock
+                name={KARI_GOD}
+                items={getDeityItemsForTemple("sri-kariyakali-amman-temple")}
+                groupLabel={isEn ? "Deity" : "தெய்வம்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={1}
+                onOpen={setLightbox}
+              />
+            )}
+            {getTempleItemsForTemple("sri-kariyakali-amman-temple").length > 0 && (
+              <GroupedBlock
+                name={KARI}
+                items={getTempleItemsForTemple("sri-kariyakali-amman-temple")}
+                groupLabel={isEn ? "Temple" : "கோவில்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={2}
+                onOpen={setLightbox}
+              />
+            )}
+
+            {/* Angalamman */}
+            {getDeityItemsForTemple("sri-angalamman-temple").length > 0 && (
+              <GroupedBlock
+                name={ANG_GOD}
+                items={getDeityItemsForTemple("sri-angalamman-temple")}
+                groupLabel={isEn ? "Deity" : "தெய்வம்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={3}
+                onOpen={setLightbox}
+              />
+            )}
+            {getTempleItemsForTemple("sri-angalamman-temple").length > 0 && (
+              <GroupedBlock
+                name={ANG}
+                items={getTempleItemsForTemple("sri-angalamman-temple")}
+                groupLabel={isEn ? "Temple" : "கோவில்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={4}
+                onOpen={setLightbox}
+              />
+            )}
+
+            {/* Eswaran */}
+            {getDeityItemsForTemple("sri-pushpavaneswara-swamy-temple").length > 0 && (
+              <GroupedBlock
+                name={ESW_GOD}
+                items={getDeityItemsForTemple("sri-pushpavaneswara-swamy-temple")}
+                groupLabel={isEn ? "Deity" : "தெய்வம்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={5}
+                onOpen={setLightbox}
+              />
+            )}
+            {getTempleItemsForTemple("sri-pushpavaneswara-swamy-temple").length > 0 && (
+              <GroupedBlock
+                name={ESW}
+                items={getTempleItemsForTemple("sri-pushpavaneswara-swamy-temple")}
+                groupLabel={isEn ? "Temple" : "கோவில்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={6}
+                onOpen={setLightbox}
+              />
+            )}
+
+            {/* Perumal */}
+            {getDeityItemsForTemple("sri-damodara-perumal-temple").length > 0 && (
+              <GroupedBlock
+                name={PER_GOD}
+                items={getDeityItemsForTemple("sri-damodara-perumal-temple")}
+                groupLabel={isEn ? "Deity" : "தெய்வம்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={7}
+                onOpen={setLightbox}
+              />
+            )}
+            {getTempleItemsForTemple("sri-damodara-perumal-temple").length > 0 && (
+              <GroupedBlock
+                name={PER}
+                items={getTempleItemsForTemple("sri-damodara-perumal-temple")}
+                groupLabel={isEn ? "Temple" : "கோவில்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={8}
+                onOpen={setLightbox}
+              />
+            )}
+          </div>
+        )}
+
+        {/* Gallery Grid UI (Festivals tab only) */}
+        {!loading && !isGodTabActive && activeCategory !== "All" && (
           <>
             <MasonryGrid items={paginatedItems} onOpen={setLightbox} />
             
