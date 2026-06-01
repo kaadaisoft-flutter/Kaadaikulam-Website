@@ -326,15 +326,15 @@ const Gallery = () => {
 
   const isEn = language === "en";
 
-  const ANG     = isEn ? "Sri Angalamman Temple, Erode"           : "ஸ்ரீ அருள்மிகு அங்காளம்மன் கோவில்";
-  const ESW     = isEn ? "Sri Pushpavaneswara Swamy Temple, Erode" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி திருக்கோயில்";
-  const PER     = isEn ? "Sri Damodara Perumal Temple, Erode"     : "ஸ்ரீ தாமோதர பெருமாள் திருக்கோயில்";
-  const KARI    = isEn ? "Sri Karikaliamman Temple, Poondurai"   : "ஸ்ரீ கரியகாளியம்மன் திருக்கோவில்";
+  const ANG     = isEn ? "Arultharum Angalamman Temple, Erode"           : "அருள்தரும் அங்காளம்மன்";
+  const ESW     = isEn ? "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy Temple, Erode" : "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி";
+  const PER     = isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal Temple, Erode" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்";
+  const KARI    = isEn ? "Arulmigu Karikaliamman Temple, Poondurai"   : "அருள்மிகு கரியகாளியம்மன்";
   
-  const ANG_GOD = isEn ? "Sri Arulmigu Angalamman"                : "ஸ்ரீ அருள்மிகு அங்காளம்மன்";
-  const ESW_GOD = isEn ? "Sri Pushpavaneswara Swamy"              : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி";
-  const PER_GOD = isEn ? "Sri Damodara Perumal"                   : "ஸ்ரீ தாமோதர பெருமாள்";
-  const KARI_GOD = isEn ? "Sri Karikaliamman"                    : "ஸ்ரீ கரியகாளியம்மன்";
+  const ANG_GOD = isEn ? "Arultharum Angalamman"                : "அருள்தரும் அங்காளம்மன்";
+  const ESW_GOD = isEn ? "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy" : "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி";
+  const PER_GOD = isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்";
+  const KARI_GOD = isEn ? "Arulmigu Karikaliamman"                    : "அருள்மிகு கரியகாளியம்மன்";
 
   // Translate/Map Temple ID to local display name
   const mapTempleToGroup = (templeId, isEn) => {
@@ -357,10 +357,10 @@ const Gallery = () => {
   const categories = [
     { id: "All",                            label: t.categories.all },
     { id: "Festivals",                      label: t.categories.festivals },
-    { id: "sri-kariyakali-amman-temple",    label: isEn ? "Sri Karikaliamman" : "ஸ்ரீ கரியகாளியம்மன்" },
-    { id: "sri-angalamman-temple",          label: isEn ? "Sri Angalamman" : "ஸ்ரீ அங்காளம்மன்" },
-    { id: "sri-pushpavaneswara-swamy-temple", label: isEn ? "Sri Pushpavaneswara Swamy" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி" },
-    { id: "sri-damodara-perumal-temple",    label: isEn ? "Sri Damodara Perumal" : "ஸ்ரீ தாமோதர பெருமாள்" },
+    { id: "sri-kariyakali-amman-temple",    label: isEn ? "Arulmigu Karikaliamman" : "அருள்மிகு கரியகாளியம்மன்" },
+    { id: "sri-angalamman-temple",          label: isEn ? "Arultharum Angalamman" : "அருள்தரும் அங்காளம்மன்" },
+    { id: "sri-pushpavaneswara-swamy-temple", label: isEn ? "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy" : "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி" },
+    { id: "sri-damodara-perumal-temple",    label: isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்" },
   ];
 
   // Static Local gallery items

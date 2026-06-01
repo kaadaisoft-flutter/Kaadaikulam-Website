@@ -12,7 +12,7 @@ const Heritage = () => {
   const { language } = useLanguage();
   const t = translations[language].heritage;
   const [currentImg, setCurrentImg] = useState(0);
-  const images = [img1, img2, img3, img4];
+  const images = [img3, img1, img2, img4];
 
   useEffect(() => {
     // Preload slideshow images to prevent transition lag/flash

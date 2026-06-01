@@ -24,19 +24,19 @@ export const translations = {
           text: "The sacred ancestral foundation of the Poondurai Kaadai lineage, dedicated to preserving our divine traditions and spiritual heritage for eternity."
         },
         {
-          title: "Sri Karikaliamman Temple",
+          title: "Arulmigu Karikaliamman Temple",
           text: "The ancestral deity of the Kaadai Koottam lineage, representing generations of devotion and spiritual legacy in Kongu Nadu."
         },
         {
-          title: "Sri Arulmigu Angalamman Temple",
+          title: "Arultharum Angalamman Temple",
           text: "A sacred shrine rooted in the ancient Kaadai Koottam lineage and traditionally administered by the revered Kongu Vellalar Poondurai Kaadai Koottam."
         },
         {
-          title: "Sri Pushpavaneswara Swamy Temple",
+          title: "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy Temple",
           text: "Dedicated to Lord Shiva, this ancient temple stands as a symbol of heritage and divine grace under the administration of Poondurai Kaadai Koottam."
         },
         {
-          title: "Sri Damodara Perumal Temple",
+          title: "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal Temple",
           text: "A majestic temple of Lord Vishnu, preserving the sacred traditions and spiritual essence of the Poondurai region."
         }
       ]
@@ -49,19 +49,19 @@ export const translations = {
       learnMore: "Learn More",
       items: [
         {
-          name: "Sri Kariyakali Amman Temple",
+          name: "Arulmigu Kariyakali Amman Temple",
           desc: "The original deity of the Kongu Vellalar Poondurai Kaadai lineage."
         },
         {
-          name: "Sri Arulmigu Angalamman Temple",
+          name: "Arultharum Angalamman Temple",
           desc: "The ancestral deity of Poondurai Kaadai, the graceful Angalamman."
         },
         {
-          name: "Sri Pushpavaneswara Swamy Temple",
+          name: "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy Temple",
           desc: "The sacred place where Lord Shiva removed the curse of Umadevi."
         },
         {
-          name: "Sri Damodara Perumal Temple",
+          name: "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal Temple",
           desc: "The shrine that manifests the Vaishnava excellence of Poondurai to the world."
         }
       ]
@@ -69,7 +69,7 @@ export const translations = {
     heritage: {
       heading: "The Greatness of Kongu Vellalar Poondurai Kaadai Sacred Shrines",
       p1: "In the land of Poondurai, which stands as the primary among the twenty-four regions of Kongu Nadu, these are spiritual shrines inextricably linked with the lifestyle and heroic history of the Kaadai clan. In this land praised as 'Generous Poondurai', the coexistence of Shaivism, Vaishnavism, and Shaktism stands as a testament to the devotion and virtue of the Kaadai lineage.",
-      p2: "The shrines of Arultharum Angalamman, Sri Kariyakali Amman, Sri Pushpavaneswara Swamy, and Sri Damodara Perumal, which serve as the original places of worship for our ancestors, have flourished for generations as great cultural centers of Kongu Nadu and birthplaces of divine grace.",
+      p2: "The shrines of Arultharum Angalamman, Arulmigu Kariyakali Amman, Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy, and Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal, which serve as the original places of worship for our ancestors, have flourished for generations as great cultural centers of Kongu Nadu and birthplaces of divine grace.",
       link: "Discover Our Temples",
       templeLabel: "Temples"
     },
@@ -744,19 +744,19 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
           text: "பூந்துறை காடை வம்சத்தின் புனிதமான மூதாதையர் தளம், நமது தெய்வீக மரபுகளையும் ஆன்மீக பாரம்பரியத்தையும் என்றென்றும் பாதுகாப்பதற்காக அர்ப்பணிக்கப்பட்டது."
         },
         {
-          title: "ஸ்ரீ கரியகாளி அம்மன் ஆலயம்",
+          title: "அருள்மிகு கரியகாளியம்மன்",
           text: "காடை கூட்ட வம்சத்தின் குலதெய்வம், கொங்கு நாட்டில் தலைமுறைகளாக பக்தி மற்றும் ஆன்மீக பாரம்பரியத்தை பிரதிபலிக்கிறது."
         },
         {
-          title: "ஸ்ரீ அருள்மிகு அங்காளம்மன் கோவில்",
+          title: "அருள்தரும் அங்காளம்மன்",
           text: "பண்டைய காடை கூட்ட வம்சத்தில் வேரூன்றி, மரியாதைக்குரிய கொங்கு வேளாளர் பூந்துறை காடை கூட்டத்தால் பாரம்பரியமாக நிர்வகிக்கப்படும் ஒரு புனித தலம்."
         },
         {
-          title: "ஸ்ரீ புஷ்பவனேசுவர சுவாமி திருக்கோயில்",
+          title: "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி",
           text: "சிவபெருமானுக்கு அர்ப்பணிக்கப்பட்ட இந்த புராதனமான கோவில், பூந்துறை காடை கூட்டத்தின் நிர்வாகத்தின் கீழ் பாரம்பரியம் மற்றும் தெய்வீக அருளின் அடையாளமாகத் திகழ்கிறது."
         },
         {
-          title: "ஸ்ரீ தாமோதர பெருமாள் திருக்கோயில்",
+          title: "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்",
           text: "பூந்துறை பிராந்தியத்தின் புனித மரபுகள் மற்றும் ஆன்மீக சாரத்தைப் பாதுகாக்கும் விஷ்ணு பகவானின் கம்பீரமான தலம்."
         }
       ]
@@ -769,19 +769,19 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
       learnMore: "மேலும் அறிய",
       items: [
         {
-          name: "ஸ்ரீ கரியகாளி அம்மன் ஆலயம்",
+          name: "அருள்மிகு கரியகாளியம்மன்",
           desc: "கொங்கு வேளாளர் பூந்துறை காடை குலத்தின் ஆதி தெய்வம்."
         },
         {
-          name: "ஸ்ரீ அருள்மிகு அங்காளம்மன் கோவில்",
+          name: "அருள்தரும் அங்காளம்மன்",
           desc: "பூந்துறை காடை குலதெய்வம், அருள்தரும் அங்காளம்மன்."
         },
         {
-          name: "ஸ்ரீ புஷ்பவனேசுவர சுவாமி திருக்கோயில்",
+          name: "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி",
           desc: "சிவபெருமான் உமாதேவியாரின் சாபத்தை நீக்கிய தலம்."
         },
         {
-          name: "ஸ்ரீ தாமோதர பெருமாள் திருக்கோயில்",
+          name: "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்",
           desc: "பூந்துறையின் வைணவச் சிறப்பை உலகிற்கு உணர்த்தும் ஆலயம்."
         }
       ]
@@ -789,7 +789,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
     heritage: {
       heading: "கொங்கு வேளாளர்\nபூந்துறை காடை குலத்\nதிருத்தலங்களின்\nபெருமை",
       p1: "கொங்கு நாட்டின் இருபத்து நான்கு நாடுகளில் முதன்மை நாடாகத் திகழும் பூந்துறை நாட்டில், காடை குலத்தவர்களின் வாழ்வியலோடும், வீர வரலாற்றோடும் பின்னிப் பிணைந்துள்ள ஆன்மீகத் தலங்களாகும். 'வண்மைசேர் பூந்துறை' என்று போற்றப்படும் இந்நாட்டில், சைவமும், வைணவமும், சக்தியும் ஒருங்கே இணைந்து அருள்பாலிப்பது காடை குலத்தவர்களின் பக்திக்கும், அறத்திற்கும் சான்றாகும்.",
-      p2: "நமது குலத்து முன்னோர்களின் ஆதி வழிபாட்டுத் தலங்களாகத் திகழும் அருள்தரும் அங்காளம்மன், ஸ்ரீ கரியகாளி அம்மன், ஸ்ரீ புஷ்பவனேசுவர சுவாமி மற்றும் ஸ்ரீ தாமோதர பெருமாள் ஆகிய இத்தலங்கள் கொங்கு நாட்டின் மாபெரும் கலாச்சார மையங்களாகவும், தெய்வ அருளின் பிறப்பிடங்களாகவும் பல தலைமுறைகளாக விளங்கி வருகின்றன.",
+      p2: "நமது குலத்து முன்னோர்களின் ஆதி வழிபாட்டுத் தலங்களாகத் திகழும் அருள்தரும் அங்காளம்மன், அருள்மிகு கரியகாளியம்மன், அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி மற்றும் ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள் ஆகிய இத்தலங்கள் கொங்கு நாட்டின் மாபெரும் கலாச்சார மையங்களாகவும், தெய்வ அருளின் பிறப்பிடங்களாகவும் பல தலைமுறைகளாக விளங்கி வருகின்றன.",
       link: "எங்கள் கோவில்களைக் கண்டறியுங்கள்",
       templeLabel: "கோவில்கள்"
     },
