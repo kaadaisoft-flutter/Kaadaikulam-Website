@@ -3,7 +3,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import img1 from "../assets/images/pasur_periya_madam-CCPWZxUo.webp";
 import img2 from "../assets/images/pasur_chinna_madam-BOzzffoW.webp";
-import heroImg from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
+import heroImg from "../assets/Eswaran_Temple/Eswaran_Temple_Hero.webp";
 import { FadeUp } from "../components/animations/Reveal";
 
 const Kulaguru = () => {

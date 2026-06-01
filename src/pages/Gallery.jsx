@@ -143,31 +143,7 @@ const MasonryCard = ({ item, index, onOpen }) => {
         loading="lazy"
       />
 
-      {/* Gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent
-                      opacity-0 group-hover:opacity-100 transition-opacity duration-400
-                      flex flex-col justify-end p-5">
-        <motion.div
-          initial={false}
-          className="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-400"
-        >
-          <span className="text-[#c49a3c] text-[9px] uppercase font-bold tracking-[0.2em] mb-1 block">
-            {item.category}
-          </span>
-          <h3 className="text-white font-serif text-base leading-snug mb-0.5">{item.title}</h3>
-          {item.group && <p className="text-white/55 text-xs font-light italic">{item.group}</p>}
-        </motion.div>
-      </div>
 
-      {/* Always-visible bottom tag strip */}
-      {item.group && (
-        <div className="absolute bottom-0 inset-x-0 h-10
-                        bg-gradient-to-t from-black/50 to-transparent
-                        group-hover:opacity-0 transition-opacity duration-300
-                        flex items-end px-4 pb-2">
-          <span className="text-white/70 text-[10px] font-medium truncate">{item.group}</span>
-        </div>
-      )}
     </motion.div>
   );
 };
@@ -331,10 +307,10 @@ const Gallery = () => {
   const PER     = isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal Temple, Erode" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்";
   const KARI    = isEn ? "Arulmigu Karikaliamman Temple, Poondurai"   : "அருள்மிகு கரியகாளியம்மன்";
   
-  const ANG_GOD = isEn ? "Arultharum Angalamman"                : "அருள்தரும் அங்காளம்மன்";
-  const ESW_GOD = isEn ? "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy" : "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி";
-  const PER_GOD = isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்";
-  const KARI_GOD = isEn ? "Arulmigu Karikaliamman"                    : "அருள்மிகு கரியகாளியம்மன்";
+  const ANG_GOD = isEn ? "Arultharum Angalamman Temple Gods"    : "அருள்தரும் அங்காளம்மன் கோவில் தெய்வங்கள்";
+  const ESW_GOD = isEn ? "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy Temple Gods" : "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி கோவில் தெய்வங்கள்";
+  const PER_GOD = isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal Temple Gods" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள் கோவில் தெய்வங்கள்";
+  const KARI_GOD = isEn ? "Arulmigu Karikaliamman Temple Gods"  : "அருள்மிகு கரியகாளியம்மன் கோவில் தெய்வங்கள்";
 
   // Translate/Map Temple ID to local display name
   const mapTempleToGroup = (templeId, isEn) => {

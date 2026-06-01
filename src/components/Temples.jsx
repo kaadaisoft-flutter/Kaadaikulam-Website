@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import img1 from "../assets/Angalamman_Temple/Angalamman_Temple_Hero_optimized.webp";
-import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero_optimized.webp";
+import img2 from "../assets/Eswaran_Temple/Eswaran_Temple_Hero.webp";
 import img3 from "../assets/images/karikaliaman_1-BmA6tM5O.webp";
 import img4 from "../assets/Perumal_Temple/Peruma_Hero.webp";
 import { useLanguage } from "../context/LanguageContext";
