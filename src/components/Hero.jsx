@@ -14,7 +14,7 @@ const Hero = () => {
   const { language } = useLanguage();
   const t = translations[language].hero;
 
-  const bgImages = [logo, img1, img2, img3, img4];
+  const bgImages = [logo, img3, img1, img2, img4];
 
   useEffect(() => {
     // Preload background images to prevent flash/jank during slide transitions
@@ -86,7 +86,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-[1] bg-black/25 pointer-events-none" />
       <div className="absolute inset-0 z-[2] bg-gradient-to-r from-black/45 via-black/10 to-transparent pointer-events-none" />
 
-      <div className="container mx-auto px-6 py-12 lg:py-16 relative z-10">
+      <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-12 lg:py-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
           {/* Left Column: Text Content */}

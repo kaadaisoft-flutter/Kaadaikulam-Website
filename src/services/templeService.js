@@ -3,10 +3,17 @@ import { db } from "../firebase/config";
 
 const TEMPLES_COLLECTION = "temples";
 
+const PREFERRED_ORDER = [
+    "sri-kariyakali-amman-temple",
+    "sri-angalamman-temple",
+    "sri-pushpavaneswara-swamy-temple",
+    "sri-damodara-perumal-temple"
+];
+
 const DEFAULT_TEMPLES = [
+    { id: "sri-kariyakali-amman-temple", name: "Sri Kariyakali Amman Temple", nameTa: "ஸ்ரீ கரியகாளியம்மன் திருக்கோவில்" },
     { id: "sri-angalamman-temple", name: "Sri Angalamman Temple", nameTa: "ஸ்ரீ அருள்மிகு அங்காளம்மன் கோவில்" },
     { id: "sri-pushpavaneswara-swamy-temple", name: "Sri Pushpavaneswara Swamy Temple", nameTa: "ஸ்ரீ புஷ்பவனேசுவர சுவாமி திருக்கோயில்" },
-    { id: "sri-kariyakali-amman-temple", name: "Sri Kariyakali Amman Temple", nameTa: "ஸ்ரீ கரியகாளியம்மன் திருக்கோவில்" },
     { id: "sri-damodara-perumal-temple", name: "Sri Damodara Perumal Temple", nameTa: "ஸ்ரீ தாமோதர பெருமாள் திருக்கோயில்" }
 ];
 
@@ -24,15 +31,17 @@ export const getTemples = async () => {
             }
             // Fetch again after seeding
             const freshSnapshot = await getDocs(collection(db, TEMPLES_COLLECTION));
-            return freshSnapshot.docs.map(doc => ({
+            const list = freshSnapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
             }));
+            return list.sort((a, b) => PREFERRED_ORDER.indexOf(a.id) - PREFERRED_ORDER.indexOf(b.id));
         }
-        return querySnapshot.docs.map(doc => ({
+        const list = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
         }));
+        return list.sort((a, b) => PREFERRED_ORDER.indexOf(a.id) - PREFERRED_ORDER.indexOf(b.id));
     } catch (error) {
         console.error("Error fetching temples: ", error);
         throw error;

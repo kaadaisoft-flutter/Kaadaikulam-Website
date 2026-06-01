@@ -17,25 +17,25 @@ const Temples = ({ showButton = true }) => {
       id: 1,
       name: t.items[0]?.name || "",
       desc: t.items[0]?.desc || "",
-      image: img1,
-      slug: "sri-angalamman-temple",
-      tags: language === 'en' ? ["Daily Pooja", "Annual Festival", "Special Abhishekam"] : ["தினசரி பூஜை", "ஆண்டு விழா", "சிறப்பு அபிஷேகம்"]
+      image: img3,
+      slug: "sri-kariyakali-amman-temple",
+      tags: language === 'en' ? ["Aadi Perukku", "Special Arthi", "Navaratri"] : ["ஆடி பெருக்கு", "சிறப்பு ஆரத்தி", "நவராத்திரி"]
     },
     {
       id: 2,
       name: t.items[1]?.name || "",
       desc: t.items[1]?.desc || "",
-      image: img2,
-      slug: "sri-pushpavaneswara-swamy-temple",
-      tags: language === 'en' ? ["Shivaratri", "Daily Abhishekam", "Rudra Abhishekam"] : ["சிவராத்திரி", "தினசரி அபிஷேகம்", "ருத்ர அபிஷேகம்"]
+      image: img1,
+      slug: "sri-angalamman-temple",
+      tags: language === 'en' ? ["Daily Pooja", "Annual Festival", "Special Abhishekam"] : ["தினசரி பூஜை", "ஆண்டு விழா", "சிறப்பு அபிஷேகம்"]
     },
     {
       id: 3,
       name: t.items[2]?.name || "",
       desc: t.items[2]?.desc || "",
-      image: img3,
-      slug: "sri-kariyakali-amman-temple",
-      tags: language === 'en' ? ["Aadi Perukku", "Special Arthi", "Navaratri"] : ["ஆடி பெருக்கு", "சிறப்பு ஆரத்தி", "நவராத்திரி"]
+      image: img2,
+      slug: "sri-pushpavaneswara-swamy-temple",
+      tags: language === 'en' ? ["Shivaratri", "Daily Abhishekam", "Rudra Abhishekam"] : ["சிவராத்திரி", "தினசரி அபிஷேகம்", "ருத்ர அபிஷேகம்"]
     },
     {
       id: 4,

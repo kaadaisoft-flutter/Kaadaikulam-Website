@@ -354,10 +354,12 @@ const Gallery = () => {
 
   // Simplified gallery tabs/categories based on user request
   const categories = [
-    { id: "All",       label: t.categories.all },
-    { id: "Festivals", label: t.categories.festivals },
-    { id: "Temples",   label: t.categories.temples },
-    { id: "Gods",      label: t.categories.gods },
+    { id: "All",                            label: t.categories.all },
+    { id: "Festivals",                      label: t.categories.festivals },
+    { id: "sri-kariyakali-amman-temple",    label: isEn ? "Sri Karikaliamman" : "ஸ்ரீ கரியகாளியம்மன்" },
+    { id: "sri-angalamman-temple",          label: isEn ? "Sri Angalamman" : "ஸ்ரீ அங்காளம்மன்" },
+    { id: "sri-pushpavaneswara-swamy-temple", label: isEn ? "Sri Pushpavaneswara Swamy" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி" },
+    { id: "sri-damodara-perumal-temple",    label: isEn ? "Sri Damodara Perumal" : "ஸ்ரீ தாமோதர பெருமாள்" },
   ];
 
   // Static Local gallery items
@@ -477,6 +479,7 @@ const Gallery = () => {
     if (item.category === "Temples") unifiedCategory = "Temple";
 
     let templeId = "";
+    if (item.group === KARI || item.group === KARI_GOD) templeId = "sri-kariyakali-amman-temple";
     if (item.group === ANG || item.group === ANG_GOD) templeId = "sri-angalamman-temple";
     if (item.group === ESW || item.group === ESW_GOD) templeId = "sri-pushpavaneswara-swamy-temple";
     if (item.group === PER || item.group === PER_GOD) templeId = "sri-damodara-perumal-temple";
@@ -506,13 +509,13 @@ const Gallery = () => {
           item.category === "Annadhanam" ||
           item.category === "Special Days" ||
           item.category === "Others";
-      } else if (activeCategory === "Temples") {
-        matchesCategory = 
-          item.category === "Temple" || 
-          item.category === "Temples" ||
-          item.category === "Videos";
-      } else if (activeCategory === "Gods") {
-        matchesCategory = item.category === "Gods";
+      } else if (
+        activeCategory === "sri-kariyakali-amman-temple" ||
+        activeCategory === "sri-angalamman-temple" ||
+        activeCategory === "sri-pushpavaneswara-swamy-temple" ||
+        activeCategory === "sri-damodara-perumal-temple"
+      ) {
+        matchesCategory = item.templeId === activeCategory;
       } else {
         matchesCategory = item.category === activeCategory;
       }
@@ -536,8 +539,22 @@ const Gallery = () => {
   // Paginated/Infinite Scroll Slice for Grid UI
   const paginatedItems = filteredItems.slice(0, visibleCount);
 
+  const isGodTabActive = 
+    activeCategory === "sri-kariyakali-amman-temple" ||
+    activeCategory === "sri-angalamman-temple" ||
+    activeCategory === "sri-pushpavaneswara-swamy-temple" ||
+    activeCategory === "sri-damodara-perumal-temple";
+
+  const godDeityItems = isGodTabActive
+    ? filteredItems.filter((item) => item.category === "Gods" || item.category === "God")
+    : [];
+
+  const godTempleItems = isGodTabActive
+    ? filteredItems.filter((item) => item.category === "Temple" || item.category === "Temples" || item.category === "Videos")
+    : [];
+
   // Grouped Temples Grid Data
-  const TEMPLE_ORDER = [ANG, ESW, KARI, PER];
+  const TEMPLE_ORDER = [KARI, ANG, ESW, PER];
   
   // Returns ALL god images for a given temple group name
   const getGodItems = (name) => {
@@ -619,7 +636,7 @@ const Gallery = () => {
 
 
   // Grouped Gods Grid Data
-  const GOD_ORDER = [ANG_GOD, ESW_GOD, KARI_GOD, PER_GOD];
+  const GOD_ORDER = [KARI_GOD, ANG_GOD, ESW_GOD, PER_GOD];
   const godGroups = GOD_ORDER.map((name) => {
     const groupItems = filteredItems.filter(
       (item) => item.category === "Gods" && item.group === name
@@ -629,6 +646,7 @@ const Gallery = () => {
 
   const handleCategoryChange = (catId) => {
     setActiveCategory(catId);
+    setSelectedTemple(""); // Reset dropdown filter when switching tabs
     setVisibleCount(12);
   };
 
@@ -769,28 +787,33 @@ const Gallery = () => {
           </div>
 
           {/* Temple select */}
-          <div className="relative w-full md:w-72">
-            <select
-              value={selectedTemple}
-              onChange={(e) => {
-                setSelectedTemple(e.target.value);
-                setVisibleCount(12);
-              }}
-              className="w-full pl-4 pr-10 py-2.5 bg-white border border-stone-200 rounded-xl text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#5d1712]/20 focus:border-[#5d1712] transition-all text-stone-700 font-medium cursor-pointer"
-            >
-              <option value="">{isEn ? "All Temples" : "அனைத்து கோவில்கள்"}</option>
-              {temples.map((temple) => (
-                <option key={temple.id} value={temple.id}>
-                  {isEn ? temple.name : temple.nameTa}
-                </option>
-              ))}
-            </select>
-            <span className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-stone-400">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-              </svg>
-            </span>
-          </div>
+          {activeCategory !== "sri-kariyakali-amman-temple" &&
+           activeCategory !== "sri-angalamman-temple" &&
+           activeCategory !== "sri-pushpavaneswara-swamy-temple" &&
+           activeCategory !== "sri-damodara-perumal-temple" && (
+            <div className="relative w-full md:w-72">
+              <select
+                value={selectedTemple}
+                onChange={(e) => {
+                  setSelectedTemple(e.target.value);
+                  setVisibleCount(12);
+                }}
+                className="w-full pl-4 pr-10 py-2.5 bg-white border border-stone-200 rounded-xl text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#5d1712]/20 focus:border-[#5d1712] transition-all text-stone-700 font-medium cursor-pointer"
+              >
+                <option value="">{isEn ? "All Temples" : "அனைத்து கோவில்கள்"}</option>
+                {temples.map((temple) => (
+                  <option key={temple.id} value={temple.id}>
+                    {isEn ? temple.name : temple.nameTa}
+                  </option>
+                ))}
+              </select>
+              <span className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-stone-400">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Loading Spinner */}
@@ -812,28 +835,41 @@ const Gallery = () => {
           </div>
         )}
 
-        {/* Temples – grouped masonry */}
-        {!loading && activeCategory === "Temples" && (
-          <GroupedSection
-            groups={templeGroups}
-            groupLabel={isEn ? "Temple" : "கோவில்"}
-            countLabel={isEn ? "Photos" : "படங்கள்"}
-            onOpen={setLightbox}
-          />
+        {/* God Deity & Temple separated sections */}
+        {!loading && isGodTabActive && (
+          <div className="space-y-24">
+            {godDeityItems.length > 0 && (
+              <GroupedBlock
+                name={activeCategory === "sri-kariyakali-amman-temple" ? KARI_GOD :
+                      activeCategory === "sri-angalamman-temple" ? ANG_GOD :
+                      activeCategory === "sri-pushpavaneswara-swamy-temple" ? ESW_GOD :
+                      activeCategory === "sri-damodara-perumal-temple" ? PER_GOD : ""}
+                items={godDeityItems}
+                groupLabel={isEn ? "Deity" : "தெய்வம்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={0}
+                onOpen={setLightbox}
+              />
+            )}
+
+            {godTempleItems.length > 0 && (
+              <GroupedBlock
+                name={activeCategory === "sri-kariyakali-amman-temple" ? KARI :
+                      activeCategory === "sri-angalamman-temple" ? ANG :
+                      activeCategory === "sri-pushpavaneswara-swamy-temple" ? ESW :
+                      activeCategory === "sri-damodara-perumal-temple" ? PER : ""}
+                items={godTempleItems}
+                groupLabel={isEn ? "Temple" : "கோவில்"}
+                countLabel={isEn ? "Photos" : "படங்கள்"}
+                groupIdx={1}
+                onOpen={setLightbox}
+              />
+            )}
+          </div>
         )}
 
-        {/* Gods – grouped masonry */}
-        {!loading && activeCategory === "Gods" && (
-          <GroupedSection
-            groups={godGroups}
-            groupLabel={isEn ? "Deity" : "தெய்வம்"}
-            countLabel={isEn ? "Photos" : "படங்கள்"}
-            onOpen={setLightbox}
-          />
-        )}
-
-        {/* All / Other categories – flat masonry */}
-        {!loading && activeCategory !== "Temples" && activeCategory !== "Gods" && (
+        {/* Gallery Grid UI (All / Festivals) */}
+        {!loading && !isGodTabActive && (
           <>
             <MasonryGrid items={paginatedItems} onOpen={setLightbox} />
             
@@ -856,7 +892,7 @@ const Gallery = () => {
       <AnimatePresence>
         {lightbox && (
           <motion.div
-            className="fixed inset-0 z-[100] bg-black/92 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[150] bg-black/92 flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

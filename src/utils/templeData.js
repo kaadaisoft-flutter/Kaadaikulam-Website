@@ -63,7 +63,7 @@ export const getTempleInfo = (language, t) => {
 
   return {
     "sri-angalamman-temple": {
-      name: t.items[0].name,
+      name: t.items[1].name,
       image: img1,
       godImages: [newAngImg, ang_g1, ang_g2, ang_g3, ang_g4, ang_g5, ang_g6, ang_g7, ang_g8, ang_g9],
       visitingHours: isTa ? "காலை 6:00 - மதியம் 12:00, மாலை 4:00 - இரவு 8:00" : "6:00 AM - 12:00 PM, 4:00 PM - 8:00 PM",
@@ -95,7 +95,7 @@ export const getTempleInfo = (language, t) => {
       }
     },
     "sri-pushpavaneswara-swamy-temple": {
-      name: t.items[1].name,
+      name: t.items[2].name,
       image: img2,
       godImages: [newEswImg, esw_g1, esw_g2, esw_g3, esw_g4, esw_g5, esw_g6, esw_g7, esw_g8, esw_g9, esw_g10, esw_g11, esw_g12],
       visitingHours: isTa ? "காலை 6:00 - 11:30, மாலை 4:30 - இரவு 8:30" : "6:00 AM - 11:30 AM, 4:30 PM - 8:30 PM",
@@ -127,7 +127,7 @@ export const getTempleInfo = (language, t) => {
       }
     },
     "sri-kariyakali-amman-temple": {
-      name: t.items[2].name,
+      name: t.items[0].name,
       image: img3,
       godImages: [newKariImg, kari_g1],
       visitingHours: isTa ? "காலை 7:00 - மதியம் 12:00, மாலை 5:00 - இரவு 8:00" : "7:00 AM - 12:00 PM, 5:00 PM - 8:00 PM",
@@ -145,7 +145,7 @@ export const getTempleInfo = (language, t) => {
       }
     },
     "sri-damodara-perumal-temple": {
-      name: t.items[4]?.name || t.items[3].name,
+      name: t.items[3].name,
       image: img4,
       godImages: [newPerImg, per_g1, per_g2, per_g3, per_g4, per_g5, per_g6, per_g7, per_g8, per_g9, per_g10, per_g11, per_g12, per_g13, per_g14, per_g15, per_g16, per_g17, per_g18],
       visitingHours: isTa ? "காலை 6:30 - 11:30, மாலை 5:00 - இரவு 8:30" : "6:30 AM - 11:30 AM, 5:00 PM - 8:30 PM",

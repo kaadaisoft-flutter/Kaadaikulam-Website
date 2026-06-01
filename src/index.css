@@ -78,45 +78,21 @@
   }
 }
 
-/* Custom scrollbar for Webkit browsers (Chrome, Safari, Edge) */
+/* Hide scrollbar for Chrome, Safari and Opera */
 html::-webkit-scrollbar {
-  width: 8px;
-  background: transparent;
+  display: none;
+  width: 0;
+  height: 0;
 }
 
-html::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-html::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 10px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  transition: background-color 0.3s ease;
-}
-
-html.is-scrolling::-webkit-scrollbar-thumb {
-  background-color: rgba(93, 23, 18, 0.45); /* #5d1712 with 45% opacity */
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-
-html::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(93, 23, 18, 0.75) !important;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-
-/* Firefox support */
+/* Hide scrollbar for Firefox */
 html {
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
-  transition: scrollbar-color 0.3s ease;
+  scrollbar-width: none;
 }
 
-html.is-scrolling {
-  scrollbar-color: rgba(93, 23, 18, 0.45) transparent;
+/* Hide scrollbar for IE, Edge and Opera */
+html, body {
+  -ms-overflow-style: none;
 }
 
 
