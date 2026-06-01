@@ -782,7 +782,7 @@ const Gallery = () => {
                 <option value="">{isEn ? "All Temples" : "அனைத்து கோவில்கள்"}</option>
                 {temples.map((temple) => (
                   <option key={temple.id} value={temple.id}>
-                    {isEn ? temple.name : temple.nameTa}
+                    {mapTempleToGroup(temple.id)}
                   </option>
                 ))}
               </select>
