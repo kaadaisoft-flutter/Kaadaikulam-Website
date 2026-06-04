@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import logo from "../assets/logo.webp";
+import preloaderWebm from "../assets/Preloader/bd2507452ac54f0e8cc439035aac5e35.webm";
 
 /**
  * Preloader
@@ -59,8 +60,7 @@ const Preloader = ({ theme = "maroon", duration = 1500, onComplete }) => {
             }
           }}
         >
-          <source src={`${import.meta.env.BASE_URL}preloader.mp4`} type="video/mp4" />
-          <source src={`${import.meta.env.BASE_URL}preloader.webm`} type="video/webm" />
+          <source src={preloaderWebm} type="video/webm" />
         </video>
       </div>
     </motion.div>
