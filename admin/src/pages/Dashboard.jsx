@@ -240,21 +240,21 @@ const Dashboard = () => {
                     </div>
 
                     {/* Quick Stats Mini */}
-                    <div className="bg-[#1A1C1E] p-8 rounded-[2rem] text-white shadow-xl">
+                    <div className="bg-[#5D1712] p-8 rounded-[2rem] text-white shadow-xl">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+                            <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shadow-lg">
                                 <TrendingUp size={20} />
                             </div>
                             <h3 className="font-bold">Performance</h3>
                         </div>
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-gray-400">System Progress</span>
-                                <span className="text-xs font-bold text-primary">{performanceScore}%</span>
+                                <span className="text-xs text-stone-300">System Progress</span>
+                                <span className="text-xs font-bold text-secondary">{performanceScore}%</span>
                             </div>
                             <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                                 <div 
-                                    className="h-full bg-primary rounded-full shadow-[0_0_8px_rgba(128,0,0,0.4)] transition-all duration-1000" 
+                                    className="h-full bg-secondary rounded-full shadow-[0_0_8px_rgba(212,175,55,0.4)] transition-all duration-1000" 
                                     style={{ width: `${performanceScore}%` }}
                                 />
                             </div>

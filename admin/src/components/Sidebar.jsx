@@ -79,7 +79,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     return (
         <aside
             className={`
-                relative flex flex-col bg-[#1A1C1E] text-gray-400 transition-all duration-300 ease-in-out z-30
+                relative flex flex-col bg-[#5D1712] text-stone-300 transition-all duration-300 ease-in-out z-30
                 ${isCollapsed ? 'w-20' : 'w-72'}
             `}
         >
@@ -107,7 +107,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                 {menuGroups.map((group, gIdx) => (
                     <div key={gIdx} className="space-y-2">
                         {!isCollapsed && (
-                            <span className="px-4 text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] mb-4 block">
+                            <span className="px-4 text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] mb-4 block">
                                 {group.title}
                             </span>
                         )}
@@ -120,7 +120,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                         className={({ isActive }) => `
                                             flex items-center gap-3 px-4 py-3 rounded-xl transition-all relative group
                                             ${isActive
-                                                ? 'bg-primary/10 text-white font-semibold'
+                                                ? 'bg-white/10 text-white font-semibold'
                                                 : 'hover:bg-white/5 hover:text-white'}
                                             ${isCollapsed ? 'justify-center' : ''}
                                         `}
@@ -129,18 +129,18 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                             <>
                                                 <item.icon size={20} className={`
                                                     transition-colors
-                                                    ${isActive ? 'text-primary' : 'group-hover:text-white'}
+                                                    ${isActive ? 'text-secondary' : 'group-hover:text-white'}
                                                 `} />
                                                 {!isCollapsed && <span className="flex-1 text-sm">{item.label}</span>}
                                                 {item.badge > 0 && !isCollapsed && (
-                                                    <span className="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                                                    <span className="bg-secondary text-[#5D1712] text-[10px] font-bold px-2 py-0.5 rounded-full">
                                                         {item.badge}
                                                     </span>
                                                 )}
                                                 {isActive && (
                                                     <motion.div
                                                         layoutId="active-pill"
-                                                        className="absolute left-0 w-1 h-6 bg-primary rounded-r-full"
+                                                        className="absolute left-0 w-1 h-6 bg-secondary rounded-r-full"
                                                     />
                                                 )}
                                             </>
@@ -214,7 +214,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             {/* Collapse Toggle Overlay */}
             <button
                 onClick={toggleSidebar}
-                className="absolute -right-3 top-24 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center shadow-lg border-2 border-[#FAF5EE] hover:scale-110 transition-all z-40"
+                className="absolute -right-3 top-24 w-6 h-6 bg-secondary text-[#5D1712] rounded-full flex items-center justify-center shadow-lg border-2 border-[#FAF5EE] hover:scale-110 transition-all z-40"
             >
                 {isCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
             </button>
