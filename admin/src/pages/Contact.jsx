@@ -117,7 +117,7 @@ const Contact = () => {
             </div>
             <DataTable data={items} columns={columns} exportFileName="Contact_Messages_Export" searchPlaceholder="Search senders, subjects, emails..." filterOptions={filterOptions} initialFilters={{ status: 'pending' }} />
 
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Message Details" maxWidth="max-w-lg">
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Message Details" maxWidth="max-w-2xl" bodyClassName="!overflow-hidden">
                 {selectedMsg && (
                     <div className="space-y-4">
                         <div className="bg-gray-50 border border-gray-100 rounded-lg p-4">
@@ -129,11 +129,8 @@ const Contact = () => {
                                 <span className="text-xs text-gray-500">{formatDateTime(selectedMsg.createdAt || selectedMsg.date)}</span>
                             </div>
                         </div>
-                        <div className="p-4 bg-white border border-gray-100 rounded-lg whitespace-pre-wrap text-sm text-gray-800 max-h-60 overflow-y-auto">
+                        <div className="p-5 bg-white border border-gray-100 rounded-lg whitespace-pre-wrap text-sm text-gray-800 max-h-[22rem] overflow-y-auto leading-relaxed">
                             {selectedMsg.message}
-                        </div>
-                        <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
-                            <button onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">Close</button>
                         </div>
                     </div>
                 )}

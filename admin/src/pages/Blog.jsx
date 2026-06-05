@@ -38,10 +38,16 @@ const Blog = () => {
     const [previewSelection, setPreviewSelection] = useState({ isOpen: false, media: null });
     const [confirmDelete, setConfirmDelete] = useState({ isOpen: false, id: null });
     const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
+    const [isConverting, setIsConverting] = useState(false);
+    const [hasInitialized, setHasInitialized] = useState(false);
 
     const id = routeId || (location.pathname.includes('/edit/') ? location.pathname.split('/').pop() : null);
     const isAddPage = location.pathname.endsWith('/blog/add');
     const isEditPage = !!id && (location.pathname.includes('/edit/') || location.pathname.includes('/blog/edit/'));
+
+    useEffect(() => {
+        setHasInitialized(false);
+    }, [id, location.pathname]);
 
     useEffect(() => {
         const unsubscribe = subscribeBlogs((data) => {
@@ -83,12 +89,14 @@ const Blog = () => {
 
     // Form initialization
     useEffect(() => {
+        if (hasInitialized) return;
+
         if (isEditPage && id && items.length > 0) {
             const item = items.find((i) => i.id === id);
             if (item) {
                 reset({
                     title: item.title || '',
-                    slug: item.slug || '',
+                    slug: item.slug || (item.title ? generateSlug(item.title) : ''),
                     category: BLOG_CATEGORIES.find((c) => c.value === item.category) || BLOG_CATEGORIES[0],
                     shortDescription: item.shortDescription || '',
                     content: item.content || '',
@@ -102,6 +110,7 @@ const Blog = () => {
                 });
                 setFilePreview(item.image);
                 setSlugManuallyEdited(true);
+                setHasInitialized(true);
             }
         } else if (isAddPage) {
             reset({
@@ -121,8 +130,9 @@ const Blog = () => {
             setFilePreview(null);
             setSelectedFile(null);
             setSlugManuallyEdited(false);
+            setHasInitialized(true);
         }
-    }, [isEditPage, isAddPage, id, items, reset]);
+    }, [isEditPage, isAddPage, id, items, reset, hasInitialized]);
 
     // SEO & Stats Calculations
     const wordCount = useMemo(() => {
@@ -153,6 +163,11 @@ const Blog = () => {
     const onSubmit = async (data) => {
         if (!filePreview && !isEditPage) {
             toast.error("Featured image is required");
+            return;
+        }
+
+        if (filePreview && filePreview.startsWith('blob:') && !selectedFile) {
+            toast.error("Featured image is still processing. Please wait a moment.");
             return;
         }
 
@@ -316,11 +331,17 @@ const Blog = () => {
                         </button>
                         <button
                             onClick={handleSubmit(onSubmit)}
-                            disabled={isSaving}
+                            disabled={isSaving || isConverting}
                             className="px-8 py-2.5 text-sm font-bold text-white bg-primary rounded-2xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2"
                         >
-                            {isSaving ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Sparkles size={16} />}
-                            {isEditPage ? 'Update Post' : 'Publish Post'}
+                            {isSaving ? (
+                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            ) : isConverting ? (
+                                <div className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                            ) : (
+                                <Sparkles size={16} />
+                            )}
+                            {isSaving ? 'Saving...' : isConverting ? 'Optimizing...' : isEditPage ? 'Update Post' : 'Publish Post'}
                         </button>
                     </div>
                 </div>
@@ -334,8 +355,38 @@ const Blog = () => {
                                 {...register('title', { required: true })}
                                 type="text"
                                 placeholder="Article Title..."
-                                className="w-full text-5xl font-bold text-gray-900 placeholder:text-gray-200 border-0 p-0 focus:ring-0 mb-6 bg-transparent"
+                                className="w-full text-5xl font-bold text-gray-900 placeholder:text-gray-200 border-0 p-0 focus:ring-0 mb-2 bg-transparent"
                             />
+                            
+                            {/* Hidden Slug Input */}
+                            <input type="hidden" {...register('slug', { required: true })} />
+                            
+                            {/* Live Permalink / Slug Editor */}
+                            <div className="flex items-center gap-2 text-xs text-gray-500 mb-6 bg-stone-50 px-4 py-2 rounded-xl border border-stone-100 max-w-fit select-none">
+                                <span className="font-bold text-stone-400">Permalink:</span>
+                                <span className="font-mono text-stone-600">/blog/{watch('slug') || '...'}</span>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const currentSlug = watch('slug');
+                                        const newSlug = prompt("Edit URL slug (leave empty to reset to title):", currentSlug);
+                                        if (newSlug !== null) {
+                                            if (newSlug.trim() === '') {
+                                                setSlugManuallyEdited(false);
+                                                setValue('slug', generateSlug(titleValue || ''));
+                                            } else {
+                                                const formatted = generateSlug(newSlug);
+                                                setValue('slug', formatted);
+                                                setSlugManuallyEdited(true);
+                                            }
+                                        }
+                                    }}
+                                    className="text-primary hover:underline font-semibold ml-2 cursor-pointer bg-transparent border-0 p-0"
+                                >
+                                    Edit
+                                </button>
+                            </div>
+
                             <div className="flex items-center gap-6">
                                 <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-xl text-gray-500 border border-gray-100">
                                     <Tag size={14} />
@@ -384,7 +435,8 @@ const Blog = () => {
                                         value={filePreview}
                                         onChange={setFilePreview}
                                         onFileChange={setSelectedFile}
-                                        aspectRatio={16 / 9}
+                                        onConvertingChange={setIsConverting}
+                                        disableCrop={true}
                                         className="rounded-2xl border-dashed border-2 border-gray-100 hover:border-primary/20 transition-all bg-gray-50/50"
                                     />
                                     <div className="mt-3">

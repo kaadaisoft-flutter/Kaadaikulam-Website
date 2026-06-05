@@ -73,15 +73,30 @@ const Blog = () => {
                                     transition={{ duration: 0.6, delay: index * 0.1 }}
                                     className="group flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100"
                                 >
-                                    <Link to={`/blog/${blog.slug}`} className="block relative aspect-[16/10] overflow-hidden">
-                                        <img 
-                                            src={blog.image} 
-                                            alt={blog.title}
-                                            crossOrigin="anonymous"
-                                            referrerPolicy="no-referrer"
-                                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
-                                        />
-                                        <div className="absolute top-4 left-4">
+                                    <Link to={`/blog/${blog.slug}`} className="block relative aspect-[16/10] overflow-hidden bg-slate-950 flex items-center justify-center">
+                                        {blog.image && !blog.image.startsWith('blob:') ? (
+                                            <img 
+                                                src={blog.image} 
+                                                alt={blog.title}
+                                                crossOrigin="anonymous"
+                                                referrerPolicy="no-referrer"
+                                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
+                                                onError={(e) => {
+                                                    e.target.style.display = 'none';
+                                                    if (e.target.nextSibling) {
+                                                        e.target.nextSibling.style.display = 'flex';
+                                                    }
+                                                }}
+                                            />
+                                        ) : null}
+                                        <div 
+                                            className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-slate-800 to-slate-900 text-white"
+                                            style={{ display: (!blog.image || blog.image.startsWith('blob:')) ? 'flex' : 'none' }}
+                                        >
+                                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Poondurai Kaadai</span>
+                                            <span className="text-sm font-bold line-clamp-2 px-4">{blog.title}</span>
+                                        </div>
+                                        <div className="absolute top-4 left-4 z-10">
                                             <span className="px-4 py-1.5 rounded-lg bg-blue-600/90 backdrop-blur-md text-white text-[9px] font-black uppercase tracking-widest shadow-lg">
                                                 {blog.category || 'BLOG'}
                                             </span>

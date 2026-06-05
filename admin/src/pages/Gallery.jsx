@@ -78,6 +78,7 @@ const Gallery = () => {
     });
 
     const selectedMediaType = watch('mediaType');
+    const selectedCategory = watch('category');
 
     const openPreview = (item) => {
         setPreviewSelection({
@@ -222,11 +223,6 @@ const Gallery = () => {
             key: 'category',
             label: 'Category',
             options: categoryOptions
-        },
-        {
-            key: 'type',
-            label: 'Media Type',
-            options: mediaTypeOptions
         },
         {
             key: 'templeName',
@@ -434,25 +430,6 @@ const Gallery = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Media Type select */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Media Type <span className="text-red-500">*</span></label>
-                            <Controller
-                                name="mediaType"
-                                control={control}
-                                rules={{ required: 'Please select a type' }}
-                                render={({ field }) => (
-                                    <Select
-                                        {...field}
-                                        options={mediaTypeOptions}
-                                        styles={selectStyles}
-                                        placeholder="Select type..."
-                                        isDisabled={!!editingItem} // Avoid switching type on edit to prevent payload inconsistency
-                                    />
-                                )}
-                            />
-                        </div>
-
                         {/* Category select */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Category <span className="text-red-500">*</span></label>
@@ -472,15 +449,28 @@ const Gallery = () => {
                             />
                             {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category.message}</p>}
                         </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 gap-4">
                         {/* Temple Select Dropdown */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Temple <span className="text-gray-400">(Optional)</span></label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Temple {selectedCategory?.value === 'Gods' || selectedCategory?.value === 'Temple' ? (
+                                    <span className="text-red-500">*</span>
+                                ) : (
+                                    <span className="text-gray-400">(Optional)</span>
+                                )}
+                            </label>
                             <Controller
                                 name="templeName"
                                 control={control}
+                                rules={{
+                                    validate: (value) => {
+                                        const cat = selectedCategory?.value;
+                                        if ((cat === 'Gods' || cat === 'Temple') && !value) {
+                                            return 'Temple selection is required for Deity or Temple categories';
+                                        }
+                                        return true;
+                                    }
+                                }}
                                 render={({ field }) => (
                                     <Select
                                         {...field}
@@ -491,24 +481,12 @@ const Gallery = () => {
                                     />
                                 )}
                             />
+                            {errors.templeName && <p className="text-red-500 text-xs mt-1">{errors.templeName.message}</p>}
                         </div>
                     </div>
 
-                    {/* Featured & Published checkboxes */}
+                    {/* Published checkbox */}
                     <div className="flex items-center gap-6 bg-gray-50 p-3 rounded-lg border border-gray-100">
-                        {/* Featured Toggle */}
-                        <label className="flex items-center gap-2.5 cursor-pointer select-none">
-                            <input
-                                {...register('featured')}
-                                type="checkbox"
-                                className="w-4 h-4 text-[#800000] border-gray-300 rounded focus:ring-[#800000] focus:ring-2 focus:ring-offset-0 cursor-pointer"
-                            />
-                            <div className="flex flex-col">
-                                <span className="text-sm font-semibold text-gray-800">Featured</span>
-                                <span className="text-xs text-gray-500">Show in featured gallery section</span>
-                            </div>
-                        </label>
-
                         {/* Published Toggle */}
                         <label className="flex items-center gap-2.5 cursor-pointer select-none">
                             <input
@@ -552,7 +530,7 @@ const Gallery = () => {
                             previewClassName="w-20 h-20"
                             onPreviewClick={(url) => url && openPreview({ type: 'Photo', fullUrl: url, title: selectedFile?.name || 'Image' })}
                             onConvertingChange={setIsConverting}
-                            aspectRatio={4 / 3}
+                            disableCrop={true}
                         />
                     ) : (
                         /* Video upload area */

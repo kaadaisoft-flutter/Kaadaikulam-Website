@@ -2,7 +2,7 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { createPortal } from 'react-dom';
 
-const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-md', lightBackdrop = false, noPadding = false, skipAnimation = false }) => {
+const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-md', lightBackdrop = false, noPadding = false, skipAnimation = false, bodyClassName = '' }) => {
     if (!isOpen) return null;
 
     const backdropClass = lightBackdrop ? 'bg-black/20' : 'bg-black/50';
@@ -27,7 +27,7 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-md', lightB
                 </div>
 
                 {/* Modal Body */}
-                <div className={`overflow-y-auto w-full ${noPadding ? 'p-0' : 'p-4 sm:p-6'}`}>
+                <div className={`overflow-y-auto w-full ${noPadding ? 'p-0' : 'p-4 sm:p-6'} ${bodyClassName}`}>
                     {children}
                 </div>
             </div>

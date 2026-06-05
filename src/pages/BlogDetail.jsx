@@ -15,6 +15,7 @@ const BlogDetail = () => {
     const [commentForm, setCommentForm] = useState({ name: '', text: '' });
     const [submitting, setSubmitting] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [imageError, setImageError] = useState(false);
 
     useEffect(() => {
         const fetchBlog = async () => {
@@ -57,6 +58,7 @@ const BlogDetail = () => {
             }
         };
 
+        setImageError(false);
         fetchBlog();
         window.scrollTo(0, 0);
     }, [slug]);
@@ -117,15 +119,25 @@ const BlogDetail = () => {
     return (
         <article className="min-h-screen bg-[#FDFBF7] pb-32">
             {/* Hero Section */}
-            <header className="relative h-[70vh] md:h-[80vh] w-full overflow-hidden">
-                <img 
-                    src={blog.image} 
-                    alt={blog.title}
-                    crossOrigin="anonymous"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover"
-                />
-                <div className="absolute top-10 left-10">
+            <header className="relative h-[70vh] md:h-[80vh] w-full overflow-hidden bg-stone-900 flex items-center justify-center">
+                {blog.image && !blog.image.startsWith('blob:') && !imageError ? (
+                    <img 
+                        src={blog.image} 
+                        alt={blog.title}
+                        crossOrigin="anonymous"
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover"
+                        onError={() => setImageError(true)}
+                    />
+                ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-stone-850 to-stone-950 text-white p-8 text-center">
+                        <span className="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+                            {blog.category}
+                        </span>
+                        <h2 className="text-3xl md:text-5xl font-serif font-bold max-w-3xl px-6 leading-tight">{blog.title}</h2>
+                    </div>
+                )}
+                <div className="absolute top-10 left-10 z-10">
                     <Link 
                         to="/blog" 
                         className="flex items-center justify-center w-14 h-14 bg-white/10 backdrop-blur-xl rounded-full text-white hover:bg-white hover:text-primary transition-all duration-500 shadow-2xl border border-white/20"
@@ -294,8 +306,26 @@ const BlogDetail = () => {
                         <div className="space-y-10">
                             {recentBlogs.map((recent) => (
                                 <Link to={`/blog/${recent.slug}`} key={recent.id} className="group flex gap-6 items-start">
-                                    <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-lg group-hover:scale-105 transition-transform duration-500">
-                                        <img src={recent.image} alt={recent.title} className="w-full h-full object-cover" />
+                                    <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-lg group-hover:scale-105 transition-transform duration-500 bg-stone-900 flex items-center justify-center relative">
+                                        {recent.image && !recent.image.startsWith('blob:') ? (
+                                            <img 
+                                                src={recent.image} 
+                                                alt={recent.title} 
+                                                className="w-full h-full object-cover"
+                                                onError={(e) => {
+                                                    e.target.style.display = 'none';
+                                                    if (e.target.nextSibling) {
+                                                        e.target.nextSibling.style.display = 'flex';
+                                                    }
+                                                }}
+                                            />
+                                        ) : null}
+                                        <div 
+                                            className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-800 to-stone-900 text-white text-[8px] font-bold p-2 text-center"
+                                            style={{ display: (!recent.image || recent.image.startsWith('blob:')) ? 'flex' : 'none' }}
+                                        >
+                                            Story
+                                        </div>
                                     </div>
                                     <div>
                                         <span className="text-[9px] font-black text-primary uppercase tracking-widest mb-1 block">

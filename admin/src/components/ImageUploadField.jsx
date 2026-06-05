@@ -25,23 +25,54 @@ const ImageUploadField = ({
     fileName = '',
     fileDetails = '',
     aspectRatio = null, // e.g. 16/9 or 4/3
+    disableCrop = false,
 }) => {
     const [cropImageSource, setCropImageSource] = useState(null);
     const [originalFileName, setOriginalFileName] = useState('');
     const [isConverting, setIsConverting] = useState(false);
     const fileInputRef = useRef(null);
 
+    const processFile = useCallback(async (file) => {
+        setIsConverting(true);
+        onConvertingChange?.(true);
+
+        const baseName = file.name ? file.name.replace(/\.[^/.]+$/, '') : 'image';
+        const webpName = `${baseName}.webp`;
+
+        const previewUrl = URL.createObjectURL(file);
+        onChange(previewUrl);
+
+        try {
+            const optimizedFile = await convertToWebP(file);
+            if (onFileChange) onFileChange(optimizedFile);
+            if (optimizedFile !== file) {
+                URL.revokeObjectURL(previewUrl);
+                const newUrl = URL.createObjectURL(optimizedFile);
+                onChange(newUrl);
+            }
+        } catch (err) {
+            console.error('Optimization failed:', err);
+            if (onFileChange) onFileChange(file);
+        }
+        setIsConverting(false);
+        onConvertingChange?.(false);
+    }, [onChange, onFileChange, onConvertingChange]);
+
     const handleFileSelect = useCallback((e) => {
         const file = e.target.files?.[0];
         if (!file) return;
 
         if (file.type.startsWith('image/')) {
-            const baseName = file.name ? file.name.replace(/\.[^/.]+$/, '') : 'image';
-            setOriginalFileName(baseName);
-            const objectUrl = URL.createObjectURL(file);
-            setCropImageSource(objectUrl);
+            if (disableCrop) {
+                processFile(file);
+            } else {
+                const baseName = file.name ? file.name.replace(/\.[^/.]+$/, '') : 'image';
+                setOriginalFileName(baseName);
+                const objectUrl = URL.createObjectURL(file);
+                setCropImageSource(objectUrl);
+            }
         }
-    }, []);
+    }, [disableCrop, processFile]);
 
     const handleCropComplete = useCallback(async (croppedBlob) => {
         if (cropImageSource) URL.revokeObjectURL(cropImageSource);
