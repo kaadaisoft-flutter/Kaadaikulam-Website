@@ -165,18 +165,6 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                         {!isCollapsed && <span className="font-bold text-sm">Add New Blog</span>}
                     </button>
                 </div>
-
-                <div className="pt-2">
-                    <button
-                        className={`
-                            flex items-center gap-3 w-full px-4 py-3 rounded-xl text-gray-500 hover:text-red-400 hover:bg-red-400/10 transition-all
-                            ${isCollapsed ? 'justify-center' : ''}
-                        `}
-                    >
-                        <Trash2 size={20} />
-                        {!isCollapsed && <span className="text-sm font-medium">Trash</span>}
-                    </button>
-                </div>
             </div>
 
             {/* User Profile / Logout Section */}
