@@ -103,7 +103,7 @@ export const translations = {
       services: {
         title: "Online Services",
         donation: "Donation",
-        benefits: "ID Card Benefits"
+        benefits: "Digital ID Card Benefits"
       },
       connect: {
         title: "Connect",
@@ -642,9 +642,9 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
     idCardBenefits: {
       hero: {
         label: "EXCLUSIVE PRIVILEGES",
-        title: "Advantages of the ID Card",
-        desc: "The Poondurai Kaadai ID Card is more than an identity; it is a gateway to collective security, community prosperity, and cultural preservation. Explore the twelve core benefits designed to support and elevate our members.",
-        applyBtn: "Apply for ID Card"
+        title: "Advantages of the Member Digital ID Card",
+        desc: "The Poondurai Kaadai Member Digital ID Card is more than an identity; it is a gateway to collective security, community prosperity, and cultural preservation. Explore the twelve core benefits designed to support and elevate our members.",
+        applyBtn: "Apply for Digital ID Card"
       },
       card: {
         front: {
@@ -673,7 +673,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
           desc: "Provides immediate identification and quick support for safety and crisis management."
         },
         {
-          title: "Unified ID Card System",
+          title: "Unified Digital ID Card System",
           desc: "Streamlines identification and connectivity across the entire organization or community."
         },
         {
@@ -685,7 +685,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
           desc: "Acts as a premium membership pass for exclusive economic benefits and discounts."
         },
         {
-          title: "Durable PVC ID Card",
+          title: "Durable PVC Digital ID Card",
           desc: "A durable, high-quality physical card format suitable for long-term daily use."
         },
         {
@@ -823,7 +823,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
       services: {
         title: "மின் சேவைகள்",
         donation: "நன்கொடை",
-        benefits: "அடையாள அட்டை நன்மைகள்"
+        benefits: "டிஜிட்டல் அடையாள அட்டை நன்மைகள்"
       },
       connect: {
         title: "இணைக்கவும்",
@@ -1380,9 +1380,9 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
     idCardBenefits: {
       hero: {
         label: "பிரத்யேக சலுகைகள்",
-        title: "அடையாள அட்டை நன்மைகள்",
-        desc: "பூந்துறை காடை அடையாள அட்டை என்பது வெறும் அடையாளம் மட்டுமல்ல; இது கூட்டு பாதுகாப்பு, சமூக செழிப்பு மற்றும் பண்பாட்டு பாதுகாப்பிற்கான ஒரு நுழைவாயிலாகும். நமது உறுப்பினர்களை ஆதரிப்பதற்காக வடிவமைக்கப்பட்ட பன்னிரண்டு முக்கிய நன்மைகளை இங்கே ஆராயுங்கள்.",
-        applyBtn: "அடையாள அட்டைக்கு விண்ணப்பிக்கவும்"
+        title: "உறுப்பினர் டிஜிட்டல் அடையாள அட்டை நன்மைகள்",
+        desc: "பூந்துறை காடை உறுப்பினர் டிஜிட்டல் அடையாள அட்டை என்பது வெறும் அடையாளம் மட்டுமல்ல; இது கூட்டு பாதுகாப்பு, சமூக செழிப்பு மற்றும் பண்பாட்டு பாதுகாப்பிற்கான ஒரு நுழைவாயிலாகும். நமது உறுப்பினர்களை ஆதரிப்பதற்காக வடிவமைக்கப்பட்ட பன்னிரண்டு முக்கிய நன்மைகளை இங்கே ஆராயுங்கள்.",
+        applyBtn: "டிஜிட்டல் அடையாள அட்டைக்கு விண்ணப்பிக்கவும்"
       },
       card: {
         front: {
@@ -1411,7 +1411,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
           desc: "பாதுகாப்பு மற்றும் பேரிடர் மேலாண்மைக்கு உடனடி அடையாளத்தையும் விரைவான ஆதரவையும் வழங்குகிறது."
         },
         {
-          title: "ஒருங்கிணைந்த அடையாள அட்டை",
+          title: "ஒருங்கிணைந்த டிஜிட்டல் அடையாள அட்டை",
           desc: "ஒட்டுமொத்த சமூகம் மற்றும் அமைப்பிற்குள் தடையற்ற அடையாளப்படுத்தலையும் இணைப்பையும் எளிதாக்குகிறது."
         },
         {
@@ -1423,7 +1423,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
           desc: "பிரத்யேக பொருளாதார நன்மைகள் மற்றும் தள்ளுபடிகளைப் பெற ஒரு பிரீமியம் உறுப்பினர் அட்டையாகச் செயல்படுகிறது."
         },
         {
-          title: "நீடித்த PVC அடையாள அட்டை",
+          title: "நீடித்த PVC டிஜிட்டல் அடையாள அட்டை",
           desc: "நீண்ட கால தினசரி பயன்பாட்டிற்கு ஏற்ற நீடித்த, உயர்தர இயற்பியல் அட்டை வடிவம்."
         },
         {

@@ -254,8 +254,8 @@ const IDCardBenefits = () => {
           <div className="flex flex-col items-start max-w-xl relative z-10">
             <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#5d1712] mb-3 leading-tight">
               {language === "ta"
-                ? "இன்றே உங்கள் அடையாள அட்டையைப் பெறுங்கள்"
-                : "Obtain Your Official ID Card Today"}
+                ? "இன்றே உங்கள் உறுப்பினர் டிஜிட்டல் அடையாள அட்டையைப் பெறுங்கள்"
+                : "Obtain Your Member Digital ID Card Today"}
             </h3>
             <p className="text-stone-600 text-base leading-relaxed">
               {language === "ta"

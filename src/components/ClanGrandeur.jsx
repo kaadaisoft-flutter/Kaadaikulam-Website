@@ -220,12 +220,12 @@ const ClanGrandeur = () => {
             className="text-center max-w-xl mb-10"
           >
             <h3 className="font-serif text-2xl md:text-3xl text-[#5d1712] font-bold mb-3">
-              {language === 'ta' ? 'உறுப்பினர் அடையாள அட்டை' : 'Member ID Card'}
+              {language === 'ta' ? 'உறுப்பினர் டிஜிட்டல் அடையாள அட்டை' : 'Member Digital ID Card'}
             </h3>
             <p className="text-stone-600 text-sm md:text-base leading-relaxed px-4">
               {language === 'ta' 
-                ? 'உங்கள் உறுப்பினர் அடையாள அட்டையைப் பெற, கீழே கிளிக் செய்து உள்நுழையவும் / பதிவு செய்யவும்.'
-                : 'To get your member ID card, please click below to login or register.'}
+                ? 'உங்கள் உறுப்பினர் டிஜிட்டல் அடையாள அட்டையைப் பெற, கீழே கிளிக் செய்து உள்நுழையவும் / பதிவு செய்யவும்.'
+                : 'To get your member digital ID card, please click below to login or register.'}
             </p>
           </motion.div>
 
@@ -337,7 +337,7 @@ const ClanGrandeur = () => {
                   onClick={() => setIsModalOpen(false)}
                   className="mt-4 block text-[#8b1d1d] hover:text-[#c49a3c] font-bold text-xs uppercase tracking-widest transition-colors duration-300"
                 >
-                  {language === 'ta' ? 'அடையாள அட்டையின் 12 நன்மைகள் →' : '12 Benefits of ID Card →'}
+                  {language === 'ta' ? 'டிஜிட்டல் அடையாள அட்டையின் 12 நன்மைகள் →' : '12 Benefits of Digital ID Card →'}
                 </Link>
                 
                 <button 
