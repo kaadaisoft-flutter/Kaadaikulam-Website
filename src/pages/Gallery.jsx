@@ -3,95 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
 import heroImg from "../assets/Eswaran_Temple/DJI_20260429101906_0061_D.webp";
-import templeFn from "../assets/images/temple fn.webp";
-import kari_g1 from "../assets/Kariyakaliyamman_God/WhatsApp Image 2026-05-24 at 12.55.12 PM.webp";
-import kari_g2 from "../assets/Kariyakaliyamman_God/WhatsApp Image 2026-06-01 at 11.59.37 AM.webp";
-
-
-
-// Services
 import { subscribeGalleryItems } from "../services/galleryService";
 import { getTemples } from "../services/templeService";
-
-// ── Angalamman Temple ──────────────────────────────────────────────────
-import ang_t1 from "../assets/Angalamman_Temple/DJI_20260429100446_0036_D.webp";
-import ang_t2 from "../assets/Angalamman_Temple/DJI_20260429100611_0039_D.webp";
-import ang_t3 from "../assets/Angalamman_Temple/DJI_20260429100631_0040_D.webp";
-import ang_t4 from "../assets/Angalamman_Temple/DJI_20260429100648_0041_D.webp";
-import ang_t5 from "../assets/Angalamman_Temple/DJI_20260429100657_0042_D.webp";
-import ang_t6 from "../assets/Angalamman_Temple/DJI_20260429101021_0053_D.webp";
-import ang_t7 from "../assets/Angalamman_Temple/DJI_20260429101105_0055_D.webp";
-import ang_t8 from "../assets/Angalamman_Temple/DJI_20260429101125_0056_D.webp";
-
-// ── Eswaran Temple ────────────────────────────────────────────────────
-import esw_t1  from "../assets/Eswaran_Temple/DJI_20260429094001_0001_D.webp";
-import esw_t2  from "../assets/Eswaran_Temple/DJI_20260429094155_0005_D.webp";
-import esw_t3  from "../assets/Eswaran_Temple/DJI_20260429094325_0008_D.webp";
-import esw_t4  from "../assets/Eswaran_Temple/DJI_20260429094349_0009_D.webp";
-import esw_t5  from "../assets/Eswaran_Temple/DJI_20260429094433_0011_D (1).webp";
-import esw_t6  from "../assets/Eswaran_Temple/DJI_20260429094530_0013_D.webp";
-import esw_t7  from "../assets/Eswaran_Temple/DJI_20260429094547_0015_D.webp";
-import esw_t8  from "../assets/Eswaran_Temple/DJI_20260429094609_0017_D.webp";
-import esw_t9  from "../assets/Eswaran_Temple/DJI_20260429094906_0023_D.webp";
-import esw_t10 from "../assets/Eswaran_Temple/DJI_20260429100936_0051_D.webp";
-import esw_t11 from "../assets/Eswaran_Temple/DJI_20260429101848_0059_D.webp";
-import esw_t12 from "../assets/Eswaran_Temple/DJI_20260429101906_0061_D.webp";
-import esw_t13 from "../assets/Eswaran_Temple/P - DJI_20260429094325_0008_D.webp";
-import esw_t14 from "../assets/Eswaran_Temple/P - DJI_20260429101906_0061_D.webp";
-
-// ── Perumal Temple ────────────────────────────────────────────────────
-import per_t1 from "../assets/Perumal_Temple/DJI_20260429095535_0025_D.webp";
-import per_t2 from "../assets/Perumal_Temple/DJI_20260429095651_0028_D.webp";
-import per_t3 from "../assets/Perumal_Temple/DJI_20260429095745_0031_D.webp";
-import per_t4 from "../assets/Perumal_Temple/DJI_20260429095752_0032_D.webp";
-import per_t5 from "../assets/Perumal_Temple/DJI_20260429095817_0034_D0.webp";
-import per_t6 from "../assets/Perumal_Temple/DJI_20260429100909_0049_D.webp";
-import per_t7 from "../assets/Perumal_Temple/DJI_20260429100936_0051_D.webp";
-
-// ── Angalamman God ────────────────────────────────────────────────────
-import ang_g1  from "../assets/Angalamman_God/DSC01350.webp";
-import ang_g2  from "../assets/Angalamman_God/DSC01359.webp";
-import ang_g3  from "../assets/Angalamman_God/DSC01366.webp";
-import ang_g4  from "../assets/Angalamman_God/DSC01381.webp";
-import ang_g5  from "../assets/Angalamman_God/DSC01384.webp";
-import ang_g6  from "../assets/Angalamman_God/DSC01392.webp";
-import ang_g7  from "../assets/Angalamman_God/DSC01401.webp";
-import ang_g8  from "../assets/Angalamman_God/DSC01403.webp";
-import ang_g9  from "../assets/Angalamman_God/DSC01405.webp";
-
-// ── Eswaran God ───────────────────────────────────────────────────────
-import esw_g1  from "../assets/Eswaran_God/DSC01409.webp";
-import esw_g2  from "../assets/Eswaran_God/DSC01415.webp";
-import esw_g3  from "../assets/Eswaran_God/DSC01417.webp";
-import esw_g4  from "../assets/Eswaran_God/DSC01419.webp";
-import esw_g5  from "../assets/Eswaran_God/DSC01431.webp";
-import esw_g6  from "../assets/Eswaran_God/DSC01435.webp";
-import esw_g7  from "../assets/Eswaran_God/DSC01439.webp";
-import esw_g8  from "../assets/Eswaran_God/DSC01444.webp";
-import esw_g9  from "../assets/Eswaran_God/DSC01451.webp";
-import esw_g10 from "../assets/Eswaran_God/DSC01454.webp";
-import esw_g11 from "../assets/Eswaran_God/DSC01458.webp";
-import esw_g12 from "../assets/Eswaran_God/DSC01464.webp";
-
-// ── Perumal God ───────────────────────────────────────────────────────
-import per_g1  from "../assets/Perumal_God/DSC01216.webp";
-import per_g2  from "../assets/Perumal_God/DSC01229.webp";
-import per_g3  from "../assets/Perumal_God/DSC01240.webp";
-import per_g4  from "../assets/Perumal_God/DSC01245.webp";
-import per_g5  from "../assets/Perumal_God/DSC01250.webp";
-import per_g6  from "../assets/Perumal_God/DSC01254.webp";
-import per_g7  from "../assets/Perumal_God/DSC01264.webp";
-import per_g8  from "../assets/Perumal_God/DSC01288.webp";
-import per_g9  from "../assets/Perumal_God/DSC01292.webp";
-import per_g10 from "../assets/Perumal_God/DSC01293.webp";
-import per_g11 from "../assets/Perumal_God/DSC01298.webp";
-import per_g12 from "../assets/Perumal_God/DSC01311.webp";
-import per_g13 from "../assets/Perumal_God/DSC01325.webp";
-import per_g14 from "../assets/Perumal_God/DSC01334.webp";
-import per_g15 from "../assets/Perumal_God/DSC01338.webp";
-import per_g16 from "../assets/Perumal_God/DSC01341.webp";
-import per_g17 from "../assets/Perumal_God/DSC01343.webp";
-import per_g18 from "../assets/Perumal_God/DSC01345.webp";
 
 // YouTube ID Extractor Helper
 const extractYoutubeId = (url) => {
@@ -340,92 +253,7 @@ const Gallery = () => {
   ];
 
   // Static Local gallery items
-  const staticGalleryItems = [
-    // Festivals
-    { id: "static-1",  title: isEn ? "48th Day Mandala Pooja"          : "48-வது நாள் மண்டல பூஜை",            category: "Festivals", image: templeFn,     group: ANG },
-
-    // Temples – Angalamman
-    { id: "static-2",  title: isEn ? "Sri Angalamman Temple – View 1"  : "அங்காளம்மன் கோவில் – காட்சி 1",  category: "Temples", image: ang_t1, group: ANG },
-    { id: "static-3",  title: isEn ? "Sri Angalamman Temple – View 2"  : "அங்காளம்மன் கோவில் – காட்சி 2",  category: "Temples", image: ang_t2, group: ANG },
-    { id: "static-4",  title: isEn ? "Sri Angalamman Temple – View 3"  : "அங்காளம்மன் கோவில் – காட்சி 3",  category: "Temples", image: ang_t3, group: ANG },
-    { id: "static-5",  title: isEn ? "Sri Angalamman Temple – View 4"  : "அங்காளம்மன் கோவில் – காட்சி 4",  category: "Temples", image: ang_t4, group: ANG },
-    { id: "static-6",  title: isEn ? "Sri Angalamman Temple – View 5"  : "அங்காளம்மன் கோவில் – காட்சி 5",  category: "Temples", image: ang_t5, group: ANG },
-    { id: "static-7",  title: isEn ? "Sri Angalamman Temple – View 6"  : "அங்காளம்மன் கோவில் – காட்சி 6",  category: "Temples", image: ang_t6, group: ANG },
-    { id: "static-8",  title: isEn ? "Sri Angalamman Temple – View 7"  : "அங்காளம்மன் கோவில் – காட்சி 7",  category: "Temples", image: ang_t7, group: ANG },
-    { id: "static-9",  title: isEn ? "Sri Angalamman Temple – View 8"  : "அங்காளம்மன் கோவில் – காட்சி 8",  category: "Temples", image: ang_t8, group: ANG },
-
-    // Temples – Eswaran
-    { id: "static-10", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 1"  : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 1",  category: "Temples", image: esw_t1,  group: ESW },
-    { id: "static-11", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 2"  : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 2",  category: "Temples", image: esw_t2,  group: ESW },
-    { id: "static-12", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 3"  : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 3",  category: "Temples", image: esw_t3,  group: ESW },
-    { id: "static-13", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 4"  : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 4",  category: "Temples", image: esw_t4,  group: ESW },
-    { id: "static-14", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 5"  : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 5",  category: "Temples", image: esw_t5,  group: ESW },
-    { id: "static-15", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 6"  : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 6",  category: "Temples", image: esw_t6,  group: ESW },
-    { id: "static-16", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 7"  : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 7",  category: "Temples", image: esw_t7,  group: ESW },
-    { id: "static-17", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 8"  : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 8",  category: "Temples", image: esw_t8,  group: ESW },
-    { id: "static-18", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 9"  : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 9",  category: "Temples", image: esw_t9,  group: ESW },
-    { id: "static-19", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 10" : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 10", category: "Temples", image: esw_t10, group: ESW },
-    { id: "static-20", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 11" : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 11", category: "Temples", image: esw_t11, group: ESW },
-    { id: "static-21", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 12" : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 12", category: "Temples", image: esw_t12, group: ESW },
-    { id: "static-22", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 13" : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 13", category: "Temples", image: esw_t13, group: ESW },
-    { id: "static-23", title: isEn ? "Sri Pushpavaneswara Swamy Temple – View 14" : "புஷ்பவனேசுவர சுவாமி கோவில் – காட்சி 14", category: "Temples", image: esw_t14, group: ESW },
-
-    // Temples – Perumal
-    { id: "static-24", title: isEn ? "Sri Damodara Perumal Temple – View 1" : "தாமோதர பெருமாள் கோவில் – காட்சி 1", category: "Temples", image: per_t1, group: PER },
-    { id: "static-25", title: isEn ? "Sri Damodara Perumal Temple – View 2" : "தாமோதர பெருமாள் கோவில் – காட்சி 2", category: "Temples", image: per_t2, group: PER },
-    { id: "static-26", title: isEn ? "Sri Damodara Perumal Temple – View 3" : "தாமோதர பெருமாள் கோவில் – காட்சி 3", category: "Temples", image: per_t3, group: PER },
-    { id: "static-27", title: isEn ? "Sri Damodara Perumal Temple – View 4" : "தாமோதர பெருமாள் கோவில் – காட்சி 4", category: "Temples", image: per_t4, group: PER },
-    { id: "static-28", title: isEn ? "Sri Damodara Perumal Temple – View 5" : "தாமோதர பெருமாள் கோவில் – காட்சி 5", category: "Temples", image: per_t5, group: PER },
-    { id: "static-29", title: isEn ? "Sri Damodara Perumal Temple – View 6" : "தாமோதர பெருமாள் கோவில் – காட்சி 6", category: "Temples", image: per_t6, group: PER },
-    { id: "static-30", title: isEn ? "Sri Damodara Perumal Temple – View 7" : "தாமோதர பெருமாள் கோவில் – காட்சி 7", category: "Temples", image: per_t7, group: PER },
-
-    // Gods – Angalamman
-    { id: "static-31", title: isEn ? "Sri Angalamman – Photo 1"  : "ஸ்ரீ அங்காளம்மன் – படம் 1",  category: "Gods", image: ang_g1,  group: ANG_GOD },
-    { id: "static-32", title: isEn ? "Sri Angalamman – Photo 2"  : "ஸ்ரீ அங்காளம்மன் – படம் 2",  category: "Gods", image: ang_g2,  group: ANG_GOD },
-    { id: "static-33", title: isEn ? "Sri Angalamman – Photo 3"  : "ஸ்ரீ அங்காளம்மன் – படம் 3",  category: "Gods", image: ang_g3,  group: ANG_GOD },
-    { id: "static-34", title: isEn ? "Sri Angalamman – Photo 4"  : "ஸ்ரீ அங்காளம்மன் – படம் 4",  category: "Gods", image: ang_g4,  group: ANG_GOD },
-    { id: "static-35", title: isEn ? "Sri Angalamman – Photo 5"  : "ஸ்ரீ அங்காளம்மன் – படம் 5",  category: "Gods", image: ang_g5,  group: ANG_GOD },
-    { id: "static-36", title: isEn ? "Sri Angalamman – Photo 6"  : "ஸ்ரீ அங்காளம்மன் – படம் 6",  category: "Gods", image: ang_g6,  group: ANG_GOD },
-    { id: "static-37", title: isEn ? "Sri Angalamman – Photo 7"  : "ஸ்ரீ அங்காளம்மன் – படம் 7",  category: "Gods", image: ang_g7,  group: ANG_GOD },
-    { id: "static-38", title: isEn ? "Sri Angalamman – Photo 8"  : "ஸ்ரீ அங்காளம்மன் – படம் 8",  category: "Gods", image: ang_g8,  group: ANG_GOD },
-    { id: "static-39", title: isEn ? "Sri Angalamman – Photo 9"  : "ஸ்ரீ அங்காளம்மன் – படம் 9",  category: "Gods", image: ang_g9,  group: ANG_GOD },
-
-    // Gods – Eswaran
-    { id: "static-40", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 1"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 1",  category: "Gods", image: esw_g1,  group: ESW_GOD },
-    { id: "static-41", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 2"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 2",  category: "Gods", image: esw_g2,  group: ESW_GOD },
-    { id: "static-42", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 3"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 3",  category: "Gods", image: esw_g3,  group: ESW_GOD },
-    { id: "static-43", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 4"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 4",  category: "Gods", image: esw_g4,  group: ESW_GOD },
-    { id: "static-44", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 5"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 5",  category: "Gods", image: esw_g5,  group: ESW_GOD },
-    { id: "static-45", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 6"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 6",  category: "Gods", image: esw_g6,  group: ESW_GOD },
-    { id: "static-46", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 7"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 7",  category: "Gods", image: esw_g7,  group: ESW_GOD },
-    { id: "static-47", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 8"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 8",  category: "Gods", image: esw_g8,  group: ESW_GOD },
-    { id: "static-48", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 9"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 9",  category: "Gods", image: esw_g9,  group: ESW_GOD },
-    { id: "static-49", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 10" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 10", category: "Gods", image: esw_g10, group: ESW_GOD },
-    { id: "static-50", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 11" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 11", category: "Gods", image: esw_g11, group: ESW_GOD },
-    { id: "static-51", title: isEn ? "Sri Pushpavaneswara Swamy – Photo 12" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 12", category: "Gods", image: esw_g12, group: ESW_GOD },
-
-    // Gods – Perumal
-    { id: "static-52", title: isEn ? "Sri Damodara Perumal – Photo 1"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 1",  category: "Gods", image: per_g1,  group: PER_GOD },
-    { id: "static-53", title: isEn ? "Sri Damodara Perumal – Photo 2"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 2",  category: "Gods", image: per_g2,  group: PER_GOD },
-    { id: "static-54", title: isEn ? "Sri Damodara Perumal – Photo 3"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 3",  category: "Gods", image: per_g3,  group: PER_GOD },
-    { id: "static-55", title: isEn ? "Sri Damodara Perumal – Photo 4"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 4",  category: "Gods", image: per_g4,  group: PER_GOD },
-    { id: "static-56", title: isEn ? "Sri Damodara Perumal – Photo 5"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 5",  category: "Gods", image: per_g5,  group: PER_GOD },
-    { id: "static-57", title: isEn ? "Sri Damodara Perumal – Photo 6"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 6",  category: "Gods", image: per_g6,  group: PER_GOD },
-    { id: "static-58", title: isEn ? "Sri Damodara Perumal – Photo 7"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 7",  category: "Gods", image: per_g7,  group: PER_GOD },
-    { id: "static-59", title: isEn ? "Sri Damodara Perumal – Photo 8"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 8",  category: "Gods", image: per_g8,  group: PER_GOD },
-    { id: "static-60", title: isEn ? "Sri Damodara Perumal – Photo 9"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 9",  category: "Gods", image: per_g9,  group: PER_GOD },
-    { id: "static-61", title: isEn ? "Sri Damodara Perumal – Photo 10" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 10", category: "Gods", image: per_g10, group: PER_GOD },
-    { id: "static-62", title: isEn ? "Sri Damodara Perumal – Photo 11" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 11", category: "Gods", image: per_g11, group: PER_GOD },
-    { id: "static-63", title: isEn ? "Sri Damodara Perumal – Photo 12" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 12", category: "Gods", image: per_g12, group: PER_GOD },
-    { id: "static-64", title: isEn ? "Sri Damodara Perumal – Photo 13" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 13", category: "Gods", image: per_g13, group: PER_GOD },
-    { id: "static-65", title: isEn ? "Sri Damodara Perumal – Photo 14" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 14", category: "Gods", image: per_g14, group: PER_GOD },
-    { id: "static-66", title: isEn ? "Sri Damodara Perumal – Photo 15" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 15", category: "Gods", image: per_g15, group: PER_GOD },
-    { id: "static-67", title: isEn ? "Sri Damodara Perumal – Photo 16" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 16", category: "Gods", image: per_g16, group: PER_GOD },
-    { id: "static-68", title: isEn ? "Sri Damodara Perumal – Photo 17" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 17", category: "Gods", image: per_g17, group: PER_GOD },
-    { id: "static-69", title: isEn ? "Sri Damodara Perumal – Photo 18" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 18", category: "Gods", image: per_g18, group: PER_GOD },
-    { id: "static-70", title: isEn ? "Sri Kariyakali Amman – Photo 1" : "ஸ்ரீ கரியகாளியம்மன் – படம் 1", category: "Gods", image: kari_g1, group: KARI_GOD },
-    { id: "static-71", title: isEn ? "Sri Kariyakali Amman – Photo 2" : "ஸ்ரீ கரியகாளியம்மன் – படம் 2", category: "Gods", image: kari_g2, group: KARI_GOD },
-  ];
+  const staticGalleryItems = [];
 
   // Map dynamic items from Firestore
   const mappedDynamicItems = dynamicItems.map(item => {
@@ -470,8 +298,10 @@ const Gallery = () => {
     };
   });
 
-  // Combine dynamic uploads at the top, followed by static images
-  const combinedItems = [...mappedDynamicItems, ...mappedStaticItems];
+  // Only use dynamic uploads from Firestore, remove all static images and filter out video items
+  const combinedItems = mappedDynamicItems.filter(
+    (item) => item.type !== "YouTube Video" && item.type !== "Video Upload" && item.category !== "Videos"
+  );
 
   // Apply filters mapping extra categories to Festivals and Temples
   const filteredItems = combinedItems.filter((item) => {
@@ -552,58 +382,7 @@ const Gallery = () => {
   
   // Returns ALL god images for a given temple group name
   const getGodItems = (name) => {
-    const godImageSets = {
-      [ANG]: [
-        { id: "god-ang-1",  image: ang_g1,  title: isEn ? "Sri Angalamman – Photo 1"  : "ஸ்ரீ அங்காளம்மன் – படம் 1",  templeId: "sri-angalamman-temple", group: ANG },
-        { id: "god-ang-2",  image: ang_g2,  title: isEn ? "Sri Angalamman – Photo 2"  : "ஸ்ரீ அங்காளம்மன் – படம் 2",  templeId: "sri-angalamman-temple", group: ANG },
-        { id: "god-ang-3",  image: ang_g3,  title: isEn ? "Sri Angalamman – Photo 3"  : "ஸ்ரீ அங்காளம்மன் – படம் 3",  templeId: "sri-angalamman-temple", group: ANG },
-        { id: "god-ang-4",  image: ang_g4,  title: isEn ? "Sri Angalamman – Photo 4"  : "ஸ்ரீ அங்காளம்மன் – படம் 4",  templeId: "sri-angalamman-temple", group: ANG },
-        { id: "god-ang-5",  image: ang_g5,  title: isEn ? "Sri Angalamman – Photo 5"  : "ஸ்ரீ அங்காளம்மன் – படம் 5",  templeId: "sri-angalamman-temple", group: ANG },
-        { id: "god-ang-6",  image: ang_g6,  title: isEn ? "Sri Angalamman – Photo 6"  : "ஸ்ரீ அங்காளம்மன் – படம் 6",  templeId: "sri-angalamman-temple", group: ANG },
-        { id: "god-ang-7",  image: ang_g7,  title: isEn ? "Sri Angalamman – Photo 7"  : "ஸ்ரீ அங்காளம்மன் – படம் 7",  templeId: "sri-angalamman-temple", group: ANG },
-        { id: "god-ang-8",  image: ang_g8,  title: isEn ? "Sri Angalamman – Photo 8"  : "ஸ்ரீ அங்காளம்மன் – படம் 8",  templeId: "sri-angalamman-temple", group: ANG },
-        { id: "god-ang-9",  image: ang_g9,  title: isEn ? "Sri Angalamman – Photo 9"  : "ஸ்ரீ அங்காளம்மன் – படம் 9",  templeId: "sri-angalamman-temple", group: ANG },
-      ],
-      [ESW]: [
-        { id: "god-esw-1",  image: esw_g1,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 1"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 1",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-2",  image: esw_g2,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 2"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 2",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-3",  image: esw_g3,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 3"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 3",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-4",  image: esw_g4,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 4"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 4",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-5",  image: esw_g5,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 5"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 5",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-6",  image: esw_g6,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 6"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 6",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-7",  image: esw_g7,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 7"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 7",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-8",  image: esw_g8,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 8"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 8",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-9",  image: esw_g9,  title: isEn ? "Sri Pushpavaneswara Swamy – Photo 9"  : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 9",  templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-10", image: esw_g10, title: isEn ? "Sri Pushpavaneswara Swamy – Photo 10" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 10", templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-11", image: esw_g11, title: isEn ? "Sri Pushpavaneswara Swamy – Photo 11" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 11", templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-        { id: "god-esw-12", image: esw_g12, title: isEn ? "Sri Pushpavaneswara Swamy – Photo 12" : "ஸ்ரீ புஷ்பவனேசுவர சுவாமி – படம் 12", templeId: "sri-pushpavaneswara-swamy-temple", group: ESW },
-      ],
-      [KARI]: [
-        { id: "god-kari-1", image: kari_g1, title: isEn ? "Sri Kariyakali Amman – Photo 1" : "ஸ்ரீ கரியகாளியம்மன் – படம் 1", templeId: "sri-kariyakali-amman-temple", group: KARI },
-        { id: "god-kari-2", image: kari_g2, title: isEn ? "Sri Kariyakali Amman – Photo 2" : "ஸ்ரீ கரியகாளியம்மன் – படம் 2", templeId: "sri-kariyakali-amman-temple", group: KARI },
-      ],
-      [PER]: [
-        { id: "god-per-1",  image: per_g1,  title: isEn ? "Sri Damodara Perumal – Photo 1"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 1",  templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-2",  image: per_g2,  title: isEn ? "Sri Damodara Perumal – Photo 2"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 2",  templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-3",  image: per_g3,  title: isEn ? "Sri Damodara Perumal – Photo 3"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 3",  templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-4",  image: per_g4,  title: isEn ? "Sri Damodara Perumal – Photo 4"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 4",  templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-5",  image: per_g5,  title: isEn ? "Sri Damodara Perumal – Photo 5"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 5",  templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-6",  image: per_g6,  title: isEn ? "Sri Damodara Perumal – Photo 6"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 6",  templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-7",  image: per_g7,  title: isEn ? "Sri Damodara Perumal – Photo 7"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 7",  templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-8",  image: per_g8,  title: isEn ? "Sri Damodara Perumal – Photo 8"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 8",  templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-9",  image: per_g9,  title: isEn ? "Sri Damodara Perumal – Photo 9"  : "ஸ்ரீ தாமோதர பெருமாள் – படம் 9",  templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-10", image: per_g10, title: isEn ? "Sri Damodara Perumal – Photo 10" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 10", templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-11", image: per_g11, title: isEn ? "Sri Damodara Perumal – Photo 11" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 11", templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-12", image: per_g12, title: isEn ? "Sri Damodara Perumal – Photo 12" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 12", templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-13", image: per_g13, title: isEn ? "Sri Damodara Perumal – Photo 13" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 13", templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-14", image: per_g14, title: isEn ? "Sri Damodara Perumal – Photo 14" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 14", templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-15", image: per_g15, title: isEn ? "Sri Damodara Perumal – Photo 15" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 15", templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-16", image: per_g16, title: isEn ? "Sri Damodara Perumal – Photo 16" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 16", templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-17", image: per_g17, title: isEn ? "Sri Damodara Perumal – Photo 17" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 17", templeId: "sri-damodara-perumal-temple", group: PER },
-        { id: "god-per-18", image: per_g18, title: isEn ? "Sri Damodara Perumal – Photo 18" : "ஸ்ரீ தாமோதர பெருமாள் – படம் 18", templeId: "sri-damodara-perumal-temple", group: PER },
-      ],
-    };
-    return (godImageSets[name] || []).map(g => ({ ...g, category: "Temple" }));
+    return [];
   };
 
   const templeGroups = TEMPLE_ORDER.map((name) => {

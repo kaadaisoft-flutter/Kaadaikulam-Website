@@ -18,7 +18,7 @@ const GALLERY_COLLECTION = 'gallery';
 /**
  * Save or Update a gallery item (metadata and optional file upload).
  */
-export const saveGalleryItem = async (id, data, file) => {
+export const saveGalleryItem = async (id, data, file, thumbnailFile) => {
     const now = serverTimestamp();
     const itemData = {
         ...data,
@@ -29,7 +29,28 @@ export const saveGalleryItem = async (id, data, file) => {
         itemData.createdAt = now;
     }
 
-    // Handle Cloudinary upload if a file is provided
+    // Handle Cloudinary upload for custom thumbnail if provided
+    if (thumbnailFile) {
+        // Delete old thumbnail if updating
+        if (id) {
+            try {
+                const oldDoc = await getDoc(doc(db, GALLERY_COLLECTION, id));
+                const oldData = oldDoc.data();
+                if (oldData?.cloudinaryThumbnailPublicId) {
+                    await deleteFromCloudinary(oldData.cloudinaryThumbnailPublicId, 'image');
+                }
+            } catch (err) {
+                console.warn('Failed to delete old thumbnail from Cloudinary during save:', err);
+            }
+        }
+
+        const { url, publicId } = await uploadToCloudinary(thumbnailFile);
+        itemData.thumbnail = url;
+        itemData.imageUrl = url;
+        itemData.cloudinaryThumbnailPublicId = publicId;
+    }
+
+    // Handle Cloudinary upload if a main file is provided
     if (file) {
         // Delete old asset if updating
         if (id) {
@@ -45,9 +66,11 @@ export const saveGalleryItem = async (id, data, file) => {
         }
 
         const { url, publicId, resourceType } = await uploadToCloudinary(file);
-        itemData.imageUrl = url;
-        itemData.thumbnail = url;
         itemData.fullUrl = url;
+        if (!thumbnailFile) {
+            itemData.imageUrl = url;
+            itemData.thumbnail = url;
+        }
         itemData.cloudinaryPublicId = publicId;
         itemData.cloudinaryResourceType = resourceType;
     }
@@ -126,13 +149,21 @@ export const subscribeGallery = (callback) => {
  * Delete a gallery item. Deletes from Cloudinary (if applicable) then Firestore.
  */
 export const deleteGalleryItem = async (id, item = {}) => {
-    const { cloudinaryPublicId, cloudinaryResourceType } = item;
+    const { cloudinaryPublicId, cloudinaryResourceType, cloudinaryThumbnailPublicId } = item;
 
     if (cloudinaryPublicId) {
         try {
             await deleteFromCloudinary(cloudinaryPublicId, cloudinaryResourceType || 'image');
         } catch (err) {
             console.warn('Cloudinary delete failed, proceeding with Firestore deletion:', err.message);
+        }
+    }
+
+    if (cloudinaryThumbnailPublicId) {
+        try {
+            await deleteFromCloudinary(cloudinaryThumbnailPublicId, 'image');
+        } catch (err) {
+            console.warn('Cloudinary thumbnail delete failed:', err.message);
         }
     }
 

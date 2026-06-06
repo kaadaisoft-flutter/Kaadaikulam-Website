@@ -19,6 +19,7 @@ const Donations = React.lazy(() => import('./pages/eservices/Donations'));
 const Events = React.lazy(() => import('./pages/Events'));
 const ForgotPassword = React.lazy(() => import('./pages/ForgotPassword'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
+const Videos = React.lazy(() => import('./pages/Videos'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -40,6 +41,7 @@ export function AdminContent() {
           <Route path="" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="gallery" element={<Gallery />} />
+            <Route path="videos" element={<Videos />} />
             <Route path="blog/*" element={<Blog />} />
             <Route path="comments" element={<Comments />} />
             <Route path="donation" element={<Donations />} />

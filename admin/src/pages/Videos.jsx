@@ -8,21 +8,24 @@ import Select from 'react-select';
 import toast from 'react-hot-toast';
 import { formatDateTime } from '../utils/dateUtils';
 import MediaPreview from '../components/MediaPreview';
-import ImageUploadField from '../components/ImageUploadField';
-import { GALLERY_CATEGORIES, GALLERY_MEDIA_TYPES, PLACEHOLDER_VID } from '../constants';
+import { GALLERY_CATEGORIES, PLACEHOLDER_VID } from '../constants';
 import { extractYoutubeId } from '../utils/youtubeUtils';
 import { subscribeGallery, saveGalleryItem, deleteGalleryItem } from '../services/galleryService';
 import { getTemples } from '../services/templeService';
 import { auth } from '../firebase';
-import { convertToWebP } from '../utils/imageUtils';
+import ImageUploadField from '../components/ImageUploadField';
 
 const categoryOptions = GALLERY_CATEGORIES;
-const mediaTypeOptions = GALLERY_MEDIA_TYPES;
+
+const videoMediaTypeOptions = [
+    { value: 'YouTube Video', label: 'YouTube Video' },
+    { value: 'Video Upload', label: 'Video Upload' },
+];
 
 const defaultValues = {
     title: '',
     category: null,
-    mediaType: mediaTypeOptions[0],
+    mediaType: videoMediaTypeOptions[0], // Defaults to YouTube Video
     templeName: null,
     description: '',
     featured: false,
@@ -30,7 +33,7 @@ const defaultValues = {
     youtubeUrl: '',
 };
 
-const Gallery = () => {
+const Videos = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
     const [previewSelection, setPreviewSelection] = useState({ isOpen: false, media: null });
@@ -38,11 +41,11 @@ const Gallery = () => {
     const [temples, setTemples] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Fetch gallery items
+    // Fetch all gallery items and filter for videos on display
     useEffect(() => {
         const unsubscribe = subscribeGallery((data) => {
-            const imageItems = data.filter(i => i.type === 'Image' || !i.type);
-            setItems(imageItems);
+            const videoItems = data.filter(i => i.type === 'YouTube Video' || i.type === 'Video Upload');
+            setItems(videoItems);
             setLoading(false);
         });
         return () => unsubscribe();
@@ -67,13 +70,12 @@ const Gallery = () => {
         label: t.name
     }));
 
-    // File preview state
+    // Video preview and file state
     const [filePreview, setFilePreview] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
-    const [selectedFiles, setSelectedFiles] = useState([]);
-    const [isDragActive, setIsDragActive] = useState(false);
+    const [thumbnailPreview, setThumbnailPreview] = useState(null);
+    const [thumbnailFile, setThumbnailFile] = useState(null);
     const [isVideoDragActive, setIsVideoDragActive] = useState(false);
-    const [isConverting, setIsConverting] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState({ isOpen: false, item: null });
     const prevMediaTypeRef = useRef(null);
@@ -89,7 +91,7 @@ const Gallery = () => {
         setPreviewSelection({
             isOpen: true,
             media: {
-                type: item.type === 'YouTube Video' ? 'YouTube' : item.type === 'Video Upload' ? 'Video' : 'Photo',
+                type: item.type === 'YouTube Video' ? 'YouTube' : 'Video',
                 fullUrl: item.fullUrl,
                 title: item.title,
             }
@@ -100,6 +102,8 @@ const Gallery = () => {
         setEditingItem(null);
         setFilePreview(null);
         setSelectedFile(null);
+        setThumbnailPreview(null);
+        setThumbnailFile(null);
         reset(defaultValues);
         setIsModalOpen(true);
     };
@@ -108,11 +112,16 @@ const Gallery = () => {
         setEditingItem(item);
         setFilePreview(item.thumbnail || item.imageUrl || null);
         setSelectedFile(null);
+        
+        // Detect if the thumbnail is a default YouTube / placeholder or a custom upload
+        const isPlaceholder = item.thumbnail === PLACEHOLDER_VID || (item.type === 'YouTube Video' && item.thumbnail && item.thumbnail.includes('img.youtube.com'));
+        setThumbnailPreview(!isPlaceholder ? item.thumbnail : null);
+        setThumbnailFile(null);
 
         reset({
             title: item.title || '',
             category: categoryOptions.find(o => o.value === item.category) || null,
-            mediaType: mediaTypeOptions.find(o => o.value === item.type) || mediaTypeOptions[0],
+            mediaType: videoMediaTypeOptions.find(o => o.value === item.type) || videoMediaTypeOptions[0],
             templeName: templeOptions.find(o => o.value === item.templeName) || null,
             description: item.description || '',
             featured: !!item.featured,
@@ -125,11 +134,11 @@ const Gallery = () => {
     const columns = [
         {
             key: 'thumbnail',
-            label: 'Media',
+            label: 'Video Thumbnail',
             sortable: false,
             render: (item) => (
                 <div
-                    className="w-12 h-12 rounded-lg overflow-hidden bg-black flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all group"
+                    className="w-16 h-10 rounded overflow-hidden bg-black flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all group"
                     onClick={() => openPreview(item)}
                 >
                     {item.type === 'YouTube Video' ? (
@@ -139,7 +148,7 @@ const Gallery = () => {
                                 <Video size={18} className="text-red-500 fill-red-500" />
                             </div>
                         </div>
-                    ) : item.type === 'Video Upload' ? (
+                    ) : (
                         <div className="relative w-full h-full">
                             <video
                                 src={item.thumbnail}
@@ -151,28 +160,24 @@ const Gallery = () => {
                                 <Video size={18} className="text-white drop-shadow-lg" />
                             </div>
                         </div>
-                    ) : (
-                        <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover" />
                     )}
                 </div>
             )
         },
         {
             key: 'title',
-            label: 'Media Details',
+            label: 'Video Details',
             sortable: true,
             render: (item) => (
                 <div>
                     <div className="font-semibold text-gray-900 truncate max-w-[220px]" title={item.title}>{item.title}</div>
                     <div className="text-xs text-gray-400 mt-1 flex flex-wrap gap-x-2 gap-y-0.5 items-center">
+                        <span className="bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded text-[10px] font-medium">{item.type}</span>
                         <span className="bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded text-[10px] font-medium">{item.category}</span>
                         {item.templeName && (
                             <span className="bg-primary/5 text-primary px-1.5 py-0.5 rounded text-[10px] font-medium border border-primary/10">
                                 {temples.find(t => t.id === item.templeName)?.name || item.templeName}
                             </span>
-                        )}
-                        {item.featured && (
-                            <span className="bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded text-[10px] font-bold border border-amber-200">Featured</span>
                         )}
                     </div>
                 </div>
@@ -225,6 +230,11 @@ const Gallery = () => {
 
     const filterOptions = [
         {
+            key: 'type',
+            label: 'Video Type',
+            options: videoMediaTypeOptions
+        },
+        {
             key: 'category',
             label: 'Category',
             options: categoryOptions
@@ -243,10 +253,10 @@ const Gallery = () => {
             try {
                 await deleteGalleryItem(confirmDelete.item.id, confirmDelete.item);
                 setItems(items.filter((i) => i.id !== confirmDelete.item.id));
-                toast.success('Media deleted successfully', { id: 'gallery-delete' });
+                toast.success('Video deleted successfully', { id: 'gallery-delete' });
             } catch (err) {
                 console.error('Delete failed:', err);
-                toast.error('Failed to delete media', { id: 'gallery-delete-error' });
+                toast.error('Failed to delete video', { id: 'gallery-delete-error' });
             }
             setConfirmDelete({ isOpen: false, item: null });
         }
@@ -275,110 +285,6 @@ const Gallery = () => {
         setFilePreview(null);
         setSelectedFile(null);
     }, [filePreview]);
-
-    const handleImageFiles = useCallback(async (files) => {
-        setIsConverting(true);
-        
-        const newItems = files.map(file => {
-            const previewUrl = URL.createObjectURL(file);
-            return {
-                id: Math.random().toString(36).substring(2, 9),
-                file: file,
-                preview: previewUrl,
-                name: file.name,
-                size: file.size,
-                isOptimizing: true
-            };
-        });
-        
-        setSelectedFiles(prev => [...prev, ...newItems]);
-
-        for (let item of newItems) {
-            try {
-                const optimizedFile = await convertToWebP(item.file);
-                setSelectedFiles(prev => prev.map(f => {
-                    if (f.id === item.id) {
-                        URL.revokeObjectURL(f.preview);
-                        const newPreviewUrl = URL.createObjectURL(optimizedFile);
-                        return {
-                            ...f,
-                            file: optimizedFile,
-                            preview: newPreviewUrl,
-                            name: optimizedFile.name,
-                            size: optimizedFile.size,
-                            isOptimizing: false
-                        };
-                    }
-                    return f;
-                }));
-            } catch (err) {
-                console.error("Optimization failed for file:", item.name, err);
-                setSelectedFiles(prev => prev.map(f => {
-                    if (f.id === item.id) {
-                        return { ...f, isOptimizing: false };
-                    }
-                    return f;
-                }));
-            }
-        }
-        
-        setIsConverting(false);
-    }, []);
-
-    const removeSelectedFile = useCallback((id) => {
-        setSelectedFiles(prev => {
-            const item = prev.find(f => f.id === id);
-            if (item && item.preview) {
-                URL.revokeObjectURL(item.preview);
-            }
-            return prev.filter(f => f.id !== id);
-        });
-    }, []);
-
-    const clearMultipleFiles = useCallback(() => {
-        setSelectedFiles(prev => {
-            prev.forEach(item => {
-                if (item.preview && item.preview.startsWith('blob:')) {
-                    URL.revokeObjectURL(item.preview);
-                }
-            });
-            return [];
-        });
-    }, []);
-
-    const handleDrag = useCallback((e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (e.type === "dragenter" || e.type === "dragover") {
-            setIsDragActive(true);
-        } else if (e.type === "dragleave") {
-            setIsDragActive(false);
-        }
-    }, []);
-
-    const handleDrop = useCallback((e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsDragActive(false);
-
-        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            const files = Array.from(e.dataTransfer.files);
-            const imageFiles = files.filter(file => file.type.startsWith('image/'));
-            if (imageFiles.length > 0) {
-                handleImageFiles(imageFiles);
-            } else {
-                toast.error("Please drop image files only", { id: 'gallery-drop-error' });
-            }
-        }
-    }, [handleImageFiles]);
-
-    const handleFileInputChange = useCallback((e) => {
-        if (e.target.files && e.target.files.length > 0) {
-            const files = Array.from(e.target.files);
-            handleImageFiles(files);
-            e.target.value = '';
-        }
-    }, [handleImageFiles]);
 
     const handleVideoDrag = useCallback((e) => {
         e.preventDefault();
@@ -413,7 +319,7 @@ const Gallery = () => {
 
     useEffect(() => {
         const current = selectedMediaType?.value;
-        if (prevMediaTypeRef.current != null && prevMediaTypeRef.current !== current && current !== 'YouTube Video') {
+        if (prevMediaTypeRef.current != null && prevMediaTypeRef.current !== current) {
             clearFile();
         }
         prevMediaTypeRef.current = current;
@@ -430,7 +336,6 @@ const Gallery = () => {
 
         setIsSubmitting(true);
         try {
-            // Logged in admin email
             const uploadedBy = auth.currentUser?.email || 'admin@kaadai.com';
 
             const payload = {
@@ -446,12 +351,22 @@ const Gallery = () => {
             if (isYoutube) {
                 const videoId = extractYoutubeId(data.youtubeUrl);
                 payload.title = data.title || 'YouTube Video';
-                payload.thumbnail = videoId ? `https://img.youtube.com/vi/${videoId}/0.jpg` : PLACEHOLDER_VID;
                 payload.fullUrl = data.youtubeUrl;
-                payload.imageUrl = payload.thumbnail;
+                
+                if (!thumbnailFile) {
+                    if (editingItem) {
+                        payload.thumbnail = editingItem.thumbnail || `https://img.youtube.com/vi/${videoId}/0.jpg`;
+                        payload.imageUrl = editingItem.imageUrl || payload.thumbnail;
+                        payload.cloudinaryThumbnailPublicId = editingItem.cloudinaryThumbnailPublicId || '';
+                    } else {
+                        payload.thumbnail = videoId ? `https://img.youtube.com/vi/${videoId}/0.jpg` : PLACEHOLDER_VID;
+                        payload.imageUrl = payload.thumbnail;
+                    }
+                }
 
-                await saveGalleryItem(editingItem?.id || null, payload, null);
-            } else if (type === 'Video Upload') {
+                await saveGalleryItem(editingItem?.id || null, payload, null, thumbnailFile);
+            } else {
+                // Video Upload
                 if (!editingItem && !selectedFile) {
                     toast.error('Please select a video file', { id: 'gallery-no-file' });
                     setIsSubmitting(false);
@@ -460,57 +375,22 @@ const Gallery = () => {
 
                 payload.title = data.title || selectedFile?.name.replace(/\.[^/.]+$/, '') || 'Untitled Video';
 
-                // If editing, preserve the old URLs if no new file is uploaded
                 if (editingItem) {
                     payload.thumbnail = editingItem.thumbnail || '';
                     payload.fullUrl = editingItem.fullUrl || '';
                     payload.imageUrl = editingItem.imageUrl || '';
                     payload.cloudinaryPublicId = editingItem.cloudinaryPublicId || '';
                     payload.cloudinaryResourceType = editingItem.cloudinaryResourceType || '';
+                    payload.cloudinaryThumbnailPublicId = editingItem.cloudinaryThumbnailPublicId || '';
                 }
 
-                await saveGalleryItem(editingItem?.id || null, payload, selectedFile);
-            } else {
-                // Image Upload
-                if (editingItem) {
-                    payload.title = data.title || editingItem.title || 'Untitled Image';
-                    if (selectedFile) {
-                        payload.thumbnail = '';
-                        payload.fullUrl = '';
-                        payload.imageUrl = '';
-                        payload.cloudinaryPublicId = '';
-                        payload.cloudinaryResourceType = '';
-                        await saveGalleryItem(editingItem.id, payload, selectedFile);
-                    } else {
-                        payload.thumbnail = editingItem.thumbnail || '';
-                        payload.fullUrl = editingItem.fullUrl || '';
-                        payload.imageUrl = editingItem.imageUrl || '';
-                        payload.cloudinaryPublicId = editingItem.cloudinaryPublicId || '';
-                        payload.cloudinaryResourceType = editingItem.cloudinaryResourceType || '';
-                        await saveGalleryItem(editingItem.id, payload, null);
-                    }
-                } else {
-                    // Adding multiple images
-                    if (selectedFiles.length === 0) {
-                        toast.error('Please select one or more images', { id: 'gallery-no-file' });
-                        setIsSubmitting(false);
-                        return;
-                    }
-
-                    for (const item of selectedFiles) {
-                        const itemPayload = {
-                            ...payload,
-                            title: item.name.replace(/\.[^/.]+$/, ''),
-                        };
-                        await saveGalleryItem(null, itemPayload, item.file);
-                    }
-                }
+                await saveGalleryItem(editingItem?.id || null, payload, selectedFile, thumbnailFile);
             }
             closeModal();
-            toast.success(editingItem ? 'Media updated successfully' : 'Media uploaded successfully', { id: 'gallery-upload' });
+            toast.success(editingItem ? 'Video updated successfully' : 'Video uploaded successfully', { id: 'gallery-upload' });
         } catch (err) {
             console.error('Upload failed:', err);
-            toast.error('Failed to save media', { id: 'gallery-upload-error' });
+            toast.error('Failed to save video', { id: 'gallery-upload-error' });
         } finally {
             setIsSubmitting(false);
         }
@@ -520,11 +400,11 @@ const Gallery = () => {
         setIsModalOpen(false);
         setEditingItem(null);
         clearFile();
-        clearMultipleFiles();
+        setThumbnailPreview(null);
+        setThumbnailFile(null);
         reset(defaultValues);
     };
 
-    // react-select custom styles
     const selectStyles = {
         control: (base, state) => ({
             ...base,
@@ -549,28 +429,27 @@ const Gallery = () => {
 
     return (
         <div className="space-y-6">
-            {/* Page header with action button on the right */}
             <div className="flex items-start justify-between">
                 <div>
-                    <h2 className="text-2xl font-serif font-bold text-gray-900">Gallery Management</h2>
-                    <p className="text-gray-600 mt-1">Manage and export temple photos and videos.</p>
+                    <h2 className="text-2xl font-serif font-bold text-gray-900">Video Management</h2>
+                    <p className="text-gray-600 mt-1">Manage and publish temple video content.</p>
                 </div>
                 <button
                     onClick={openAdd}
                     className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-light transition-colors shrink-0"
                 >
                     <Plus size={16} />
-                    <span>Upload Media</span>
+                    <span>Upload Video</span>
                 </button>
             </div>
 
             {loading ? (
-                <p className="text-sm text-gray-500 text-center py-8">Loading gallery...</p>
+                <p className="text-sm text-gray-500 text-center py-8">Loading videos...</p>
             ) : (
                 <DataTable
                     data={items}
                     columns={columns}
-                    searchPlaceholder="Search media..."
+                    searchPlaceholder="Search videos..."
                     filterOptions={filterOptions}
                     showExport={false}
                 />
@@ -579,25 +458,42 @@ const Gallery = () => {
             <Modal
                 isOpen={isModalOpen}
                 onClose={closeModal}
-                title={editingItem ? 'Edit Media Details' : 'Upload New Media'}
+                title={editingItem ? 'Edit Video Details' : 'Upload New Video'}
                 maxWidth="max-w-xl"
             >
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                    {/* Media Type Dropdown Selector */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Video Source Type <span className="text-red-500">*</span></label>
+                        <Controller
+                            name="mediaType"
+                            control={control}
+                            rules={{ required: 'Please select a video type' }}
+                            render={({ field }) => (
+                                <Select
+                                    {...field}
+                                    options={videoMediaTypeOptions}
+                                    styles={selectStyles}
+                                    placeholder="Select video source..."
+                                    isClearable={false}
+                                />
+                            )}
+                        />
+                    </div>
+
                     {/* Title input */}
-                    {selectedMediaType?.value !== 'Image' && (
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Title {isYoutubeSelected && <span className="text-red-500">*</span>}
-                            </label>
-                            <input
-                                {...register('title', { required: isYoutubeSelected ? 'Media title is required' : false })}
-                                type="text"
-                                placeholder={isYoutubeSelected ? "e.g. Temple Festival 2026" : "e.g. Temple Festival 2026 (Optional - defaults to filename)"}
-                                className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
-                            />
-                            {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>}
-                        </div>
-                    )}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Title {isYoutubeSelected && <span className="text-red-500">*</span>}
+                        </label>
+                        <input
+                            {...register('title', { required: isYoutubeSelected ? 'Video title is required' : false })}
+                            type="text"
+                            placeholder={isYoutubeSelected ? "e.g. Temple Festival 2026" : "e.g. Temple Festival 2026 (Optional - defaults to filename)"}
+                            className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
+                        />
+                        {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>}
+                    </div>
 
                     {/* Description input */}
                     <div>
@@ -605,8 +501,23 @@ const Gallery = () => {
                         <textarea
                             {...register('description')}
                             rows={3}
-                            placeholder="Provide brief details or context about the media item"
+                            placeholder="Provide brief details or context about the video"
                             className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary resize-none"
+                        />
+                    </div>
+
+                    {/* Custom Video Cover/Thumbnail Upload */}
+                    <div>
+                        <ImageUploadField
+                            value={thumbnailPreview}
+                            onChange={setThumbnailPreview}
+                            onFileChange={setThumbnailFile}
+                            label="Custom Video Cover/Thumbnail Image (Optional)"
+                            required={false}
+                            placeholder="Click to upload custom thumbnail or drag & drop"
+                            previewClassName="w-32 h-20"
+                            onPreviewClick={(url) => url && openPreview({ type: 'Photo', fullUrl: url, title: 'Thumbnail Preview' })}
+                            disableCrop={true}
                         />
                     </div>
 
@@ -666,7 +577,6 @@ const Gallery = () => {
 
                     {/* Published checkbox */}
                     <div className="flex items-center gap-6 bg-gray-50 p-3 rounded-lg border border-gray-100">
-                        {/* Published Toggle */}
                         <label className="flex items-center gap-2.5 cursor-pointer select-none">
                             <input
                                 {...register('published')}
@@ -675,7 +585,7 @@ const Gallery = () => {
                             />
                             <div className="flex flex-col">
                                 <span className="text-sm font-semibold text-gray-800">Published</span>
-                                <span className="text-xs text-gray-500">Make visible on website gallery</span>
+                                <span className="text-xs text-gray-500">Make visible on website gallery & homepage</span>
                             </div>
                         </label>
                     </div>
@@ -698,93 +608,6 @@ const Gallery = () => {
                             />
                             {errors.youtubeUrl && <p className="text-red-500 text-xs mt-1">{errors.youtubeUrl.message}</p>}
                         </div>
-                    ) : selectedMediaType?.value === 'Image' ? (
-                        editingItem ? (
-                            <ImageUploadField
-                                value={filePreview}
-                                onChange={setFilePreview}
-                                onFileChange={setSelectedFile}
-                                label="Change Image (Leave blank to keep current)"
-                                required={false}
-                                placeholder="Click to upload or drag & drop"
-                                previewClassName="w-20 h-20"
-                                onPreviewClick={(url) => url && openPreview({ type: 'Photo', fullUrl: url, title: selectedFile?.name || 'Image' })}
-                                onConvertingChange={setIsConverting}
-                                disableCrop={true}
-                            />
-                        ) : (
-                            /* Multiple images drag & drop uploader for new uploads */
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Upload Images <span className="text-red-500">*</span>
-                                </label>
-                                <div
-                                    onDragEnter={handleDrag}
-                                    onDragOver={handleDrag}
-                                    onDragLeave={handleDrag}
-                                    onDrop={handleDrop}
-                                    className={`flex flex-col items-center justify-center w-full h-36 border-2 border-dashed rounded-lg transition-all cursor-pointer relative ${
-                                        isDragActive
-                                            ? 'border-primary bg-primary/5 scale-[0.99]'
-                                            : 'border-gray-300 bg-gray-50 hover:bg-gray-100 hover:border-primary/30'
-                                    }`}
-                                >
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        multiple
-                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                        onChange={handleFileInputChange}
-                                    />
-                                    <Upload size={28} className={`mb-2 transition-colors ${isDragActive ? 'text-primary' : 'text-gray-400'}`} />
-                                    <p className="text-sm text-gray-600 font-medium">Click to upload or drag & drop multiple images</p>
-                                    <p className="text-xs text-gray-500 mt-1">Select one or more image files</p>
-                                </div>
-
-                                {selectedFiles.length > 0 && (
-                                    <div className="mt-4 space-y-2 max-h-56 overflow-y-auto pr-1">
-                                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                            Selected Images ({selectedFiles.length})
-                                        </p>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                            {selectedFiles.map((item) => (
-                                                <div
-                                                    key={item.id}
-                                                    className="flex items-center gap-3 border border-gray-200 rounded-lg p-2 bg-white hover:border-primary/20 transition-all shadow-sm"
-                                                >
-                                                    <div
-                                                        className="w-12 h-12 rounded overflow-hidden bg-gray-50 shrink-0 cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all"
-                                                        onClick={() => openPreview({ type: 'Photo', fullUrl: item.preview, title: item.name })}
-                                                    >
-                                                        <img src={item.preview} alt="Preview" className="w-full h-full object-cover" />
-                                                    </div>
-                                                    <div className="flex-1 min-w-0">
-                                                        <p className="text-xs font-medium text-gray-800 truncate" title={item.name}>
-                                                            {item.name}
-                                                        </p>
-                                                        <p className="text-[10px] text-gray-500 mt-0.5">
-                                                            {item.isOptimizing ? (
-                                                                <span className="text-primary animate-pulse font-semibold">Optimizing...</span>
-                                                            ) : (
-                                                                `${(item.size / 1024).toFixed(1)} KB`
-                                                            )}
-                                                        </p>
-                                                    </div>
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => removeSelectedFile(item.id)}
-                                                        className="p-1 rounded-full text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors"
-                                                        title="Remove file"
-                                                    >
-                                                        <X size={15} />
-                                                    </button>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        )
                     ) : (
                         /* Video upload area with drag & drop support */
                         <div>
@@ -831,7 +654,7 @@ const Gallery = () => {
                                         <div className="flex items-center gap-1">
                                             <button
                                                 type="button"
-                                                onClick={() => document.getElementById('gallery-file-input')?.click()}
+                                                onClick={() => document.getElementById('videos-file-input')?.click()}
                                                 className="px-2 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
                                             >
                                                 Change
@@ -848,7 +671,7 @@ const Gallery = () => {
                                         </div>
                                     </div>
                                     <input
-                                        id="gallery-file-input"
+                                        id="videos-file-input"
                                         type="file"
                                         accept="video/*"
                                         className="hidden"
@@ -869,10 +692,10 @@ const Gallery = () => {
                         </button>
                         <button
                             type="submit"
-                            disabled={isConverting || isSubmitting}
+                            disabled={isSubmitting}
                             className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-light disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            {isConverting ? 'Processing...' : isSubmitting ? 'Saving...' : editingItem ? 'Save Changes' : 'Upload'}
+                            {isSubmitting ? 'Saving...' : editingItem ? 'Save Changes' : 'Upload'}
                         </button>
                     </div>
                 </form>
@@ -888,8 +711,8 @@ const Gallery = () => {
                 isOpen={confirmDelete.isOpen}
                 onClose={() => setConfirmDelete({ isOpen: false, item: null })}
                 onConfirm={confirmDeleteAction}
-                title="Delete Media"
-                message="Are you sure you want to delete this item? This action cannot be undone."
+                title="Delete Video"
+                message="Are you sure you want to delete this video? This action cannot be undone."
                 confirmLabel="Delete"
                 variant="danger"
             />
@@ -897,4 +720,4 @@ const Gallery = () => {
     );
 };
 
-export default Gallery;
+export default Videos;

@@ -202,6 +202,11 @@ export const translations = {
         kumbhabhishekam: "Kumbhabhishekam Yagasalai"
       }
     },
+    homeVideos: {
+      heading: "Sacred Video Gallery",
+      sub: "Watch the divine celebrations, rituals, and virtual temple tours of Poondurai Kaadai.",
+      noVideos: "No videos uploaded yet."
+    },
     events: {
       hero: {
         label: "Temple Events",
@@ -921,6 +926,11 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
         video: "காணொளி",
         kumbhabhishekam: "கும்பாபிஷேக யாகசாலை"
       }
+    },
+    homeVideos: {
+      heading: "அருள்மிகு காணொளிகள்",
+      sub: "பூந்துறை காடையின் இறை திருவிழாக்கள், வழிபாடுகள் மற்றும் கோவில் காட்சிகளைக் காணுங்கள்.",
+      noVideos: "காணொளிகள் எதுவும் பதிவேற்றப்படவில்லை."
     },
     events: {
       hero: {
