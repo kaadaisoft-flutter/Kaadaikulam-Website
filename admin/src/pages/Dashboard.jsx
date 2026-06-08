@@ -245,7 +245,7 @@ const Dashboard = () => {
                             <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shadow-lg">
                                 <TrendingUp size={20} />
                             </div>
-                            <h3 className="font-bold">Performance</h3>
+                            <h3 className="font-bold text-white">Performance</h3>
                         </div>
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">

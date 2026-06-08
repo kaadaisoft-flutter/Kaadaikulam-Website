@@ -25,7 +25,7 @@ const MasonryCard = ({ item, index, onOpen }) => {
       viewport={{ once: true, margin: "-60px" }}
       whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
       transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1], delay: (index % 3) * 0.08 }}
-      className="break-inside-avoid mb-5 group relative rounded-2xl overflow-hidden cursor-pointer
+      className="group relative rounded-2xl overflow-hidden cursor-pointer
                  shadow-md hover:shadow-2xl transition-shadow duration-500 bg-stone-100"
       onClick={() => onOpen(item)}
     >
@@ -45,25 +45,25 @@ const MasonryCard = ({ item, index, onOpen }) => {
         </div>
       )}
 
-      {/* Image — natural height, no forced ratio */}
-      <img
-        src={item.image}
-        alt={item.title}
-        onLoad={() => setIsLoaded(true)}
-        className={`w-full h-auto block transition-all duration-700 group-hover:scale-[1.04] ${
-          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        }`}
-        loading="lazy"
-      />
-
-
+      {/* Image — uniform ratio */}
+      <div className="aspect-[3/4] w-full overflow-hidden">
+        <img
+          src={item.image}
+          alt={item.title}
+          onLoad={() => setIsLoaded(true)}
+          className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.04] ${
+            isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
+          }`}
+          loading="lazy"
+        />
+      </div>
     </motion.div>
   );
 };
 
-/* ─── Masonry grid ───────────────────────────────────────────────────── */
+/* ─── Gallery grid ───────────────────────────────────────────────────── */
 const MasonryGrid = ({ items, onOpen }) => (
-  <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
     {items.map((item, idx) => (
       <MasonryCard key={item.id} item={item} index={idx} onOpen={onOpen} />
     ))}
@@ -812,7 +812,9 @@ const Gallery = () => {
               )}
 
               <div className="mt-5 text-center px-4">
-                <h3 className="text-white font-serif text-xl md:text-2xl">{lightbox.title}</h3>
+                {(lightbox.type === "YouTube Video" || lightbox.type === "Video Upload") && (
+                  <h3 className="text-white font-serif text-xl md:text-2xl">{lightbox.title}</h3>
+                )}
                 {lightbox.description && (
                   <p className="text-white/70 text-sm mt-2 max-w-xl mx-auto font-light leading-relaxed">
                     {lightbox.description}

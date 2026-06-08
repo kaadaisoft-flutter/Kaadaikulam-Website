@@ -313,19 +313,19 @@ const Events = () => {
             </section>
 
             {/* Tab Switcher */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 hidden sm:block">
-                <div className="flex items-center justify-center gap-1 sm:gap-4 bg-stone-200/50 p-1 sm:p-1.5 rounded-2xl w-full max-w-[500px] sm:w-fit mx-auto shadow-sm border border-stone-200">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+                <div className="flex items-center justify-center gap-1 sm:gap-4 bg-[#5d1712]/5 p-1 sm:p-1.5 rounded-2xl w-full max-w-[500px] sm:w-fit mx-auto shadow-sm border border-[#5d1712]/10">
                     <button
                         onClick={() => setActiveTab('upcoming')}
                         className={`flex-1 sm:flex-none px-3 sm:px-8 py-2.5 sm:py-3 rounded-xl text-[10px] xs:text-xs sm:text-sm font-bold transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 ${
                             activeTab === 'upcoming' 
                             ? "bg-[#5d1712] text-white shadow-lg sm:scale-105" 
-                            : "text-stone-500 hover:text-stone-800 hover:bg-stone-200"
+                            : "bg-[#5d1712]/8 text-[#5d1712]/80 hover:text-[#5d1712] hover:bg-[#5d1712]/15"
                         }`}
                     >
                         <CalendarDays size={16} className="sm:w-[18px] sm:h-[18px]" />
                         <span className="whitespace-nowrap">{t_events.upcomingEvents}</span>
-                        <span className={`ml-0.5 sm:ml-1 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'upcoming' ? 'bg-white/20' : 'bg-stone-300 text-stone-600'}`}>
+                        <span className={`ml-0.5 sm:ml-1 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'upcoming' ? 'bg-white/20' : 'bg-[#5d1712]/10 text-[#5d1712]'}`}>
                             {upcomingEvents.length}
                         </span>
                     </button>
@@ -334,12 +334,12 @@ const Events = () => {
                         className={`flex-1 sm:flex-none px-3 sm:px-8 py-2.5 sm:py-3 rounded-xl text-[10px] xs:text-xs sm:text-sm font-bold transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 ${
                             activeTab === 'completed' 
                             ? "bg-[#5d1712] text-white shadow-lg sm:scale-105" 
-                            : "text-stone-500 hover:text-stone-800 hover:bg-stone-200"
+                            : "bg-[#5d1712]/8 text-[#5d1712]/80 hover:text-[#5d1712] hover:bg-[#5d1712]/15"
                         }`}
                     >
                         <Tag size={16} className="sm:w-[18px] sm:h-[18px]" />
                         <span className="whitespace-nowrap">{t_events.completedEvents}</span>
-                        <span className={`ml-0.5 sm:ml-1 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'completed' ? 'bg-white/20' : 'bg-stone-300 text-stone-600'}`}>
+                        <span className={`ml-0.5 sm:ml-1 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'completed' ? 'bg-white/20' : 'bg-[#5d1712]/10 text-[#5d1712]'}`}>
                             {completedEvents.length}
                         </span>
                     </button>
