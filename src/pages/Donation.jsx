@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
-import heroImg from "../assets/images/donation_hero.webp";
-import qrCodeImg from "../assets/images/Donation_QR.webp";
+
 import { addDonation } from "../services/donationService";
 import { getDonationSettings } from "../services/donationSettingsService";
 import toast, { Toaster } from 'react-hot-toast';
@@ -23,9 +22,8 @@ const Donation = () => {
     const fetchSettings = async () => {
       try {
         const data = await getDonationSettings();
-        if (data) {
-          setSettings(data);
-        }
+        console.log("[DonationSettings] fetched:", data);
+        setSettings(data || null);
       } catch (err) {
         console.error("Failed to load donation settings:", err);
       } finally {
@@ -36,13 +34,13 @@ const Donation = () => {
   }, []);
 
   const bankDetails = {
-    accountName: settings?.accountName || "Poondurai Kadaikula Makkal Narpani",
-    accountNumber: settings?.accountNumber || "231602000022222",
-    ifscCode: settings?.ifscCode || "IOBA0002316",
-    branch: settings?.branch || "Avalpoondurai",
-    bankName: settings?.bankName || "Indian Overseas Bank",
+    accountName: settings?.accountName || "",
+    accountNumber: settings?.accountNumber || "",
+    ifscCode: settings?.ifscCode || "",
+    branch: settings?.branch || "",
+    bankName: settings?.bankName || "",
     upiId: settings?.upiId || "",
-    qrImageUrl: settings?.qrImageUrl || qrCodeImg
+    qrImageUrl: settings?.qrImageUrl || null
   };
 
   // Confirmation Form State
@@ -98,14 +96,8 @@ const Donation = () => {
     <div className="min-h-screen bg-sacred pt-0 pb-20">
       <Toaster position="bottom-center" />
       {/* Hero Section */}
-      <section className="relative w-full min-h-[550px] lg:min-h-[650px] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img src={heroImg} alt={t.hero.label} className="w-full h-full object-cover" />
-        </div>
-
-        {/* Cinematic Dark Overlays */}
-        <div className="absolute inset-0 z-[1] bg-black/25 pointer-events-none" />
-        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-black/45 via-black/10 to-transparent pointer-events-none" />
+      <section className="relative w-full min-h-[400px] lg:min-h-[500px] flex items-center overflow-hidden bg-[#5d1712]">
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
 
         <div className="container mx-auto px-6 py-12 lg:py-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -232,6 +224,12 @@ const Donation = () => {
                 <div className="w-10 h-10 border-4 border-[#5d1712]/30 border-t-[#5d1712] rounded-full animate-spin mb-4" />
                 <p className="text-stone-500 text-sm font-medium">Loading details...</p>
               </div>
+            ) : !settings ? (
+              <div className="bg-[#fdfcf7] p-12 rounded-[40px] border border-[#c49a3c]/20 shadow-2xl flex flex-col items-center justify-center min-h-[300px] text-center">
+                <svg className="w-12 h-12 text-[#c49a3c]/40 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <p className="text-stone-700 font-semibold text-lg mb-2">Payment details not configured</p>
+                <p className="text-stone-500 text-sm max-w-xs">Bank and UPI details will appear here once configured by the admin.</p>
+              </div>
             ) : (
               <AnimatePresence mode="wait">
                 {paymentMethod === "bank" ? (
@@ -313,13 +311,20 @@ const Donation = () => {
                         {t.bank.qrSub}
                       </p>
 
-                      <div className="relative group p-4 bg-white rounded-3xl border border-[#c49a3c]/20 shadow-lg max-w-[280px] w-full transition-all duration-300 hover:border-[#c49a3c] hover:shadow-xl mb-6">
-                        <img
-                          src={bankDetails.qrImageUrl}
-                          alt={t.bank.qrHeading}
-                          className="w-full h-auto rounded-2xl"
-                        />
-                      </div>
+                      {bankDetails.qrImageUrl ? (
+                        <div className="relative group p-4 bg-white rounded-3xl border border-[#c49a3c]/20 shadow-lg max-w-[280px] w-full transition-all duration-300 hover:border-[#c49a3c] hover:shadow-xl mb-6">
+                          <img
+                            src={bankDetails.qrImageUrl}
+                            alt={t.bank.qrHeading}
+                            className="w-full h-auto rounded-2xl"
+                          />
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center justify-center p-8 bg-stone-50 rounded-3xl border border-dashed border-stone-300 max-w-[280px] w-full mb-6 text-stone-400">
+                          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="mb-3 opacity-40"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM17 17h3v3h-3zM14 17v3"/></svg>
+                          <p className="text-xs font-medium">No QR code configured</p>
+                        </div>
+                      )}
 
                       {bankDetails.upiId && (
                         <div className="group cursor-pointer w-full max-w-sm" onClick={() => handleCopy(bankDetails.upiId)}>

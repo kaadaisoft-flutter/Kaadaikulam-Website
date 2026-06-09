@@ -140,8 +140,8 @@ const DonationSettings = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1"><LinkIcon size={14} /> UPI ID Address <span className="text-red-500">*</span></label>
-                                    <input {...register('upiId', { required: 'UPI ID is required', pattern: { value: UPI_REGEX, message: 'Invalid UPI ID format (e.g. name@bank)' } })} type="text" placeholder={PLACEHOLDERS.upiId} className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary" />
+                                    <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1"><LinkIcon size={14} /> UPI ID Address <span className="text-gray-400 text-xs font-normal">(Optional)</span></label>
+                                    <input {...register('upiId', { pattern: { value: UPI_REGEX, message: 'Invalid UPI ID format (e.g. name@bank)' } })} type="text" placeholder={PLACEHOLDERS.upiId} className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary" />
                                     {errors.upiId && <p className="text-red-500 text-xs mt-1">{errors.upiId.message}</p>}
                                 </div>
                                 <div className="bg-blue-50 text-blue-800 p-3 rounded-md flex items-start gap-2 text-sm border border-blue-100">

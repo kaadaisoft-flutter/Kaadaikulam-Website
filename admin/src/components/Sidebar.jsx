@@ -81,7 +81,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     return (
         <aside
             className={`
-                relative flex flex-col bg-[#5D1712] text-stone-300 transition-all duration-300 ease-in-out z-30
+                relative flex flex-col bg-[#3d2b27] text-stone-300 transition-all duration-300 ease-in-out z-30
                 ${isCollapsed ? 'w-20' : 'w-72'}
             `}
         >
@@ -135,7 +135,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                 `} />
                                                 {!isCollapsed && <span className="flex-1 text-sm">{item.label}</span>}
                                                 {item.badge > 0 && !isCollapsed && (
-                                                    <span className="bg-secondary text-[#5D1712] text-[10px] font-bold px-2 py-0.5 rounded-full">
+                                                    <span className="bg-secondary text-[#3d2b27] text-[10px] font-bold px-2 py-0.5 rounded-full">
                                                         {item.badge}
                                                     </span>
                                                 )}
@@ -204,7 +204,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             {/* Collapse Toggle Overlay */}
             <button
                 onClick={toggleSidebar}
-                className="absolute -right-3 top-24 w-6 h-6 bg-secondary text-[#5D1712] rounded-full flex items-center justify-center shadow-lg border-2 border-[#FAF5EE] hover:scale-110 transition-all z-40"
+                className="absolute -right-3 top-24 w-6 h-6 bg-secondary text-[#3d2b27] rounded-full flex items-center justify-center shadow-lg border-2 border-[#FAF5EE] hover:scale-110 transition-all z-40"
             >
                 {isCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
             </button>
