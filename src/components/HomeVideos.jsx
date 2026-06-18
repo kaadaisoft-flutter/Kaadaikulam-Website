@@ -80,7 +80,7 @@ const HomeVideos = () => {
             <div className="absolute inset-0 w-full h-full flex items-center justify-center">
               <img 
                 src={coverImage} 
-                alt={selectedVideo?.title} 
+                alt={language === "ta" ? (selectedVideo?.titleTa || selectedVideo?.title) : selectedVideo?.title} 
                 className="w-full h-full object-cover brightness-[0.85]" 
                 loading="lazy"
               />
@@ -104,7 +104,7 @@ const HomeVideos = () => {
               {isYoutube ? (
                 <iframe
                   src={`https://www.youtube.com/embed/${selectedVideoId}?autoplay=1&rel=0`}
-                  title={selectedVideo?.title}
+                  title={language === "ta" ? (selectedVideo?.titleTa || selectedVideo?.title) : selectedVideo?.title}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -126,7 +126,7 @@ const HomeVideos = () => {
         {selectedVideo && (
           <div className="mt-6 text-center max-w-2xl mx-auto px-4">
             <h3 className="font-serif text-xl md:text-2xl text-[#5d1712] font-semibold">
-              {selectedVideo.title}
+              {language === "ta" ? (selectedVideo.titleTa || selectedVideo.title) : selectedVideo.title}
             </h3>
             {selectedVideo.description && (
               <p className="text-stone-600 text-sm mt-2.5 font-light leading-relaxed">
@@ -160,7 +160,7 @@ const HomeVideos = () => {
                     <div className="relative aspect-video bg-black overflow-hidden">
                       <img 
                         src={thumbImg} 
-                        alt={vid.title} 
+                        alt={language === "ta" ? (vid.titleTa || vid.title) : vid.title} 
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />
@@ -181,7 +181,7 @@ const HomeVideos = () => {
                     {/* Meta details */}
                     <div className="p-3">
                       <p className="text-xs font-semibold text-stone-800 line-clamp-1 group-hover:text-[#5d1712] transition-colors">
-                        {vid.title}
+                        {language === "ta" ? (vid.titleTa || vid.title) : vid.title}
                       </p>
                       <p className="text-[10px] text-stone-500 mt-1 uppercase font-bold tracking-wider flex items-center gap-1.5">
                         <span className="text-[#c49a3c]">{isVidYoutube ? "YouTube" : "Video"}</span>

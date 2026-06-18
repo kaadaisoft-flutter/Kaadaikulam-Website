@@ -4,7 +4,18 @@ import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
 const SmoothScroll = ({ children }) => {
+  const { pathname } = useLocation();
+  const isAdmin = pathname.startsWith('/admin');
+
   useEffect(() => {
+    if (isAdmin) {
+      if (window.lenis) {
+        window.lenis.destroy();
+        window.lenis = null;
+      }
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -40,13 +51,14 @@ const SmoothScroll = ({ children }) => {
       clearTimeout(scrollTimeout);
       document.documentElement.classList.remove('is-scrolling');
       lenis.destroy();
+      window.lenis = null;
     };
-  }, []);
+  }, [isAdmin]);
 
-  const { pathname } = useLocation();
   useEffect(() => {
+    if (isAdmin) return;
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, isAdmin]);
 
   return <>{children}</>;
 };

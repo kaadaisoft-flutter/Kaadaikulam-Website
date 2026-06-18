@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import DataTable from '../components/DataTable';
 import Modal from '../components/Modal';
 import ConfirmDialog from '../components/ConfirmDialog';
-import { Plus, Trash2, Pencil, X, Upload, Video } from 'lucide-react';
+import { Plus, Trash2, Pencil, X, Upload, Video, Wand2, Loader2 } from 'lucide-react';
 import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select';
 import toast from 'react-hot-toast';
@@ -24,6 +24,7 @@ const videoMediaTypeOptions = [
 
 const defaultValues = {
     title: '',
+    titleTa: '',
     category: null,
     mediaType: videoMediaTypeOptions[0], // Defaults to YouTube Video
     templeName: null,
@@ -78,11 +79,40 @@ const Videos = () => {
     const [isVideoDragActive, setIsVideoDragActive] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState({ isOpen: false, item: null });
+    const [isTranslating, setIsTranslating] = useState(false);
     const prevMediaTypeRef = useRef(null);
 
-    const { control, handleSubmit, reset, watch, register, formState: { errors } } = useForm({
+    const { control, handleSubmit, reset, watch, register, setValue, getValues, formState: { errors } } = useForm({
         defaultValues
     });
+
+    // Auto-translate English title to Tamil using Google Translate free API
+    const translateToTamil = async (englishText) => {
+        if (!englishText || !englishText.trim()) {
+            toast.error('Please enter an English title first', { id: 'translate-empty' });
+            return;
+        }
+        setIsTranslating(true);
+        try {
+            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ta&dt=t&q=${encodeURIComponent(englishText.trim())}`;
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Translation failed');
+            const data = await response.json();
+            // data[0] is an array of translation segments
+            const translatedText = data[0]?.map(segment => segment[0]).join('') || '';
+            if (translatedText) {
+                setValue('titleTa', translatedText, { shouldDirty: true });
+                toast.success('Translated to Tamil!', { id: 'translate-success' });
+            } else {
+                throw new Error('Empty translation result');
+            }
+        } catch (err) {
+            console.error('Translation error:', err);
+            toast.error('Translation failed. Please enter Tamil title manually.', { id: 'translate-error' });
+        } finally {
+            setIsTranslating(false);
+        }
+    };
 
     const selectedMediaType = watch('mediaType');
     const selectedCategory = watch('category');
@@ -120,6 +150,7 @@ const Videos = () => {
 
         reset({
             title: item.title || '',
+            titleTa: item.titleTa || '',
             category: categoryOptions.find(o => o.value === item.category) || null,
             mediaType: videoMediaTypeOptions.find(o => o.value === item.type) || videoMediaTypeOptions[0],
             templeName: templeOptions.find(o => o.value === item.templeName) || null,
@@ -171,6 +202,9 @@ const Videos = () => {
             render: (item) => (
                 <div>
                     <div className="font-semibold text-gray-900 truncate max-w-[220px]" title={item.title}>{item.title}</div>
+                    {item.titleTa && (
+                        <div className="text-xs text-gray-500 font-medium truncate max-w-[220px] mt-0.5" title={item.titleTa}>{item.titleTa}</div>
+                    )}
                     <div className="text-xs text-gray-400 mt-1 flex flex-wrap gap-x-2 gap-y-0.5 items-center">
                         <span className="bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded text-[10px] font-medium">{item.type}</span>
                         <span className="bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded text-[10px] font-medium">{item.category}</span>
@@ -346,6 +380,7 @@ const Videos = () => {
                 featured,
                 published,
                 uploadedBy,
+                titleTa: data.titleTa || '',
             };
 
             if (isYoutube) {
@@ -481,18 +516,47 @@ const Videos = () => {
                         />
                     </div>
 
-                    {/* Title input */}
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Title {isYoutubeSelected && <span className="text-red-500">*</span>}
-                        </label>
-                        <input
-                            {...register('title', { required: isYoutubeSelected ? 'Video title is required' : false })}
-                            type="text"
-                            placeholder={isYoutubeSelected ? "e.g. Temple Festival 2026" : "e.g. Temple Festival 2026 (Optional - defaults to filename)"}
-                            className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
-                        />
-                        {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>}
+                    {/* Title inputs */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Title (English) {isYoutubeSelected && <span className="text-red-500">*</span>}
+                            </label>
+                            <input
+                                {...register('title', { required: isYoutubeSelected ? 'English title is required' : false })}
+                                type="text"
+                                placeholder={isYoutubeSelected ? "e.g. Temple Festival 2026" : "e.g. Temple Festival 2026 (Optional)"}
+                                className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
+                            />
+                            {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>}
+                        </div>
+                        <div>
+                            <div className="flex items-center justify-between mb-1">
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Title (Tamil)
+                                </label>
+                                <button
+                                    type="button"
+                                    onClick={() => translateToTamil(getValues('title'))}
+                                    disabled={isTranslating}
+                                    title="Auto-translate English title to Tamil"
+                                    className="flex items-center gap-1 text-xs font-medium text-primary hover:text-primary-light disabled:opacity-50 disabled:cursor-not-allowed transition-colors px-2 py-0.5 rounded border border-primary/30 hover:bg-primary/5"
+                                >
+                                    {isTranslating ? (
+                                        <><Loader2 size={11} className="animate-spin" /> Translating...</>
+                                    ) : (
+                                        <><Wand2 size={11} /> Auto-translate</>
+                                    )}
+                                </button>
+                            </div>
+                            <input
+                                {...register('titleTa')}
+                                type="text"
+                                placeholder="உதாரணம்: கோவில் திருவிழா 2026"
+                                className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-primary focus:border-primary"
+                            />
+                            <p className="text-[11px] text-gray-400 mt-1">Type manually or click Auto-translate ↑</p>
+                        </div>
                     </div>
 
                     {/* Description input */}

@@ -15,6 +15,12 @@ const STATUS_OPTIONS = [
     { value: 'Draft', label: 'Draft' },
 ];
 
+const FILTER_STATUS_OPTIONS = [
+    { value: 'Published', label: 'Published' },
+    { value: 'Completed', label: 'Completed' },
+    { value: 'Draft', label: 'Draft' },
+];
+
 const CATEGORY_OPTIONS = [
     { value: 'Festival', label: 'Festival' },
     { value: 'Ceremony', label: 'Ceremony' },
@@ -94,7 +100,17 @@ const Events = () => {
 
     useEffect(() => {
         const unsub = subscribeEvents((data) => {
-            setEvents(data);
+            const now = new Date().getTime();
+            const buffer = 2 * 60 * 60 * 1000; // 2 hours buffer
+            const mapped = data.map(event => {
+                const eventDate = event.eventDate?.toDate ? event.eventDate.toDate() : (event.eventDate ? new Date(event.eventDate) : null);
+                const isCompleted = eventDate && !isNaN(eventDate.getTime()) && (eventDate.getTime() + buffer < now);
+                return {
+                    ...event,
+                    status: (isCompleted && event.status === 'Published') ? 'Completed' : event.status
+                };
+            });
+            setEvents(mapped);
             setLoading(false);
         });
         return () => unsub();
@@ -281,7 +297,8 @@ const Events = () => {
             sortable: true,
             render: (item) => (
                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wide
-                    ${item.status === 'Published' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                    ${item.status === 'Published' ? 'bg-green-100 text-green-700' : 
+                      item.status === 'Completed' ? 'bg-gray-100 text-gray-700' : 'bg-yellow-100 text-yellow-700'}`}>
                     {item.status}
                 </span>
             ),
@@ -315,7 +332,7 @@ const Events = () => {
         {
             key: 'status',
             label: 'Status',
-            options: STATUS_OPTIONS,
+            options: FILTER_STATUS_OPTIONS,
         },
         {
             key: 'category',

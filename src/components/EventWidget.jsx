@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import { subscribeEvents } from '../services/eventService';
+import { subscribeGalleryItems } from '../services/galleryService';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../utils/translations';
 import { X, CalendarDays, MapPin, ArrowRight, Clock } from 'lucide-react';
@@ -141,12 +142,108 @@ const EventDetailModal = ({ event, onClose, t }) => {
     );
 };
 
+/* ─── Video Player Modal ─── */
+const VideoPlayerModal = ({ video, isOpen, onClose }) => {
+    const { language } = useLanguage();
+
+    useEffect(() => {
+        if (isOpen) {
+            const scrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.width = '100%';
+            if (window.lenis && typeof window.lenis.stop === 'function') window.lenis.stop();
+        }
+        return () => {
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+            if (window.lenis && typeof window.lenis.start === 'function') window.lenis.start();
+        };
+    }, [isOpen]);
+
+    if (!isOpen || !video) return null;
+
+    const extractYoutubeId = (url) => {
+        if (!url) return '';
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : '';
+    };
+
+    const isYoutube = video.type === 'YouTube Video';
+    const title = language === 'ta' ? (video.titleTa || video.title) : video.title;
+
+    return (
+        <AnimatePresence>
+            <motion.div
+                className="fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={onClose}
+                data-lenis-prevent
+            >
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+                <motion.div
+                    className="relative z-10 bg-[#FAF5EE] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl max-w-3xl w-full flex flex-col"
+                    initial={{ opacity: 0, scale: 0.92, y: 30 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.92, y: 30 }}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {/* Modal Header */}
+                    <div className="flex items-center justify-between p-4 border-b border-stone-200 bg-stone-100 shrink-0">
+                        <h3 className="text-lg font-serif font-bold text-gray-900 truncate max-w-[80%]">{title}</h3>
+                        <button onClick={onClose} className="p-1 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded-full transition-colors cursor-pointer">
+                            <X size={20} />
+                        </button>
+                    </div>
+
+                    {/* Modal Body / Video Player */}
+                    <div className="bg-black relative pb-[56.25%] h-0 w-full">
+                        {isYoutube ? (
+                            <iframe
+                                src={`https://www.youtube.com/embed/${extractYoutubeId(video.fullUrl || video.imageUrl)}?autoplay=1&rel=0`}
+                                title={title}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                className="absolute top-0 left-0 w-full h-full"
+                            />
+                        ) : (
+                            <video
+                                src={video.fullUrl}
+                                controls
+                                autoPlay
+                                className="absolute top-0 left-0 w-full h-full object-contain"
+                            />
+                        )}
+                    </div>
+
+                    {/* Modal Footer */}
+                    {video.description && (
+                        <div className="p-4 border-t border-stone-100 bg-stone-50/50 text-stone-600 text-sm font-light leading-relaxed max-h-24 overflow-y-auto" data-lenis-prevent>
+                            {video.description}
+                        </div>
+                    )}
+                </motion.div>
+            </motion.div>
+        </AnimatePresence>
+    );
+};
+
 /* ─── Global Event Widget (Scrolling Ticker) ─── */
 const EventWidget = () => {
     const { language } = useLanguage();
     const location = useLocation();
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
+    const [featuredVideo, setFeaturedVideo] = useState(null);
+    const [selectedVideoVideo, setSelectedVideoVideo] = useState(null);
+    const [isVideoOpen, setIsVideoOpen] = useState(false);
 
     const t = translations[language].events.details;
 
@@ -154,7 +251,7 @@ const EventWidget = () => {
     const isEventsPage = location.pathname === '/events';
 
     useEffect(() => {
-        const unsub = subscribeEvents((data) => {
+        const unsubEvents = subscribeEvents((data) => {
             const now = new Date();
             const upcoming = data.filter(event => {
                 const eventDate = event.eventDate?.toDate ? event.eventDate.toDate() : new Date(event.eventDate);
@@ -163,21 +260,63 @@ const EventWidget = () => {
             });
             setEvents(upcoming);
         });
-        return () => unsub();
+
+        const unsubVideos = subscribeGalleryItems((items) => {
+            const videoItems = items.filter(
+                (item) => item.type === "YouTube Video" || item.type === "Video Upload"
+            );
+            if (videoItems.length > 0) {
+                const featured = videoItems.find((v) => v.featured) || videoItems[0];
+                setFeaturedVideo(featured);
+            } else {
+                setFeaturedVideo(null);
+            }
+        });
+
+        return () => {
+            unsubEvents();
+            unsubVideos();
+        };
     }, []);
 
-    if (events.length === 0 || isEventsPage) return <EventDetailModal event={selectedEvent} onClose={() => setSelectedEvent(null)} t={t} />;
+    // Create mixed ticker items
+    const tickerItems = [];
+
+    if (featuredVideo) {
+        tickerItems.push({
+            id: 'featured-video',
+            isVid: true,
+            video: featuredVideo
+        });
+    }
+
+    events.forEach(event => {
+        tickerItems.push({
+            id: event.id,
+            isVid: false,
+            title: event.title,
+            event: event
+        });
+    });
+
+    if (tickerItems.length === 0 || isEventsPage) {
+        return (
+            <>
+                <EventDetailModal event={selectedEvent} onClose={() => setSelectedEvent(null)} t={t} />
+                <VideoPlayerModal video={selectedVideoVideo} isOpen={isVideoOpen} onClose={() => { setIsVideoOpen(false); setSelectedVideoVideo(null); }} />
+            </>
+        );
+    }
 
     // Ensure we have enough items to fill the screen and loop smoothly
-    let baseEvents = [...events];
-    while (baseEvents.length > 0 && baseEvents.length < 6) {
-        baseEvents = [...baseEvents, ...events];
+    let baseItems = [...tickerItems];
+    while (baseItems.length > 0 && baseItems.length < 6) {
+        baseItems = [...baseItems, ...tickerItems];
     }
-    const tickerEvents = [...baseEvents, ...baseEvents];
+    const finalTickerItems = [...baseItems, ...baseItems];
     
     // Adjust animation speed: more items = slower duration to keep speed consistent
-    // Increased multiplier to 15s per item for better readability
-    const scrollDuration = Math.max(30, baseEvents.length * 15);
+    const scrollDuration = Math.max(30, baseItems.length * 15);
 
     return (
         <>
@@ -200,45 +339,82 @@ const EventWidget = () => {
                     }}
                 >
                     <div className="flex items-center gap-4">
-                        {tickerEvents.map((event, idx) => (
-                            <div 
-                                key={`${event.id}-${idx}`}
-                                onClick={() => setSelectedEvent(event)}
-                                className="flex items-center gap-6 px-8 border-r border-white/10 cursor-pointer hover:bg-white/10 transition-colors group shrink-0"
-                            >
-                                <div className="flex items-center gap-2">
-                                    <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-200">
-                                        UPCOMING
-                                    </span>
-                                </div>
-                                <span className="text-sm font-serif font-bold tracking-wide group-hover:text-amber-200 transition-colors">
-                                    {event.title}
-                                </span>
-                                <div className="flex items-center gap-1.5 text-[11px] text-white/70">
-                                    <CalendarDays size={12} className="text-amber-400" />
-                                    <span>{formatDate(event.eventDate, language)}</span>
-                                </div>
-                                <div className="flex items-center gap-1.5 text-[11px] text-white/70">
-                                    <Clock size={12} className="text-amber-400" />
-                                    <span>{formatTime(event.eventDate, language)}</span>
-                                </div>
-                                {event.location && (
-                                    <div className="flex items-center gap-1.5 text-[11px] text-white/70">
-                                        <MapPin size={12} className="text-amber-400" />
-                                        <span className="italic">{event.location}</span>
+                        {finalTickerItems.map((item, idx) => {
+                            if (item.isVid) {
+                                return (
+                                    <div 
+                                        key={`${item.id}-${idx}`}
+                                        onClick={() => {
+                                            setSelectedVideoVideo(item.video);
+                                            setIsVideoOpen(true);
+                                        }}
+                                        className="flex items-center gap-6 px-8 border-r border-white/10 cursor-pointer hover:bg-white/10 transition-colors group shrink-0"
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-300">
+                                                {language === 'ta' ? 'காணொளி' : 'VIDEO'}
+                                            </span>
+                                        </div>
+                                        <span className="text-sm font-serif font-bold tracking-wide group-hover:text-amber-200 transition-colors flex items-center gap-2">
+                                            <svg className="w-4 h-4 text-red-400 fill-current shrink-0" viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                            {language === 'ta'
+                                                ? (item.video?.titleTa || item.video?.title || item.title)
+                                                : (item.video?.title || item.title)
+                                            }
+                                        </span>
+                                        <div className="flex items-center gap-1 text-[10px] font-bold text-amber-400 uppercase tracking-widest ml-2 opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
+                                            <span>{language === 'ta' ? 'காண்க' : 'PLAY'}</span>
+                                            <ArrowRight size={10} />
+                                        </div>
                                     </div>
-                                )}
-                                <div className="flex items-center gap-1 text-[10px] font-bold text-amber-400 uppercase tracking-widest ml-2 opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
-                                    <span>{t.see}</span>
-                                    <ArrowRight size={10} />
-                                </div>
-                            </div>
-                        ))}
+                                );
+                            } else {
+                                const event = item.event;
+                                return (
+                                    <div 
+                                        key={`${item.id}-${idx}`}
+                                        onClick={() => setSelectedEvent(event)}
+                                        className="flex items-center gap-6 px-8 border-r border-white/10 cursor-pointer hover:bg-white/10 transition-colors group shrink-0"
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-200">
+                                                UPCOMING
+                                            </span>
+                                        </div>
+                                        <span className="text-sm font-serif font-bold tracking-wide group-hover:text-amber-200 transition-colors">
+                                            {event.title}
+                                        </span>
+                                        <div className="flex items-center gap-1.5 text-[11px] text-white/70">
+                                            <CalendarDays size={12} className="text-amber-400" />
+                                            <span>{formatDate(event.eventDate, language)}</span>
+                                        </div>
+                                        <div className="flex items-center gap-1.5 text-[11px] text-white/70">
+                                            <Clock size={12} className="text-amber-400" />
+                                            <span>{formatTime(event.eventDate, language)}</span>
+                                        </div>
+                                        {event.location && (
+                                            <div className="flex items-center gap-1.5 text-[11px] text-white/70">
+                                                <MapPin size={12} className="text-amber-400" />
+                                                <span className="italic">{event.location}</span>
+                                            </div>
+                                        )}
+                                        <div className="flex items-center gap-1 text-[10px] font-bold text-amber-400 uppercase tracking-widest ml-2 opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
+                                            <span>{t.see}</span>
+                                            <ArrowRight size={10} />
+                                        </div>
+                                    </div>
+                                );
+                            }
+                        })}
                     </div>
                 </motion.div>
             </motion.div>
             <EventDetailModal event={selectedEvent} onClose={() => setSelectedEvent(null)} t={t} />
+            <VideoPlayerModal video={selectedVideoVideo} isOpen={isVideoOpen} onClose={() => { setIsVideoOpen(false); setSelectedVideoVideo(null); }} />
         </>
     );
 };

@@ -51,9 +51,8 @@ const MasonryCard = ({ item, index, onOpen }) => {
           src={item.image}
           alt={item.title}
           onLoad={() => setIsLoaded(true)}
-          className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.04] ${
-            isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          }`}
+          className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.04] ${isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            }`}
           loading="lazy"
         />
       </div>
@@ -215,15 +214,15 @@ const Gallery = () => {
 
   const isEn = language === "en";
 
-  const ANG     = isEn ? "Arultharum Angalamman Temple, Erode"           : "அருள்தரும் அங்காளம்மன்";
-  const ESW     = isEn ? "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy Temple, Erode" : "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி";
-  const PER     = isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal Temple, Erode" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்";
-  const KARI    = isEn ? "Arulmigu Karikaliamman Temple, Poondurai"   : "அருள்மிகு கரியகாளியம்மன்";
-  
-  const ANG_GOD = isEn ? "Arultharum Angalamman Temple Gods"    : "அருள்தரும் அங்காளம்மன் கோவில் தெய்வங்கள்";
+  const ANG = isEn ? "Arultharum Angalamman Temple, Erode" : "அருள்தரும் அங்காளம்மன்";
+  const ESW = isEn ? "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy Temple, Erode" : "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி";
+  const PER = isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal Temple, Erode" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்";
+  const KARI = isEn ? "Arulmigu Karikaliamman Temple, Poondurai" : "அருள்மிகு கரியகாளியம்மன்";
+
+  const ANG_GOD = isEn ? "Arultharum Angalamman Temple Gods" : "அருள்தரும் அங்காளம்மன் கோவில் தெய்வங்கள்";
   const ESW_GOD = isEn ? "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy Temple Gods" : "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி கோவில் தெய்வங்கள்";
   const PER_GOD = isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal Temple Gods" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள் கோவில் தெய்வங்கள்";
-  const KARI_GOD = isEn ? "Arulmigu Karikaliamman Temple Gods"  : "அருள்மிகு கரியகாளியம்மன் கோவில் தெய்வங்கள்";
+  const KARI_GOD = isEn ? "Arulmigu Karikaliamman Temple Gods" : "அருள்மிகு கரியகாளியம்மன் கோவில் தெய்வங்கள்";
 
   // Translate/Map Temple ID to local display name
   const mapTempleToGroup = (templeId, isEn) => {
@@ -244,12 +243,12 @@ const Gallery = () => {
 
   // Simplified gallery tabs/categories based on user request
   const categories = [
-    { id: "All",                            label: t.categories.all },
-    { id: "Festivals",                      label: t.categories.festivals },
-    { id: "sri-kariyakali-amman-temple",    label: isEn ? "Arulmigu Karikaliamman" : "அருள்மிகு கரியகாளியம்மன்" },
-    { id: "sri-angalamman-temple",          label: isEn ? "Arultharum Angalamman" : "அருள்தரும் அங்காளம்மன்" },
+    { id: "All", label: t.categories.all },
+    { id: "Festivals", label: t.categories.festivals },
+    { id: "sri-kariyakali-amman-temple", label: isEn ? "Arulmigu Karikaliamman" : "அருள்மிகு கரியகாளியம்மன்" },
+    { id: "sri-angalamman-temple", label: isEn ? "Arultharum Angalamman" : "அருள்தரும் அங்காளம்மன்" },
     { id: "sri-pushpavaneswara-swamy-temple", label: isEn ? "Arultharum Bagampriyal Udanamar Arulmigu Pushpavaneswara Swamy" : "அருள்தரும் பாகம்பிரியாள் உடனமர் அருள்மிகு புஷ்பவனேஸ்வர சுவாமி" },
-    { id: "sri-damodara-perumal-temple",    label: isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்" },
+    { id: "sri-damodara-perumal-temple", label: isEn ? "Sri Alamelu Mangai Lakshmi Sametha Sri Damodara Perumal" : "ஸ்ரீ அலமேலு மங்கை லக்ஷ்மி சமேத ஸ்ரீ தாமோதர பெருமாள்" },
   ];
 
   // Static Local gallery items
@@ -259,7 +258,7 @@ const Gallery = () => {
   const mappedDynamicItems = dynamicItems.map(item => {
     // Map temple ID to group string
     const groupName = item.templeName ? (
-      item.category === "Gods" 
+      item.category === "Gods"
         ? mapTempleToGodGroup(item.templeName, isEn)
         : mapTempleToGroup(item.templeName, isEn)
     ) : "";
@@ -309,8 +308,8 @@ const Gallery = () => {
     let matchesCategory = true;
     if (activeCategory !== "All") {
       if (activeCategory === "Festivals") {
-        matchesCategory = 
-          item.category === "Festival" || 
+        matchesCategory =
+          item.category === "Festival" ||
           item.category === "Festivals" ||
           item.category === "Events" ||
           item.category === "Pooja" ||
@@ -347,7 +346,7 @@ const Gallery = () => {
   // Paginated/Infinite Scroll Slice for Grid UI
   const paginatedItems = filteredItems.slice(0, visibleCount);
 
-  const isGodTabActive = 
+  const isGodTabActive =
     activeCategory === "sri-kariyakali-amman-temple" ||
     activeCategory === "sri-angalamman-temple" ||
     activeCategory === "sri-pushpavaneswara-swamy-temple" ||
@@ -361,8 +360,8 @@ const Gallery = () => {
     ? filteredItems.filter((item) => item.category === "Temple" || item.category === "Temples" || item.category === "Videos")
     : [];
 
-  const festivalItems = filteredItems.filter((item) => 
-    item.category === "Festival" || 
+  const festivalItems = filteredItems.filter((item) =>
+    item.category === "Festival" ||
     item.category === "Festivals" ||
     item.category === "Events" ||
     item.category === "Pooja" ||
@@ -371,15 +370,15 @@ const Gallery = () => {
     item.category === "Others"
   );
 
-  const getDeityItemsForTemple = (templeId) => 
+  const getDeityItemsForTemple = (templeId) =>
     filteredItems.filter((item) => item.templeId === templeId && (item.category === "Gods" || item.category === "God"));
 
-  const getTempleItemsForTemple = (templeId) => 
+  const getTempleItemsForTemple = (templeId) =>
     filteredItems.filter((item) => item.templeId === templeId && (item.category === "Temple" || item.category === "Temples" || item.category === "Videos"));
 
   // Grouped Temples Grid Data
   const TEMPLE_ORDER = [KARI, ANG, ESW, PER];
-  
+
   // Returns ALL god images for a given temple group name
   const getGodItems = (name) => {
     return [];
@@ -493,11 +492,10 @@ const Gallery = () => {
                 <button
                   key={cat.id}
                   onClick={() => handleCategoryChange(cat.id)}
-                  className={`relative px-6 py-2.5 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-bold tracking-widest uppercase transition-all duration-300 select-none cursor-pointer ${
-                    isActive
+                  className={`relative px-6 py-2.5 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-bold tracking-widest uppercase transition-all duration-300 select-none cursor-pointer ${isActive
                       ? "text-white"
                       : "bg-white text-stone-500 hover:text-[#c49a3c] border border-stone-100/80 shadow-sm"
-                  }`}
+                    }`}
                 >
                   {isActive && (
                     <motion.span
@@ -562,32 +560,32 @@ const Gallery = () => {
 
           {/* Temple select */}
           {activeCategory !== "sri-kariyakali-amman-temple" &&
-           activeCategory !== "sri-angalamman-temple" &&
-           activeCategory !== "sri-pushpavaneswara-swamy-temple" &&
-           activeCategory !== "sri-damodara-perumal-temple" && (
-            <div className="relative w-full md:w-72">
-              <select
-                value={selectedTemple}
-                onChange={(e) => {
-                  setSelectedTemple(e.target.value);
-                  setVisibleCount(12);
-                }}
-                className="w-full pl-4 pr-10 py-2.5 bg-white border border-stone-200 rounded-xl text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#5d1712]/20 focus:border-[#5d1712] transition-all text-stone-700 font-medium cursor-pointer"
-              >
-                <option value="">{isEn ? "All Temples" : "அனைத்து கோவில்கள்"}</option>
-                {temples.map((temple) => (
-                  <option key={temple.id} value={temple.id}>
-                    {mapTempleToGroup(temple.id)}
-                  </option>
-                ))}
-              </select>
-              <span className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-stone-400">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-            </div>
-          )}
+            activeCategory !== "sri-angalamman-temple" &&
+            activeCategory !== "sri-pushpavaneswara-swamy-temple" &&
+            activeCategory !== "sri-damodara-perumal-temple" && (
+              <div className="relative w-full md:w-72">
+                <select
+                  value={selectedTemple}
+                  onChange={(e) => {
+                    setSelectedTemple(e.target.value);
+                    setVisibleCount(12);
+                  }}
+                  className="w-full pl-4 pr-10 py-2.5 bg-white border border-stone-200 rounded-xl text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#5d1712]/20 focus:border-[#5d1712] transition-all text-stone-700 font-medium cursor-pointer"
+                >
+                  <option value="">{isEn ? "All Temples" : "அனைத்து கோவில்கள்"}</option>
+                  {temples.map((temple) => (
+                    <option key={temple.id} value={temple.id}>
+                      {mapTempleToGroup(temple.id)}
+                    </option>
+                  ))}
+                </select>
+                <span className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-stone-400">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </div>
+            )}
         </div>
 
         {/* Loading Spinner */}
@@ -615,8 +613,8 @@ const Gallery = () => {
             {godDeityItems.length > 0 && (
               <GroupedBlock
                 name={activeCategory === "sri-kariyakali-amman-temple" ? KARI_GOD :
-                      activeCategory === "sri-angalamman-temple" ? ANG_GOD :
-                      activeCategory === "sri-pushpavaneswara-swamy-temple" ? ESW_GOD :
+                  activeCategory === "sri-angalamman-temple" ? ANG_GOD :
+                    activeCategory === "sri-pushpavaneswara-swamy-temple" ? ESW_GOD :
                       activeCategory === "sri-damodara-perumal-temple" ? PER_GOD : ""}
                 items={godDeityItems}
                 groupLabel={isEn ? "Deity" : "தெய்வம்"}
@@ -629,8 +627,8 @@ const Gallery = () => {
             {godTempleItems.length > 0 && (
               <GroupedBlock
                 name={activeCategory === "sri-kariyakali-amman-temple" ? KARI :
-                      activeCategory === "sri-angalamman-temple" ? ANG :
-                      activeCategory === "sri-pushpavaneswara-swamy-temple" ? ESW :
+                  activeCategory === "sri-angalamman-temple" ? ANG :
+                    activeCategory === "sri-pushpavaneswara-swamy-temple" ? ESW :
                       activeCategory === "sri-damodara-perumal-temple" ? PER : ""}
                 items={godTempleItems}
                 groupLabel={isEn ? "Temple" : "கோவில்"}
@@ -751,7 +749,7 @@ const Gallery = () => {
         {!loading && !isGodTabActive && activeCategory !== "All" && (
           <>
             <MasonryGrid items={paginatedItems} onOpen={setLightbox} />
-            
+
             {/* Load More Button */}
             {visibleCount < filteredItems.length && (
               <div className="flex justify-center mt-16">
@@ -824,7 +822,7 @@ const Gallery = () => {
                   <p className="text-[#c49a3c] text-xs mt-2 uppercase font-bold tracking-widest">{lightbox.group}</p>
                 )}
               </div>
-              
+
               <button
                 onClick={() => setLightbox(null)}
                 className="absolute -top-4 -right-4 w-10 h-10 bg-white/20 hover:bg-white/40
