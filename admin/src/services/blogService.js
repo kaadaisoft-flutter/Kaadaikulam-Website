@@ -10,6 +10,7 @@ import {
     serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import { moveToTrash } from './trashService';
 
 const BLOG_COLLECTION = 'blogs';
 
@@ -63,6 +64,6 @@ export const saveBlog = async (id, data) => {
 /**
  * Delete a blog post.
  */
-export const deleteBlog = async (id) => {
-    await deleteDoc(doc(db, BLOG_COLLECTION, id));
+export const deleteBlog = async (id, item) => {
+    await moveToTrash(BLOG_COLLECTION, id, item);
 };

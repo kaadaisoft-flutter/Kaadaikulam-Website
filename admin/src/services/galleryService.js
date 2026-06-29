@@ -12,6 +12,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { uploadToCloudinary, deleteFromCloudinary } from './cloudinaryService';
+import { moveToTrash } from './trashService';
 
 const GALLERY_COLLECTION = 'gallery';
 
@@ -149,23 +150,5 @@ export const subscribeGallery = (callback) => {
  * Delete a gallery item. Deletes from Cloudinary (if applicable) then Firestore.
  */
 export const deleteGalleryItem = async (id, item = {}) => {
-    const { cloudinaryPublicId, cloudinaryResourceType, cloudinaryThumbnailPublicId } = item;
-
-    if (cloudinaryPublicId) {
-        try {
-            await deleteFromCloudinary(cloudinaryPublicId, cloudinaryResourceType || 'image');
-        } catch (err) {
-            console.warn('Cloudinary delete failed, proceeding with Firestore deletion:', err.message);
-        }
-    }
-
-    if (cloudinaryThumbnailPublicId) {
-        try {
-            await deleteFromCloudinary(cloudinaryThumbnailPublicId, 'image');
-        } catch (err) {
-            console.warn('Cloudinary thumbnail delete failed:', err.message);
-        }
-    }
-
-    await deleteDoc(doc(db, GALLERY_COLLECTION, id));
+    await moveToTrash(GALLERY_COLLECTION, id, item);
 };

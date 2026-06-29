@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
 import NotFound from '../pages/NotFound';
 
-const VALID_PATHS = ['/', '/gallery', '/blog', '/comments', '/donation', '/contact', '/donation-settings', '/events'];
+const VALID_PATHS = ['/', '/gallery', '/blog', '/comments', '/donation', '/contact', '/donation-settings', '/events', '/trash', '/videos'];
 const isBlogPath = (p) => p === '/blog' || p.startsWith('/blog/');
 
 const MainLayout = () => {

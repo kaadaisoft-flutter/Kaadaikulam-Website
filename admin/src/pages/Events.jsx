@@ -216,10 +216,10 @@ const Events = () => {
     const confirmDeleteAction = async () => {
         if (!confirmDelete.item) return;
         try {
-            await deleteEvent(confirmDelete.item.id);
-            toast.success('Event deleted.', { id: 'event-delete' });
+            await deleteEvent(confirmDelete.item.id, confirmDelete.item);
+            toast.success('Event moved to trash.', { id: 'event-delete' });
         } catch {
-            toast.error('Failed to delete event.', { id: 'event-delete-error' });
+            toast.error('Failed to move event to trash.', { id: 'event-delete-error' });
         }
         setConfirmDelete({ isOpen: false, item: null });
     };
@@ -587,8 +587,8 @@ const Events = () => {
                 isOpen={confirmDelete.isOpen}
                 onClose={() => setConfirmDelete({ isOpen: false, item: null })}
                 onConfirm={confirmDeleteAction}
-                title="Delete Event"
-                message="Are you sure you want to delete this event? This action cannot be undone."
+                title="Move to Trash"
+                message="Are you sure you want to delete this event? It will be moved to the trash."
                 confirmLabel="Delete"
                 variant="danger"
             />

@@ -20,6 +20,7 @@ const Events = React.lazy(() => import('./pages/Events'));
 const ForgotPassword = React.lazy(() => import('./pages/ForgotPassword'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 const Videos = React.lazy(() => import('./pages/Videos'));
+const Trash = React.lazy(() => import('./pages/Trash'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -48,6 +49,7 @@ export function AdminContent() {
             <Route path="contact" element={<Contact />} />
             <Route path="donation-settings" element={<DonationSettings />} />
             <Route path="events" element={<Events />} />
+            <Route path="trash" element={<Trash />} />
             {/* 404 - shows "Go to Dashboard" when auth, "Go to Login" when not (via MainLayout redirect) */}
             <Route path="*" element={<NotFound />} />
           </Route>

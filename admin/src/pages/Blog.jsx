@@ -36,7 +36,7 @@ const Blog = () => {
     const [filePreview, setFilePreview] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewSelection, setPreviewSelection] = useState({ isOpen: false, media: null });
-    const [confirmDelete, setConfirmDelete] = useState({ isOpen: false, id: null });
+    const [confirmDelete, setConfirmDelete] = useState({ isOpen: false, item: null });
     const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
     const [isConverting, setIsConverting] = useState(false);
     const [hasInitialized, setHasInitialized] = useState(false);
@@ -214,14 +214,14 @@ const Blog = () => {
     };
 
     const confirmDeleteAction = async () => {
-        if (confirmDelete.id) {
+        if (confirmDelete.item) {
             try {
-                await deleteBlog(confirmDelete.id);
-                toast.success("Post deleted");
+                await deleteBlog(confirmDelete.item.id, confirmDelete.item);
+                toast.success("Post moved to trash");
             } catch (err) {
                 toast.error("Delete failed");
             }
-            setConfirmDelete({ isOpen: false, id: null });
+            setConfirmDelete({ isOpen: false, item: null });
         }
     };
 
@@ -291,7 +291,7 @@ const Blog = () => {
                         <Edit2 size={16} />
                     </button>
                     <button
-                        onClick={() => setConfirmDelete({ isOpen: true, id: item.id })}
+                        onClick={() => setConfirmDelete({ isOpen: true, item })}
                         className="p-2 rounded-xl text-red-500 hover:bg-red-50 border border-transparent hover:border-red-100 transition-all"
                     >
                         <Trash2 size={16} />
@@ -592,10 +592,10 @@ const Blog = () => {
 
             <ConfirmDialog
                 isOpen={confirmDelete.isOpen}
-                onClose={() => setConfirmDelete({ isOpen: false, id: null })}
+                onClose={() => setConfirmDelete({ isOpen: false, item: null })}
                 onConfirm={confirmDeleteAction}
-                title="Delete Article?"
-                message="This action cannot be undone. All images and content associated with this post will be permanently removed."
+                title="Move to Trash?"
+                message="Are you sure you want to delete this article? It will be moved to the trash."
             />
         </div>
     );

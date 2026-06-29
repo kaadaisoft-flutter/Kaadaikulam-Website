@@ -12,6 +12,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { uploadToCloudinary, deleteFromCloudinary } from './cloudinaryService';
+import { moveToTrash } from './trashService';
 
 const EVENT_COLLECTION = 'events';
 
@@ -82,19 +83,6 @@ export const saveEvent = async (id, data, imageFile) => {
 /**
  * Delete an event.
  */
-export const deleteEvent = async (id) => {
-    // Delete image from Cloudinary first
-    const docRef = doc(db, EVENT_COLLECTION, id);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-        const data = docSnap.data();
-        if (data.cloudinaryPublicId) {
-            try {
-                await deleteFromCloudinary(data.cloudinaryPublicId);
-            } catch (err) {
-                console.warn('Failed to delete event image from Cloudinary:', err);
-            }
-        }
-    }
-    await deleteDoc(docRef);
+export const deleteEvent = async (id, item) => {
+    await moveToTrash(EVENT_COLLECTION, id, item);
 };

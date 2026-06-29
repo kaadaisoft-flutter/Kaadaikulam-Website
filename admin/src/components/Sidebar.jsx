@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { subscribeComments } from '../services/commentService';
 import { subscribeDonations } from '../services/donationService';
 import { subscribeContactMessages } from '../services/contactService';
+import { subscribeTrash } from '../services/trashService';
 import {
     LayoutDashboard,
     Image as ImageIcon,
@@ -34,6 +35,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
         comments: 0,
         donations: 0,
         messages: 0,
+        trash: 0,
     });
 
     useEffect(() => {
@@ -46,11 +48,15 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
         const unsubMessages = subscribeContactMessages((data) => {
             setCounts(prev => ({ ...prev, messages: data.filter(i => i.status === 'pending').length }));
         });
+        const unsubTrash = subscribeTrash((data) => {
+            setCounts(prev => ({ ...prev, trash: data.length }));
+        });
 
         return () => {
             unsubComments();
             unsubDonations();
             unsubMessages();
+            unsubTrash();
         };
     }, []);
 
@@ -73,6 +79,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             title: 'Communication',
             items: [
                 { path: '/admin/contact', icon: Mail, label: 'Messages', badge: counts.messages },
+                { path: '/admin/trash', icon: Trash2, label: 'Trash', badge: counts.trash },
                 { path: '/admin/donation-settings', icon: Settings, label: 'Settings' },
             ]
         }
