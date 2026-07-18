@@ -92,7 +92,7 @@ export const translations = {
       link: "Contact Us"
     },
     footer: {
-      title: "Poondurai Kaadai",
+      title: "Poondurai Kaadaikula Narpani Mandram",
       description: "A sacred place of devotion and spiritual heritage in Tamil Nadu. Preserving ancient traditions for generations.",
       explore: {
         title: "Explore",
@@ -109,6 +109,7 @@ export const translations = {
         title: "Connect",
         contact: "Contact Us"
       },
+      address: "40 Easwaran Koil Street, Avalpoondurai (TP), Erode, Tamil Nadu - 638115",
       rights: "All rights reserved.",
       privacy: "Privacy",
       terms: "Terms"
@@ -123,7 +124,7 @@ export const translations = {
         heading: "Reach Out to the Clan",
         text: "Our clan administrators and temple priests are available to assist you with any spiritual or communal inquiries.",
         location: "Our Location",
-        address: "Sri Krishna Tower, Door No.75/2, Muthukumarasamy Temple Street, Erode Road, Avalpoondurai, Erode District - 638115",
+        address: "40 Easwaran Koil Street, Avalpoondurai (TP), Erode, Tamil Nadu - 638115",
         phone: "Contact Numbers",
         email: "Email Support"
       },
@@ -667,7 +668,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
         },
         back: {
           scanText: "Scan to view member details",
-          address: "Sri Krishna Tower, Door No.75/2, Muthukumarasamy Temple Street, Erode Road, Avalpoondurai, Erode District - 638115",
+          address: "40 Easwaran Koil Street, Avalpoondurai (TP), Erode, Tamil Nadu - 638115",
           website: "kaadaikulam.org"
         },
         flipHint: "Hover or click to flip the card"
@@ -817,7 +818,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
       link: "தொடர்பு கொள்ளுங்கள்"
     },
     footer: {
-      title: "பூந்துறை காடை",
+      title: "பூந்துறை காடைகுல நற்பணி மன்றம்",
       description: "தமிழ்நாட்டில் பக்தி மற்றும் ஆன்மீக பாரம்பரியத்தின் புனித இடம். பல தலைமுறைகளாக பண்டைய மரபுகளைப் பாதுகாத்து வருகிறோம்.",
       explore: {
         title: "ஆராயுங்கள்",
@@ -834,6 +835,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
         title: "இணைக்கவும்",
         contact: "தொடர்பு கொள்ளுங்கள்"
       },
+      address: "40 ஈஸ்வரன் கோயில் தெரு, அவல்பூந்துறை (TP), ஈரோடு, தமிழ்நாடு - 638115",
       rights: "அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
       privacy: "தனியுரிமை",
       terms: "விதிமுறைகள்"
@@ -848,7 +850,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
         heading: "குலத்தாரைத் தொடர்பு கொள்ளுங்கள்",
         text: "எங்கள் குல நிர்வாகிகள் மற்றும் கோயில் அர்ச்சகர்கள் எந்தவொரு ஆன்மீக அல்லது சமூக விசாரணைகளுக்கும் உங்களுக்கு உதவ உள்ளனர்.",
         location: "எங்கள் இடம்",
-        address: "ஸ்ரீ கிருஷ்ணா டவர், கதவு எண்.75/2, முத்துக்குமாரசாமி கோவில் வீதி, ஈரோடு சாலை, அவல்பூந்துறை, ஈரோடு மாவட்டம் - 638115",
+        address: "40 ஈஸ்வரன் கோயில் தெரு, அவல்பூந்துறை (TP), ஈரோடு, தமிழ்நாடு - 638115",
         phone: "தொடர்பு எண்கள்",
         email: "மின்னஞ்சல் ஆதரவு"
       },
@@ -1410,7 +1412,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
         },
         back: {
           scanText: "உறுப்பினர் விவரங்களைக் காண ஸ்கேன் செய்யவும்",
-          address: "ஸ்ரீ கிருஷ்ணா டவர், கதவு எண்.75/2, முத்துகுமாரசாமி கோவில் வீதி, அவல்பூந்துறை, ஈரோடு மாவட்டம் - 638115",
+          address: "40 ஈஸ்வரன் கோயில் தெரு, அவல்பூந்துறை (TP), ஈரோடு, தமிழ்நாடு - 638115",
           website: "kaadaikulam.org"
         },
         flipHint: "அட்டையைத் திருப்ப அதன் மீது நகர்த்தவும் அல்லது அழுத்தவும்"

@@ -1,6 +1,6 @@
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
-import logo from "../assets/logo.webp";
+import pkknmLogo from "../assets/images/PKKMN_Logo.webp";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -14,11 +14,11 @@ const Footer = () => {
           {/* Logo & About Column */}
           <div className="flex flex-col items-start gap-5">
              <div className="flex items-center gap-4">
-               <div className="w-12 h-12 rounded-full bg-white/10 p-0.5 flex items-center justify-center border border-white/20 relative shadow-inner">
-                 <img src={logo} alt="Poondurai Kaadai Logo" className="w-[85%] h-[85%] object-contain" />
+               <div className="w-32 h-28 rounded-full bg-[#3d2b27] p-1 flex items-center justify-center relative shadow-inner overflow-hidden">
+                 <img src={pkknmLogo} alt="Poondurai Kaadaikula Narpani Mandram Logo" className="w-full h-full object-cover" />
                  <div className="absolute inset-0 rounded-full border border-white/10 scale-110"></div>
                </div>
-               <h3 className="text-xl font-bold text-white tracking-wide font-serif drop-shadow-sm">{t.title}</h3>
+               <h3 className="text-base font-bold text-white tracking-wide font-serif drop-shadow-sm leading-snug max-w-[160px]">{t.title}</h3>
              </div>
              <p className="text-sm leading-relaxed max-w-xs opacity-70">
                {t.description}
@@ -55,6 +55,13 @@ const Footer = () => {
             <ul className="space-y-3 text-sm font-medium">
               <li><Link to="/contact" className="hover:text-[#c49a3c] transition-colors duration-300">{t.connect.contact}</Link></li>
             </ul>
+            <div className="flex items-start gap-2 mt-4">
+              <svg className="w-4 h-4 text-[#c49a3c] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <p className="text-xs leading-relaxed opacity-70">{t.address}</p>
+            </div>
           </div>
         </div>
 
