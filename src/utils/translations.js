@@ -93,7 +93,7 @@ export const translations = {
     },
     footer: {
       title: "Poondurai Kaadaikula Narpani Mandram",
-      description: "A sacred place of devotion and spiritual heritage in Tamil Nadu. Preserving ancient traditions for generations.",
+      description: "Serving the Kongu Vellalar Poondurai Kaadai community through cultural preservation, temple administration, and social welfare initiatives.",
       explore: {
         title: "Explore",
         temples: "Our Temples",
@@ -819,7 +819,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
     },
     footer: {
       title: "பூந்துறை காடைகுல நற்பணி மன்றம்",
-      description: "தமிழ்நாட்டில் பக்தி மற்றும் ஆன்மீக பாரம்பரியத்தின் புனித இடம். பல தலைமுறைகளாக பண்டைய மரபுகளைப் பாதுகாத்து வருகிறோம்.",
+      description: "கொங்கு வெள்ளாள பூந்துறை காடை குல மக்களுக்கு கோயில் நிர்வாகம், கலாச்சார பாதுகாப்பு மற்றும் சமூக நல சேவைகள் வழங்கும் நற்பணி மன்றம்.",
       explore: {
         title: "ஆராயுங்கள்",
         temples: "எங்கள் கோவில்கள்",
