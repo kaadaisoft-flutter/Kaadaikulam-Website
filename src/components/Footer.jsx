@@ -1,6 +1,6 @@
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../utils/translations";
-import pkknmLogo from "../assets/images/PKKMN_Logo.webp";
+import logo from "../assets/logo.webp";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -13,13 +13,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-10">
           {/* Logo & About Column */}
           <div className="flex flex-col items-start gap-5">
-             <div className="flex items-center gap-4">
-               <div className="w-32 h-28 rounded-full bg-[#3d2b27] p-1 flex items-center justify-center relative shadow-inner overflow-hidden">
-                 <img src={pkknmLogo} alt="Poondurai Kaadaikula Narpani Mandram Logo" className="w-full h-full object-cover" />
+             <Link to="/" className="flex items-center gap-4 group">
+               <div className="w-20 h-20 rounded-full bg-[#3d2b27] p-1 flex items-center justify-center relative shadow-inner overflow-hidden shrink-0">
+                 <img src={logo} alt="Poondurai Kaadai" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
                  <div className="absolute inset-0 rounded-full border border-white/10 scale-110"></div>
                </div>
-               <h3 className="text-base font-bold text-white tracking-wide font-serif drop-shadow-sm leading-snug max-w-[160px]">{t.title}</h3>
-             </div>
+               <h3 className={`font-serif font-bold text-white tracking-wide drop-shadow-sm transition-colors duration-300 group-hover:text-[#c49a3c] ${language === 'ta' ? 'text-lg md:text-xl leading-tight' : 'text-lg md:text-xl'}`}>
+                 {t.title}
+               </h3>
+             </Link>
              <p className="text-sm leading-relaxed max-w-xs opacity-70">
                {t.description}
              </p>

@@ -92,7 +92,7 @@ export const translations = {
       link: "Contact Us"
     },
     footer: {
-      title: "Poondurai Kaadaikula Narpani Mandram",
+      title: "Poondurai Kaadai",
       description: "Serving the Kongu Vellalar Poondurai Kaadai community through cultural preservation, temple administration, and social welfare initiatives.",
       explore: {
         title: "Explore",
@@ -818,7 +818,7 @@ Carrying these famous historical fragments of our clan, our Kaadai Kulam website
       link: "தொடர்பு கொள்ளுங்கள்"
     },
     footer: {
-      title: "பூந்துறை காடைகுல நற்பணி மன்றம்",
+      title: "பூந்துறை காடை",
       description: "கொங்கு வெள்ளாள பூந்துறை காடை குல மக்களுக்கு கோயில் நிர்வாகம், கலாச்சார பாதுகாப்பு மற்றும் சமூக நல சேவைகள் வழங்கும் நற்பணி மன்றம்.",
       explore: {
         title: "ஆராயுங்கள்",
